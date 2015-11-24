@@ -17,7 +17,7 @@ class Task(object):
         self.__app_version_num = ''
         self.__checkpoint_cpu_time = ''
         self.__current_cpu_time = ''
-        self.__fraction_done = ''
+        self.__fraction_done = 0.0
         self.__swap_size = ''
         self.__working_set_size = ''
         self.__estimated_cpu_time_remaining = ''
@@ -183,11 +183,12 @@ class Task(object):
 
     @property
     def fraction_done(self):
-        return self.__fraction_done
+        percentage = round(self.__fraction_done * 100, 2)
+        return "{percentage}%".format(percentage=percentage)        
 
     @fraction_done.setter
     def fraction_done(self, val):
-        self.__fraction_done = val
+        self.__fraction_done = float(val)
 
     @property
     def swap_size(self):
@@ -207,7 +208,9 @@ class Task(object):
 
     @property
     def estimated_cpu_time_remaining(self):
-        return self.__estimated_cpu_time_remaining
+        m, s = divmod(float(self.__estimated_cpu_time_remaining), 60)
+        h, m = divmod(m, 60)
+        return "%d:%02d:%02d" % (h, m, s)
 
     @estimated_cpu_time_remaining.setter
     def estimated_cpu_time_remaining(self, val):

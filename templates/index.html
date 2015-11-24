@@ -2,12 +2,30 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>hi</title>
+    <title>Boinc Tasks</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
       integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
       crossorigin="anonymous"/>
   </head>
   <body>
-hi
+    <div class="container">
+      <h1>Tasks</h1>
+      <table class="table table-striped">
+        <thead>
+          <th>Task Name</th>
+          <th>Task URL</th>
+          <th>Progress</th>
+          <th>Est. Time Remaining (hh:mm:ss)</th>
+        </thead>
+        {% for task in tasks %}
+        <tr>
+          <td>{{task.name}}</td>
+          <td>{{task.project_url}}</td>
+          <td>{{task.fraction_done}}</td>
+          <td>{{task.estimated_cpu_time_remaining}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
   </body>
 </html>

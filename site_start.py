@@ -18,12 +18,7 @@ class WebServer(object):
     def index(self):
         task = get_tasks.GetTasks()
         boinc_tasks = task.execute()
-        out = ''
-        for bt in boinc_tasks:
-            t = boinc_task.Task(bt)
-            out += '<p>{task_name}</p>'.format(task_name=t.name)
-
-        return out
+        return TemplateRenderer().render('index.html', tasks=boinc_tasks)        
 
 class TemplateRenderer(object):
 

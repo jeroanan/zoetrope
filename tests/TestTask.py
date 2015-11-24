@@ -21,7 +21,7 @@ class tests(unittest.TestCase):
    app version num: 0
    checkpoint CPU time: 1330.000000
    current CPU time: 1414.000000
-   fraction done: 88.000000
+   fraction done: 0.8800000
    swap size: 10.000000
    working set size: 11.000000
    estimated CPU time remaining: 74181.872265"""
@@ -93,7 +93,7 @@ class tests(unittest.TestCase):
         self.assertEqual(expected_value, self.__target.current_cpu_time)
 
     def test_fraction_done(self):
-        expected_value = '88.000000'
+        expected_value = '88.0%'
         self.assertEqual(expected_value, self.__target.fraction_done)
 
     def test_swap_size(self):
@@ -105,5 +105,5 @@ class tests(unittest.TestCase):
         self.assertEqual(expected_value, self.__target.working_set_size)
 
     def test_estimated_cpu_time_remaining(self):
-        expected_value = '74181.872265'
+        expected_value = '20:36:21'
         self.assertEqual(expected_value, self.__target.estimated_cpu_time_remaining)
