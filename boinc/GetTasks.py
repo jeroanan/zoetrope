@@ -6,5 +6,5 @@ class GetTasks(object):
         boinccmd = Popen(['boinccmd --get_tasks'], shell=True, stdout=PIPE, stderr=PIPE)
         out, err = boinccmd.communicate()
         tasks = out.decode("utf-8").split(') -----------')
-        del(tasks[0])
+        del(tasks[0])        
         return tasks

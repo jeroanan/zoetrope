@@ -1,8 +1,10 @@
 from subprocess import Popen, PIPE
 
 import cherrypy
-import boinc.GetTasks as get_tasks
 from jinja2 import Environment, PackageLoader
+
+import boinc.GetTasks as get_tasks
+import Task as boinc_task
 
 class WebServer(object):
 
@@ -14,14 +16,13 @@ class WebServer(object):
 
     @cherrypy.expose
     def index(self):
-        # boinccmd = Popen(['boinccmd --get_tasks'], shell=True, stdout=PIPE, stderr=PIPE)
-        # out, err = boinccmd.communicate()
-        # return out.decode("utf-8").split(') -----------')[1].replace('\n', '<br />') #TemplateRenderer().render('index.html')
         task = get_tasks.GetTasks()
         boinc_tasks = task.execute()
         out = ''
         for bt in boinc_tasks:
-            out += '<p>{task}<p>'.format(task=bt.replace('\n', '<br />'))
+            t = boinc_task.Task(bt)
+            out += '<p>{task_name}</p>'.format(task_name=t.name)
+
         return out
 
 class TemplateRenderer(object):
