@@ -10,14 +10,9 @@ class Task(object):
             self.__set_name(line_split)
 
     def __set_name(self, line_split):
-        if len(line_split)<2:
-            return
         if line_split[0].strip().startswith('name'):
             self.name = str.join(' ', line_split[1:])
-        else:
-            print(line_split[0])
-
-
+            
     @property
     def name(self):
         return self.__name
