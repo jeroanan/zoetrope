@@ -26,6 +26,28 @@ class tests(unittest.TestCase):
    working set size: 11.000000
    estimated CPU time remaining: 74181.872265"""
 
+        self.__completed_task = \
+"""   name: m4-vroln72-1_0_13808757_623_0
+   WU name: m4-vroln72-1_0_13808757_623
+   project URL: http://www.enigmaathome.net/
+   report deadline: Sat Dec  5 02:11:28 2015
+   ready to report: yes
+   got server ack: no
+   final CPU time: 0.000000
+   state: 5
+   scheduler state: 0
+   exit_status: 0
+   signal: 0
+   suspended via GUI: no
+   active_task_state: 0
+   app version num: 0
+   checkpoint CPU time: 0.000000
+   current CPU time: 0.000000
+   fraction done: 0.000000
+   swap size: 0.000000
+   working set size: 0.000000
+   estimated CPU time remaining: 0.000000"""
+
         self.__target = t.Task(self.__test_data)
 
     def test_name(self):
@@ -45,7 +67,7 @@ class tests(unittest.TestCase):
         self.assertEqual(expected_value, self.__target.report_deadline)
 
     def test_ready_to_report(self):
-        expected_value = 'no'
+        expected_value = False
         self.assertEqual(expected_value, self.__target.ready_to_report)
 
     def test_got_server_ack(self):
@@ -107,3 +129,9 @@ class tests(unittest.TestCase):
     def test_estimated_cpu_time_remaining(self):
         expected_value = '20:36:21'
         self.assertEqual(expected_value, self.__target.estimated_cpu_time_remaining)
+
+    def test_completed_task_has_fracion_done_100(self):
+        expected_value = '100.0%'
+
+        target = t.Task(self.__completed_task)
+        self.assertEqual(expected_value, target.fraction_done)

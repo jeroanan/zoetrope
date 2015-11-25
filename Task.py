@@ -87,7 +87,7 @@ class Task(object):
 
     @property
     def ready_to_report(self):
-        return self.__ready_to_report
+        return self.__ready_to_report == 'yes'
 
     @ready_to_report.setter
     def ready_to_report(self, val):
@@ -183,7 +183,10 @@ class Task(object):
 
     @property
     def fraction_done(self):
-        percentage = round(self.__fraction_done * 100, 2)
+        if self.ready_to_report:
+            percentage = 100.00
+        else:
+            percentage = round(self.__fraction_done * 100, 2)
         return "{percentage}%".format(percentage=percentage)
 
     @fraction_done.setter
