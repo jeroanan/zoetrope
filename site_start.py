@@ -1,10 +1,10 @@
 from subprocess import Popen, PIPE
 
 import cherrypy
-from jinja2 import Environment, PackageLoader
 
 import boinc.GetTasks as get_tasks
 import Task as boinc_task
+import templates.TemplateRenderer as tr
 
 class WebServer(object):
 
@@ -18,17 +18,7 @@ class WebServer(object):
     def index(self):
         task = get_tasks.GetTasks()
         boinc_tasks = task.execute()
-        return TemplateRenderer().render('index.html', tasks=boinc_tasks)        
-
-class TemplateRenderer(object):
-
-    def render(self, template, **args):
-        template = self.__get_template(template)
-        return template.render(args)
-
-    def __get_template(self, template):
-        env = Environment(loader=PackageLoader("templates", "."))
-        return env.get_template(template)
+        return tr.TemplateRenderer().render('index.html', tasks=boinc_tasks)
 
 if __name__=='__main__':
     ws = WebServer()
