@@ -175,7 +175,7 @@ class Task(object):
 
     @property
     def current_cpu_time(self):
-        return self.__current_cpu_time
+        return self.__formatted_time_from_seconds(self.__current_cpu_time)
 
     @current_cpu_time.setter
     def current_cpu_time(self, val):
@@ -184,7 +184,7 @@ class Task(object):
     @property
     def fraction_done(self):
         percentage = round(self.__fraction_done * 100, 2)
-        return "{percentage}%".format(percentage=percentage)        
+        return "{percentage}%".format(percentage=percentage)
 
     @fraction_done.setter
     def fraction_done(self, val):
@@ -208,7 +208,10 @@ class Task(object):
 
     @property
     def estimated_cpu_time_remaining(self):
-        m, s = divmod(float(self.__estimated_cpu_time_remaining), 60)
+        return self.__formatted_time_from_seconds(self.__estimated_cpu_time_remaining)
+
+    def __formatted_time_from_seconds(self, seconds):
+        m, s = divmod(float(seconds), 60)
         h, m = divmod(m, 60)
         return "%d:%02d:%02d" % (h, m, s)
 

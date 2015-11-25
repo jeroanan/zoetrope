@@ -12,17 +12,21 @@
       <h1>Tasks</h1>
       <table class="table table-striped">
         <thead>
-          <th>Task Name</th>
+          <th>#</th>
           <th>Task URL</th>
           <th>Progress</th>
+          <th>Time So Far</th>
           <th>Est. Time Remaining (hh:mm:ss)</th>
+          <th>Deadline</th>
         </thead>
         {% for task in tasks %}
         <tr>
-          <td>{{task.name}}</td>
+          <td>{{loop.index}}.</td>
           <td>{{task.project_url}}</td>
           <td>{{task.fraction_done}}</td>
+          <td>{{task.current_cpu_time}}</td>
           <td>{{task.estimated_cpu_time_remaining}}</td>
+          <td>{{task.report_deadline}}</td>
         </tr>
         {% endfor %}
       </table>

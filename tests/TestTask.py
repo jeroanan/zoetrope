@@ -89,7 +89,7 @@ class tests(unittest.TestCase):
         self.assertEqual(expected_value, self.__target.checkpoint_cpu_time)
 
     def test_current_cpu_time(self):
-        expected_value = '1414.000000'
+        expected_value = '0:23:34'
         self.assertEqual(expected_value, self.__target.current_cpu_time)
 
     def test_fraction_done(self):
