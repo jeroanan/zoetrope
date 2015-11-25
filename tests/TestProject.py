@@ -118,3 +118,7 @@ GUI URL:
     def test_project_files_downloaded(self):
         expected_result = '30.000000'
         self.assertEqual(expected_result, self.__target.project_files_downloaded)
+
+    def test_correct_number_of_gui_urls(self):
+        expected_result = 4
+        self.assertEqual(expected_result, len(self.__target.gui_urls))

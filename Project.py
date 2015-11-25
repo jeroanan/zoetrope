@@ -57,6 +57,11 @@ class Project(object):
                 line_split.reverse()
                 setattr(self, line_mappings[key], str.join(':', line_split).strip())
 
+        if any(project_strings):
+            for ps in project_strings:
+                self.gui_urls.append(GuiUrl(ps))
+
+
     @property
     def name(self):
         return self.__name
@@ -216,3 +221,54 @@ class Project(object):
     @project_files_downloaded.setter
     def project_files_downloaded(self, val):
         self.__project_files_downloaded = val
+
+    @property
+    def gui_urls(self):
+        return self.__gui_urls
+
+    @gui_urls.setter
+    def gui_urls(self, val):
+        self.__gui_urls = val
+
+class GuiUrl(object):
+
+    def __init__(self, gui_url_strings):
+        self.__name = ''
+        self.__description = ''
+        self.__url = ''
+
+        line_mappings = {'name': 'name',
+                         'description': 'description',
+                         'URL': 'url'}
+
+        for gus in gui_url_strings.split('\n'):
+            line_split = gus.split(':')
+            line_split.reverse()
+            key = line_split.pop().strip()
+            if key in line_mappings:
+                line_split.reverse()
+                setattr(self, line_mappings[key], str.join(':', line_split).strip())
+
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, val):
+        self.__name = val
+
+    @property
+    def description(self):
+        return self.__description
+
+    @description.setter
+    def description(self, val):
+        self.__description = val
+
+    @property
+    def url(self):
+        return self.__url
+
+    @url.setter
+    def url(self, val):
+        self.__url = val
