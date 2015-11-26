@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Projects</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+      integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+      crossorigin="anonymous"/>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Tasks</h1>
+      <table class="table table-striped">
+        <thead>
+          <th>Project Name</th>
+          <th>Total Credit</th>
+          <th>Recent Average Credit</th>
+        </thead>
+        {% for project in projects %}
+        <tr>
+          <td><a href="/project?project={{project.name|urlencode}}">{{project.name}}</a></td>
+          <td>{{project.user_total_credit}}</td>
+          <td>{{project.user_expavg_credit}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+
+
+
+  </body>
+</html>
