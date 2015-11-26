@@ -122,3 +122,7 @@ GUI URL:
     def test_correct_number_of_gui_urls(self):
         expected_result = 4
         self.assertEqual(expected_result, len(self.__target.gui_urls))
+
+    def test_master_url(self):
+        expected_result = 'http://www.enigmaathome.net/'
+        self.assertEqual(expected_result, self.__target.master_url)

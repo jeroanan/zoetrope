@@ -46,7 +46,8 @@ class Project(object):
                          'don\'t request more work': 'dont_request_more_work',
                          'disk usage': 'disk_usage',
                          'last RPC': 'last_rpc',
-                         'project files downloaded': 'project_files_downloaded'}
+                         'project files downloaded': 'project_files_downloaded',
+                         'master URL': 'master_url'}
 
         for ps in project_strings.pop().split('\n'):
             line_split = ps.split(':')
@@ -227,6 +228,15 @@ class Project(object):
     @gui_urls.setter
     def gui_urls(self, val):
         self.__gui_urls = val
+
+    @property
+    def master_url(self):
+        return self.__master_url
+
+    @master_url.setter
+    def master_url(self, val):
+        self.__master_url = val
+
 
 class GuiUrl(object):
 
