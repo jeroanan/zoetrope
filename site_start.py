@@ -28,6 +28,11 @@ class WebServer(object):
         projects = task.execute()
         return tr.TemplateRenderer().render('projects.html',projects=projects)
 
+    @cherrypy.expose
+    def project(self, **args):
+        project = [t for t in get_project_status.GetProjectStatus().execute() if t.name==args.get('project', '')].pop()
+        return 'yo'
+
 if __name__=='__main__':
     ws = WebServer()
     ws.start()
