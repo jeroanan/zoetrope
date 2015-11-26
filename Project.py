@@ -4,7 +4,6 @@ class Project(object):
         self.__name = ''
         self.__master_url = ''
         self.__user_name = ''
-        self.__master_url = ''
         self.__team_name = ''
         self.__resource_share = ''
         self.__user_total_credit = ''
@@ -60,7 +59,6 @@ class Project(object):
         if any(project_strings):
             for ps in project_strings:
                 self.gui_urls.append(GuiUrl(ps))
-
 
     @property
     def name(self):
