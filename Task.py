@@ -4,6 +4,7 @@ class Task(object):
         self.__name = ''
         self.__workunit_name = ''
         self.__project_url = ''
+        self.__project_name = ''
         self.__report_deadline = ''
         self.__ready_to_report = ''
         self.__got_server_ack = ''
@@ -103,7 +104,7 @@ class Task(object):
 
     @property
     def final_cpu_time(self):
-        return self.__final_cpu_time
+        return self.__formatted_time_from_seconds(self.__final_cpu_time)
 
     @final_cpu_time.setter
     def final_cpu_time(self, val):
@@ -187,7 +188,7 @@ class Task(object):
             percentage = 100.00
         else:
             percentage = round(self.__fraction_done * 100, 2)
-        return "{percentage}%".format(percentage=percentage)
+        return '{0:.2f}'.format(percentage)
 
     @fraction_done.setter
     def fraction_done(self, val):
@@ -212,6 +213,14 @@ class Task(object):
     @property
     def estimated_cpu_time_remaining(self):
         return self.__formatted_time_from_seconds(self.__estimated_cpu_time_remaining)
+
+    @property
+    def project_name(self):
+        return self.__project_name
+
+    @project_name.setter
+    def project_name(self, val):
+        self.__project_name = val
 
     def __formatted_time_from_seconds(self, seconds):
         m, s = divmod(float(seconds), 60)
