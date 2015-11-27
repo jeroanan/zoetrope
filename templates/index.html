@@ -11,7 +11,7 @@
         </thead>
         {% for task in tasks %}
         <tr>
-          <td><a href="/task?{{task.name}}" title="View task details">{{loop.index}}.</a></td>
+          <td><a href="/task?task_name={{task.name}}" title="View task details">{{loop.index}}.</a></td>
           <td>{{task.project_name}}</td>
           <td>
             <div class="progress">

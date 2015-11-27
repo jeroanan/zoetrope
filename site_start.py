@@ -32,6 +32,16 @@ class WebServer(object):
         return tr.TemplateRenderer().render('index.html', tasks=boinc_tasks, title='Boinc Tasks')
 
     @cherrypy.expose
+    def task(self, task_name):
+        boinc_tasks = list(get_tasks.GetTasks().execute())
+        projects = list(get_project_status.GetProjectStatus().execute())
+
+        task = [t for t in boinc_tasks if t.name==task_name].pop()
+        task.project_name = [p.name for p in projects if p.master_url==task.project_url].pop()
+
+        return tr.TemplateRenderer().render('task.html', task=task, title=task_name)
+
+    @cherrypy.expose
     def projects(self):
         task = get_project_status.GetProjectStatus()
         projects = task.execute()

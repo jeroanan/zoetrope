@@ -1,0 +1,30 @@
+{% extends 'master.html' %}
+
+{% block stylesheet %}
+  div.row {
+    padding-top: 5px;
+  }
+{% endblock %}
+
+{% block content %}
+  {{task_row('Project Name', task.project_name)}}
+  {{task_row('Project URL', task.project_url)}}
+  {{task_row('Percent done', task.fraction_done + '%')}}
+
+  {% if task.ready_to_report %}
+    {{task_row('Time elapsed', task.final_cpu_time)}}
+  {% else %}
+    {{task_row('Time elapsed', task.current_cpu_time)}}
+    {{task_row('Time remaining', task.estimated_cpu_time_remaining)}}
+  {% endif %}
+
+  {{task_row('Report deadline', task.report_deadline)}}
+  {{task_row('Ready to report?', task.ready_to_report)}}
+
+
+
+  {{task_row('State', task.state)}}
+  {{task_row('Suspended via gui?', task.suspended_via_gui)}}
+  {{task_row('Active task state', task.active_task_state)}}
+
+{% endblock %}
