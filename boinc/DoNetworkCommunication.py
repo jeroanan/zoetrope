@@ -1,7 +1,6 @@
-from subprocess import Popen, PIPE
+import boinc.BoincCommand as bc
 
-class DoNetworkCommunication(object):
+class DoNetworkCommunication(bc.BoincCommand):
 
     def execute(self):
-        boinccmd = Popen(['boinccmd --network_available'], shell=True, stdout=PIPE, stderr=PIPE)
-        out, err = boinccmd.communicate()
+        out, err = self.run_command('boinccmd --network_available')

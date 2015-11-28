@@ -1,12 +1,11 @@
-from subprocess import Popen, PIPE
+import boinc.BoincCommand as bc
 
 import Message as m
 
-class GetMessages(object):
+class GetMessages(bc.BoincCommand):
 
     def execute(self):
-        boinccmd = Popen(['boinccmd --get_messages'], shell=True, stdout=PIPE, stderr=PIPE)
-        out, err = boinccmd.communicate()
+        out, err = self.run_command('boinccmd --get_messages')
 
         messages = [m for m in out.decode("utf-8").split('\n') if m.strip() != '']
 

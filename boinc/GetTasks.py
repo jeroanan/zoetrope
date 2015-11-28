@@ -1,13 +1,13 @@
-import Task as t
-from subprocess import Popen, PIPE
+import boinc.BoincCommand as bc
 
-class GetTasks(object):
+import Task as t
+
+class GetTasks(bc.BoincCommand):
 
     def execute(self):
-        boinccmd = Popen(['boinccmd --get_tasks'], shell=True, stdout=PIPE, stderr=PIPE)
-        out, err = boinccmd.communicate()
+        out, err = self.run_command('boinccmd --get_tasks')
+
         tasks = out.decode("utf-8").split(') -----------')
         del(tasks[0])
 
         return map(lambda x: t.Task(x), tasks)
-        
