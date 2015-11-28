@@ -14,11 +14,14 @@
           <td><a href="/task?task_name={{task.name}}" title="View task details">{{loop.index}}.</a></td>
           <td>{{task.project_name}}</td>
           <td>
-            <div class="progress">
+            <div class="progress hidden-sm">
               <div class="progress-bar" role="progressbar" aria-valuenow="{{task.fraction_done}}" aria-valuemin="0"
                 aria-valuemax="100" style="width: {{task.fraction_done}}%; min-width: 4em;">
                 <span>{{task.fraction_done}}%</span>
               </div>
+            </div>
+            <div class="hidden-lg">
+              <span>{{task.fraction_done}}%</span>
             </div>
           </td>
           <td>

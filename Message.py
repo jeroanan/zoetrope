@@ -2,7 +2,6 @@ class Message(object):
 
     def __init__(self, message_string):
         space_split = list(reversed(message_string.split(' ')))
-
         self.__message_number = int(space_split.pop().strip(':'))
         self.__date_time = '{date} {time}'.format(date=space_split.pop(), time=space_split.pop())
         self.__message_type = space_split.pop().strip('()')

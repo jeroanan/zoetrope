@@ -6,6 +6,7 @@ import cherrypy
 import boinc.GetTasks as get_tasks
 import boinc.GetProjectStatus as get_project_status
 import boinc.DoNetworkCommunication as do_comms
+import boinc.GetMessages as get_messages
 
 import Task as boinc_task
 import templates.TemplateRenderer as tr
@@ -57,6 +58,11 @@ class WebServer(object):
         command = do_comms.DoNetworkCommunication()
         command.execute()
         raise cherrypy.HTTPRedirect('/')
+
+    @cherrypy.expose
+    def messages(self):
+        messages = get_messages.GetMessages().execute()
+        return tr.TemplateRenderer().render('messages.html', messages=reversed(list(messages)), title="Messages")
 
 if __name__=='__main__':
     ws = WebServer()
