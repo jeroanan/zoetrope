@@ -5,7 +5,7 @@ import Message as m
 class TestMessage(unittest.TestCase):
 
     def setUp(self):
-        data = '30: 26-Nov-2015 20:25:45 (low) [Einstein@Home] This is my message'
+        data = '30: 26-Nov-2015 20:25:45 (user notification) [Einstein@Home] This is my message'
         self.__target = m.Message(data)
 
     def test_message_number(self):
@@ -17,7 +17,7 @@ class TestMessage(unittest.TestCase):
         self.assertEqual(expected_result, self.__target.date_time)
 
     def test_message_type(self):
-        expected_result = 'low'
+        expected_result = 'user notification'
         self.assertEqual(expected_result, self.__target.message_type)
 
     def test_project_name(self):

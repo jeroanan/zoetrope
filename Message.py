@@ -4,9 +4,15 @@ class Message(object):
         space_split = list(reversed(message_string.split(' ')))
         self.__message_number = int(space_split.pop().strip(':'))
         self.__date_time = '{date} {time}'.format(date=space_split.pop(), time=space_split.pop())
-        self.__message_type = space_split.pop().strip('()')
-        self.__project_name = space_split.pop().strip('[]')
-        self.__message_text = ' '.join(list(reversed(space_split)))
+
+        def string_between_two_chars(char_one, char_two):
+            char_one_onwards = message_string[message_string.find(char_one)+1:]
+            return char_one_onwards [0:char_one_onwards.find(char_two)]
+
+        self.__message_type = string_between_two_chars('(', ')')
+        self.__project_name = string_between_two_chars('[', ']')
+
+        self.__message_text = message_string[message_string.find(']')+1:].strip()
 
     @property
     def message_number(self):
