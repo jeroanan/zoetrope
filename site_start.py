@@ -7,6 +7,7 @@ import boinc.GetTasks as get_tasks
 import boinc.GetProjectStatus as get_project_status
 import boinc.DoNetworkCommunication as do_comms
 import boinc.GetMessages as get_messages
+import boinc.DiskUsage as disk_usage
 
 import Task as boinc_task
 import templates.TemplateRenderer as tr
@@ -58,6 +59,11 @@ class WebServer(object):
         command = do_comms.DoNetworkCommunication()
         command.execute()
         raise cherrypy.HTTPRedirect('/')
+
+    @cherrypy.expose
+    def disk_usage(self):
+        du = disk_usage.DiskUsage().execute()
+        return tr.TemplateRenderer().render('diskusage.html', title='Disk Usage', disk_usage=du)
 
     @cherrypy.expose
     def messages(self):
