@@ -9,6 +9,7 @@ import boinc.DoNetworkCommunication as do_comms
 import boinc.GetMessages as get_messages
 import boinc.DiskUsage as disk_usage
 import boinc.HostInfo as host_info
+import boinc.DailyTransferHistory as dth
 
 import Task as boinc_task
 import templates.TemplateRenderer as tr
@@ -75,6 +76,11 @@ class WebServer(object):
     def host_info(self):
         hi = host_info.HostInfo().execute()
         return tr.TemplateRenderer().render('hostinfo.html', title='Host Info', host_info=hi)
+
+    @cherrypy.expose
+    def daily_transfer_history(self):
+        dts = dth.DailyTransferHistory().execute()
+        return tr.TemplateRenderer().render('dailytransferhistory.html', title='Daily Transfer History', transfers=dts)
 
 if __name__=='__main__':
     ws = WebServer()

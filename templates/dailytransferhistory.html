@@ -1,0 +1,20 @@
+{% extends 'master.html' %}
+
+{% block content %}
+
+  <table class="table table-striped">
+    <thead>
+      <th>Date</th>
+      <th>Uploaded</th>
+      <th>Downloaded</th>
+    </thead>
+    {% for t in transfers %}
+      <tr>
+        <td>{{ t.date }}</td>
+        <td>{{ t.uploaded }}</td>
+        <td>{{ t.downloaded }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+
+{% endblock %}
