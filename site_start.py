@@ -8,6 +8,7 @@ import boinc.GetProjectStatus as get_project_status
 import boinc.DoNetworkCommunication as do_comms
 import boinc.GetMessages as get_messages
 import boinc.DiskUsage as disk_usage
+import boinc.HostInfo as host_info
 
 import Task as boinc_task
 import templates.TemplateRenderer as tr
@@ -69,6 +70,11 @@ class WebServer(object):
     def messages(self):
         messages = get_messages.GetMessages().execute()
         return tr.TemplateRenderer().render('messages.html', messages=reversed(list(messages)), title="Messages")
+
+    @cherrypy.expose
+    def host_info(self):
+        hi = host_info.HostInfo().execute()
+        return tr.TemplateRenderer().render('hostinfo.html', title='Host Info', host_info=hi)
 
 if __name__=='__main__':
     ws = WebServer()

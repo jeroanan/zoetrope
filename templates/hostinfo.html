@@ -1,0 +1,20 @@
+{% extends 'master.html' %}
+
+{% block content %}
+  {{ task_row('Timezone', host_info.timezone) }}
+  {{ task_row('Domain name', host_info.domain_name) }}
+  {{ task_row('IP address', host_info.ip_address) }}
+  {{ task_row('Number of CPUs', host_info.number_of_cpus) }}
+  {{ task_row('CPU vendor', host_info.cpu_vendor) }}
+  {{ task_row('CPU model', host_info.cpu_model) }}
+  {{ task_row('CPU floating point operations/second', host_info.cpu_fps_ops) }}
+  {{ task_row('CPU integer operations/second', host_info.cpu_int_ops) }}
+  {{ task_row('CPU mem bw', host_info.cpu_mem_bw) }}
+  {{ task_row('Operating system name', host_info.os_name) }}
+  {{ task_row('Operating system version', host_info.os_version) }}
+  {{ task_row('Memory size', host_info.memory_size) }}
+  {{ task_row('Cache size', host_info.cache_size) }}
+  {{ task_row('Swap size', host_info.swap_size) }}
+  {{ task_row('Disk size', host_info.disk_size) }}
+  {{ task_row('Disk free', host_info.disk_free) }}
+{% endblock %}
