@@ -1,3 +1,5 @@
+import util.ByteConversion as bc
+
 class HostInfo(object):
 
     def __init__(self, host_info_string):
@@ -113,7 +115,7 @@ class HostInfo(object):
 
     @property
     def memory_size(self):
-        return self.__memory_size
+        return bc.bytes_to_gigabytes(self.__memory_size)
 
     @memory_size.setter
     def memory_size(self, val):
@@ -129,7 +131,7 @@ class HostInfo(object):
 
     @property
     def swap_size(self):
-        return self.__swap_size
+        return bc.bytes_to_gigabytes(self.__swap_size)
 
     @swap_size.setter
     def swap_size(self, val):
@@ -137,7 +139,7 @@ class HostInfo(object):
 
     @property
     def disk_size(self):
-        return self.__disk_size
+        return bc.bytes_to_gigabytes(self.__disk_size)
 
     @disk_size.setter
     def disk_size(self, val):
@@ -145,7 +147,7 @@ class HostInfo(object):
 
     @property
     def disk_free(self):
-        return self.__disk_free
+        return bc.bytes_to_gigabytes(self.__disk_free)
 
     @disk_free.setter
     def disk_free(self, val):

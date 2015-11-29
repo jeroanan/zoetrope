@@ -71,7 +71,7 @@ class TestHostInfo(unittest.TestCase):
         self.assertEqual(expected_result, self.__target.os_version)
 
     def test_mem_size(self):
-        expected_result = '970874880.000000'
+        expected_result = '0.90GB'
         self.assertEqual(expected_result, self.__target.memory_size)
 
     def test_cache_size(self):
@@ -79,13 +79,13 @@ class TestHostInfo(unittest.TestCase):
         self.assertEqual(expected_result, self.__target.cache_size)
 
     def test_swap_size(self):
-        expected_result = '104853504.000000'
+        expected_result = '0.10GB'
         self.assertEqual(expected_result, self.__target.swap_size)
 
     def test_disk_size(self):
-        expected_result = '15187017728.000000'
+        expected_result = '14.14GB'
         self.assertEqual(expected_result, self.__target.disk_size)
 
     def test_disk_free(self):
-        expected_result = '7895998464.000000'
+        expected_result = '7.35GB'
         self.assertEqual(expected_result, self.__target.disk_free)

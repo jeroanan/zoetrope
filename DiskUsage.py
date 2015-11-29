@@ -1,3 +1,5 @@
+import util.ByteConversion as bc
+
 class DiskUsage(object):
 
     def __init__(self, disk_usage_string):
@@ -37,7 +39,7 @@ class DiskUsage(object):
 
     @property
     def total_disk_space(self):
-        return self.__bytes_to_gigabytes(self.__total_disk_space) #self.__total_disk_space
+        return bc.bytes_to_gigabytes(self.__total_disk_space)
 
     @total_disk_space.setter
     def total_disk_space(self, val):
@@ -45,15 +47,11 @@ class DiskUsage(object):
 
     @property
     def free_disk_space(self):
-        return self.__bytes_to_gigabytes(self.__free_disk_space) #self.__free_disk_space
+        return bc.bytes_to_gigabytes(self.__free_disk_space)
 
     @free_disk_space.setter
     def free_disk_space(self, val):
         self.__free_disk_space = val
-
-    def __bytes_to_gigabytes(self, bytes):
-        gb = float(1024 ** 3)
-        return '{0:.2f}GB'.format(float(bytes)/gb)
 
     @property
     def project_disk_usages(self):
