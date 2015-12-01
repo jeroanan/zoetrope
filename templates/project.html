@@ -1,15 +1,5 @@
 {% extends 'master.html' %}
 
-{% block stylesheet %}
-  div.row {
-    padding-top: 5px;
-  }
-
-  li {
-    padding-top: 5px;
-  }
-{% endblock %}
-
 {% block content %}
 
 <h2>Summary</h2>
@@ -38,7 +28,7 @@
   <div class="col-xs-6">
     <ul>
     {% for gu in project.gui_urls %}
-      <li><a href="{{gu.url}}" title="{{gu.description}}">{{gu.name}}</a></li>
+      <li class="project-link"><a href="{{gu.url}}" title="{{gu.description}}">{{gu.name}}</a></li>
     {% endfor %}
     </ul>
   </div>
