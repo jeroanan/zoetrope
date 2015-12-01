@@ -144,7 +144,7 @@ class Task(object):
 
     @property
     def suspended_via_gui(self):
-        return self.__suspended_via_gui
+        return self.__suspended_via_gui == 'yes'
 
     @suspended_via_gui.setter
     def suspended_via_gui(self, val):
@@ -230,3 +230,19 @@ class Task(object):
     @estimated_cpu_time_remaining.setter
     def estimated_cpu_time_remaining(self, val):
         self.__estimated_cpu_time_remaining = val
+
+    def get_state_string(self):
+
+        if self.suspended_via_gui:
+            return 'Task suspended by user'
+
+        if self.state == '2' and self.scheduler_state == '1':
+            return 'Waiting to run'
+
+        state_string_mappings = {
+            '2': 'Running',
+            '5': 'Ready to report',
+            '6': 'Aborted by user'
+        }
+
+        return state_string_mappings.get(self.state, self.__state)

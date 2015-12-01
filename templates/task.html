@@ -21,9 +21,7 @@
   {{task_row('Report deadline', task.report_deadline)}}
   {{task_row('Ready to report?', task.ready_to_report)}}
 
-
-
-  {{task_row('State', task.state)}}
+  {{task_row('State', task.get_state_string())}}
   {{task_row('Suspended via gui?', task.suspended_via_gui)}}
   {{task_row('Active task state', task.active_task_state)}}
 

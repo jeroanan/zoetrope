@@ -73,7 +73,7 @@ class tests(unittest.TestCase):
         self.assertEqual(expected_value, self.__target.signal)
 
     def test_suspended_via_gui(self):
-        expected_value = 'no'
+        expected_value = False
         self.assertEqual(expected_value, self.__target.suspended_via_gui)
 
     def test_active_task_state(self):
@@ -115,3 +115,31 @@ class tests(unittest.TestCase):
         target.ready_to_report = 'yes'
 
         self.assertEqual(expected_value, target.fraction_done)
+
+    def test_state_string(self):
+        state_mappings = {
+            '2': 'Running',
+            '5': 'Ready to report',
+            '6': 'Aborted by user',
+            '-99': '-99'
+        }
+
+        for state, state_string in state_mappings.items():
+            self.__target.state = state
+            result = self.__target.get_state_string()
+
+            self.assertEqual(state_string,
+                             result,
+                             "Expected state string of {state_string} for state {state}. Got {result}"
+                             .format(state_string=state_string, state=state, result=result))
+
+    def test_state_string_task_suspended_via_gui(self):
+        self.__target.suspended_via_gui = 'yes'
+        expected_result = 'Task suspended by user'
+        self.assertEqual(expected_result, self.__target.get_state_string())
+
+    def test_state_string_waiting_to_run(self):
+        self.__target.state = '2'
+        self.__target.scheduler_state = '1'
+        expected_result = 'Waiting to run'
+        self.assertEqual(expected_result, self.__target.get_state_string())

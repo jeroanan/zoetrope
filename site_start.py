@@ -40,7 +40,12 @@ class WebServer(object):
         boinc_tasks = list(get_tasks.GetTasks().execute())
         projects = list(get_project_status.GetProjectStatus().execute())
 
-        task = [t for t in boinc_tasks if t.name==task_name].pop()
+        ts = [t for t in boinc_tasks if t.name==task_name]
+
+        if not any(ts):
+            return "Task {task_name} not found".format(task_name=task_name)
+
+        task = ts.pop()
         task.project_name = [p.name for p in projects if p.master_url==task.project_url].pop()
 
         return tr.TemplateRenderer().render('task.html', task=task, title=task_name)

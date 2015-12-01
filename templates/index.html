@@ -5,6 +5,7 @@
           <th>#</th>
           <th>Project Name</th>
           <th>Progress</th>
+          <th>State</th>
           <th>Time So Far</th>
           <th>Est. Time Remaining</th>
           <th>Deadline</th>
@@ -14,15 +15,16 @@
           <td><a href="/task?task_name={{task.name}}" title="View task details">{{loop.index}}.</a></td>
           <td>{{task.project_name}}</td>
           <td>
-            <div class="progress hidden-sm">
+            <div class="progress">
               <div class="progress-bar" role="progressbar" aria-valuenow="{{task.fraction_done}}" aria-valuemin="0"
-                aria-valuemax="100" style="width: {{task.fraction_done}}%; min-width: 4em;">
-                <span>{{task.fraction_done}}%</span>
-              </div>
+                aria-valuemax="100" style="width: {{task.fraction_done}}%;"></div>
             </div>
-            <div class="hidden-lg">
-              <span>{{task.fraction_done}}%</span>
+            <div>
+              <span><small>{{task.fraction_done}}%</small></span>
             </div>
+          </td>
+          <td>
+              {{ task.get_state_string() }}
           </td>
           <td>
             {% if task.ready_to_report %}
