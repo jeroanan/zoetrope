@@ -7,5 +7,9 @@ li.project-link {
 }
 
 div.home-row {
+  padding-top: 40px;
+}
+
+div.task-controls {
   padding-top: 20px;
 }

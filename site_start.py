@@ -3,6 +3,7 @@ from subprocess import Popen, PIPE
 
 import cherrypy
 
+import boinc.GetTask as get_task
 import boinc.GetTasks as get_tasks
 import boinc.GetProjectStatus as get_project_status
 import boinc.DoNetworkCommunication as do_comms
@@ -37,15 +38,13 @@ class WebServer(object):
 
     @cherrypy.expose
     def task(self, task_name):
-        boinc_tasks = list(get_tasks.GetTasks().execute())
         projects = list(get_project_status.GetProjectStatus().execute())
 
-        ts = [t for t in boinc_tasks if t.name==task_name]
-
-        if not any(ts):
+        try:
+            task = get_task.GetTask().execute(task_name)
+        except get_task.TaskNotFoundException:
             return "Task {task_name} not found".format(task_name=task_name)
 
-        task = ts.pop()
         task.project_name = [p.name for p in projects if p.master_url==task.project_url].pop()
 
         return tr.TemplateRenderer().render('task.html', task=task, title=task_name)
@@ -86,6 +85,10 @@ class WebServer(object):
     def daily_transfer_history(self):
         dts = dth.DailyTransferHistory().execute()
         return tr.TemplateRenderer().render('dailytransferhistory.html', title='Daily Transfer History', transfers=dts)
+
+    @cherrypy.expose
+    def suspend_resume(self, task_name, return_url):
+        raise cherrypy.HTTPRedirect(return_url)
 
 if __name__=='__main__':
     ws = WebServer()
