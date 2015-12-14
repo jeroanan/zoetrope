@@ -1,5 +1,17 @@
 {% extends 'master.html' %}
 
+{% block javascript %}
+
+  function confirmAbort() {
+    $('div.confirm-row').removeClass('hide');
+  }
+
+  $(function() {
+    $('a.abort-button').on('click', function() { confirmAbort(); });
+  })
+
+{% endblock %}
+
 {% block content %}
   {{task_row('Project Name', task.project_name)}}
   {{task_row('Project URL', task.project_url)}}
@@ -31,7 +43,14 @@
         {% endif %}
       </a>
     </div>
-    <div class="col-xs-3"><a class="btn btn-danger">Abort</a></div>
+    <div class="col-xs-3"><a class="btn btn-danger abort-button">Abort</a></div>
+    <div class="col-xs-3"></div>
+  </div>
+
+  <div class="row confirm-row hide">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-3"></div>
+    <div class="col-xs-3">Confirm task abort: <a href="/abort_task?task_name={{ task.name }}">OK</a></div>
     <div class="col-xs-3"></div>
   </div>
 

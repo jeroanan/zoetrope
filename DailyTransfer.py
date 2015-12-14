@@ -3,7 +3,6 @@ import util.ByteConversion as bc
 class DailyTransfer(object):
 
     def __init__(self, daily_transfer_string):
-        print(daily_transfer_string)
         colon_split = daily_transfer_string.split(':')
         self.__date = colon_split[0]
 

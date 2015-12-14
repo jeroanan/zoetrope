@@ -236,7 +236,7 @@ class Task(object):
         if self.suspended_via_gui:
             return 'Task suspended by user'
 
-        if self.state == '2' and self.scheduler_state == '1':
+        if self.state == '2' and (self.scheduler_state == '1' or self.active_task_state == '0'): 
             return 'Waiting to run'
 
         state_string_mappings = {

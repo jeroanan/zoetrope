@@ -117,6 +117,8 @@ class tests(unittest.TestCase):
         self.assertEqual(expected_value, target.fraction_done)
 
     def test_state_string(self):
+        self.__target.active_task_state = '1'
+
         state_mappings = {
             '2': 'Running',
             '5': 'Ready to report',
@@ -141,5 +143,11 @@ class tests(unittest.TestCase):
     def test_state_string_waiting_to_run(self):
         self.__target.state = '2'
         self.__target.scheduler_state = '1'
+        expected_result = 'Waiting to run'
+        self.assertEqual(expected_result, self.__target.get_state_string())
+
+    def test_state_string_waiting_to_run_when_state_2_and_active_task_0(self):
+        self.__target.state = '2'
+        self.__target.active_task = '0'
         expected_result = 'Waiting to run'
         self.assertEqual(expected_result, self.__target.get_state_string())

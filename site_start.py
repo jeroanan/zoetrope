@@ -3,6 +3,7 @@ from subprocess import Popen, PIPE
 
 import cherrypy
 
+import boinc.AbortTask as abort_task
 import boinc.GetTask as get_task
 import boinc.GetTasks as get_tasks
 import boinc.GetProjectStatus as get_project_status
@@ -38,13 +39,13 @@ class WebServer(object):
 
     @cherrypy.expose
     def task(self, task_name):
-        projects = list(get_project_status.GetProjectStatus().execute())
 
         try:
             task = get_task.GetTask().execute(task_name)
         except get_task.TaskNotFoundException:
             return "Task {task_name} not found".format(task_name=task_name)
 
+        projects = list(get_project_status.GetProjectStatus().execute())
         task.project_name = [p.name for p in projects if p.master_url==task.project_url].pop()
 
         return tr.TemplateRenderer().render('task.html', task=task, title=task_name)
@@ -89,6 +90,11 @@ class WebServer(object):
     @cherrypy.expose
     def suspend_resume(self, task_name, return_url):
         raise cherrypy.HTTPRedirect(return_url)
+
+    @cherrypy.expose
+    def abort_task(self, task_name):
+        abort_task.AbortTask().execute(task_name)
+        raise cherrypy.HTTPRedirect('/')
 
 if __name__=='__main__':
     ws = WebServer()
