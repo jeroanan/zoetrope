@@ -1,6 +1,6 @@
-import boinc.BoincCommand as bc
+import boincsite.boinc.BoincCommand as bc
 
-import boinc.GetTask as gt
+import boincsite.boinc.GetTask as gt
 
 
 class AbortTask(bc.BoincCommand):

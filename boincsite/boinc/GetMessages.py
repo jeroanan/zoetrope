@@ -1,6 +1,6 @@
-import boinc.BoincCommand as bc
+import boincsite.boinc.BoincCommand as bc
 
-import Message as m
+import boincsite.Message as m
 
 class GetMessages(bc.BoincCommand):
 

@@ -3,18 +3,18 @@ from subprocess import Popen, PIPE
 
 import cherrypy
 
-import boinc.AbortTask as abort_task
-import boinc.GetTask as get_task
-import boinc.GetTasks as get_tasks
-import boinc.GetProjectStatus as get_project_status
-import boinc.DoNetworkCommunication as do_comms
-import boinc.GetMessages as get_messages
-import boinc.DiskUsage as disk_usage
-import boinc.HostInfo as host_info
-import boinc.DailyTransferHistory as dth
+import boincsite.boinc.commandline.AbortTask as abort_task
+import boincsite.boinc.GetTask as get_task
+import boincsite.boinc.GetTasks as get_tasks
+import boincsite.boinc.GetProjectStatus as get_project_status
+import boincsite.boinc.DoNetworkCommunication as do_comms
+import boincsite.boinc.GetMessages as get_messages
+import boincsite.boinc.DiskUsage as disk_usage
+import boincsite.boinc.HostInfo as host_info
+import boincsite.boinc.DailyTransferHistory as dth
 
-import Task as boinc_task
-import templates.TemplateRenderer as tr
+import boincsite.Task as boinc_task
+import boincsite.templates.TemplateRenderer as tr
 
 WorkingDirectory = os.path.dirname(os.path.abspath(__file__))
 

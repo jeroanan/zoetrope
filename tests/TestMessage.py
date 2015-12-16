@@ -1,6 +1,6 @@
 import unittest
 
-import Message as m
+import boincsite.Message as m
 
 class TestMessage(unittest.TestCase):
 

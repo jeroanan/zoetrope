@@ -1,6 +1,6 @@
 import unittest
 
-import HostInfo as hi
+import boincsite.HostInfo as hi
 
 
 class TestHostInfo(unittest.TestCase):

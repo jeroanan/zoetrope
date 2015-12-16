@@ -1,6 +1,6 @@
-import boinc.BoincCommand as bc
+import boincsite.boinc.BoincCommand as bc
 
-import DiskUsage as du
+import boincsite.DiskUsage as du
 
 class DiskUsage(bc.BoincCommand):
 

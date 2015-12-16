@@ -1,4 +1,4 @@
-import util.ByteConversion as bc
+import boincsite.util.ByteConversion as bc
 
 class HostInfo(object):
 

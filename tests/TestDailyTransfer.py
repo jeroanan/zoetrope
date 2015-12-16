@@ -1,6 +1,6 @@
 import unittest
 
-import DailyTransfer as dt
+import boincsite.DailyTransfer as dt
 
 
 class TestDailyTransfer(unittest.TestCase):

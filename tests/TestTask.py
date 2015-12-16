@@ -1,4 +1,4 @@
-import Task as t
+import boincsite.Task as t
 import unittest
 
 class tests(unittest.TestCase):

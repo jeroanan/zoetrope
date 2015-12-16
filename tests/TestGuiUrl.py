@@ -1,6 +1,6 @@
 import unittest
 
-import Project as p
+import boincsite.Project as p
 
 class TestGuiUrl(unittest.TestCase):
 

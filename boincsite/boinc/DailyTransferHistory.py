@@ -1,6 +1,6 @@
-import boinc.BoincCommand as bc
+import boincsite.boinc.BoincCommand as bc
 
-import DailyTransfer as dt
+import boincsite.DailyTransfer as dt
 
 
 class DailyTransferHistory(bc.BoincCommand):
