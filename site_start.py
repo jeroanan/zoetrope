@@ -24,16 +24,15 @@ class WebServer(object):
     @cherrypy.expose
     def index(self):
         tasks_command = self.__command_factory.create('GetTasks')
-        projects_command = self.__command_factory.create('GetProjectStatus')
-
         boinc_tasks = list(tasks_command.execute())
-        projects = list(projects_command.execute())
+
+        projects = self.__get_projects()
 
         for t in boinc_tasks:
             pns = [p.name for p in projects if p.master_url==t.project_url]
             t.project_name = pns.pop()
 
-        return self.__renderer.render('index.html', tasks=boinc_tasks, title='Boinc Tasks')
+        return self.__render('index.html', tasks=boinc_tasks, title='Boinc Tasks')
 
     @cherrypy.expose
     def task(self, task_name):
@@ -44,23 +43,25 @@ class WebServer(object):
         except get_task.TaskNotFoundException:
             return "Task {task_name} not found".format(task_name=task_name)
 
-        projects_command = self.__command_factory.create('GetProjectStatus')
-        projects = list(projects_command.execute())
+        projects = self.__get_projects()
+
         task.project_name = [p.name for p in projects if p.master_url==task.project_url].pop()
 
-        return self.__renderer.render('task.html', task=task, title=task_name)
+        return self.__render('task.html', task=task, title=task_name)
 
     @cherrypy.expose
     def projects(self):
-        projects_command = self.__command_factory.create('GetProjectStatus')
-        projects = projects_command.execute()
-        return self.__renderer.render('projects.html',projects=projects, title='Boinc Projects')
+        return self.__render('projects.html',projects=self.__get_projects(), title='Boinc Projects')
 
     @cherrypy.expose
     def project(self, **args):
+
+        project = [t for t in self.__get_projects() if t.name==args.get('project', '')].pop()
+        return self.__render('project.html', project=project, title=project.name)
+
+    def __get_projects(self):
         projects_command = self.__command_factory.create('GetProjectStatus')
-        project = [t for t in projects_command.execute() if t.name==args.get('project', '')].pop()
-        return self.__renderer.render('project.html', project=project, title=project.name)
+        return list(projects_command.execute())
 
     @cherrypy.expose
     def do_network_communication(self):
@@ -72,25 +73,28 @@ class WebServer(object):
     def disk_usage(self):
         disk_usage_command = self.__command_factory.create('DiskUsage')
         du = disk_usage_command.execute()
-        return self.__renderer.render('diskusage.html', title='Disk Usage', disk_usage=du)
+        return self.__render('diskusage.html', title='Disk Usage', disk_usage=du)
 
     @cherrypy.expose
     def messages(self):
         get_messages_command = self.__command_factory.create('GetMessages')
         messages = get_messages_command.execute()
-        return self.__renderer.render('messages.html', messages=reversed(list(messages)), title="Messages")
+        return self.__render('messages.html', messages=reversed(list(messages)), title="Messages")
 
     @cherrypy.expose
     def host_info(self):
         host_info_command = self.__command_factory.create('HostInfo')
         hi = host_info_command.execute()
-        return self.__renderer.render('hostinfo.html', title='Host Info', host_info=hi)
+        return self.__render('hostinfo.html', title='Host Info', host_info=hi)
 
     @cherrypy.expose
     def daily_transfer_history(self):
         daily_transfer_history_command = self.__command_factory.create('DailyTransferHistory')
         dts = daily_transfer_history_command.execute()
-        return self.__renderer.render('dailytransferhistory.html', title='Daily Transfer History', transfers=dts)
+        return self.__render('dailytransferhistory.html', title='Daily Transfer History', transfers=dts)
+
+    def __render(self, page, **kwargs):
+        return self.__renderer.render(page, **kwargs)
 
     @cherrypy.expose
     def suspend_resume(self, task_name, return_url):
