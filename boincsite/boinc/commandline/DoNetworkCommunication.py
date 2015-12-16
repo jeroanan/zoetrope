@@ -1,4 +1,4 @@
-import boincsite.boinc.BoincCommand as bc
+import boincsite.boinc.commandline.BoincCommand as bc
 
 class DoNetworkCommunication(bc.BoincCommand):
 

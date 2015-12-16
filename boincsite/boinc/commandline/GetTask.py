@@ -1,5 +1,5 @@
-import boincsite.boinc.BoincCommand as bc
-import boincsite.boinc.GetTasks as gt
+import boincsite.boinc.commandline.BoincCommand as bc
+import boincsite.boinc.commandline.GetTasks as gt
 
 class GetTask(bc.BoincCommand):
 

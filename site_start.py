@@ -4,14 +4,14 @@ from subprocess import Popen, PIPE
 import cherrypy
 
 import boincsite.boinc.commandline.AbortTask as abort_task
-import boincsite.boinc.GetTask as get_task
-import boincsite.boinc.GetTasks as get_tasks
-import boincsite.boinc.GetProjectStatus as get_project_status
-import boincsite.boinc.DoNetworkCommunication as do_comms
-import boincsite.boinc.GetMessages as get_messages
-import boincsite.boinc.DiskUsage as disk_usage
-import boincsite.boinc.HostInfo as host_info
-import boincsite.boinc.DailyTransferHistory as dth
+import boincsite.boinc.commandline.GetTask as get_task
+import boincsite.boinc.commandline.GetTasks as get_tasks
+import boincsite.boinc.commandline.GetProjectStatus as get_project_status
+import boincsite.boinc.commandline.DoNetworkCommunication as do_comms
+import boincsite.boinc.commandline.GetMessages as get_messages
+import boincsite.boinc.commandline.DiskUsage as disk_usage
+import boincsite.boinc.commandline.HostInfo as host_info
+import boincsite.boinc.commandline.DailyTransferHistory as dth
 
 import boincsite.Task as boinc_task
 import boincsite.templates.TemplateRenderer as tr
