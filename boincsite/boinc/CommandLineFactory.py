@@ -27,3 +27,8 @@ class CommandLineFactory(object):
 
         if command_type in mappings:
             return mappings[command_type]()
+
+        raise UnknownCommandException
+
+class UnknownCommandException(Exception):
+    pass

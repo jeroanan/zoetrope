@@ -36,3 +36,6 @@ class TestCommandLineFactory(unittest.TestCase):
                     instance=return_type,
                     type_string=type_string,
                     result=result))
+
+    def test_unknown_command_raises_command_unknown_command_exception(self):
+        self.assertRaises(clf.UnknownCommandException, clf.CommandLineFactory.create, 'SomeUnknownCommand')
