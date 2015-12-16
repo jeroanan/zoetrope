@@ -12,4 +12,4 @@ class AbortTask(bc.BoincCommand):
             project_url=task.project_url.strip('/'),
             task_name=task.name)
 
-        out, err = self.run_command(command_line)
+        out, err = self.run(command_line)
