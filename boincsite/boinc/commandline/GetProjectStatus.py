@@ -1,6 +1,6 @@
 import boincsite.boinc.commandline.BoincCommand as bc
 
-import boincsite.Project as p
+import boincsite.status.Project as p
 
 class GetProjectStatus(bc.BoincCommand):
 

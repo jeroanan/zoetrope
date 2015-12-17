@@ -1,6 +1,6 @@
 import unittest
 
-import boincsite.DiskUsage as du
+import boincsite.status.DiskUsage as du
 
 class TestProjectDiskUsage(unittest.TestCase):
 

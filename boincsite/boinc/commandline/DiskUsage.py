@@ -1,6 +1,6 @@
 import boincsite.boinc.commandline.BoincCommand as bc
 
-import boincsite.DiskUsage as du
+import boincsite.status.DiskUsage as du
 
 class DiskUsage(bc.BoincCommand):
 

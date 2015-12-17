@@ -1,6 +1,6 @@
 import boincsite.boinc.commandline.BoincCommand as bc
 
-import boincsite.Task as t
+import boincsite.status.Task as t
 
 class GetTasks(bc.BoincCommand):
 

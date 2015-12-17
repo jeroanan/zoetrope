@@ -1,6 +1,6 @@
 import unittest
 
-import boincsite.Project as p
+import boincsite.status.Project as p
 
 class TestProject(unittest.TestCase):
 

@@ -63,7 +63,7 @@ class WebServer(object):
     @cherrypy.expose
     def project(self, **kwargs):
 
-        project = [t for t in self.__get_projects() if t.name==args.get('project', '')].pop()
+        project = [t for t in self.__get_projects() if t.name==kwargs.get('project', '')].pop()
         return self.__render('project.html', project=project, title=project.name)
 
     def __get_projects(self):
