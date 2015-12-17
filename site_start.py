@@ -22,7 +22,7 @@ class WebServer(object):
         cherrypy.quickstart(WebServer(), '/', 'server.conf')
 
     @cherrypy.expose
-    def index(self):
+    def index(self, **kwargs):
         tasks_command = self.__command_factory.create('GetTasks')
         boinc_tasks = list(tasks_command.execute())
 
@@ -35,7 +35,12 @@ class WebServer(object):
         return self.__render('index.html', tasks=boinc_tasks, title='Boinc Tasks')
 
     @cherrypy.expose
-    def task(self, task_name):
+    def task(self, **kwargs):
+
+        task_name = kwargs.get('task_name', '')
+
+        if task_name == '':
+            raise cherrypy.HTTPRedirect('/')
 
         try:
             task_command = self.__command_factory.create('GetTask')
@@ -50,11 +55,11 @@ class WebServer(object):
         return self.__render('task.html', task=task, title=task_name)
 
     @cherrypy.expose
-    def projects(self):
+    def projects(self, **kwargs):
         return self.__render('projects.html',projects=self.__get_projects(), title='Boinc Projects')
 
     @cherrypy.expose
-    def project(self, **args):
+    def project(self, **kwargs):
 
         project = [t for t in self.__get_projects() if t.name==args.get('project', '')].pop()
         return self.__render('project.html', project=project, title=project.name)
@@ -64,31 +69,31 @@ class WebServer(object):
         return list(projects_command.execute())
 
     @cherrypy.expose
-    def do_network_communication(self):
+    def do_network_communication(self, **kwargs):
         command = self.__command_factory.create('DoNetworkCommunication')
         command.execute()
         raise cherrypy.HTTPRedirect('/')
 
     @cherrypy.expose
-    def disk_usage(self):
+    def disk_usage(self, **kwargs):
         disk_usage_command = self.__command_factory.create('DiskUsage')
         du = disk_usage_command.execute()
         return self.__render('diskusage.html', title='Disk Usage', disk_usage=du)
 
     @cherrypy.expose
-    def messages(self):
+    def messages(self, **kwargs):
         get_messages_command = self.__command_factory.create('GetMessages')
         messages = get_messages_command.execute()
         return self.__render('messages.html', messages=reversed(list(messages)), title="Messages")
 
     @cherrypy.expose
-    def host_info(self):
+    def host_info(self, **kwargs):
         host_info_command = self.__command_factory.create('HostInfo')
         hi = host_info_command.execute()
         return self.__render('hostinfo.html', title='Host Info', host_info=hi)
 
     @cherrypy.expose
-    def daily_transfer_history(self):
+    def daily_transfer_history(self, **kwarhs):
         daily_transfer_history_command = self.__command_factory.create('DailyTransferHistory')
         dts = daily_transfer_history_command.execute()
         return self.__render('dailytransferhistory.html', title='Daily Transfer History', transfers=dts)
@@ -101,9 +106,13 @@ class WebServer(object):
         raise cherrypy.HTTPRedirect(return_url)
 
     @cherrypy.expose
-    def abort_task(self, task_name):
-        abort_task_command = self.__command_factory.create('AbortTask')
-        abort_task_command.execute(task_name)
+    def abort_task(self, **kwargs):
+        task_name = kwargs.get('task_name', '')
+
+        if task_name!='':
+            abort_task_command = self.__command_factory.create('AbortTask')
+            abort_task_command.execute(task_name)
+            
         raise cherrypy.HTTPRedirect('/')
 
 if __name__=='__main__':
