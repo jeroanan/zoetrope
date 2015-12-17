@@ -1,10 +1,10 @@
 import os
-from subprocess import Popen, PIPE
 
 import cherrypy
 
 import boincsite.boinc.CommandLineFactory as clf
-import boincsite.Task as boinc_task
+import boincsite.boinc.RpcFactory as rf
+
 import boincsite.templates.TemplateRenderer as tr
 
 WorkingDirectory = os.path.dirname(os.path.abspath(__file__))
@@ -13,6 +13,8 @@ class WebServer(object):
 
     def __init__(self):
         self.__command_factory = clf.CommandLineFactory
+        self.__rpc_facotry = rf.RpcFactory
+
         self.__renderer = tr.TemplateRenderer()
 
     def start(self):
@@ -112,8 +114,15 @@ class WebServer(object):
         if task_name!='':
             abort_task_command = self.__command_factory.create('AbortTask')
             abort_task_command.execute(task_name)
-            
+
         raise cherrypy.HTTPRedirect('/')
+
+    @cherrypy.expose
+    def experimental_tasks(self, **kwargs):
+        command = self.__rpc_facotry.create('GetTasks')
+        result = command.execute()
+        for r in result:
+            print(r.fraction_done)
 
 if __name__=='__main__':
     ws = WebServer()

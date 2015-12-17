@@ -20,7 +20,8 @@
 
 # Based on client/boinc_cmd.cpp
 
-import rpc
+import lib.boincindicator.rpc as rpc
+
 import socket
 import hashlib
 import time
@@ -54,7 +55,7 @@ def setattrs_from_xml(obj, xml, attrfuncdict={}):
                 else:                         attrfunc = lambda x: x
             setattr(obj, e.tag, attrfunc(e))
         else:
-            print "class missing attribute '%s': %r" % (e.tag, obj)
+            print("class missing attribute '%s': %r") % (e.tag, obj)
     return obj
 
 
@@ -682,20 +683,3 @@ def read_gui_rpc_password():
     except IOError:
         # Permission denied or File not found.
         pass
-
-
-if __name__ == '__main__':
-    with BoincClient() as boinc:
-        print boinc.connected
-        print boinc.authorized
-        print boinc.version
-        print boinc.get_cc_status()
-        for i, task in enumerate(boinc.get_tasks()):
-            print i+1, task
-        print boinc.get_host_info()
-        print boinc.run_benchmarks()
-        print boinc.set_run_mode(RunMode.NEVER, 6)
-        time.sleep(7)
-        print boinc.set_gpu_mode(RunMode.NEVER, 6)
-        time.sleep(7)
-        print boinc.set_network_mode(RunMode.NEVER, 6)

@@ -20,6 +20,7 @@
 
 # A replacement of gui_rpc_client for basic RPC calls, with a sane API
 
+import array
 import socket
 from xml.etree import ElementTree
 
@@ -88,10 +89,10 @@ class Rpc(object):
         # pack request
         end = '\003'
         req = "<boinc_gui_rpc_request>\n%s\n</boinc_gui_rpc_request>\n%s" \
-            % (ElementTree.tostring(request).replace(' />','/>'), end)
+            % (ElementTree.tostring(request).decode('UTF-8').replace(' />','/>'), end)
 
         try:
-            self.sock.sendall(req)
+            self.sock.sendall(req.encode('ascii'))
         except (socket.error, socket.herror, socket.gaierror, socket.timeout):
             raise
 
@@ -103,10 +104,10 @@ class Rpc(object):
                     raise socket.error("No data from socket")
             except socket.error:
                 raise
-            n = buf.find(end)
+            n = buf.find(end.encode('ascii'))
             if not n == -1: break
             req += buf
-        req += buf[:n]
+        req += buf[:n].decode('UTF-8')
 
         # unpack reply (remove root tag, ie: first and last lines)
         req = '\n'.join(req.strip().rsplit('\n')[1:-1])
@@ -115,12 +116,3 @@ class Rpc(object):
             return req
         else:
             return ElementTree.fromstring(req)
-
-
-if __name__ == '__main__':
-    with Rpc(text_output=True) as rpc:
-        print rpc.call('<exchange_versions/>')
-        print rpc.call('<get_cc_status/>')
-        print rpc.call('<get_results/>')
-        print rpc.call('<get_host_info/>')
-        print rpc.call('<run_benchmarks/>')
