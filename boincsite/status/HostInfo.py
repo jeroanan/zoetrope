@@ -2,28 +2,23 @@ import boincsite.util.ByteConversion as bc
 
 class HostInfo(object):
 
-    def __init__(self, host_info_string):
-
-        host_info_stack = [s for s in list(reversed(host_info_string.split('\n'))) if s.strip() != '']
-
-        get_next_field = lambda: host_info_stack.pop().split(':')[1].strip()
-
-        self.__timezone = get_next_field()
-        self.__domain_name = get_next_field()
-        self.__ip_address = get_next_field()
-        self.__number_of_cpus = get_next_field()
-        self.__cpu_vendor = get_next_field()
-        self.__cpu_model = get_next_field()
-        self.__cpu_fps_ops = get_next_field()
-        self.__cpu_int_ops = get_next_field()
-        self.__cpu_mem_bw = get_next_field()
-        self.__os_name = get_next_field()
-        self.__os_version = get_next_field()
-        self.__memory_size = get_next_field()
-        self.__cache_size = get_next_field()
-        self.__swap_size = get_next_field()
-        self.__disk_size = get_next_field()
-        self.__disk_free = get_next_field()
+    def __init__(self, host_info):
+        self.__timezone = ''
+        self.__domain_name = ''
+        self.__ip_address = ''
+        self.__number_of_cpus = ''
+        self.__cpu_vendor = ''
+        self.__cpu_model = ''
+        self.__cpu_fps_ops = ''
+        self.__cpu_int_ops = ''
+        self.__cpu_mem_bw = ''
+        self.__os_name = ''
+        self.__os_version = ''
+        self.__memory_size = ''
+        self.__cache_size = ''
+        self.__swap_size = ''
+        self.__disk_size = ''
+        self.__disk_free = ''
 
     @property
     def timezone(self):

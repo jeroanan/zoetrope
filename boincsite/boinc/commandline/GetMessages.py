@@ -1,6 +1,6 @@
 import boincsite.boinc.commandline.BoincCommand as bc
 
-import boincsite.status.Message as m
+import boincsite.status.commandline.Message as m
 
 class GetMessages(bc.BoincCommand):
 

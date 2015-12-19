@@ -1,18 +1,11 @@
 class Message(object):
 
-    def __init__(self, message_string):
-        space_split = list(reversed(message_string.split(' ')))
-        self.__message_number = int(space_split.pop().strip(':'))
-        self.__date_time = '{date} {time}'.format(date=space_split.pop(), time=space_split.pop())
-
-        def string_between_two_chars(char_one, char_two):
-            char_one_onwards = message_string[message_string.find(char_one)+1:]
-            return char_one_onwards [0:char_one_onwards.find(char_two)]
-
-        self.__message_type = string_between_two_chars('(', ')')
-        self.__project_name = string_between_two_chars('[', ']')
-
-        self.__message_text = message_string[message_string.find(']')+1:].strip()
+    def __init__(self, message):
+        self.__message_number = -1
+        self.__date_time = ''
+        self.__message_type = ''
+        self.__project_name = ''
+        self.__message_text = ''
 
     @property
     def message_number(self):

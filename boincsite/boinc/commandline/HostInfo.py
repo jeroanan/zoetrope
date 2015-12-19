@@ -1,6 +1,6 @@
 import boincsite.boinc.commandline.BoincCommand as bc
 
-import boincsite.status.HostInfo as hi
+import boincsite.status.commandline.HostInfo as hi
 
 
 class HostInfo(bc.BoincCommand):
