@@ -7,5 +7,5 @@ class TemplateRenderer(object):
         return template.render(args)
 
     def __get_template(self, template):
-        env = Environment(loader=PackageLoader("templates", "."))
+        env = Environment(loader=PackageLoader("boincsite.templates", "."))
         return env.get_template(template)

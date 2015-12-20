@@ -1,13 +1,19 @@
+# Copyright (c) David Wilson 2015
+#
+# Licensed under the GPL version 3
+
 import os
 
 import cherrypy
 
 import boincsite.boinc.CommandLineFactory as clf
 import boincsite.boinc.RpcFactory as rf
+import boincsite.boinc.commandline.GetTask as get_task
 
 import boincsite.templates.TemplateRenderer as tr
 
 WorkingDirectory = os.path.dirname(os.path.abspath(__file__))
+
 
 class WebServer(object):
 
@@ -122,7 +128,7 @@ class WebServer(object):
         command = self.__rpc_facotry.create('GetTasks')
         result = command.execute()
         for r in result:
-            print(r.fraction_done)
+            print(r.name + ' ' + str(r.fraction_done))
 
 if __name__=='__main__':
     ws = WebServer()

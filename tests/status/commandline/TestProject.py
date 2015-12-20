@@ -1,3 +1,7 @@
+# Copyright (c) David Wilson 2015
+#
+# Licensed under the GPL version 3
+
 import unittest
 
 import boincsite.status.commandline.Project as p

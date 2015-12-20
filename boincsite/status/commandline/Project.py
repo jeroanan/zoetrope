@@ -1,8 +1,14 @@
+# Copyright (c) David Wilson 2015
+#
+# Licensed under the GPL version 3
+
 import boincsite.status.Project as proj
 
 
 class Project(proj.Project):
-
+    """
+    Contains details of one project in
+    """
     def __init__(self, project):
         super().__init__(project)
 
@@ -42,7 +48,7 @@ class Project(proj.Project):
         if any(project_strings):
             for ps in project_strings:
                 self.gui_urls.append(GuiUrl(ps))
-                
+
 
 class GuiUrl(proj.GuiUrl):
 

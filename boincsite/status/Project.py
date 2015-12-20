@@ -1,3 +1,8 @@
+# Copyright (c) David Wilson 2015
+#
+# Licensed under the GPL version 3
+
+
 class Project(object):
 
     def __init__(self, project_string):
@@ -206,7 +211,7 @@ class GuiUrl(object):
     def __init__(self, gui_urls):
         self.__name = ''
         self.__description = ''
-        self.__url = ''        
+        self.__url = ''
 
     @property
     def name(self):

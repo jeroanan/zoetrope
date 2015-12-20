@@ -1,3 +1,8 @@
+# Copyright (c) David Wilson 2015
+#
+# Licensed under the GPL version 3
+
+
 class Task(object):
 
     def __init__(self, task):
@@ -22,8 +27,6 @@ class Task(object):
         self.__swap_size = ''
         self.__working_set_size = ''
         self.__estimated_cpu_time_remaining = ''
-
-        
 
     @property
     def name(self):

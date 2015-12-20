@@ -1,5 +1,10 @@
+# Copyright (c) David Wilson 2015
+#
+# Licensed under the GPL version 3
+
 import boincsite.boinc.commandline.BoincCommand as bc
 import boincsite.boinc.commandline.GetTasks as gt
+
 
 class GetTask(bc.BoincCommand):
 
