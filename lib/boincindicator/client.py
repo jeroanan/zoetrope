@@ -662,36 +662,33 @@ class BoincClient(object):
             return True
         return False
 
-    def abort_task(self, result_name, project_url):
-        '''
-        Abort a given task.
-
-        This command requires authorization in order to run successfully.
-        '''
-        xml = '<abort_result>\n<name>{rn}</name>\n<project_url>{pu}</project_url>\n</abort_result>'.format(
+    def result_op(self, op, result_name, project_url):
+        xml = '<{op}>\n<name>{rn}</name>\n<project_url>{pu}</project_url>\n</{op}>'.format(
+          op=op,
           rn=result_name,
           pu=project_url
         )
         result = self.rpc.call(xml)
+        return result
+
+    def abort_result(self, result_name, project_url):
+        '''
+        Abort a given result.
+
+        This command requires authorization in order to run successfully.
+        '''
+        return self.result_op('abort_result', result_name, project_url)
 
     def suspend_result(self, result_name, project_url):
         '''
-        Abort a given task.
+        Abort a given result.
 
         This command requires authorization in order to run successfully.
         '''
-        xml = '<suspend_result>\n<name>{rn}</name>\n<project_url>{pu}</project_url>\n</suspend_result>'.format(
-          rn=result_name,
-          pu=project_url
-        )
-        result = self.rpc.call(xml)
+        return self.result_op('suspend_result', result_name, project_url)
 
     def resume_result(self, result_name, project_url):
-        xml = '<resume_result>\n<name>{rn}</name>\n<project_url>{pu}</project_url>\n</resume_result>'.format(
-          rn=result_name,
-          pu=project_url
-        )
-        result = self.rpc.call(xml)
+        return self.result_op('resume_result', result_name, project_url)
 
 def read_gui_rpc_password():
     ''' Read password string from GUI_RPC_PASSWD_FILE file, trim the last CR
