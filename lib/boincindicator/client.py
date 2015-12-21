@@ -685,7 +685,13 @@ class BoincClient(object):
           pu=project_url
         )
         result = self.rpc.call(xml)
-        print(result)
+
+    def resume_result(self, result_name, project_url):
+        xml = '<resume_result>\n<name>{rn}</name>\n<project_url>{pu}</project_url>\n</resume_result>'.format(
+          rn=result_name,
+          pu=project_url
+        )
+        result = self.rpc.call(xml)
 
 def read_gui_rpc_password():
     ''' Read password string from GUI_RPC_PASSWD_FILE file, trim the last CR

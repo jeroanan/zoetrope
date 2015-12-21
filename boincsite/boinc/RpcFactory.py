@@ -5,6 +5,7 @@
 import boincsite.boinc.rpc.GetTasks as gts
 import boincsite.boinc.rpc.AbortTask as at
 import boincsite.boinc.rpc.SuspendTask as st
+import boincsite.boinc.rpc.ResumeTask as rt
 
 class RpcFactory(object):
 
@@ -13,7 +14,8 @@ class RpcFactory(object):
         mappings = {
             'GetTasks': gts.GetTasks,
             'AbortTask': at.AbortTask,
-            'SuspendTask': st.SuspendTask
+            'SuspendTask': st.SuspendTask,
+            'ResumeTask': rt.ResumeTask
         }
 
         if command_type in mappings:

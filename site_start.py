@@ -116,8 +116,15 @@ class WebServer(object):
         return_url = kwargs.get('return_url', '/')
 
         if task_name!='':
-            suspend_task_command = self.__rpc_factory.create('SuspendTask')
-            suspend_task_command.execute(task_name)
+            task_command = self.__command_factory.create('GetTask')
+            task = task_command.execute(task_name)
+
+            if task.suspended_via_gui:
+                resume_task_command = self.__rpc_factory.create('ResumeTask')
+                resume_task_command.execute(task_name)
+            else:
+                suspend_task_command = self.__rpc_factory.create('SuspendTask')
+                suspend_task_command.execute(task_name)
 
         raise cherrypy.HTTPRedirect(return_url)
 
