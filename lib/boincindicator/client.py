@@ -662,15 +662,6 @@ class BoincClient(object):
             return True
         return False
 
-    def result_op(self, op, result_name, project_url):
-        xml = '<{op}>\n<name>{rn}</name>\n<project_url>{pu}</project_url>\n</{op}>'.format(
-          op=op,
-          rn=result_name,
-          pu=project_url
-        )
-        result = self.rpc.call(xml)
-        return result
-
     def abort_result(self, result_name, project_url):
         '''
         Abort a given result.
@@ -688,7 +679,21 @@ class BoincClient(object):
         return self.result_op('suspend_result', result_name, project_url)
 
     def resume_result(self, result_name, project_url):
+        '''
+        Abort a given result.
+
+        This command requires authorization in order to run successfully.
+        '''
         return self.result_op('resume_result', result_name, project_url)
+
+    def result_op(self, op, result_name, project_url):
+        xml = '<{op}>\n<name>{rn}</name>\n<project_url>{pu}</project_url>\n</{op}>'.format(
+          op=op,
+          rn=result_name,
+          pu=project_url
+        )
+        result = self.rpc.call(xml)
+        return result
 
 def read_gui_rpc_password():
     ''' Read password string from GUI_RPC_PASSWD_FILE file, trim the last CR
