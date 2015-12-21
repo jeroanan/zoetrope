@@ -31,7 +31,6 @@ from xml.etree import ElementTree
 
 GUI_RPC_PASSWD_FILE = "/etc/boinc-client/gui_rpc_auth.cfg"
 
-
 def setattrs_from_xml(obj, xml, attrfuncdict={}):
     ''' Helper to set values for attributes of a class instance by mapping
         matching tags from a XML file.
@@ -58,7 +57,6 @@ def setattrs_from_xml(obj, xml, attrfuncdict={}):
             print("class missing attribute '%s': %r") % (e.tag, obj)
     return obj
 
-
 def parse_bool(e):
     ''' Helper to convert ElementTree.Element.text to boolean.
         Treat '<foo/>' (and '<foo>[[:blank:]]</foo>') as True
@@ -69,7 +67,6 @@ def parse_bool(e):
     else:
         return bool(e.text) and not e.text.strip().lower() in ('0', 'false')
 
-
 def parse_int(e):
     ''' Helper to convert ElementTree.Element.text to integer.
         Treat '<foo/>' (and '<foo></foo>') as 0
@@ -77,23 +74,19 @@ def parse_int(e):
     # int(float()) allows casting to int a value expressed as float in XML
     return 0 if e.text is None else int(float(e.text.strip()))
 
-
 def parse_float(e):
     ''' Helper to convert ElementTree.Element.text to float. '''
     return 0.0 if e.text is None else float(e.text.strip())
 
-
 def parse_str(e):
     ''' Helper to convert ElementTree.Element.text to string. '''
     return "" if e.text is None else e.text.strip()
-
 
 def parse_list(e):
     ''' Helper to convert ElementTree.Element to list. For now, simply return
         the list of root element's children
     '''
     return list(e)
-
 
 class Enum(object):
     UNKNOWN                =   -1  # Not in original API
@@ -115,7 +108,6 @@ class Enum(object):
         # value not found
         return cls.name(Enum.UNKNOWN)
 
-
 class NetworkStatus(Enum):
     ''' Values of "network_status" '''
     ONLINE                 =    0  #// have network connections open
@@ -131,7 +123,6 @@ class NetworkStatus(Enum):
         elif v == cls.WANT_DISCONNECT: return "don't need connection"
         elif v == cls.LOOKUP_PENDING:  return "reference site lookup pending"
         else: return super(NetworkStatus, cls).name(v)
-
 
 class SuspendReason(Enum):
     ''' bitmap defs for task_suspend_reason, network_suspend_reason
@@ -573,7 +564,8 @@ class BoincClient(object):
         if password is None and not self.hostname:
             password = read_gui_rpc_password() or ""
         nonce = self.rpc.call('<auth1/>').text
-        hash = hashlib.md5('%s%s' % (nonce, password)).hexdigest().lower()
+        hashstr = '{nonce}{password}'.format(nonce=nonce, password=password).encode('utf-8')
+        hash = hashlib.md5(hashstr).hexdigest().lower()
         reply = self.rpc.call('<auth2><nonce_hash>%s</nonce_hash></auth2>' % hash)
 
         if reply.tag == 'authorized':
@@ -670,6 +662,14 @@ class BoincClient(object):
             return True
         return False
 
+    def abort_task(self, result_name, project_url):
+        '''Abort a given task'''
+        xml = '<abort_result>\n<name>{rn}</name>\n<project_url>{pu}</project_url>\n</abort_result>'.format(
+          rn=result_name,
+          pu=project_url
+        )
+        result = self.rpc.call(xml)
+        print(result)
 
 def read_gui_rpc_password():
     ''' Read password string from GUI_RPC_PASSWD_FILE file, trim the last CR

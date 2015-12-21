@@ -47,8 +47,6 @@ __author__  = 'Rodrigo Silva'
 __url__     = 'http://github.com/MestreLion/boinc-indicator'
 
 
-
-
 class BoincIndicator(object):
     def __init__(self, theme_path="", refresh=3):
         self.theme_path = osp.abspath(theme_path or
@@ -118,7 +116,6 @@ class BoincIndicator(object):
         if subprocess.call(['which', 'boincmgr'],  stdout=subprocess.PIPE) != 0:
             self.menu['manager'].set_sensitive(False)
 
-
     def main(self):
         #FIXME: make damn sure Indicator have found icons and it's working
         #       before entering Gtk.main()! An invisible indicator has no means
@@ -130,15 +127,12 @@ class BoincIndicator(object):
         GLib.timeout_add_seconds(self.refresh, self.update_status)
         Gtk.main()
 
-
     def quit(self):
         Gtk.main_quit()
         self.boinc.disconnect()
 
-
     def handler_generic(self, src=None):
         pass
-
 
     def handler_manager(self, src=None):
         # Activate window of running instance, if any
@@ -167,10 +161,8 @@ class BoincIndicator(object):
         except OSError:
             pass
 
-
     def handler_website(self, src=None):
         webbrowser.open('http://boinc.berkeley.edu')
-
 
     def suspend_resume(self, src, component):
         if src.get_active():
@@ -179,25 +171,20 @@ class BoincIndicator(object):
             self.boinc.set_mode(component, client.RunMode.RESTORE)
         self.update_status()
 
-
     def handler_suspend_resume_cpu(self, src=None):
         self.suspend_resume(src, 'cpu')
-
 
     def handler_suspend_resume_gpu(self, src=None):
         self.suspend_resume(src, 'gpu')
 
-
     def handler_client_restart(self, src=None):
         subprocess.call(['pkexec', '/etc/init.d/boinc-client', 'restart'])
-
 
     def handler_client_stop(self, src=None):
         # TODO: open a BIG alert telling user that after a shutdown, admin
         # privileges will be required to restart. Ask to confirm
         if self.boinc.quit():
             self.update_status()
-
 
     def handler_about(self, src=None):
         #TODO: prevent opening multiple times, disable minimize
@@ -216,10 +203,8 @@ class BoincIndicator(object):
         about.run()
         about.destroy()
 
-
     def handler_quit(self, src=None):
         self.quit()
-
 
     def check_set_active(self, tag, value):
         ''' A replacement for Gtk.CheckMenuItem.set_active() that blocks
@@ -230,7 +215,6 @@ class BoincIndicator(object):
         self.menu[tag].handler_block_by_func(handler)
         self.menu[tag].set_active(value)
         self.menu[tag].handler_unblock_by_func(handler)
-
 
     def update_status(self):
         ''' Updates the UI according to boinc client status '''
@@ -340,15 +324,3 @@ class BoincIndicator(object):
         self.menu['status_cpu'].show()
 
         return True  # returning False would deactivate update timer
-
-
-
-
-if __name__ == "__main__":
-    GLib.set_application_name(__appname__)
-    GLib.set_prgname(__apptag__)
-    Wnck.set_client_type(Wnck.ClientType.PAGER)
-    #TODO: add command-line arguments (via argparse), specially --refresh
-    # Which could move from __init__() to main()
-    ind = BoincIndicator()
-    sys.exit(ind.main())

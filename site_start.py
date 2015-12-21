@@ -19,7 +19,7 @@ class WebServer(object):
 
     def __init__(self):
         self.__command_factory = clf.CommandLineFactory
-        self.__rpc_facotry = rf.RpcFactory
+        self.__rpc_factory = rf.RpcFactory
 
         self.__renderer = tr.TemplateRenderer()
 
@@ -118,14 +118,14 @@ class WebServer(object):
         task_name = kwargs.get('task_name', '')
 
         if task_name!='':
-            abort_task_command = self.__command_factory.create('AbortTask')
+            abort_task_command = self.__rpc_factory.create('AbortTask')
             abort_task_command.execute(task_name)
 
         raise cherrypy.HTTPRedirect('/')
 
     @cherrypy.expose
     def experimental_tasks(self, **kwargs):
-        command = self.__rpc_facotry.create('GetTasks')
+        command = self.__rpc_factory.create('GetTasks')
         result = command.execute()
         for r in result:
             print(r.name + ' ' + str(r.fraction_done))
