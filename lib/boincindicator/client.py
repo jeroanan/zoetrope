@@ -663,8 +663,24 @@ class BoincClient(object):
         return False
 
     def abort_task(self, result_name, project_url):
-        '''Abort a given task'''
+        '''
+        Abort a given task.
+
+        This command requires authorization in order to run successfully.
+        '''
         xml = '<abort_result>\n<name>{rn}</name>\n<project_url>{pu}</project_url>\n</abort_result>'.format(
+          rn=result_name,
+          pu=project_url
+        )
+        result = self.rpc.call(xml)
+
+    def suspend_result(self, result_name, project_url):
+        '''
+        Abort a given task.
+
+        This command requires authorization in order to run successfully.
+        '''
+        xml = '<suspend_result>\n<name>{rn}</name>\n<project_url>{pu}</project_url>\n</suspend_result>'.format(
           rn=result_name,
           pu=project_url
         )

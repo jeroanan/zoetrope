@@ -110,7 +110,15 @@ class WebServer(object):
         return self.__renderer.render(page, **kwargs)
 
     @cherrypy.expose
-    def suspend_resume(self, task_name, return_url):
+    def suspend_resume(self, **kwargs):
+
+        task_name = kwargs.get('task_name', '')
+        return_url = kwargs.get('return_url', '/')
+
+        if task_name!='':
+            suspend_task_command = self.__rpc_factory.create('SuspendTask')
+            suspend_task_command.execute(task_name)
+
         raise cherrypy.HTTPRedirect(return_url)
 
     @cherrypy.expose
