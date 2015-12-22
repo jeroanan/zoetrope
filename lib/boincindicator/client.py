@@ -663,24 +663,21 @@ class BoincClient(object):
         return False
 
     def abort_result(self, result_name, project_url):
-        '''
-        Abort a given result.
+        ''' Abort the given result.
 
         This command requires authorization in order to run successfully.
         '''
         return self.result_op('abort_result', result_name, project_url)
 
     def suspend_result(self, result_name, project_url):
-        '''
-        Abort a given result.
+        ''' suspend the given result.
 
         This command requires authorization in order to run successfully.
         '''
         return self.result_op('suspend_result', result_name, project_url)
 
     def resume_result(self, result_name, project_url):
-        '''
-        Abort a given result.
+        ''' resume the given result.
 
         This command requires authorization in order to run successfully.
         '''
