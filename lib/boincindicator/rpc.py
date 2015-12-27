@@ -106,7 +106,7 @@ class Rpc(object):
                 raise
             n = buf.find(end.encode('ascii'))
             if not n == -1: break
-            req += buf
+            req += buf.decode('UTF-8')
         req += buf[:n].decode('UTF-8')
 
         # unpack reply (remove root tag, ie: first and last lines)

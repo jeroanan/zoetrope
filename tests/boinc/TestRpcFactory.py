@@ -9,6 +9,7 @@ import boincsite.boinc.rpc.GetTasks as gts
 import boincsite.boinc.rpc.AbortTask as at
 import boincsite.boinc.rpc.SuspendTask as st
 import boincsite.boinc.rpc.ResumeTask as rt
+import boincsite.boinc.rpc.GetProjectStatus as gps
 
 
 class TestRpcFactory(unittest.TestCase):
@@ -18,7 +19,8 @@ class TestRpcFactory(unittest.TestCase):
             'GetTasks': gts.GetTasks,
             'AbortTask': at.AbortTask,
             'SuspendTask': st.SuspendTask,
-            'ResumeTask': rt.ResumeTask
+            'ResumeTask': rt.ResumeTask,
+            'GetProjectStatus': gps.GetProjectStatus,
         }
 
         for command_type, command_class in mappings.items():

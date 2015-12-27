@@ -41,6 +41,9 @@ def setattrs_from_xml(obj, xml, attrfuncdict={}):
     '''
     if not isinstance(xml, ElementTree.Element):
         xml = ElementTree.fromstring(xml)
+
+    missing_attributes = []
+
     for e in list(xml):
         if hasattr(obj, e.tag):
             attr = getattr(obj, e.tag)
@@ -54,8 +57,17 @@ def setattrs_from_xml(obj, xml, attrfuncdict={}):
                 else:                         attrfunc = lambda x: x
             setattr(obj, e.tag, attrfunc(e))
         else:
-            print("class missing attribute '%s': %r") % (e.tag, obj)
+            missing_attributes.append(e.tag)
+            #raise MissingAttributeException("class missing attribute '{tag}': {obj}".format(tag=e.tag, obj=obj))
+
+    if any(missing_attributes):
+        attrs_string = '\n'.join(missing_attributes)
+
+        raise MissingAttributeException("class missing attributes '{tag}': {obj}".format(tag=attrs_string, obj=obj))
     return obj
+
+class MissingAttributeException(Exception):
+    pass
 
 def parse_bool(e):
     ''' Helper to convert ElementTree.Element.text to boolean.
@@ -366,6 +378,49 @@ class HostInfo(_Struct):
 
         return hostinfo
 
+class JoinedProject(_Struct):
+
+    def __init__(self):
+        self.master_url = ''
+        self.project_name = ''
+        self.symstore = ''
+        self.user_name = ''
+        self.team_name = ''
+        self.host_venue = ''
+        self.email_hash = ''
+        self.cross_project_id = ''
+        self.cpid_time = ''
+        self.user_total_credit = ''
+        self.user_expavg_credit = ''
+        self.user_create_time = ''
+        self.rpc_seqno = ''
+        self.userid = ''
+        self.teamid = ''
+        self.hostid = ''
+        self.host_total_credit = ''
+        self.host_expavg_credit = ''
+        self.host_create_time = ''
+        self.nrpc_failures = ''
+        self.master_fetch_failures = ''
+        self.min_rpc_time = ''
+        self.next_rpc_time = ''
+        self.rec = ''
+        self.rec_time = ''
+        self.resource_share = ''
+        self.duration_correction_factor = ''
+        self.sched_rpc_pending = ''
+        self.send_time_stats_log = ''
+        self.send_job_log = ''
+        self.attached_via_acct_mgr = ''
+        self.rsc_backoff_time = ''
+        self.rsc_backoff_interval = ''
+        self.gui_urls = ''
+        self.sched_priority = ''
+        self.last_rpc_time = ''
+        self.project_files_downloaded_time = ''
+        self.venue = ''
+        self.verify_files_on_app_start = ''
+        self.no_rsc_pref = ''
 
 class Coproc(_Struct):
     ''' represents a set of identical coprocessors on a particular computer.
@@ -691,6 +746,20 @@ class BoincClient(object):
         )
         result = self.rpc.call(xml)
         return result
+
+    def get_all_projects_list(self):
+        xml = '<get_all_projects_list />'
+        return self.rpc.call(xml)
+
+    def get_project_status(self):
+        xml = '<get_project_status />'
+        ret = []
+        results = self.rpc.call(xml)
+
+        for r in list(results):            
+            ret.append(JoinedProject.parse(r))
+
+        return ret
 
 def read_gui_rpc_password():
     ''' Read password string from GUI_RPC_PASSWD_FILE file, trim the last CR

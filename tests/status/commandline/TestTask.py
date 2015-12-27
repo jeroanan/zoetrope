@@ -1,3 +1,7 @@
+# Copyright (c) David Wilson 2015
+#
+# Licensed under the GPL version 3
+
 import boincsite.status.commandline.Task as t
 import unittest
 

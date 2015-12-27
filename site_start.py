@@ -121,7 +121,7 @@ class WebServer(object):
 
             factory_string = 'ResumeTask' if task.suspended_via_gui else 'SuspendTask'
             command = self.__rpc_factory.create(factory_string)
-            command.execute(task_name)           
+            command.execute(task_name)
 
         raise cherrypy.HTTPRedirect(return_url)
 
@@ -136,11 +136,10 @@ class WebServer(object):
         raise cherrypy.HTTPRedirect('/')
 
     @cherrypy.expose
-    def experimental_tasks(self, **kwargs):
-        command = self.__rpc_factory.create('GetTasks')
-        result = command.execute()
-        for r in result:
-            print(r.name + ' ' + str(r.fraction_done))
+    def experimental_task(self, **kwargs):
+        command = self.__rpc_factory.create('GetProjectStatus')
+        return str(command.execute())
+
 
 if __name__=='__main__':
     ws = WebServer()
