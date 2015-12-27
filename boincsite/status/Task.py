@@ -11,14 +11,14 @@ class Task(object):
         self.__project_url = ''
         self.__project_name = ''
         self.__report_deadline = ''
-        self.__ready_to_report = ''
+        self._ready_to_report = ''
         self.__got_server_ack = ''
         self.__final_cpu_time = ''
         self.__state = ''
         self.__scheduler_state = ''
         self.__exit_status = ''
         self.__signal = ''
-        self.__suspended_via_gui = ''
+        self._suspended_via_gui = ''
         self.__active_task_state = ''
         self.__app_version_num = ''
         self.__checkpoint_cpu_time = ''
@@ -62,11 +62,11 @@ class Task(object):
 
     @property
     def ready_to_report(self):
-        return self.__ready_to_report == 'yes'
+        return self._ready_to_report == 'yes'
 
     @ready_to_report.setter
     def ready_to_report(self, val):
-        self.__ready_to_report = val
+        self._ready_to_report = val
 
     @property
     def got_server_ack(self):
@@ -118,11 +118,11 @@ class Task(object):
 
     @property
     def suspended_via_gui(self):
-        return self.__suspended_via_gui == 'yes'
+        return self._suspended_via_gui == 'yes'
 
     @suspended_via_gui.setter
     def suspended_via_gui(self, val):
-        self.__suspended_via_gui = val
+        self._suspended_via_gui = val
 
     @property
     def active_task_state(self):
