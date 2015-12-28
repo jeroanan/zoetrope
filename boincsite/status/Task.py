@@ -10,7 +10,7 @@ class Task(object):
         self.__workunit_name = ''
         self.__project_url = ''
         self.__project_name = ''
-        self.__report_deadline = ''
+        self._report_deadline = ''
         self._ready_to_report = ''
         self.__got_server_ack = ''
         self.__final_cpu_time = ''
@@ -54,11 +54,11 @@ class Task(object):
 
     @property
     def report_deadline(self):
-        return self.__report_deadline
+        return self._report_deadline
 
     @report_deadline.setter
     def report_deadline(self, val):
-        self.__report_deadline = val
+        self._report_deadline = val
 
     @property
     def ready_to_report(self):
@@ -78,7 +78,7 @@ class Task(object):
 
     @property
     def final_cpu_time(self):
-        return self.__formatted_time_from_seconds(self.__final_cpu_time)
+        return self.formatted_time_from_seconds(self.__final_cpu_time)
 
     @final_cpu_time.setter
     def final_cpu_time(self, val):
@@ -150,7 +150,7 @@ class Task(object):
 
     @property
     def current_cpu_time(self):
-        return self.__formatted_time_from_seconds(self.__current_cpu_time)
+        return self.formatted_time_from_seconds(self.__current_cpu_time)
 
     @current_cpu_time.setter
     def current_cpu_time(self, val):
@@ -186,7 +186,7 @@ class Task(object):
 
     @property
     def estimated_cpu_time_remaining(self):
-        return self.__formatted_time_from_seconds(self.__estimated_cpu_time_remaining)
+        return self.formatted_time_from_seconds(self.__estimated_cpu_time_remaining)
 
     @property
     def project_name(self):
@@ -196,7 +196,7 @@ class Task(object):
     def project_name(self, val):
         self.__project_name = val
 
-    def __formatted_time_from_seconds(self, seconds):
+    def formatted_time_from_seconds(self, seconds):
         m, s = divmod(float(seconds), 60)
         h, m = divmod(m, 60)
         return "%d:%02d:%02d" % (h, m, s)

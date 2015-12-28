@@ -118,28 +118,12 @@ class Project(object):
         self.__master_fetch_pending = val
 
     @property
-    def scheduler_rpc_pending(self):
-        return self.__scheduler_rpc_pending == 'yes'
-
-    @scheduler_rpc_pending.setter
-    def scheduler_rpc_pending(self, val):
-        self.__scheduler_rpc_pending = val
-
-    @property
     def trickle_upload_pending(self):
         return self.__trickle_upload_pending == 'yes'
 
     @trickle_upload_pending.setter
     def trickle_upload_pending(self, val):
         self.__trickle_upload_pending = val
-
-    @property
-    def attached_via_account_manager(self):
-        return self.__attached_via_account_manager == 'yes'
-
-    @attached_via_account_manager.setter
-    def attached_via_account_manager(self, val):
-        self.__attached_via_account_manager = val
 
     @property
     def ended(self):

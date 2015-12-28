@@ -31,7 +31,7 @@ class WebServer(object):
 
     @cherrypy.expose
     def index(self, **kwargs):
-        tasks_command = self.__command_factory.create('GetTasks')
+        tasks_command = self.__rpc_factory.create('GetTasks')
         boinc_tasks = list(tasks_command.execute())
 
         projects = self.__get_projects()

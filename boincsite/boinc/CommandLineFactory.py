@@ -1,3 +1,7 @@
+# Copyright (c) David Wilson 2015
+#
+# Licensed under the GPL version 3
+
 import boincsite.boinc.commandline.AbortTask as at
 import boincsite.boinc.commandline.DailyTransferHistory as dth
 import boincsite.boinc.commandline.DiskUsage as du

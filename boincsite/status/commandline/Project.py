@@ -49,6 +49,22 @@ class Project(proj.Project):
             for ps in project_strings:
                 self.gui_urls.append(GuiUrl(ps))
 
+    @property
+    def scheduler_rpc_pending(self):
+        return self.__scheduler_rpc_pending == 'yes'
+
+    @scheduler_rpc_pending.setter
+    def scheduler_rpc_pending(self, val):
+        self.__scheduler_rpc_pending = val
+
+    @property
+    def attached_via_account_manager(self):
+        return self.__attached_via_account_manager == 'yes'
+
+    @attached_via_account_manager.setter
+    def attached_via_account_manager(self, val):
+        self.__attached_via_account_manager = val
+        
 
 class GuiUrl(proj.GuiUrl):
 
@@ -66,3 +82,5 @@ class GuiUrl(proj.GuiUrl):
             if key in line_mappings:
                 line_split.reverse()
                 setattr(self, line_mappings[key], str.join(':', line_split).strip())
+
+                

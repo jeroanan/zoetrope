@@ -534,6 +534,8 @@ class Result(_Struct):
         self.wup                          = None  # WORKUNIT*
         self.project                      = None  # PROJECT*
         self.avp                          = None  # APP_VERSION*
+        self.bytes_sent                   = ''
+        self.bytes_received               = ''
 
     @classmethod
     def parse(cls, xml):
@@ -756,7 +758,7 @@ class BoincClient(object):
         ret = []
         results = self.rpc.call(xml)
 
-        for r in list(results):            
+        for r in list(results):
             ret.append(JoinedProject.parse(r))
 
         return ret

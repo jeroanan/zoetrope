@@ -18,7 +18,7 @@ class TestTask(unittest.TestCase):
             'name': 'result name',
             'wu_name': 'workunit name',
             'project_url': 'http://project.url',
-            'report_deadline': 1.1,
+            'report_deadline': 1451296032,
             'ready_to_report': False,
             'got_server_ack': True,
             'final_cpu_time': 1338.0,
@@ -60,6 +60,9 @@ class TestTask(unittest.TestCase):
 
         # 0.8800000 goes in but 88.00 should come out as thre percentage done.
         self.__result_attrs['fraction_done'] = '88.00'
+
+        # Report deadline goes in as seconds since epoch but comes out as formatted date/time string
+        self.__result_attrs['report_deadline'] = '2015-12-28 09:47:12'
 
         for key, value in self.__result_attrs.items():
             result = getattr(self.__target, key)

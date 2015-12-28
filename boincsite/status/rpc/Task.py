@@ -2,6 +2,8 @@
 #
 # Licensed under the GPL version 3
 
+import time
+
 import boincsite.status.Task as t
 
 
@@ -67,3 +69,12 @@ class Task(t.Task):
     @suspended_via_gui.setter
     def suspended_via_gui(self, val):
         self._suspended_via_gui = val
+
+    @property
+    def report_deadline(self):
+        return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(self._report_deadline))
+        return self._report_deadline
+
+    @report_deadline.setter
+    def report_deadline(self, val):
+        self._report_deadline = val

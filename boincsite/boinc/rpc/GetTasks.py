@@ -4,8 +4,15 @@
 
 import lib.boincindicator.client as client
 
+import boincsite.status.rpc.Task as t
 
 class GetTasks(object):
 
     def execute(self):
-        return client.BoincClient().get_results(False)
+        results = client.BoincClient().get_results(False)
+
+        tasks = []
+        for r in results:
+            tasks.append(t.Task(r))
+
+        return tasks
