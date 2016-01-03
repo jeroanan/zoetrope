@@ -3,8 +3,8 @@ import boincsite.util.ByteConversion as bc
 class DiskUsage(object):
 
     def __init__(self, disk_usage):
-        self.__total_disk_space = ''
-        self.__free_disk_space = ''
+        self.__total_disk_space = 0
+        self.__free_disk_space = 0
         self.__project_disk_usages = []
 
     @property

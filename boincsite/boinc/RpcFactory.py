@@ -2,6 +2,7 @@
 #
 # Licensed under the GPL version 3
 
+import boincsite.boinc.rpc.GetDiskUsage as gdu
 import boincsite.boinc.rpc.GetTask as gt
 import boincsite.boinc.rpc.GetTasks as gts
 import boincsite.boinc.rpc.AbortTask as at
@@ -15,6 +16,7 @@ class RpcFactory(object):
     @staticmethod
     def create(command_type):
         mappings = {
+            'DiskUsage': gdu.GetDiskUsage,
             'GetTasks': gts.GetTasks,
             'GetTask': gt.GetTask,
             'AbortTask': at.AbortTask,

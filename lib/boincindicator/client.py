@@ -430,6 +430,30 @@ class JoinedProject(_Struct):
         self.dont_use_dcf = ''
         self.project_dir = ''
 
+
+class DiskUsageProject(_Struct):
+
+    def __init__(self):
+        self.master_url = ''
+        self.disk_usage = ''
+
+
+class DiskUsageDiskBytes(_Struct):
+    def __init__(self):
+        self.disk_bytes = ''
+
+    def parse(self, xml):
+        self.disk_bytes = parse_str(xml)
+
+
+class DiskUsageDiskTotal(DiskUsageDiskBytes):
+    pass
+
+
+class DiskUsageDiskFree(DiskUsageDiskBytes):
+    pass
+
+
 class Coproc(_Struct):
     ''' represents a set of identical coprocessors on a particular computer.
         Abstract class;
@@ -770,6 +794,44 @@ class BoincClient(object):
             ret.append(JoinedProject.parse(r))
 
         return ret
+
+    def get_disk_usage(self):
+        xml = '<get_disk_usage />'
+        results = self.rpc.call(xml)
+
+        # The problem that we have here is that we're not dealing with a list of the same element type here.
+        # Rather, we're dealing with a list of elements that could be one of a few types:
+        #
+        # * project
+        # * d_total
+        # * d_free
+        # * d_boinc (Whatever that is)
+        # * d_allowed (Whatever that is)
+        #
+        # So I guess we need to test each element's name, make a struct object of a type depending on the name,
+        # and return all that lot as a list.
+
+        def objects_from_tag_class(tag_name, cls):
+            return list(map(lambda x: cls.parse(x), get_element_by_tag(tag_name)))
+
+        def objects_from_tag_object(tag_name, object_type):
+            element = get_element_by_tag(tag_name)[0]
+            o = object_type()
+            o.parse(element)
+            return o
+
+        def get_element_by_tag(tag_name):
+            return [x for x in results if x.tag == tag_name]
+
+        projects = objects_from_tag_class('project', DiskUsageProject)
+        disk_total = objects_from_tag_object('d_total', DiskUsageDiskTotal)
+        disk_free = objects_from_tag_object('d_free', DiskUsageDiskFree)
+
+        projects.append(disk_total)
+        projects.append(disk_free)
+
+        return projects
+
 
 def read_gui_rpc_password():
     ''' Read password string from GUI_RPC_PASSWD_FILE file, trim the last CR

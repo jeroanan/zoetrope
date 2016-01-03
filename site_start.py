@@ -84,7 +84,7 @@ class WebServer(object):
 
     @cherrypy.expose
     def disk_usage(self, **kwargs):
-        disk_usage_command = self.__command_factory.create('DiskUsage')
+        disk_usage_command = self.__rpc_factory.create('DiskUsage')
         du = disk_usage_command.execute()
         return self.__render('diskusage.html', title='Disk Usage', disk_usage=du)
 
