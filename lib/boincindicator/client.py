@@ -421,6 +421,14 @@ class JoinedProject(_Struct):
         self.venue = ''
         self.verify_files_on_app_start = ''
         self.no_rsc_pref = ''
+        self.external_cpid = ''
+        self.desired_disk_usage = ''
+        self.njobs_success = ''
+        self.njobs_error = ''
+        self.elapsed_time = ''
+        self.send_full_workload = ''
+        self.dont_use_dcf = ''
+        self.project_dir = ''
 
 class Coproc(_Struct):
     ''' represents a set of identical coprocessors on a particular computer.

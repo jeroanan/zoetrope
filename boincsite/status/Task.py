@@ -219,4 +219,4 @@ class Task(object):
             '6': 'Aborted by user'
         }
 
-        return state_string_mappings.get(self.state, self.__state)
+        return state_string_mappings.get(str(self.state), self.__state)

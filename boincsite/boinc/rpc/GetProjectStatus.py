@@ -6,10 +6,11 @@ from xml.etree import ElementTree
 
 import lib.boincindicator.client as client
 
+import boincsite.status.rpc.Project as p
+
 
 class GetProjectStatus(object):
 
     def execute(self):
         result = client.BoincClient().get_project_status()
-
-        return result
+        return map(lambda r: p.Project(r), result)

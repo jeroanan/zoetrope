@@ -12,15 +12,6 @@ class Task(t.Task):
     def __init__(self, task):
         super().__init__(task)
 
-        '''
-        We don't seem to get the following fields from rpc.GetTasks which we did from commandline.GetTasks:
-
-          * project_name
-
-        So it's down to whatever has brought about the instantiation of an object of this type to subsequently populate
-        these fields as required.
-        '''
-
         # These fields all have the same name from src->dest.
         fields = [
             'name',

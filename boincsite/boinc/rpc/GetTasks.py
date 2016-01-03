@@ -10,9 +10,4 @@ class GetTasks(object):
 
     def execute(self):
         results = client.BoincClient().get_results(False)
-
-        tasks = []
-        for r in results:
-            tasks.append(t.Task(r))
-
-        return tasks
+        return map(lambda r: t.Task(r), results)

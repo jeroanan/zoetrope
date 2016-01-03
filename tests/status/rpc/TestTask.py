@@ -44,9 +44,11 @@ class TestTask(unittest.TestCase):
 
     def test_task_attrs(self):
 
+        # Rather than duplicating massive ammounts of __result_attrs, change the entries in it that will differ from
+        # src to dest.
+
         # client.Result.wu_name = target.workunit_name
         self.__result_attrs['workunit_name'] = self.__result_attrs['wu_name']
-
         del(self.__result_attrs['wu_name'])
 
         # 1338.0 seconds goes in. 0:22:18 comes out as a formatted timestring.
@@ -58,7 +60,7 @@ class TestTask(unittest.TestCase):
         # 74181.87 seconds goes in. 20:36:21 comes out as a formatted timestring.
         self.__result_attrs['estimated_cpu_time_remaining'] = '20:36:21'
 
-        # 0.8800000 goes in but 88.00 should come out as thre percentage done.
+        # 0.8800000 goes in but 88.00 should come out as the percentage done.
         self.__result_attrs['fraction_done'] = '88.00'
 
         # Report deadline goes in as seconds since epoch but comes out as formatted date/time string

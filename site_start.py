@@ -73,7 +73,7 @@ class WebServer(object):
         return self.__render('project.html', project=project, title=project.name)
 
     def __get_projects(self):
-        projects_command = self.__command_factory.create('GetProjectStatus')
+        projects_command = self.__rpc_factory.create('GetProjectStatus')
         return list(projects_command.execute())
 
     @cherrypy.expose
