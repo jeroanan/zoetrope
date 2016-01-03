@@ -1,4 +1,4 @@
-# Copyright (c) David Wilson 2015
+# Copyright (c) David Wilson 2015, 2016
 #
 # Licensed under the GPL version 3
 
@@ -215,6 +215,7 @@ class Task(object):
 
         state_string_mappings = {
             '2': 'Running',
+            '3': 'Computation error',
             '5': 'Ready to report',
             '6': 'Aborted by user'
         }

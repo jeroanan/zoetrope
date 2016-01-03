@@ -1,4 +1,4 @@
-# Copyright (c) David Wilson 2015
+# Copyright (c) David Wilson 2015, 2016
 #
 # Licensed under the GPL version 3
 
@@ -125,6 +125,7 @@ class tests(unittest.TestCase):
 
         state_mappings = {
             '2': 'Running',
+            '3': 'Computation error',
             '5': 'Ready to report',
             '6': 'Aborted by user',
             '-99': '-99'
@@ -136,7 +137,7 @@ class tests(unittest.TestCase):
 
             self.assertEqual(state_string,
                              result,
-                             "Expected state string of {state_string} for state {state}. Got {result}"
+                             'Expected state string of "{state_string}" for state "{state}". Got "{result}".'
                              .format(state_string=state_string, state=state, result=result))
 
     def test_state_string_task_suspended_via_gui(self):
