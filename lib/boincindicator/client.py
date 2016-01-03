@@ -454,6 +454,16 @@ class DiskUsageDiskFree(DiskUsageDiskBytes):
     pass
 
 
+class Message(_Struct):
+
+    def __init__(self):
+        self.project = ''
+        self.pri = ''
+        self.seqno = ''
+        self.body = ''
+        self.time = ''
+
+
 class Coproc(_Struct):
     ''' represents a set of identical coprocessors on a particular computer.
         Abstract class;
@@ -831,6 +841,17 @@ class BoincClient(object):
         projects.append(disk_free)
 
         return projects
+
+    def get_messages(self):
+        xml = '<get_messages />'
+        ret = []
+
+        results = self.rpc.call(xml)
+
+        for r in results:
+            ret.append(Message.parse(r))
+
+        return ret
 
 
 def read_gui_rpc_password():

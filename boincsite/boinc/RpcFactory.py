@@ -3,6 +3,7 @@
 # Licensed under the GPL version 3
 
 import boincsite.boinc.rpc.GetDiskUsage as gdu
+import boincsite.boinc.rpc.GetMessages as gm
 import boincsite.boinc.rpc.GetTask as gt
 import boincsite.boinc.rpc.GetTasks as gts
 import boincsite.boinc.rpc.AbortTask as at
@@ -19,6 +20,7 @@ class RpcFactory(object):
             'DiskUsage': gdu.GetDiskUsage,
             'GetTasks': gts.GetTasks,
             'GetTask': gt.GetTask,
+            'GetMessages': gm.GetMessages,
             'AbortTask': at.AbortTask,
             'SuspendTask': st.SuspendTask,
             'ResumeTask': rt.ResumeTask,

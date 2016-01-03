@@ -6,6 +6,7 @@ import unittest
 
 import boincsite.boinc.RpcFactory as rf
 import boincsite.boinc.rpc.GetDiskUsage as gdu
+import boincsite.boinc.rpc.GetMessages as gm
 import boincsite.boinc.rpc.GetTask as gt
 import boincsite.boinc.rpc.GetTasks as gts
 import boincsite.boinc.rpc.AbortTask as at
@@ -21,6 +22,7 @@ class TestRpcFactory(unittest.TestCase):
             'DiskUsage': gdu.GetDiskUsage,
             'GetTasks': gts.GetTasks,
             'GetTask': gt.GetTask,
+            'GetMessages': gm.GetMessages,
             'AbortTask': at.AbortTask,
             'SuspendTask': st.SuspendTask,
             'ResumeTask': rt.ResumeTask,

@@ -92,6 +92,10 @@ class WebServer(object):
     def messages(self, **kwargs):
         get_messages_command = self.__command_factory.create('GetMessages')
         messages = get_messages_command.execute()
+
+        if messages is None:
+            messages = []
+
         return self.__render('messages.html', messages=reversed(list(messages)), title="Messages")
 
     @cherrypy.expose

@@ -115,4 +115,8 @@ class Rpc(object):
         if text_output:
             return req
         else:
-            return ElementTree.fromstring(req)
+            try:
+                return ElementTree.fromstring(req)
+            except ElementTree.ParseError:
+                print(req)
+                raise
