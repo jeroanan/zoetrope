@@ -6,6 +6,16 @@
 
   <h2>By project</h2>
 
+  <table class="table table-striped">
+    <th>Project Url</th>
+    <th>Disk Usage</th>
+    {% for pdu in disk_usage.project_disk_usages %}
+    <tr>
+      <td>{{ pdu.master_url }}</td>
+      <td>{{ pdu.disk_usage }}</td>
+    </tr>
+    {% endfor %}
+  </table>
   {% for pdu in disk_usage.project_disk_usages %}
     {{ task_row('Url', pdu.master_url) }}
     {{ task_row('Disk usage', pdu.disk_usage) }}
