@@ -1,4 +1,4 @@
-# Copyright (c) David Wilson 2015
+# Copyright (c) David Wilson 2015, 2016
 #
 # Licensed under the GPL version 3
 
@@ -51,7 +51,7 @@ class WebServer(object):
             raise cherrypy.HTTPRedirect('/')
 
         try:
-            task_command = self.__command_factory.create('GetTask')
+            task_command = self.__rpc_factory.create('GetTask')
             task = task_command.execute(task_name)
         except get_task.TaskNotFoundException:
             return "Task {task_name} not found".format(task_name=task_name)

@@ -1,7 +1,8 @@
-# Copyright (c) David Wilson 2015
+# Copyright (c) David Wilson 2015, 2016
 #
 # Licensed under the GPL version 3
 
+import boincsite.boinc.rpc.GetTask as gt
 import boincsite.boinc.rpc.GetTasks as gts
 import boincsite.boinc.rpc.AbortTask as at
 import boincsite.boinc.rpc.SuspendTask as st
@@ -15,6 +16,7 @@ class RpcFactory(object):
     def create(command_type):
         mappings = {
             'GetTasks': gts.GetTasks,
+            'GetTask': gt.GetTask,
             'AbortTask': at.AbortTask,
             'SuspendTask': st.SuspendTask,
             'ResumeTask': rt.ResumeTask,
