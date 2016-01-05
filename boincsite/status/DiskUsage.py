@@ -1,4 +1,7 @@
+import json
+
 import boincsite.util.ByteConversion as bc
+
 
 class DiskUsage(object):
 
@@ -30,6 +33,27 @@ class DiskUsage(object):
     @project_disk_usages.setter
     def project_disk_usages(self, val):
         self.__project_disk_usages = val
+
+class JSONEncoder(json.JSONEncoder):
+
+    def default(self, o):
+        disk_usages = {
+            'total_disk_space': o.total_disk_space,
+            'free_disk_space': o.free_disk_space
+        }
+
+        project_disk_usages = []
+
+        for pdu in o.project_disk_usages:
+            d = {
+                'master_url': pdu.master_url,
+                'disk_usage': float(pdu.disk_usage.strip('MB'))
+            }
+            project_disk_usages.append(d)
+
+        disk_usages['project_disk_usages'] = project_disk_usages
+
+        return disk_usages
 
 class ProjectDiskUsage(object):
 

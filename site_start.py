@@ -2,6 +2,9 @@
 #
 # Licensed under the GPL version 3
 
+
+from io import StringIO
+import json
 import os
 
 import cherrypy
@@ -84,9 +87,17 @@ class WebServer(object):
 
     @cherrypy.expose
     def disk_usage(self, **kwargs):
+        return self.__render('diskusage.html', title='Disk Usage', disk_usage=self.__get_disk_usage())
+
+    @cherrypy.expose
+    def disk_usage_json(self, **kwargs):
+        import boincsite.status.DiskUsage as duj
+        io = StringIO()
+        return json.dumps(self.__get_disk_usage(), io, cls=duj.JSONEncoder)
+
+    def __get_disk_usage(self):
         disk_usage_command = self.__rpc_factory.create('DiskUsage')
-        du = disk_usage_command.execute()
-        return self.__render('diskusage.html', title='Disk Usage', disk_usage=du)
+        return disk_usage_command.execute()
 
     @cherrypy.expose
     def messages(self, **kwargs):
@@ -141,8 +152,12 @@ class WebServer(object):
 
     @cherrypy.expose
     def experimental_task(self, **kwargs):
-        command = self.__rpc_factory.create('GetProjectStatus')
-        return str(command.execute())
+        import boincsite.status.DiskUsage as duj
+
+        disk_usage_command = self.__rpc_factory.create('DiskUsage')
+        du = disk_usage_command.execute()
+        io = StringIO()
+        return json.dumps(du, io, cls=duj.JSONEncoder)
 
 
 if __name__=='__main__':
