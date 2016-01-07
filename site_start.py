@@ -87,7 +87,7 @@ class WebServer(object):
 
     @cherrypy.expose
     def disk_usage(self, **kwargs):
-        return self.__render('diskusage.html', title='Disk Usage', disk_usage=self.__get_disk_usage())
+        return self.__render('diskusage.html', title='Disk Usage')
 
     @cherrypy.expose
     def disk_usage_json(self, **kwargs):
@@ -157,7 +157,7 @@ class WebServer(object):
         disk_usage_command = self.__rpc_factory.create('DiskUsage')
         du = disk_usage_command.execute()
         io = StringIO()
-        return json.dumps(du, io, cls=duj.JSONEncoder)
+        return json.dumps(du.__dict__(), io)
 
 
 if __name__=='__main__':

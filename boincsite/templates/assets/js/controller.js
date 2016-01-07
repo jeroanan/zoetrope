@@ -5,5 +5,5 @@ zoetrope.controller('DiskUsageCtrl', function($scope, $http) {
     $scope.disk_usages = data;
   });
   $scope.orderProp = "master_url";
-  //$scope.reverseSort = false;
+  $scope.reverseSort = false;
 });

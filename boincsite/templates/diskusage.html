@@ -1,7 +1,7 @@
 {% extends 'master.html' %}
 
 {% block content %}
-<div ng-app="zoetrope" ng-controller="DiskUsageCtrl">
+<div ng-controller="DiskUsageCtrl">
 
 {% raw %}
   <div class="row task-row">
@@ -25,7 +25,7 @@
       <th ><a href="#" ng-click="orderProp='disk_usage';reverseSort=!reverseSort;">Disk Usage</a></th>
     </thead>
     <tr ng-repeat="pdu in disk_usages.project_disk_usages | orderBy:orderProp:reverseSort">
-      <td>{{pdu.master_url}}</td>
+      <td><a href="{{pdu.master_url}}">{{pdu.master_url}}</a></td>
       <td>{{pdu.disk_usage + 'MB'}}</td>
     </tr>
   </table>
