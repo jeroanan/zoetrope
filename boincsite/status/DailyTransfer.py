@@ -1,4 +1,11 @@
+# Copyright (c) David Wilson 2015, 2016
+#
+# Licensed under the GPL version 3
+
+import json
+
 import boincsite.util.ByteConversion as bc
+
 
 class DailyTransfer(object):
 
@@ -30,3 +37,39 @@ class DailyTransfer(object):
     @downloaded.setter
     def downloaded(self, val):
         self.bytes_downloaded = val
+
+
+class JSONEncoder(json.JSONEncoder):
+
+    def default(self, o):
+        # Expected date example: 02-Jan-2016
+        date_split = o.date.split('-')
+        date_str = "{year}-{month}-{day}".format(year=date_split[2],
+                                                 month=get_month_num(date_split[1]),
+                                                 day=date_split[0])
+
+        return {
+            'date': date_str,
+            'uploaded': o.uploaded,
+            'downloaded': o.downloaded
+        }
+
+
+def get_month_num(month_abbr):
+
+    nums = {
+        'JAN': 1,
+        'FEB': 2,
+        'MAR': 3,
+        'APR': 4,
+        'MAY': 5,
+        'JUN': 6,
+        'JUL': 7,
+        'AUG': 8,
+        'SEP': 9,
+        'OCT': 10,
+        'NOV': 11,
+        'DEC': 12
+    }
+
+    return nums.get(str.upper(month_abbr), 0)

@@ -1,20 +1,22 @@
 {% extends 'master.html' %}
 
 {% block content %}
-
+<div ng-controller="DailyTransferCtrl">
+{% raw %}
   <table class="table table-striped">
     <thead>
-      <th>Date</th>
-      <th>Uploaded</th>
-      <th>Downloaded</th>
+      <th><a href="#" ng-click="orderProp='date'; reverseSort = !reverseSort;">Date</a></th>
+      <th><a href="#" ng-click="orderProp='uploaded'; reverseSort = !reverseSort">Uploaded</a></th>
+      <th><a href="#" ng-click="orderProp='downloaded'; reverseSort = !reverseSort">Downloaded</a></th>
     </thead>
-    {% for t in transfers %}
-      <tr>
-        <td>{{ t.date }}</td>
-        <td>{{ t.uploaded }}</td>
-        <td>{{ t.downloaded }}</td>
-      </tr>
-    {% endfor %}
+    <tr ng-repeat="dt in daily_transfers | orderBy:orderProp:reverseSort">
+      <td>{{ dt.date.toDateString() }}</td>
+      <td>{{ dt.uploaded }}</td>
+      <td>{{ dt.downloaded }}</td>
+    </tr>
   </table>
+{% endraw %}
+</div>
+
 
 {% endblock %}

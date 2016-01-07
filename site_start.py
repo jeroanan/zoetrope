@@ -116,10 +116,20 @@ class WebServer(object):
         return self.__render('hostinfo.html', title='Host Info', host_info=hi)
 
     @cherrypy.expose
-    def daily_transfer_history(self, **kwarhs):
+    def daily_transfer_history(self, **kwargs):
         daily_transfer_history_command = self.__command_factory.create('DailyTransferHistory')
         dts = daily_transfer_history_command.execute()
         return self.__render('dailytransferhistory.html', title='Daily Transfer History', transfers=dts)
+
+    @cherrypy.expose
+    def daily_transfer_history_json(self, **kwargs):
+        import boincsite.status.DailyTransfer as dt
+
+        daily_transfer_history_command = self.__command_factory.create('DailyTransferHistory')
+        dts = list(daily_transfer_history_command.execute())
+        io = StringIO()
+        return json.dumps(dts, io, cls=dt.JSONEncoder)
+
 
     def __render(self, page, **kwargs):
         return self.__renderer.render(page, **kwargs)
@@ -152,12 +162,12 @@ class WebServer(object):
 
     @cherrypy.expose
     def experimental_task(self, **kwargs):
-        import boincsite.status.DiskUsage as duj
+        import boincsite.status.DailyTransfer as dt
 
-        disk_usage_command = self.__rpc_factory.create('DiskUsage')
-        du = disk_usage_command.execute()
+        disk_usage_command = self.__command_factory.create('DailyTransferHistory')
+        du = list(disk_usage_command.execute())
         io = StringIO()
-        return json.dumps(du.__dict__(), io)
+        return json.dumps(du, io, cls=dt.JSONEncoder)
 
 
 if __name__=='__main__':
