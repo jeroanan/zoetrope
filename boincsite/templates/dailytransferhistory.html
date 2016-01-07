@@ -26,8 +26,8 @@
     </thead>
     <tr ng-repeat="dt in daily_transfers | orderBy:orderProp:reverseSort">
       <td>{{ dt.date.toDateString() }}</td>
-      <td>{{ dt.uploaded }}</td>
-      <td>{{ dt.downloaded }}</td>
+      <td>{{ dt.uploaded + 'MB' }}</td>
+      <td>{{ dt.downloaded + 'MB' }}</td>
     </tr>
   </table>
 {% endraw %}

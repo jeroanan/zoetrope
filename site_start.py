@@ -118,17 +118,18 @@ class WebServer(object):
     @cherrypy.expose
     def daily_transfer_history(self, **kwargs):
         daily_transfer_history_command = self.__command_factory.create('DailyTransferHistory')
-        dts = daily_transfer_history_command.execute()
-        return self.__render('dailytransferhistory.html', title='Daily Transfer History', transfers=dts)
+        return self.__render('dailytransferhistory.html', title='Daily Transfer History')
 
     @cherrypy.expose
     def daily_transfer_history_json(self, **kwargs):
         import boincsite.status.DailyTransfer as dt
-
-        daily_transfer_history_command = self.__command_factory.create('DailyTransferHistory')
-        dts = list(daily_transfer_history_command.execute())
+        dts = self.__get_daily_transfers()
         io = StringIO()
         return json.dumps(dts, io, cls=dt.JSONEncoder)
+
+    def __get_daily_transfers(self):
+        daily_transfer_history_command = self.__command_factory.create('DailyTransferHistory')
+        return list(daily_transfer_history_command.execute())
 
 
     def __render(self, page, **kwargs):
