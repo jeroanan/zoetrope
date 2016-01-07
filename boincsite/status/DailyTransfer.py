@@ -50,8 +50,8 @@ class JSONEncoder(json.JSONEncoder):
 
         return {
             'date': date_str,
-            'uploaded': o.uploaded,
-            'downloaded': o.downloaded
+            'uploaded': float(o.uploaded.strip('MB')),
+            'downloaded': float(o.downloaded.strip('MB'))
         }
 
 

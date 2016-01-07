@@ -3,6 +3,21 @@
 {% block content %}
 <div ng-controller="DailyTransferCtrl">
 {% raw %}
+  <div class="row task-row">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-3"><strong>Total Uploaded</strong></div>
+    <div class="col-xs-3">{{ totalUploaded}}</div>
+    <div class="col-xs-3"></div>
+  </div>
+  <div class="row task-row">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-3"><strong>Total Downloaded</strong></div>
+    <div class="col-xs-3">{{ totalDownloaded }}</div>
+    <div class="col-xs-3"></div>
+  </div>
+
+  <br />
+
   <table class="table table-striped">
     <thead>
       <th><a href="#" ng-click="orderProp='date'; reverseSort = !reverseSort;">Date</a></th>
