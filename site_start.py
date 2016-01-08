@@ -15,10 +15,10 @@ import boincsite.boinc.commandline.GetTask as get_task
 
 import boincsite.status.DailyTransfer as dt
 import boincsite.status.DiskUsage as duj
-import boincsite.status.Message as m
-import boincsite.status.Project as p
 
 import boincsite.templates.TemplateRenderer as tr
+
+import boincsite.util.JSONEncoder as jse
 
 WorkingDirectory = os.path.dirname(os.path.abspath(__file__))
 
@@ -77,7 +77,7 @@ class WebServer(object):
 
     @cherrypy.expose
     def projects_json(self, **kwargs):
-        return json.dumps(self.__get_projects(), self.__io, cls=p.JSONEncoder)
+        return json.dumps(self.__get_projects(), self.__io, cls=jse.JSONEncoder)
 
     @cherrypy.expose
     def project(self, **kwargs):
@@ -113,7 +113,7 @@ class WebServer(object):
     def messages_json(self, **kwargs):
         command = self.__command_factory.create('GetMessages')
         ms = list(command.execute())
-        return json.dumps(ms, self.__io, cls=m.JSONEncoder)
+        return json.dumps(ms, self.__io, cls=jse.JSONEncoder)
 
     @cherrypy.expose
     def host_info(self, **kwargs):

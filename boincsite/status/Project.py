@@ -2,9 +2,6 @@
 #
 # Licensed under the GPL version 3
 
-import inspect
-import json
-
 
 class Project(object):
 
@@ -223,14 +220,3 @@ class GuiUrl(object):
     @url.setter
     def url(self, val):
         self.__url = val
-
-
-class JSONEncoder(json.JSONEncoder):
-
-    def default(self, o):
-        props = inspect.getmembers(o.__class__, lambda p: isinstance(p, property))
-
-        dict = {}
-        for pname, x in props:
-            dict[pname] = getattr(o, pname)
-        return dict
