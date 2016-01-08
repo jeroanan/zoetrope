@@ -19,6 +19,12 @@ zoetrope.controller('ProjectsCtrl', function($scope, $http) {
     $scope.reverseSort = false;
 });
 
+zoetrope.controller('HostInfoCtrl', function($scope, $http) {
+
+    $http.get('/host_info_json').success(function(data) {
+      $scope.host_info = data;
+    });
+});
 
 zoetrope.controller('DailyTransferCtrl', function($scope, $http) {
   $http.get('/daily_transfer_history_json').success(function(data) {

@@ -117,9 +117,13 @@ class WebServer(object):
 
     @cherrypy.expose
     def host_info(self, **kwargs):
+        return self.__render('hostinfo.html', title='Host Info')
+
+    @cherrypy.expose
+    def host_info_json(self, **kwargs):
         host_info_command = self.__command_factory.create('HostInfo')
         hi = host_info_command.execute()
-        return self.__render('hostinfo.html', title='Host Info', host_info=hi)
+        return json.dumps(hi, self.__io, cls=jse.JSONEncoder)
 
     @cherrypy.expose
     def daily_transfer_history(self, **kwargs):
@@ -162,9 +166,9 @@ class WebServer(object):
 
     @cherrypy.expose
     def experimental_task(self, **kwargs):
-        disk_usage_command = self.__rpc_factory.create('GetProjectStatus')
-        du = list(disk_usage_command.execute())
-        return json.dumps(du, self.__io, cls=p.JSONEncoder)
+        disk_usage_command = self.__command_factory.create('HostInfo')
+        du = disk_usage_command.execute()
+        return json.dumps(du, self.__io, cls=jse.JSONEncoder)
 
 
 if __name__=='__main__':
