@@ -1,3 +1,7 @@
+# Copyright (c) David Wilson 2015, 2016
+#
+# Licensed under the GPL version 3
+
 import json
 
 

@@ -8,6 +8,18 @@ zoetrope.controller('DiskUsageCtrl', function($scope, $http) {
   $scope.reverseSort = false;
 });
 
+
+zoetrope.controller('ProjectsCtrl', function($scope, $http) {
+
+    $http.get('/projects_json').success(function(data) {
+      $scope.projects = data;
+    });
+
+    $scope.orderProp = 'name';
+    $scope.reverseSort = false;
+});
+
+
 zoetrope.controller('DailyTransferCtrl', function($scope, $http) {
   $http.get('/daily_transfer_history_json').success(function(data) {
 

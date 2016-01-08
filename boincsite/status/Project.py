@@ -1,6 +1,9 @@
-# Copyright (c) David Wilson 2015
+# Copyright (c) David Wilson 2015, 2016
 #
 # Licensed under the GPL version 3
+
+import inspect
+import json
 
 
 class Project(object):
@@ -11,8 +14,8 @@ class Project(object):
         self.__user_name = ''
         self.__team_name = ''
         self.__resource_share = ''
-        self.__user_total_credit = ''
-        self.__user_expavg_credit = ''
+        self.__user_total_credit = 0.0
+        self.__user_expavg_credit = 0.0
         self.__host_total_credit = ''
         self.__host_expavg_credit = ''
         self.__nrpc_failures = ''
@@ -67,7 +70,7 @@ class Project(object):
 
     @user_total_credit.setter
     def user_total_credit(self, val):
-        self.__user_total_credit = val
+        self.__user_total_credit = float(val)
 
     @property
     def user_expavg_credit(self):
@@ -75,7 +78,7 @@ class Project(object):
 
     @user_expavg_credit.setter
     def user_expavg_credit(self, val):
-        self.__user_expavg_credit = val
+        self.__user_expavg_credit = float(val)
 
     @property
     def host_total_credit(self):
@@ -220,3 +223,14 @@ class GuiUrl(object):
     @url.setter
     def url(self, val):
         self.__url = val
+
+
+class JSONEncoder(json.JSONEncoder):
+
+    def default(self, o):
+        props = inspect.getmembers(o.__class__, lambda p: isinstance(p, property))
+
+        dict = {}
+        for pname, x in props:
+            dict[pname] = getattr(o, pname)
+        return dict

@@ -13,9 +13,10 @@ import boincsite.boinc.CommandLineFactory as clf
 import boincsite.boinc.RpcFactory as rf
 import boincsite.boinc.commandline.GetTask as get_task
 
-import boincsite.status.Message as m
 import boincsite.status.DailyTransfer as dt
 import boincsite.status.DiskUsage as duj
+import boincsite.status.Message as m
+import boincsite.status.Project as p
 
 import boincsite.templates.TemplateRenderer as tr
 
@@ -72,7 +73,11 @@ class WebServer(object):
 
     @cherrypy.expose
     def projects(self, **kwargs):
-        return self.__render('projects.html',projects=self.__get_projects(), title='Boinc Projects')
+        return self.__render('projects.html', title='Boinc Projects')
+
+    @cherrypy.expose
+    def projects_json(self, **kwargs):
+        return json.dumps(self.__get_projects(), self.__io, cls=p.JSONEncoder)
 
     @cherrypy.expose
     def project(self, **kwargs):
@@ -157,9 +162,9 @@ class WebServer(object):
 
     @cherrypy.expose
     def experimental_task(self, **kwargs):
-        disk_usage_command = self.__command_factory.create('GetMessages')
+        disk_usage_command = self.__rpc_factory.create('GetProjectStatus')
         du = list(disk_usage_command.execute())
-        return json.dumps(du, self.__io, cls=dt.JSONEncoder)
+        return json.dumps(du, self.__io, cls=p.JSONEncoder)
 
 
 if __name__=='__main__':

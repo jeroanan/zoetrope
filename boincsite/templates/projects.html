@@ -1,17 +1,19 @@
-{% extends 'master.html' %}    
+{% extends 'master.html' %}
     {%block content %}
+  {% raw %}
+  <div ng-controller="ProjectsCtrl">
       <table class="table table-striped">
         <thead>
-          <th>Project Name</th>
-          <th>Total Credit</th>
-          <th>Recent Average Credit</th>
+          <th><a href="#" ng-click="orderProp='name'; reverseSort=!reverseSort">Project Name</a></th>
+          <th><a href="#" ng-click="orderProp='user_total_credit'; reverseSort=!reverseSort">Total Credit</a></th>
+          <th><a href="#" ng-click="orderProp='user_expavg_credit'; reverseSort=!reverseSort">Recent Average Credit</a></th>
         </thead>
-        {% for project in projects %}
-        <tr>
-          <td><a href="/project?project={{project.name|urlencode}}">{{project.name}}</a></td>
-          <td>{{project.user_total_credit}}</td>
-          <td>{{project.user_expavg_credit}}</td>
+        <tr ng-repeat="p in projects | orderBy:orderProp:reverseSort">
+          <td>{{ p.name }}</td>
+          <td>{{ p.user_total_credit }}</td>
+          <td>{{ p.user_expavg_credit }}</td>
         </tr>
-        {% endfor %}
       </table>
-    {% endblock %}
+  </div>
+  {% endraw %}
+  {% endblock %}
