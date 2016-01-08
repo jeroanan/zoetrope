@@ -1,3 +1,6 @@
+import json
+
+
 class Message(object):
 
     def __init__(self, message):
@@ -46,3 +49,15 @@ class Message(object):
     @message_text.setter
     def message_text(self, val):
         self.__message_text = val
+
+
+class JSONEncoder(json.JSONEncoder):
+
+    def default(self, o):
+        return {
+            'message_number': o.message_number,
+            'date_time': o.date_time,
+            'message_type': o.message_type,
+            'project_name': o.project_name,
+            'message_text': o.message_text
+        }

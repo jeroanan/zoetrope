@@ -13,6 +13,10 @@ import boincsite.boinc.CommandLineFactory as clf
 import boincsite.boinc.RpcFactory as rf
 import boincsite.boinc.commandline.GetTask as get_task
 
+import boincsite.status.Message as m
+import boincsite.status.DailyTransfer as dt
+import boincsite.status.DiskUsage as duj
+
 import boincsite.templates.TemplateRenderer as tr
 
 WorkingDirectory = os.path.dirname(os.path.abspath(__file__))
@@ -25,6 +29,7 @@ class WebServer(object):
         self.__rpc_factory = rf.RpcFactory
 
         self.__renderer = tr.TemplateRenderer()
+        self.__io = StringIO()
 
     def start(self):
         cherrypy.config.update({'server.socket_host': '0.0.0.0',
@@ -91,23 +96,19 @@ class WebServer(object):
 
     @cherrypy.expose
     def disk_usage_json(self, **kwargs):
-        import boincsite.status.DiskUsage as duj
-        io = StringIO()
-        return json.dumps(self.__get_disk_usage(), io, cls=duj.JSONEncoder)
-
-    def __get_disk_usage(self):
         disk_usage_command = self.__rpc_factory.create('DiskUsage')
-        return disk_usage_command.execute()
+        du = disk_usage_command.execute()
+        return json.dumps(du, self.__io, cls=duj.JSONEncoder)
 
     @cherrypy.expose
     def messages(self, **kwargs):
-        get_messages_command = self.__command_factory.create('GetMessages')
-        messages = get_messages_command.execute()
+        return self.__render('messages.html', title="Messages")
 
-        if messages is None:
-            messages = []
-
-        return self.__render('messages.html', messages=reversed(list(messages)), title="Messages")
+    @cherrypy.expose
+    def messages_json(self, **kwargs):
+        command = self.__command_factory.create('GetMessages')
+        ms = list(command.execute())
+        return json.dumps(ms, self.__io, cls=m.JSONEncoder)
 
     @cherrypy.expose
     def host_info(self, **kwargs):
@@ -117,20 +118,13 @@ class WebServer(object):
 
     @cherrypy.expose
     def daily_transfer_history(self, **kwargs):
-        daily_transfer_history_command = self.__command_factory.create('DailyTransferHistory')
         return self.__render('dailytransferhistory.html', title='Daily Transfer History')
 
     @cherrypy.expose
     def daily_transfer_history_json(self, **kwargs):
-        import boincsite.status.DailyTransfer as dt
-        dts = self.__get_daily_transfers()
-        io = StringIO()
-        return json.dumps(dts, io, cls=dt.JSONEncoder)
-
-    def __get_daily_transfers(self):
         daily_transfer_history_command = self.__command_factory.create('DailyTransferHistory')
-        return list(daily_transfer_history_command.execute())
-
+        dts = list(daily_transfer_history_command.execute())
+        return json.dumps(dts, self.__io, cls=dt.JSONEncoder)
 
     def __render(self, page, **kwargs):
         return self.__renderer.render(page, **kwargs)
@@ -163,12 +157,9 @@ class WebServer(object):
 
     @cherrypy.expose
     def experimental_task(self, **kwargs):
-        import boincsite.status.DailyTransfer as dt
-
-        disk_usage_command = self.__command_factory.create('DailyTransferHistory')
+        disk_usage_command = self.__command_factory.create('GetMessages')
         du = list(disk_usage_command.execute())
-        io = StringIO()
-        return json.dumps(du, io, cls=dt.JSONEncoder)
+        return json.dumps(du, self.__io, cls=dt.JSONEncoder)
 
 
 if __name__=='__main__':

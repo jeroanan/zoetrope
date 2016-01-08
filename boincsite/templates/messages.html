@@ -1,22 +1,36 @@
 {% extends 'master.html' %}
 
 {% block content %}
+{% raw %}
+<div ng-controller="MessagesCtrl">
+  <h2>Filter</h2>
+  <label for="selectProject">Project</label>
+  <select ng-model="filterProp" name="selectProject">
+    <option ng-repeat="(k, v) in project_name_counts" value="{{ k }}">
+      {{ get_project_name(k) }} ({{ v }} messages)
+    </option>
+  </select>
+
+  <input type="text" ng-model="filterProp" id="enterFilter" placeholder="Enter filter..." />
+
+  <h2>Messages</h2>
+
   <table class="table table-striped">
     <thead>
-      <th>#</th>
-      <th>Message Date</th>
-      <th>Message Type</th>
-      <th>Project</th>
-      <th>Message Text</th>
+      <th><a href="#" ng-click="orderProp='message_number'; reverseSort=!reverseSort">#</a></th>
+      <th><a href="#" ng-click="orderProp='date_time'; reverseSort=!reverseSort">Message Date</a></th>
+      <th><a href="#" ng-click="orderProp='message_type'; reverseSort=!reverseSort">Message Type</a></th>
+      <th><a href="#" ng-click="orderProp='project_name'; reverseSort=!reverseSort">Project</a></th>
+      <th><a href="#" ng-click="orderProp='message_text'; reverseSort=!reverseSort">Message Text</a></th>
     </thead>
-    {% for m in messages %}
-    <tr>
+    <tr ng-repeat="m in messages | orderBy:orderProp:reverseSort | filter:filterProp">
       <td>{{ m.message_number }}</td>
       <td>{{ m.date_time }}</td>
       <td>{{ m.message_type }}</td>
       <td>{{ m.project_name }}</td>
       <td>{{ m.message_text }}</td>
     </tr>
-    {% endfor %}
   </table>
+</div>
+{% endraw %}
 {% endblock %}
