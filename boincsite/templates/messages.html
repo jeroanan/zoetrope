@@ -2,7 +2,7 @@
 
 {% block content %}
 {% raw %}
-<div ng-controller="MessagesCtrl">
+<div ng-controller="MessagesCtrl" ng-show="ready">
   <h2>Filter</h2>
   <label for="selectProject">Project</label>
   <select ng-model="filterProp" name="selectProject">

@@ -1,7 +1,7 @@
 {% extends 'master.html' %}
     {%block content %}
   {% raw %}
-  <div ng-controller="ProjectsCtrl">
+  <div ng-controller="ProjectsCtrl" ng-show="ready">
       <table class="table table-striped">
         <thead>
           <th><a href="#" ng-click="orderProp='name'; reverseSort=!reverseSort">Project Name</a></th>

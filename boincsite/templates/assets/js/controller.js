@@ -3,9 +3,12 @@ var zoetrope = angular.module('zoetrope', [])
 zoetrope.controller('DiskUsageCtrl', function($scope, $http) {
   $http.get('/disk_usage_json').success(function(data) {
     $scope.disk_usages = data;
+    $scope.ready = true;
   });
+
   $scope.orderProp = 'master_url';
   $scope.reverseSort = false;
+  $scope.ready = false;
 });
 
 zoetrope.controller('IndexCtrl', function ($scope, $http) {
@@ -22,11 +25,14 @@ zoetrope.controller('IndexCtrl', function ($scope, $http) {
         data[i].state = get_state_string(data[i]);
         data[i].time_so_far = get_time_so_far(data[i]);
       }
+
+      $scope.ready = true;
     });
   });
 
   $scope.sortProp = 'index';
   $scope.reverseSort = false;
+  $scope.ready = false;
 });
 
 zoetrope.controller('TaskCtrl', function($scope, $http) {
@@ -87,10 +93,12 @@ zoetrope.controller('ProjectsCtrl', function($scope, $http) {
 
     $http.get('/projects_json').success(function(data) {
       $scope.projects = data;
+      $scope.ready = true;
     });
 
     $scope.orderProp = 'name';
     $scope.reverseSort = false;
+    $scope.ready = false;
 });
 
 zoetrope.controller('ProjectCtrl', function($scope, $http) {
@@ -98,17 +106,22 @@ zoetrope.controller('ProjectCtrl', function($scope, $http) {
     var project = getQueryStrings()['project'];
     $http.get('/project_json?project=' + project).success(function(data) {
       $scope.project = data;
+      $scope.ready = true;
     });
 
     $scope.orderProp = 'name';
     $scope.reverseSort = false;
+    $scope.ready = false;
 });
 
 zoetrope.controller('HostInfoCtrl', function($scope, $http) {
 
     $http.get('/host_info_json').success(function(data) {
       $scope.host_info = data;
+      $scope.ready = true;
     });
+
+    $scope.ready = false;
 });
 
 zoetrope.controller('DailyTransferCtrl', function($scope, $http) {
@@ -121,9 +134,6 @@ zoetrope.controller('DailyTransferCtrl', function($scope, $http) {
       data[d].date = theDate;
     }
 
-    $scope.daily_transfers = data;
-    $scope.orderProp = 'date';
-    $scope.reverseSort = true;
 
     var totalMegabytes = function(fieldName) {
       var megs = Array.map(data, function(x) { return x[fieldName]; });
@@ -131,11 +141,15 @@ zoetrope.controller('DailyTransferCtrl', function($scope, $http) {
       return Math.round(total * 100) / 100;
     };
 
-    //var uploads = Array.map(data, function(x) { return x['uploaded']; });
+    $scope.daily_transfers = data;
+    $scope.orderProp = 'date';
+    $scope.reverseSort = true;
     $scope.totalUploaded = totalMegabytes('uploaded') + 'MB';
     $scope.totalDownloaded = totalMegabytes('downloaded') + 'MB';
+    $scope.ready = true;
 
   });
+  $scope.ready = false;
 });
 
 zoetrope.controller('MessagesCtrl', function($scope, $http) {
@@ -160,6 +174,7 @@ zoetrope.controller('MessagesCtrl', function($scope, $http) {
         }
 
         $scope.project_name_counts = tmp_name_counts;
+        $scope.ready = true;
     });
 
     $scope.get_project_name = function(pn) {
@@ -169,6 +184,7 @@ zoetrope.controller('MessagesCtrl', function($scope, $http) {
     $scope.orderProp = 'message_number';
     $scope.reverseSort = true;
     $scope.filterProp = '';
+    $scope.ready = false;
 });
 
 function getQueryStrings() {
