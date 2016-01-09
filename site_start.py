@@ -81,9 +81,12 @@ class WebServer(object):
 
     @cherrypy.expose
     def project(self, **kwargs):
+        return self.__render('project.html')
 
+    @cherrypy.expose
+    def project_json(self, **kwargs):
         project = [t for t in self.__get_projects() if t.name==kwargs.get('project', '')].pop()
-        return self.__render('project.html', project=project, title=project.name)
+        return json.dumps(project, self.__io, cls=jse.JSONEncoder)
 
     def __get_projects(self):
         projects_command = self.__rpc_factory.create('GetProjectStatus')

@@ -9,7 +9,7 @@
           <th><a href="#" ng-click="orderProp='user_expavg_credit'; reverseSort=!reverseSort">Recent Average Credit</a></th>
         </thead>
         <tr ng-repeat="p in projects | orderBy:orderProp:reverseSort">
-          <td>{{ p.name }}</td>
+          <td><a href="/project?project={{ p.name }}">{{ p.name }}</a></td>
           <td>{{ p.user_total_credit }}</td>
           <td>{{ p.user_expavg_credit }}</td>
         </tr>

@@ -8,11 +8,21 @@ zoetrope.controller('DiskUsageCtrl', function($scope, $http) {
   $scope.reverseSort = false;
 });
 
-
 zoetrope.controller('ProjectsCtrl', function($scope, $http) {
 
     $http.get('/projects_json').success(function(data) {
       $scope.projects = data;
+    });
+
+    $scope.orderProp = 'name';
+    $scope.reverseSort = false;
+});
+
+zoetrope.controller('ProjectCtrl', function($scope, $http) {
+
+    var project = getQueryStrings()['project'];
+    $http.get('/project_json?project=' + project).success(function(data) {
+      $scope.project = data;
     });
 
     $scope.orderProp = 'name';
@@ -85,3 +95,19 @@ zoetrope.controller('MessagesCtrl', function($scope, $http) {
     $scope.reverseSort = true;
     $scope.filterProp = '';
 });
+
+function getQueryStrings() {
+  var assoc  = {};
+  var decode = function (s) { return decodeURIComponent(s.replace(/\+/g, " ")); };
+  var queryString = location.search.substring(1);
+  var keyValues = queryString.split('&');
+
+  for(var i in keyValues) {
+    var key = keyValues[i].split('=');
+    if (key.length > 1) {
+      assoc[decode(key[0])] = decode(key[1]);
+    }
+  }
+
+  return assoc;
+}
