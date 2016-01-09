@@ -52,6 +52,12 @@ class WebServer(object):
         return self.__render('index.html', tasks=boinc_tasks, title='Boinc Tasks')
 
     @cherrypy.expose
+    def tasks_json(self, **kwargs):
+        command = self.__rpc_factory.create('GetTasks')
+        tasks = command.execute()
+        return json.dumps(list(tasks), self.__io, cls=jse.JSONEncoder)
+
+    @cherrypy.expose
     def task(self, **kwargs):
 
         task_name = kwargs.get('task_name', '')
@@ -169,9 +175,9 @@ class WebServer(object):
 
     @cherrypy.expose
     def experimental_task(self, **kwargs):
-        disk_usage_command = self.__command_factory.create('HostInfo')
+        disk_usage_command = self.__rpc_factory.create('GetTasks')
         du = disk_usage_command.execute()
-        return json.dumps(du, self.__io, cls=jse.JSONEncoder)
+        return json.dumps(list(du), self.__io, cls=jse.JSONEncoder)
 
 
 if __name__=='__main__':
