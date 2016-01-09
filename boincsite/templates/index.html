@@ -29,8 +29,8 @@
             </div>
           </td>
 
-          <td>{{ get_state_string(task) }}</td>
-          <td>{{ get_time_so_far(task) }}</td>
+          <td>{{ task.state }}</td>
+          <td>{{ task.time_so_far }}</td>
           <td>{{ task.estimated_cpu_time_remaining }}</td>
           <td><span ng-bind="task.report_deadline"></span></td>
         </tr>

@@ -19,39 +19,30 @@ zoetrope.controller('IndexCtrl', function ($scope, $http) {
       for (var i=0; i<data.length; i++) {
         data[i].idx = i + 1;
         data[i].project_name = get_project_name(data[i], $scope.projects);
+        data[i].state = get_state_string(data[i]);
+        data[i].time_so_far = get_time_so_far(data[i]);
       }
     });
   });
 
-  $scope.get_state_string = function(task) {
-    if (task.suspended_via_gui) return 'Task suspended by user';
-
-    if (task.state === 2 && (task.scheduler_state === 1 || task.active_task_state === 0)) {
-      return 'Waiting to run';
-    }
-
-    switch (task.state) {
-      case 2:
-        return 'Running';
-        break;
-      case 3:
-        return 'Computation error';
-        break;
-      case 5:
-        return 'Ready to report';
-        break;
-      case 6: 'Aborted by user';
-      default:
-        return task.state;
-    }
-  };
-
-  $scope.get_time_so_far = function(task) {
-    return task.ready_to_report ? task.final_cpu_time : task.current_cpu_time;
-  };
-
   $scope.sortProp = 'index';
   $scope.reverseSort = false;
+});
+
+zoetrope.controller('TaskCtrl', function($scope, $http) {
+  $http.get('/task_json?task_name=' + getQueryStrings()['task_name']).success(function(data) {
+    $http.get('/projects_json').success(function(projects) {
+      $scope.task = data;
+      data.project_name = get_project_name(data, projects);
+      data.state = get_state_string(data);
+      data.time_so_far = get_time_so_far(data);
+
+      $scope.suspend_button_text = data.suspended_via_gui ? 'Resume' : 'Suspend';
+      $scope.ready = true;
+    });
+  });
+
+  $scope.ready = false;
 });
 
 var get_project_name = function(task, projects) {
@@ -63,6 +54,33 @@ var get_project_name = function(task, projects) {
   }
 
   return '';
+};
+
+var get_time_so_far = function(task) {
+  return task.ready_to_report ? task.final_cpu_time : task.current_cpu_time;
+};
+
+var get_state_string = function(task) {
+  if (task.suspended_via_gui) return 'Task suspended by user';
+
+  if (task.state === 2 && (task.scheduler_state === 1 || task.active_task_state === 0)) {
+    return 'Waiting to run';
+  }
+
+  switch (task.state) {
+    case 2:
+      return 'Running';
+      break;
+    case 3:
+      return 'Computation error';
+      break;
+    case 5:
+      return 'Ready to report';
+      break;
+    case 6: 'Aborted by user';
+    default:
+      return task.state;
+  }
 };
 
 zoetrope.controller('ProjectsCtrl', function($scope, $http) {

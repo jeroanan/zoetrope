@@ -13,34 +13,77 @@
 {% endblock %}
 
 {% block content %}
-  {{task_row('Project Name', task.project_name)}}
-  {{task_row('Project URL', task.project_url)}}
-  {{task_row('Percent done', task.fraction_done + '%')}}
+  {% raw %}
+<div ng-controller="TaskCtrl" ng-show="ready">
+  <div class="row task-row">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-3"><strong>Project name</strong></div>
+    <div class="col-xs-3">{{ task.project_name }}</div>
+    <div class="col-xs-3"></div>
+  </div>
 
-  {% if task.ready_to_report %}
-    {{task_row('Time elapsed', task.final_cpu_time)}}
-  {% else %}
-    {{task_row('Time elapsed', task.current_cpu_time)}}
-    {{task_row('Time remaining', task.estimated_cpu_time_remaining)}}
-  {% endif %}
+  <div class="row task-row">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-3"><strong>Percent done</strong></div>
+    <div class="col-xs-3">{{ task.fraction_done + '%' }}</div>
+    <div class="col-xs-3"></div>
+  </div>
 
-  {{task_row('Report deadline', task.report_deadline)}}
-  {{task_row('Ready to report?', task.ready_to_report)}}
+  <div class="row task-row">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-3"><strong>Time Elapsed</strong></div>
+    <div class="col-xs-3">{{ task.time_so_far }}</div>
+    <div class="col-xs-3"></div>
+  </div>
 
-  {{task_row('State', task.get_state_string())}}
-  {{task_row('Suspended via gui?', task.suspended_via_gui)}}
-  {{task_row('Active task state', task.active_task_state)}}
+  <div class="row task-row" ng-show="!task.ready_to_report">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-3"><strong>Time Remaining</strong></div>
+    <div class="col-xs-3">{{ task.estimated_cpu_time_remaining }}</div>
+    <div class="col-xs-3"></div>
+  </div>
+
+  <div class="row task-row">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-3"><strong>Report Deadline</strong></div>
+    <div class="col-xs-3">{{ task.report_deadline }}</div>
+    <div class="col-xs-3"></div>
+  </div>
+
+  <div class="row task-row">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-3"><strong>Ready to report?</strong></div>
+    <div class="col-xs-3">{{ task.ready_to_report }}</div>
+    <div class="col-xs-3"></div>
+  </div>
+
+  <div class="row task-row">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-3"><strong>State</strong></div>
+    <div class="col-xs-3">{{ task.state }}</div>
+    <div class="col-xs-3"></div>
+  </div>
+
+  <div class="row task-row">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-3"><strong>Suspended via gui?</strong></div>
+    <div class="col-xs-3">{{ task.suspended_via_gui }}</div>
+    <div class="col-xs-3"></div>
+  </div>
+
+  <div class="row task-row">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-3"><strong>Active task state</strong></div>
+    <div class="col-xs-3">{{ task.active_task_state }}</div>
+    <div class="col-xs-3"></div>
+  </div>
 
   <div class="row task-controls">
     <div class="col-xs-3"></div>
     <div class="col-xs-3">
       <a class="btn btn-primary pull-right"
         href="suspend_resume?task_name={{ task.name }}&return_url=/task?task_name={{ task.name }}">
-        {% if task.suspended_via_gui %}
-          Resume
-        {% else %}
-          Suspend
-        {% endif %}
+        {{ suspend_button_text}}
       </a>
     </div>
     <div class="col-xs-3"><a class="btn btn-danger abort-button">Abort</a></div>
@@ -53,6 +96,7 @@
     <div class="col-xs-3">Confirm task abort: <a href="/abort_task?task_name={{ task.name }}">OK</a></div>
     <div class="col-xs-3"></div>
   </div>
+  {% endraw %}
 
   <div class="row home-row">
     <div class="col-xs-3"></div>
@@ -60,4 +104,5 @@
     <div class="col-xs-3"><a href="/">Home</a></div>
     <div class="col-xs-3"></div>
   </div>
+</div>
 {% endblock %}

@@ -59,23 +59,14 @@ class WebServer(object):
 
     @cherrypy.expose
     def task(self, **kwargs):
+        return self.__render('task.html')
 
+    @cherrypy.expose
+    def task_json(self, **kwargs):
         task_name = kwargs.get('task_name', '')
-
-        if task_name == '':
-            raise cherrypy.HTTPRedirect('/')
-
-        try:
-            task_command = self.__rpc_factory.create('GetTask')
-            task = task_command.execute(task_name)
-        except get_task.TaskNotFoundException:
-            return "Task {task_name} not found".format(task_name=task_name)
-
-        projects = self.__get_projects()
-
-        task.project_name = [p.name for p in projects if p.master_url==task.project_url].pop()
-
-        return self.__render('task.html', task=task, title=task_name)
+        task_command = self.__rpc_factory.create('GetTask')
+        task = task_command.execute(task_name)
+        return json.dumps(task, self.__io, cls=jse.JSONEncoder)
 
     @cherrypy.expose
     def projects(self, **kwargs):

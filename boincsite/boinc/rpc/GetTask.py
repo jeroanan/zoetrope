@@ -3,7 +3,7 @@
 # Licensed under the GPL version 3
 
 import boincsite.boinc.rpc.GetTasks as gts
-
+import boincsite.boinc.exceptions.TaskNotFoundException as tnfe
 
 class GetTask(object):
 
