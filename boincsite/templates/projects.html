@@ -18,6 +18,17 @@
           <td>{{ p.user_expavg_credit }}</td>
         </tr>
       </table>
+      <div class="row">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-3"></div>
+        <div class="col-xs-3"></div>
+        <div class="col-xs-3">
+          <input type="checkbox" ng-model="showRawData">Show raw data</input>
+        </div>
+      </div>
+      <div class="row" ng-show="showRawData">
+        {{ projects }}
+      </div>
     </div>
   </div>
   {% endraw %}

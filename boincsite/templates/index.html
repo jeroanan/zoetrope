@@ -52,6 +52,18 @@
         <a class="btn btn-primary" href="/do_network_communication">Do network communication</a>
       </div>
     </div>
+    <div class="row">
+      <div class="col-xs-3"></div>
+      <div class="col-xs-3"></div>
+      <div class="col-xs-3"></div>
+      <div class="col-xs-3">
+        <input type="checkbox" ng-model="showRawData">Show raw data</input>
+      </div>
+    </div>
+
+    <div class="row" ng-show="showRawData">
+      {{ tasks }}
+    </div>
   </div>
 </div>
 {% endraw %}

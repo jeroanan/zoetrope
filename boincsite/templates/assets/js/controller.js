@@ -27,6 +27,7 @@ zoetrope.controller('IndexCtrl', function ($scope, $http) {
       }
 
       $scope.ready = true;
+      $scope.showRawData = false;
     });
   });
 
@@ -99,6 +100,7 @@ zoetrope.controller('ProjectsCtrl', function($scope, $http) {
     $scope.orderProp = 'name';
     $scope.reverseSort = false;
     $scope.ready = false;
+    $scope.showRawData = false;
 });
 
 zoetrope.controller('ProjectCtrl', function($scope, $http) {
