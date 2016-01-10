@@ -8,7 +8,10 @@
   <div ng-show="!ready" class="text-center">
     <img src="/static/img/loading.gif" />
   </div>
-  <div ng-show="ready">
+  <div ng-show="ready && error" class="text-center">
+    <span ng-bind="errorMessage"></span>
+  </div>
+  <div ng-show="ready && !error">
     <h2>Current Status</h2>
 
     <keyvalrow key="URL" val="{{ project.master_url }}"></keyvalrow>
@@ -38,7 +41,7 @@
       <keyvalrow key="Trickle upload pending?" val="{{ project.trickle_upload_pending }}"></keyvalrow>
       <keyvalrow key="Last RPC" val="{{ project.last_rpc }}"></keyvalrow>
       <keyvalrow key="Project files downloaded" val="{{ project.project_files_downloaded }}"></keyvalrow>
-      
+
       <div class="row">
         <div class="col-xs-3"></div>
         <div class="col-xs-3"></div>
@@ -51,6 +54,9 @@
         {{ project }}
       </div>
     </div>
+  </div>
+  <div class="row home-row text-center">
+    <a href="/projects">Projects</a></div>
   </div>
 </div>
 {% endraw %}
