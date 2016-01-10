@@ -1,4 +1,9 @@
+# Copyright (c) David Wilson 2015, 2016
+#
+# Licensed under the GPL version 3
+
 import boincsite.util.ByteConversion as bc
+
 
 class HostInfo(object):
 
@@ -19,6 +24,7 @@ class HostInfo(object):
         self.__swap_size = ''
         self.__disk_size = ''
         self.__disk_free = ''
+        self.__uptime = ''
 
     @property
     def timezone(self):
@@ -147,3 +153,11 @@ class HostInfo(object):
     @disk_free.setter
     def disk_free(self, val):
         self.__disk_free = val
+
+    @property
+    def uptime(self):
+        return self.__uptime
+
+    @uptime.setter
+    def uptime(self, val):
+        self.__uptime = val

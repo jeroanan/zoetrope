@@ -7,6 +7,7 @@
     <img src="/static/img/loading.gif" />
   </div>
   <div ng-show="ready">
+    <keyvalrow key="System uptime" val="{{ host_info.uptime }}"></keyvalrow>
     <keyvalrow key="Timezone" val="{{ host_info.timezone  }}"></keyvalrow>
     <keyvalrow key="Domain name" val="{{ host_info.domain_name }}"></keyvalrow>
     <keyvalrow key="IP address" val="{{ host_info.ip_address }}"></keyvalrow>
@@ -22,7 +23,19 @@
     <keyvalrow key="Cache size" val="{{ host_info.cache_size }}"></keyvalrow>
     <keyvalrow key="Swap size" val="{{ host_info.swap_size }}"></keyvalrow>
     <keyvalrow key="Disk size" val="{{ host_info.disk_size }}"></keyvalrow>
-    <keyvalrow key="Disk free" val="{{ host_info.disk_free }}"></keyvalrow>    
+    <keyvalrow key="Disk free" val="{{ host_info.disk_free }}"></keyvalrow>
+  </div>
+  <div class="row">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-3"></div>
+    <div class="col-xs-3"></div>
+    <div class="col-xs-3">
+      <input type="checkbox" ng-model="showRawData">Show raw data</input>
+    </div>
+  </div>
+
+  <div class="row" ng-show="showRawData">
+    {{ host_info }}
   </div>
 </div>
 {% endraw %}
