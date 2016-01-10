@@ -1,6 +1,6 @@
-var zoetrope = angular.module('zoetrope', [])
+var zoetropeControllers = angular.module('zoetropeControllers', [])
 
-zoetrope.controller('DiskUsageCtrl', function($scope, $http) {
+zoetropeControllers.controller('DiskUsageCtrl', function($scope, $http) {
   $http.get('/disk_usage_json').success(function(data) {
     $scope.disk_usages = data;
     $scope.ready = true;
@@ -11,8 +11,7 @@ zoetrope.controller('DiskUsageCtrl', function($scope, $http) {
   $scope.ready = false;
 });
 
-zoetrope.controller('IndexCtrl', function ($scope, $http) {
-
+zoetropeControllers.controller('IndexCtrl', function ($scope, $http, $routeParams) {
   $http.get('/tasks_json').success(function(data) {
     $http.get('/projects_json').success(function(projects) {
 
@@ -36,7 +35,7 @@ zoetrope.controller('IndexCtrl', function ($scope, $http) {
   $scope.ready = false;
 });
 
-zoetrope.controller('TaskCtrl', function($scope, $http) {
+zoetropeControllers.controller('TaskCtrl', function($scope, $http) {
   $http.get('/task_json?task_name=' + getQueryStrings()['task_name']).then(function successCallback(response) {
 
     var task = response.data;
@@ -99,7 +98,7 @@ var get_state_string = function(task) {
   }
 };
 
-zoetrope.controller('ProjectsCtrl', function($scope, $http) {
+zoetropeControllers.controller('ProjectsCtrl', function($scope, $http) {
 
     $http.get('/projects_json').success(function(data) {
       $scope.projects = data;
@@ -112,7 +111,7 @@ zoetrope.controller('ProjectsCtrl', function($scope, $http) {
     $scope.showRawData = false;
 });
 
-zoetrope.controller('ProjectCtrl', function($scope, $http) {
+zoetropeControllers.controller('ProjectCtrl', function($scope, $http) {
 
     var project = getQueryStrings()['project'];
     $http.get('/project_json?project=' + project).then(function successCallback(response) {
@@ -127,7 +126,7 @@ zoetrope.controller('ProjectCtrl', function($scope, $http) {
     $scope.ready = false;
 });
 
-zoetrope.controller('HostInfoCtrl', function($scope, $http) {
+zoetropeControllers.controller('HostInfoCtrl', function($scope, $http) {
 
     $http.get('/host_info_json').success(function(data) {
       $scope.host_info = data;
@@ -137,7 +136,7 @@ zoetrope.controller('HostInfoCtrl', function($scope, $http) {
     $scope.ready = false;
 });
 
-zoetrope.controller('DailyTransferCtrl', function($scope, $http) {
+zoetropeControllers.controller('DailyTransferCtrl', function($scope, $http) {
   $http.get('/daily_transfer_history_json').success(function(data) {
 
     for (var d in data) {
@@ -165,7 +164,7 @@ zoetrope.controller('DailyTransferCtrl', function($scope, $http) {
   $scope.ready = false;
 });
 
-zoetrope.controller('MessagesCtrl', function($scope, $http) {
+zoetropeControllers.controller('MessagesCtrl', function($scope, $http) {
 
     $http.get('/messages_json').success(function(data) {
         $scope.messages = data;
@@ -216,7 +215,7 @@ function getQueryStrings() {
   return assoc;
 }
 
-zoetrope.directive('keyvalrow', function() {
+zoetropeControllers.directive('keyvalrow', function() {
   return {
     restrict: 'E',
     scope: {

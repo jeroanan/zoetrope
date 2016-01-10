@@ -1,0 +1,22 @@
+<div ng-controller="DiskUsageCtrl">
+  <div ng-show="!ready" class="text-center">
+    <img src="/static/img/loading.gif" />
+  </div>
+  <div ng-show="ready">
+    <keyvalrow key="Total Disk Space" val="{{ disk_usages.total_disk_space }}"></keyvalrow>
+    <keyvalrow key="Free Disk Space" val="{{ disk_usages.free_disk_space }}"></keyvalrow>
+
+    <h2>By project</h2>
+
+    <table class="table table-striped" >
+      <thead>
+        <th><a href="#" ng-click="orderProp='master_url';reverseSort=!reverseSort">Project Url</a></th>
+        <th ><a href="#" ng-click="orderProp='disk_usage';reverseSort=!reverseSort;">Disk Usage</a></th>
+      </thead>
+      <tr ng-repeat="pdu in disk_usages.project_disk_usages | orderBy:orderProp:reverseSort">
+        <td><a href="{{pdu.master_url}}">{{pdu.master_url}}</a></td>
+        <td>{{pdu.disk_usage + 'MB'}}</td>
+      </tr>
+    </table>
+  </div>
+</div>

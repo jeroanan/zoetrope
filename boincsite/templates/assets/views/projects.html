@@ -1,0 +1,30 @@
+<div ng-controller="ProjectsCtrl">
+  <div ng-show="!ready" class="text-center">
+    <img src="/static/img/loading.gif" />
+  </div>
+  <div ng-show="ready">
+    <table class="table table-striped">
+      <thead>
+        <th><a href="#" ng-click="orderProp='name'; reverseSort=!reverseSort">Project Name</a></th>
+        <th><a href="#" ng-click="orderProp='user_total_credit'; reverseSort=!reverseSort">Total Credit</a></th>
+        <th><a href="#" ng-click="orderProp='user_expavg_credit'; reverseSort=!reverseSort">Recent Average Credit</a></th>
+      </thead>
+      <tr ng-repeat="p in projects | orderBy:orderProp:reverseSort">
+        <td><a href="/project?project={{ p.name }}">{{ p.name }}</a></td>
+        <td>{{ p.user_total_credit }}</td>
+        <td>{{ p.user_expavg_credit }}</td>
+      </tr>
+    </table>
+    <div class="row">
+      <div class="col-xs-3"></div>
+      <div class="col-xs-3"></div>
+      <div class="col-xs-3"></div>
+      <div class="col-xs-3">
+        <input type="checkbox" ng-model="showRawData">Show raw data</input>
+      </div>
+    </div>
+    <div class="row" ng-show="showRawData">
+      {{ projects }}
+    </div>
+  </div>
+</div>
