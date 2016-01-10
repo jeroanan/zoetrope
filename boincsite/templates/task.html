@@ -19,68 +19,16 @@
     <img src="/static/img/loading.gif" />
   </div>
   <div ng-show="ready">
-    <div class="row task-row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"><strong>Project name</strong></div>
-      <div class="col-xs-3">{{ task.project_name }}</div>
-      <div class="col-xs-3"></div>
-    </div>
 
-    <div class="row task-row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"><strong>Percent done</strong></div>
-      <div class="col-xs-3">{{ task.fraction_done + '%' }}</div>
-      <div class="col-xs-3"></div>
-    </div>
-
-    <div class="row task-row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"><strong>Time Elapsed</strong></div>
-      <div class="col-xs-3">{{ task.time_so_far }}</div>
-      <div class="col-xs-3"></div>
-    </div>
-
-    <div class="row task-row" ng-show="!task.ready_to_report">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"><strong>Time Remaining</strong></div>
-      <div class="col-xs-3">{{ task.estimated_cpu_time_remaining }}</div>
-      <div class="col-xs-3"></div>
-    </div>
-
-    <div class="row task-row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"><strong>Report Deadline</strong></div>
-      <div class="col-xs-3">{{ task.report_deadline }}</div>
-      <div class="col-xs-3"></div>
-    </div>
-
-    <div class="row task-row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"><strong>Ready to report?</strong></div>
-      <div class="col-xs-3">{{ task.ready_to_report }}</div>
-      <div class="col-xs-3"></div>
-    </div>
-
-    <div class="row task-row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"><strong>State</strong></div>
-      <div class="col-xs-3">{{ task.state }}</div>
-      <div class="col-xs-3"></div>
-    </div>
-
-    <div class="row task-row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"><strong>Suspended via gui?</strong></div>
-      <div class="col-xs-3">{{ task.suspended_via_gui }}</div>
-      <div class="col-xs-3"></div>
-    </div>
-
-    <div class="row task-row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"><strong>Active task state</strong></div>
-      <div class="col-xs-3">{{ task.active_task_state }}</div>
-      <div class="col-xs-3"></div>
-    </div>
+    <keyvalrow key="Project name" val="{{ task.project_name }}"></keyvalrow>
+    <keyvalrow key="Percent done" val="{{ task.fraction_done + '%' }}"></keyvalrow>
+    <keyvalrow key="Time Elapsed" val="{{ task.time_so_far }}"></keyvalrow>
+    <keyvalrow key="Time Remaining" val="{{ task.estimated_cpu_time_remaining }}"></keyvalrow>
+    <keyvalrow key="Report Deadline" val="{{ task.report_deadline }}"></keyvalrow>
+    <keyvalrow key="Ready to report?" val="{{ task.ready_to_report }}"></keyvalrow>
+    <keyvalrow key="State" val="{{ task.state }}"></keyvalrow>
+    <keyvalrow key="Suspended via gui?" val="{{ task.suspended_via_gui }}"></keyvalrow>
+    <keyvalrow key="Active task state" val="{{ task.active_task_state }}"></keyvalrow>
 
     <div class="row task-controls">
       <div class="col-xs-3"></div>

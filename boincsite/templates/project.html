@@ -11,133 +11,34 @@
   <div ng-show="ready">
     <h2>Current Status</h2>
 
-    <div class="row task-row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"><strong>URL</strong></div>
-      <div class="col-xs-3">{{ project.master_url }}</div>
-      <div class="col-xs-3"></div>
-    </div>
-    <div class="row task-row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"><strong>Username</strong></div>
-      <div class="col-xs-3">{{ project.user_name }}</div>
-      <div class="col-xs-3"></div>
-    </div>
-    <div class="row task-row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"><strong>Team name</strong></div>
-      <div class="col-xs-3">{{ project.team_name }}</div>
-      <div class="col-xs-3"></div>
-    </div>
-    <div class="row task-row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"><strong>Attahced via account manager?</strong></div>
-      <div class="col-xs-3">{{ project.attached_via_account_manager }}</div>
-      <div class="col-xs-3"></div>
-    </div>
-    <div class="row task-row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"><strong>Ended</strong></div>
-      <div class="col-xs-3">{{ project.ended }}</div>
-      <div class="col-xs-3"></div>
-    </div>
-    <div class="row task-row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"><strong>Suspended via GUI?</strong></div>
-      <div class="col-xs-3">{{ project.suspended_via_gui }}</div>
-      <div class="col-xs-3"></div>
-    </div>
-    <div class="row task-row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"><strong>Don't request more work</strong></div>
-      <div class="col-xs-3">{{ project.dont_request_more_work }}</div>
-      <div class="col-xs-3"></div>
-    </div>
-    <div class="row task-row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"><strong>Disk usage</strong></div>
-      <div class="col-xs-3">{{ project.disk_usage }}</div>
-      <div class="col-xs-3"></div>
-    </div>
-    <div class="row task-row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"><strong>Resource share</strong></div>
-      <div class="col-xs-3">{{ project.resource_share }}</div>
-      <div class="col-xs-3"></div>
-    </div>
+    <keyvalrow key="URL" val="{{ project.master_url }}"></keyvalrow>
+    <keyvalrow key="Username" val="{{ project.user_name }}"></keyvalrow>
+    <keyvalrow key="Team name" val="{{ project.team_name }}"></keyvalrow>
+    <keyvalrow key="Attached via account manager?" val="{{ project.attached_via_account_manager }}"></keyvalrow>
+    <keyvalrow key="Ended" val="{{ project.ended }}"></keyvalrow>
+    <keyvalrow key="Suspended via GUI?" val="{{ project.suspended_via_gui }}"></keyvalrow>
+    <keyvalrow key="Don't request more work" val="{{ project.dont_request_more_work }}"></keyvalrow>
+    <keyvalrow key="Disk usage" val="{{ project.disk_usage }}"></keyvalrow>
+    <keyvalrow key="Resource share" val="{{ project.resource_share }}"></keyvalrow>
 
     <h2>Credit</h2>
 
-    <div class="row task-row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"><strong>User total credit</strong></div>
-      <div class="col-xs-3">{{ project.user_total_credit }}</div>
-      <div class="col-xs-3"></div>
-    </div>
-    <div class="row task-row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"><strong>User recent average credit</strong></div>
-      <div class="col-xs-3">{{ project.user_expavg_credit }}</div>
-      <div class="col-xs-3"></div>
-    </div>
-    <div class="row task-row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"><strong>Total credit for this host</strong></div>
-      <div class="col-xs-3">{{ project.host_total_credit }}</div>
-      <div class="col-xs-3"></div>
-    </div>
-    <div class="row task-row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"><strong>Recent average credit for this host</strong></div>
-      <div class="col-xs-3">{{ project.host_expavg_credit }}</div>
-      <div class="col-xs-3"></div>
-    </div>
+    <keyvalrow key="User total credit" val="{{ project.user_total_credit }}"></keyvalrow>
+    <keyvalrow key="User recent average credit" val="{{ project.user_expavg_credit }}"></keyvalrow>
+    <keyvalrow key="Total credit for this host" val="{{ project.host_total_credit }}"></keyvalrow>
+    <keyvalrow key="Recent average credit for this host" val="{{ project.host_expavg_credit }}"></keyvalrow>
 
     <h2>Additional</h2>
 
     <div id="project-additional">
-      <div class="row task-row">
-        <div class="col-xs-3"></div>
-        <div class="col-xs-3"><strong>NRPC failures</strong></div>
-        <div class="col-xs-3">{{ project.nrpc_failures }}</div>
-        <div class="col-xs-3"></div>
-      </div>
-      <div class="row task-row">
-        <div class="col-xs-3"></div>
-        <div class="col-xs-3"><strong>Master fetch failures</strong></div>
-        <div class="col-xs-3">{{ project.master_fetch_failures }}</div>
-        <div class="col-xs-3"></div>
-      </div>
-      <div class="row task-row">
-        <div class="col-xs-3"></div>
-        <div class="col-xs-3"><strong>Master fetch pending?</strong></div>
-        <div class="col-xs-3">{{ project.master_fetch_pending }}</div>
-        <div class="col-xs-3"></div>
-      </div>
-      <div class="row task-row">
-        <div class="col-xs-3"></div>
-        <div class="col-xs-3"><strong>Scheduler RPC pending?</strong></div>
-        <div class="col-xs-3">{{ project.scheduler_rpc_pending }}</div>
-        <div class="col-xs-3"></div>
-      </div>
-      <div class="row task-row">
-        <div class="col-xs-3"></div>
-        <div class="col-xs-3"><strong>Trickle upload pending?</strong></div>
-        <div class="col-xs-3">{{ project.trickle_upload_pending }}</div>
-        <div class="col-xs-3"></div>
-      </div>
-      <div class="row task-row">
-        <div class="col-xs-3"></div>
-        <div class="col-xs-3"><strong>Last RPC</strong></div>
-        <div class="col-xs-3">{{ project.last_rpc }}</div>
-        <div class="col-xs-3"></div>
-      </div>
-      <div class="row task-row">
-        <div class="col-xs-3"></div>
-        <div class="col-xs-3"><strong>Project files downloaded</strong></div>
-        <div class="col-xs-3">{{ project.project_files_downloaded }}</div>
-        <div class="col-xs-3"></div>
-      </div>
+      <keyvalrow key="NRPC failures" val="{{ project.nrpc_failures }}"></keyvalrow>
+      <keyvalrow key="Master fetch failures" val="{{ project.master_fetch_failures }}"></keyvalrow>
+      <keyvalrow key="Master fetch pending?" val="{{ project.master_fetch_pending }}"></keyvalrow>
+      <keyvalrow key="Scheduler RPC pending?" val="{{ project.scheduler_rpc_pending }}"></keyvalrow>
+      <keyvalrow key="Trickle upload pending?" val="{{ project.trickle_upload_pending }}"></keyvalrow>
+      <keyvalrow key="Last RPC" val="{{ project.last_rpc }}"></keyvalrow>
+      <keyvalrow key="Project files downloaded" val="{{ project.project_files_downloaded }}"></keyvalrow>
+      
       <div class="row">
         <div class="col-xs-3"></div>
         <div class="col-xs-3"></div>

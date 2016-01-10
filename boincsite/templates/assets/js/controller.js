@@ -204,3 +204,14 @@ function getQueryStrings() {
 
   return assoc;
 }
+
+zoetrope.directive('keyvalrow', function() {
+  return {
+    restrict: 'E',
+    scope: {
+      key: '@',
+      val: '@'
+    },
+    templateUrl: '/static/directives/keyvalrow.html'
+  };
+});
