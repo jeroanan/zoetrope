@@ -162,7 +162,7 @@ class Task(object):
             percentage = 100.00
         else:
             percentage = round(self.__fraction_done * 100, 2)
-        return '{0:.2f}'.format(percentage)
+        return float('{0:.2f}'.format(percentage))
 
     @fraction_done.setter
     def fraction_done(self, val):

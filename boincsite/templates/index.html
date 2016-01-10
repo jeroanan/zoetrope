@@ -1,47 +1,56 @@
 {% extends 'master.html' %}
 {%block content %}
 {% raw %}
-<div ng-controller="IndexCtrl" ng-show="ready">
-  <table class="table table-striped">
-    <thead>
-      <th><a href="#" ng-click="sortProp='idx'; reverseSort=!reverseSort;">#</a></th>
-      <th><a href="#" ng-click="sortProp='project_name'; reverseSort=!reverseSort;">Project Name</a></th>
-      <th><a href="#" ng-click="sortProp=''; reverseSort=!reverseSort;">Progress</a></th>
-      <th><a href="#" ng-click="sortProp=''; reverseSort=!reverseSort;">State</a></th>
-      <th><a href="#" ng-click="sortProp=''; reverseSort=!reverseSort;">Time So Far</a></th>
-      <th><a href="#" ng-click="sortProp=''; reverseSort=!reverseSort;">Est. Time Remaining</a></th>
-      <th><a href="#" ng-click="sortProp=''; reverseSort=!reverseSort;">Deadline</a></th>
-    </thead>
-    <tbody>
-      <tr ng-repeat="task in tasks | orderBy:sortProp:reverseSort">
+<div ng-controller="IndexCtrl">
+  <div ng-show="!ready" class="text-center">
+    <img src="/static/img/loading.gif" />
+  </div>
+  <div ng-show="ready">
+    <table class="table table-striped">
+      <thead>
+        <th><a href="#" ng-click="sortProp='idx'; reverseSort=!reverseSort;">#</a></th>
+        <th><a href="#" ng-click="sortProp='project_name'; reverseSort=!reverseSort;">Project Name</a></th>
+        <th><a href="#" ng-click="sortProp='fraction_done'; reverseSort=!reverseSort;">Progress</a></th>
+        <th><a href="#" ng-click="sortProp='state'; reverseSort=!reverseSort;">State</a></th>
+        <th><a href="#" ng-click="sortProp='time_so_far'; reverseSort=!reverseSort;">Time So Far</a></th>
+        <th>
+          <a href="#" ng-click="sortProp='estimated_cpu_time_remaining'; reverseSort=!reverseSort;">
+            Est. Time Remaining
+          </a>
+        </th>
+        <th><a href="#" ng-click="sortProp='report_deadline'; reverseSort=!reverseSort;">Deadline</a></th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="task in tasks | orderBy:sortProp:reverseSort">
 
-        <td><a href="/task?task_name={{ task.name }}">{{ task.idx }}</a></td>
+          <td><a href="/task?task_name={{ task.name }}">{{ task.idx }}</a></td>
 
-        <td><a href="/project?project={{ task.project_name }}">{{ task.project_name }}</a></td>
+          <td><a href="/project?project={{ task.project_name }}">{{ task.project_name }}</a></td>
 
-        <td>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="{{task.fraction_done}}" aria-valuemin="0"
-              aria-valuemax="100" style="width: {{task.fraction_done}}%;"></div>
-          </div>
-          <div>
-            <span><small>{{ task.fraction_done }}%</small></span>
-          </div>
-        </td>
+          <td>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="{{task.fraction_done}}" aria-valuemin="0"
+                aria-valuemax="100" style="width: {{task.fraction_done}}%;"></div>
+            </div>
+            <div>
+              <span><small>{{ task.fraction_done }}%</small></span>
+            </div>
+          </td>
 
-        <td>{{ task.state }}</td>
-        <td>{{ task.time_so_far }}</td>
-        <td>{{ task.estimated_cpu_time_remaining }}</td>
-        <td><span ng-bind="task.report_deadline"></span></td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="row">
-    <div class="col-xs-3"></div>
-    <div class="col-xs-3"></div>
-    <div class="col-xs-3"></div>
-    <div class="col-xs-3">
-      <a class="btn btn-primary" href="/do_network_communication">Do network communication</a>
+          <td>{{ task.state }}</td>
+          <td>{{ task.time_so_far }}</td>
+          <td>{{ task.estimated_cpu_time_remaining }}</td>
+          <td><span ng-bind="task.report_deadline"></span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row">
+      <div class="col-xs-3"></div>
+      <div class="col-xs-3"></div>
+      <div class="col-xs-3"></div>
+      <div class="col-xs-3">
+        <a class="btn btn-primary" href="/do_network_communication">Do network communication</a>
+      </div>
     </div>
   </div>
 </div>

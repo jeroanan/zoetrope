@@ -1,7 +1,11 @@
 {% extends 'master.html' %}
     {%block content %}
   {% raw %}
-  <div ng-controller="ProjectsCtrl" ng-show="ready">
+  <div ng-controller="ProjectsCtrl">
+    <div ng-show="!ready" class="text-center">
+      <img src="/static/img/loading.gif" />
+    </div>
+    <div ng-show="ready">
       <table class="table table-striped">
         <thead>
           <th><a href="#" ng-click="orderProp='name'; reverseSort=!reverseSort">Project Name</a></th>
@@ -14,6 +18,7 @@
           <td>{{ p.user_expavg_credit }}</td>
         </tr>
       </table>
+    </div>
   </div>
   {% endraw %}
   {% endblock %}

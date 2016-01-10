@@ -1,34 +1,39 @@
 {% extends 'master.html' %}
 
 {% block content %}
-<div ng-controller="DiskUsageCtrl" ng-show="ready">
-
 {% raw %}
-  <div class="row task-row">
-    <div class="col-xs-3"></div>
-    <div class="col-xs-3"><strong>Total Disk Space</strong></div>
-    <div class="col-xs-3">{{disk_usages.total_disk_space}}</div>
-    <div class="col-xs-3"></div>
-  </div>
-  <div class="row task-row">
-    <div class="col-xs-3"></div>
-    <div class="col-xs-3"><strong>Free Disk Space</strong></div>
-    <div class="col-xs-3">{{ disk_usages.free_disk_space }}</div>
-    <div class="col-xs-3"></div>
-  </div>
 
-  <h2>By project</h2>
+<div ng-controller="DiskUsageCtrl">
+  <div ng-show="!ready" class="text-center">
+    <img src="/static/img/loading.gif" />
+  </div>
+  <div ng-show="ready">
+    <div class="row task-row">
+      <div class="col-xs-3"></div>
+      <div class="col-xs-3"><strong>Total Disk Space</strong></div>
+      <div class="col-xs-3">{{disk_usages.total_disk_space}}</div>
+      <div class="col-xs-3"></div>
+    </div>
+    <div class="row task-row">
+      <div class="col-xs-3"></div>
+      <div class="col-xs-3"><strong>Free Disk Space</strong></div>
+      <div class="col-xs-3">{{ disk_usages.free_disk_space }}</div>
+      <div class="col-xs-3"></div>
+    </div>
 
-  <table class="table table-striped" >
-    <thead>
-      <th><a href="#" ng-click="orderProp='master_url';reverseSort=!reverseSort">Project Url</a></th>
-      <th ><a href="#" ng-click="orderProp='disk_usage';reverseSort=!reverseSort;">Disk Usage</a></th>
-    </thead>
-    <tr ng-repeat="pdu in disk_usages.project_disk_usages | orderBy:orderProp:reverseSort">
-      <td><a href="{{pdu.master_url}}">{{pdu.master_url}}</a></td>
-      <td>{{pdu.disk_usage + 'MB'}}</td>
-    </tr>
-  </table>
-{% endraw %}
+    <h2>By project</h2>
+
+    <table class="table table-striped" >
+      <thead>
+        <th><a href="#" ng-click="orderProp='master_url';reverseSort=!reverseSort">Project Url</a></th>
+        <th ><a href="#" ng-click="orderProp='disk_usage';reverseSort=!reverseSort;">Disk Usage</a></th>
+      </thead>
+      <tr ng-repeat="pdu in disk_usages.project_disk_usages | orderBy:orderProp:reverseSort">
+        <td><a href="{{pdu.master_url}}">{{pdu.master_url}}</a></td>
+        <td>{{pdu.disk_usage + 'MB'}}</td>
+      </tr>
+    </table>
+  </div>
 </div>
+{% endraw %}
 {% endblock %}
