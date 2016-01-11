@@ -1,4 +1,4 @@
-var zoetropeControllers = angular.module('zoetropeControllers', [])
+var zoetropeControllers = angular.module('zoetropeControllers', ['ngRoute'])
 
 zoetropeControllers.controller('DiskUsageCtrl', function($scope, $http) {
   $http.get('/disk_usage_json').success(function(data) {
@@ -114,6 +114,7 @@ zoetropeControllers.controller('ProjectsCtrl', function($scope, $http) {
 zoetropeControllers.controller('ProjectCtrl', function($scope, $http, $routeParams) {
 
     var project = $routeParams.project;
+    console.log($routeParams);
     $http.get('/project_json?project=' + project).then(function successCallback(response) {
       $scope.project = response.data;
       $scope.ready = true;
