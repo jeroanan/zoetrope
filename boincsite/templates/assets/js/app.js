@@ -22,9 +22,14 @@ zoetrope.config(['$routeProvider',
       when('/messages', {
         templateUrl: '/static/views/messages.html'
       }).
+      when('/project', {
+        templateUrl: '/static/views/project.html'
+      }).
       when('/projects', {
-        templateUrl: '/static/views/projects.html',
-        controller: 'ProjectsCtrl'
+        templateUrl: '/static/views/projects.html'
+      }).
+      when('/task', {
+        templateUrl: '/static/views/task.html',
       }).
       otherwise({
         redirectTo: '/'

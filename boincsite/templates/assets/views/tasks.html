@@ -21,7 +21,7 @@
       <tbody>
         <tr ng-repeat="task in tasks | orderBy:sortProp:reverseSort">
 
-          <td><a href="/task?task_name={{ task.name }}">{{ task.idx }}</a></td>
+          <td><a href="#/task?task_name={{ task.name }}">{{ task.idx }}</a></td>
 
           <td><a href="/project?project={{ task.project_name }}">{{ task.project_name }}</a></td>
 

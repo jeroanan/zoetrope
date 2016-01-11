@@ -1,8 +1,3 @@
-{% extends 'master.html' %}
-
-{% block content %}
-  {% raw %}
-
 <div ng-controller="TaskCtrl">
   <script type="text/javascript">
     function confirmAbort() {
@@ -48,10 +43,8 @@
       <div class="col-xs-3">Confirm task abort: <a href="/abort_task?task_name={{ task.name }}">OK</a></div>
       <div class="col-xs-3"></div>
     </div>
-    {% endraw %}
   </div>
   <div class="row home-row text-center">
     <a href="/">Home</a></div>
   </div>
 </div>
-{% endblock %}

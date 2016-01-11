@@ -35,8 +35,8 @@ zoetropeControllers.controller('IndexCtrl', function ($scope, $http, $routeParam
   $scope.ready = false;
 });
 
-zoetropeControllers.controller('TaskCtrl', function($scope, $http) {
-  $http.get('/task_json?task_name=' + getQueryStrings()['task_name']).then(function successCallback(response) {
+zoetropeControllers.controller('TaskCtrl', function($scope, $http, $routeParams) {
+  $http.get('/task_json?task_name=' + $routeParams.task_name).then(function successCallback(response) {
 
     var task = response.data;
 
@@ -111,9 +111,9 @@ zoetropeControllers.controller('ProjectsCtrl', function($scope, $http) {
     $scope.showRawData = false;
 });
 
-zoetropeControllers.controller('ProjectCtrl', function($scope, $http) {
+zoetropeControllers.controller('ProjectCtrl', function($scope, $http, $routeParams) {
 
-    var project = getQueryStrings()['project'];
+    var project = $routeParams.project;
     $http.get('/project_json?project=' + project).then(function successCallback(response) {
       $scope.project = response.data;
       $scope.ready = true;
