@@ -1,17 +1,17 @@
 <div ng-controller="IndexCtrl">
   <h1>{{ title }}</h1>
-  
+
   <div ng-show="!ready" class="text-center">
     <img src="/static/img/loading.gif" />
   </div>
   <div ng-show="ready">
     <table class="table table-striped">
       <thead>
-        <th><a href="#" ng-click="sortProp='idx'; reverseSort=!reverseSort;">#</a></th>
-        <th><a href="#" ng-click="sortProp='project_name'; reverseSort=!reverseSort;">Project Name</a></th>
-        <th><a href="#" ng-click="sortProp='fraction_done'; reverseSort=!reverseSort;">Progress</a></th>
-        <th><a href="#" ng-click="sortProp='state'; reverseSort=!reverseSort;">State</a></th>
-        <th><a href="#" ng-click="sortProp='time_so_far'; reverseSort=!reverseSort;">Time So Far</a></th>
+        <th><a ng-click="sortProp='idx'; reverseSort=!reverseSort;">#</a></th>
+        <th><a ng-click="sortProp='project_name'; reverseSort=!reverseSort;">Project Name</a></th>
+        <th><a ng-click="sortProp='fraction_done'; reverseSort=!reverseSort;">Progress</a></th>
+        <th><a ng-click="sortProp='state'; reverseSort=!reverseSort;">State</a></th>
+        <th><a ng-click="sortProp='time_so_far'; reverseSort=!reverseSort;">Time So Far</a></th>
         <th>
           <a href="#" ng-click="sortProp='estimated_cpu_time_remaining'; reverseSort=!reverseSort;">
             Est. Time Remaining

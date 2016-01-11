@@ -6,9 +6,9 @@
   <div ng-show="ready">
     <table class="table table-striped">
       <thead>
-        <th><a href="#" ng-click="orderProp='name'; reverseSort=!reverseSort">Project Name</a></th>
-        <th><a href="#" ng-click="orderProp='user_total_credit'; reverseSort=!reverseSort">Total Credit</a></th>
-        <th><a href="#" ng-click="orderProp='user_expavg_credit'; reverseSort=!reverseSort">Recent Average Credit</a></th>
+        <th><a ng-click="orderProp='name'; reverseSort=!reverseSort">Project Name</a></th>
+        <th><a ng-click="orderProp='user_total_credit'; reverseSort=!reverseSort">Total Credit</a></th>
+        <th><a ng-click="orderProp='user_expavg_credit'; reverseSort=!reverseSort">Recent Average Credit</a></th>
       </thead>
       <tr ng-repeat="p in projects | orderBy:orderProp:reverseSort">
         <td><a href="#/project?project={{ p.name }}">{{ p.name }}</a></td>

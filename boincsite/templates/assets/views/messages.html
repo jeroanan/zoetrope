@@ -18,11 +18,11 @@
 
     <table class="table table-striped">
       <thead>
-        <th><a href="#" ng-click="orderProp='message_number'; reverseSort=!reverseSort">#</a></th>
-        <th><a href="#" ng-click="orderProp='date_time'; reverseSort=!reverseSort">Message Date</a></th>
-        <th><a href="#" ng-click="orderProp='message_type'; reverseSort=!reverseSort">Message Type</a></th>
-        <th><a href="#" ng-click="orderProp='project_name'; reverseSort=!reverseSort">Project</a></th>
-        <th><a href="#" ng-click="orderProp='message_text'; reverseSort=!reverseSort">Message Text</a></th>
+        <th><a ng-click="orderProp='message_number'; reverseSort=!reverseSort">#</a></th>
+        <th><a ng-click="orderProp='date_time'; reverseSort=!reverseSort">Message Date</a></th>
+        <th><a ng-click="orderProp='message_type'; reverseSort=!reverseSort">Message Type</a></th>
+        <th><a ng-click="orderProp='project_name'; reverseSort=!reverseSort">Project</a></th>
+        <th><a ng-click="orderProp='message_text'; reverseSort=!reverseSort">Message Text</a></th>
       </thead>
       <tr ng-repeat="m in messages | orderBy:orderProp:reverseSort | filter:filterProp">
         <td>{{ m.message_number }}</td>

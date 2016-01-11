@@ -17,3 +17,7 @@ div.task-controls {
 div.confirm-row {
   padding-top: 10px;
 }
+
+a {
+  cursor: pointer;
+}

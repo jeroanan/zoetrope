@@ -11,9 +11,9 @@
 
     <table class="table table-striped">
       <thead>
-        <th><a href="#" ng-click="orderProp='date'; reverseSort = !reverseSort;">Date</a></th>
-        <th><a href="#" ng-click="orderProp='uploaded'; reverseSort = !reverseSort">Uploaded</a></th>
-        <th><a href="#" ng-click="orderProp='downloaded'; reverseSort = !reverseSort">Downloaded</a></th>
+        <th><a ng-click="orderProp='date'; reverseSort = !reverseSort;">Date</a></th>
+        <th><a ng-click="orderProp='uploaded'; reverseSort = !reverseSort">Uploaded</a></th>
+        <th><a ng-click="orderProp='downloaded'; reverseSort = !reverseSort">Downloaded</a></th>
       </thead>
       <tr ng-repeat="dt in daily_transfers | orderBy:orderProp:reverseSort">
         <td>{{ dt.date.toDateString() }}</td>
