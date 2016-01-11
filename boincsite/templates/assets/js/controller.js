@@ -9,6 +9,7 @@ zoetropeControllers.controller('DiskUsageCtrl', function($scope, $http) {
   $scope.orderProp = 'master_url';
   $scope.reverseSort = false;
   $scope.ready = false;
+  $scope.title = 'Disk Usage';
 });
 
 zoetropeControllers.controller('IndexCtrl', function ($scope, $http, $routeParams) {
@@ -27,6 +28,7 @@ zoetropeControllers.controller('IndexCtrl', function ($scope, $http, $routeParam
 
       $scope.ready = true;
       $scope.showRawData = false;
+      $scope.title = 'BOINC Tasks';
     });
   });
 
@@ -58,6 +60,7 @@ zoetropeControllers.controller('TaskCtrl', function($scope, $http, $routeParams)
   });
 
   $scope.ready = false;
+  $scope.title = 'Task Summary';
 });
 
 var get_project_name = function(task, projects) {
@@ -109,12 +112,12 @@ zoetropeControllers.controller('ProjectsCtrl', function($scope, $http) {
     $scope.reverseSort = false;
     $scope.ready = false;
     $scope.showRawData = false;
+    $scope.title = "BOINC Projects";
 });
 
 zoetropeControllers.controller('ProjectCtrl', function($scope, $http, $routeParams) {
 
     var project = $routeParams.project;
-    console.log($routeParams);
     $http.get('/project_json?project=' + project).then(function successCallback(response) {
       $scope.project = response.data;
       $scope.ready = true;
@@ -125,6 +128,7 @@ zoetropeControllers.controller('ProjectCtrl', function($scope, $http, $routePara
     });
 
     $scope.ready = false;
+    $scope.title = 'Project Summary';
 });
 
 zoetropeControllers.controller('HostInfoCtrl', function($scope, $http) {
@@ -135,6 +139,7 @@ zoetropeControllers.controller('HostInfoCtrl', function($scope, $http) {
     });
 
     $scope.ready = false;
+    $scope.title = 'Host Info';
 });
 
 zoetropeControllers.controller('DailyTransferCtrl', function($scope, $http) {
@@ -160,6 +165,7 @@ zoetropeControllers.controller('DailyTransferCtrl', function($scope, $http) {
     $scope.totalUploaded = totalMegabytes('uploaded') + 'MB';
     $scope.totalDownloaded = totalMegabytes('downloaded') + 'MB';
     $scope.ready = true;
+    $scope.title = 'Daily Transfer History';
 
   });
   $scope.ready = false;
@@ -198,6 +204,7 @@ zoetropeControllers.controller('MessagesCtrl', function($scope, $http) {
     $scope.reverseSort = true;
     $scope.filterProp = '';
     $scope.ready = false;
+    $scope.title = "Messages"
 });
 
 function getQueryStrings() {
