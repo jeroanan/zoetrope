@@ -1,0 +1,22 @@
+{% extends 'master.html' %}
+
+{% block content %}
+  <table class="table table-striped">
+    <thead>
+      <th>#</th>
+      <th>Message Date</th>
+      <th>Message Type</th>
+      <th>Project</th>
+      <th>Message Text</th>
+    </thead>
+    {% for m in messages %}
+    <tr>
+      <td>{{ m.message_number }}</td>
+      <td>{{ m.date_time }}</td>
+      <td>{{ m.message_type }}</td>
+      <td>{{ m.project_name }}</td>
+      <td>{{ m.message_text }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

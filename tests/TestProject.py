@@ -1,10 +1,6 @@
-# Copyright (c) David Wilson 2015
-#
-# Licensed under the GPL version 3
-
 import unittest
 
-import boincsite.status.commandline.Project as p
+import Project as p
 
 class TestProject(unittest.TestCase):
 
@@ -67,11 +63,11 @@ GUI URL:
         self.assertEqual(expected_result, self.__target.resource_share)
 
     def test_user_total_credit(self):
-        expected_result = 143084.0
+        expected_result = '143084.000000'
         self.assertEqual(expected_result, self.__target.user_total_credit)
 
     def test_user_expavg_credit(self):
-        expected_result = 522.652482
+        expected_result = '522.652482'
         self.assertEqual(expected_result, self.__target.user_expavg_credit)
 
     def test_host_total_credit(self):

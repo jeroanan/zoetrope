@@ -61,7 +61,7 @@ class TestTask(unittest.TestCase):
         self.__result_attrs['estimated_cpu_time_remaining'] = '20:36:21'
 
         # 0.8800000 goes in but 88.00 should come out as the percentage done.
-        self.__result_attrs['fraction_done'] = '88.00'
+        self.__result_attrs['fraction_done'] = 88.00
 
         # Report deadline goes in as seconds since epoch but comes out as formatted date/time string
         self.__result_attrs['report_deadline'] = '2015-12-28 09:47:12'

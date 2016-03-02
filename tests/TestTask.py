@@ -1,8 +1,4 @@
-# Copyright (c) David Wilson 2015, 2016
-#
-# Licensed under the GPL version 3
-
-import boincsite.status.commandline.Task as t
+import Task as t
 import unittest
 
 class tests(unittest.TestCase):
@@ -97,7 +93,7 @@ class tests(unittest.TestCase):
         self.assertEqual(expected_value, self.__target.current_cpu_time)
 
     def test_fraction_done(self):
-        expected_value = 88.00
+        expected_value = '88.00'
         self.assertEqual(expected_value, self.__target.fraction_done)
 
     def test_swap_size(self):
@@ -113,7 +109,7 @@ class tests(unittest.TestCase):
         self.assertEqual(expected_value, self.__target.estimated_cpu_time_remaining)
 
     def test_completed_task_has_fracion_done_100(self):
-        expected_value = 100.00
+        expected_value = '100.00'
 
         target = t.Task(self.__test_data)
         target.ready_to_report = 'yes'
@@ -121,11 +117,8 @@ class tests(unittest.TestCase):
         self.assertEqual(expected_value, target.fraction_done)
 
     def test_state_string(self):
-        self.__target.active_task_state = '1'
-
         state_mappings = {
             '2': 'Running',
-            '3': 'Computation error',
             '5': 'Ready to report',
             '6': 'Aborted by user',
             '-99': '-99'
@@ -137,7 +130,7 @@ class tests(unittest.TestCase):
 
             self.assertEqual(state_string,
                              result,
-                             'Expected state string of "{state_string}" for state "{state}". Got "{result}".'
+                             "Expected state string of {state_string} for state {state}. Got {result}"
                              .format(state_string=state_string, state=state, result=result))
 
     def test_state_string_task_suspended_via_gui(self):
@@ -148,11 +141,5 @@ class tests(unittest.TestCase):
     def test_state_string_waiting_to_run(self):
         self.__target.state = '2'
         self.__target.scheduler_state = '1'
-        expected_result = 'Waiting to run'
-        self.assertEqual(expected_result, self.__target.get_state_string())
-
-    def test_state_string_waiting_to_run_when_state_2_and_active_task_0(self):
-        self.__target.state = '2'
-        self.__target.active_task = '0'
         expected_result = 'Waiting to run'
         self.assertEqual(expected_result, self.__target.get_state_string())

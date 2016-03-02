@@ -1,5 +1,16 @@
+{% macro task_row(heading, value) %}
+{% if value|trim != "" %}
+<div class="row task-row">
+  <div class="col-xs-3"></div>
+  <div class="col-xs-3"><strong>{{ heading }}</strong></div>
+  <div class="col-xs-3">{{ value }}</div>
+  <div class="col-xs-3"></div>
+</div>
+{% endif %}
+{% endmacro %}
+
 <!DOCTYPE html>
-<html ng-app="zoetrope">
+<html>
   <head>
     <meta charset="utf-8">
     <title>{{title}}</title>
@@ -9,19 +20,16 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
       integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
       crossorigin="anonymous"></script>
-    <script src="/static/js/angular.min.js"></script>
-    <script src="/static/js/angular-route.min.js"></script>
-    <script src='/static/js/controller.js'></script>
-    <script src='/static/js/app.js'></script>
-
+    <style media="screen">
+      {% block stylesheet %}{% endblock %}
+    </style>
   </head>
   <body>
     {% include 'navbar.html' %}
-    {% raw %}
-    <div class="container">      
-      <div ng-view></div>
 
-      {% endraw %}
+    <div class="container">
+      <h1>{{title}}</h1>
+      {% block content %}{% endblock %}
     </div>
     <p></p>
   </body>

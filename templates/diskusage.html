@@ -1,0 +1,14 @@
+{% extends 'master.html' %}
+
+{% block content %}
+  {{ task_row('Total disk space', disk_usage.total_disk_space) }}
+  {{ task_row('Free disk space', disk_usage.free_disk_space) }}
+
+  <h2>By project</h2>
+
+  {% for pdu in disk_usage.project_disk_usages %}
+    {{ task_row('Url', pdu.master_url) }}
+    {{ task_row('Disk usage', pdu.disk_usage) }}
+    <p></p>
+  {% endfor %}
+{% endblock %}

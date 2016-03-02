@@ -1,0 +1,17 @@
+{% extends 'master.html' %}    
+    {%block content %}
+      <table class="table table-striped">
+        <thead>
+          <th>Project Name</th>
+          <th>Total Credit</th>
+          <th>Recent Average Credit</th>
+        </thead>
+        {% for project in projects %}
+        <tr>
+          <td><a href="/project?project={{project.name|urlencode}}">{{project.name}}</a></td>
+          <td>{{project.user_total_credit}}</td>
+          <td>{{project.user_expavg_credit}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    {% endblock %}
