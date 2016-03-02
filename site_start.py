@@ -58,10 +58,6 @@ class WebServer(object):
         return json.dumps(list(tasks), self.__io, cls=jse.JSONEncoder)
 
     @cherrypy.expose
-    def task(self, **kwargs):
-        return self.__render('task.html')
-
-    @cherrypy.expose
     def task_json(self, **kwargs):
         task_name = kwargs.get('task_name', '')
         task_command = self.__rpc_factory.create('GetTask')
@@ -69,16 +65,8 @@ class WebServer(object):
         return json.dumps(task, self.__io, cls=jse.JSONEncoder)
 
     @cherrypy.expose
-    def projects(self, **kwargs):
-        return self.__render('projects.html', title='Boinc Projects')
-
-    @cherrypy.expose
     def projects_json(self, **kwargs):
         return json.dumps(self.__get_projects(), self.__io, cls=jse.JSONEncoder)
-
-    @cherrypy.expose
-    def project(self, **kwargs):
-        return self.__render('project.html')
 
     @cherrypy.expose
     def project_json(self, **kwargs):
@@ -96,18 +84,10 @@ class WebServer(object):
         raise cherrypy.HTTPRedirect('/')
 
     @cherrypy.expose
-    def disk_usage(self, **kwargs):
-        return self.__render('diskusage.html', title='Disk Usage')
-
-    @cherrypy.expose
     def disk_usage_json(self, **kwargs):
         disk_usage_command = self.__rpc_factory.create('DiskUsage')
         du = disk_usage_command.execute()
         return json.dumps(du, self.__io, cls=duj.JSONEncoder)
-
-    @cherrypy.expose
-    def messages(self, **kwargs):
-        return self.__render('messages.html', title="Messages")
 
     @cherrypy.expose
     def messages_json(self, **kwargs):
@@ -116,18 +96,10 @@ class WebServer(object):
         return json.dumps(ms, self.__io, cls=jse.JSONEncoder)
 
     @cherrypy.expose
-    def host_info(self, **kwargs):
-        return self.__render('hostinfo.html', title='Host Info')
-
-    @cherrypy.expose
     def host_info_json(self, **kwargs):
         host_info_command = self.__command_factory.create('HostInfo')
         hi = host_info_command.execute()
         return json.dumps(hi, self.__io, cls=jse.JSONEncoder)
-
-    @cherrypy.expose
-    def daily_transfer_history(self, **kwargs):
-        return self.__render('dailytransferhistory.html', title='Daily Transfer History')
 
     @cherrypy.expose
     def daily_transfer_history_json(self, **kwargs):
@@ -163,13 +135,6 @@ class WebServer(object):
             abort_task_command.execute(task_name)
 
         raise cherrypy.HTTPRedirect('/')
-
-    @cherrypy.expose
-    def experimental_task(self, **kwargs):
-        disk_usage_command = self.__rpc_factory.create('GetTasks')
-        du = disk_usage_command.execute()
-        return json.dumps(list(du), self.__io, cls=jse.JSONEncoder)
-
 
 if __name__=='__main__':
     ws = WebServer()
