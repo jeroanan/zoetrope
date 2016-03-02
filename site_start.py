@@ -52,12 +52,6 @@ class WebServer(object):
         return self.__render('index.html', tasks=boinc_tasks, title='Boinc Tasks')
 
     @cherrypy.expose
-    def tasks_json(self, **kwargs):
-        command = self.__rpc_factory.create('GetTasks')
-        tasks = command.execute()
-        return json.dumps(list(tasks), self.__io, cls=jse.JSONEncoder)
-
-    @cherrypy.expose
     def task_json(self, **kwargs):
         task_name = kwargs.get('task_name', '')
         task_command = self.__rpc_factory.create('GetTask')
@@ -84,28 +78,33 @@ class WebServer(object):
         raise cherrypy.HTTPRedirect('/')
 
     @cherrypy.expose
-    def disk_usage_json(self, **kwargs):
-        disk_usage_command = self.__rpc_factory.create('DiskUsage')
-        du = disk_usage_command.execute()
-        return json.dumps(du, self.__io, cls=duj.JSONEncoder)
+    def messages_json(self, **kwargs):
+        return self.__straight_json_dump(self.__command_factory, 'GetMessages', jse, lambda x: list(x))
 
     @cherrypy.expose
-    def messages_json(self, **kwargs):
-        command = self.__command_factory.create('GetMessages')
-        ms = list(command.execute())
-        return json.dumps(ms, self.__io, cls=jse.JSONEncoder)
+    def tasks_json(self, **kwargs):
+        return self.__straight_json_dump(self.__rpc_factory, 'GetTasks', jse, lambda x: list(x))
+
+    @cherrypy.expose
+    def disk_usage_json(self, **kwargs):
+        return self.__straight_json_dump(self.__rpc_factory, 'DiskUsage', duj)
 
     @cherrypy.expose
     def host_info_json(self, **kwargs):
-        host_info_command = self.__command_factory.create('HostInfo')
-        hi = host_info_command.execute()
-        return json.dumps(hi, self.__io, cls=jse.JSONEncoder)
+        return self.__straight_json_dump(self.__command_factory, 'HostInfo', jse)
 
     @cherrypy.expose
     def daily_transfer_history_json(self, **kwargs):
-        daily_transfer_history_command = self.__command_factory.create('DailyTransferHistory')
-        dts = list(daily_transfer_history_command.execute())
-        return json.dumps(dts, self.__io, cls=dt.JSONEncoder)
+        return self.__straight_json_dump(self.__command_factory, 'DailyTransferHistory', dt, lambda x: list(x))       
+
+    def __straight_json_dump(self, factory, command_type, result_type, post_process=None):
+        command = factory.create(command_type)
+        result = command.execute()
+
+        if post_process is not None:
+            result = post_process(result)
+
+        return json.dumps(result, self.__io, cls=result_type.JSONEncoder)
 
     def __render(self, page, **kwargs):
         return self.__renderer.render(page, **kwargs)
