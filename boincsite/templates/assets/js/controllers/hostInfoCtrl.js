@@ -3,14 +3,17 @@ angular.module('zoetropeControllers')
 
 zoetropeControllers.controller('HostInfoCtrl', HostInfoController);
 
-HostInfoController.$inject = ['$scope', '$http']
+HostInfoController.$inject = ['$http']
 
-function HostInfoController($scope, $http) {
+function HostInfoController($http) {
+
+  vm = this;
+
   $http.get('/host_info_json').success(function(data) {
-    $scope.host_info = data;
-    $scope.ready = true;
+    vm.host_info = data;
+    vm.ready = true;
   });
 
-  $scope.ready = false;
-  $scope.title = 'Host Info';
+  vm.ready = false;
+  vm.title = 'Host Info';
 }

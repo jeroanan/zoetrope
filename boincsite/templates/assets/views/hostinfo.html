@@ -1,37 +1,37 @@
-<div ng-controller="HostInfoCtrl">
-  <h1>{{ title }}</h1>
-  <div ng-show="!ready" class="text-center">
+<div ng-controller="HostInfoCtrl as vm">
+  <h1>{{ vm.title }}</h1>
+  <div ng-show="!vm.ready" class="text-center">
     <img src="/static/img/loading.gif" />
   </div>
-  <div ng-show="ready">
-    <keyvalrow key="System uptime" val="{{ host_info.uptime }}"></keyvalrow>
-    <keyvalrow key="Timezone" val="{{ host_info.timezone  }}"></keyvalrow>
-    <keyvalrow key="Domain name" val="{{ host_info.domain_name }}"></keyvalrow>
-    <keyvalrow key="IP address" val="{{ host_info.ip_address }}"></keyvalrow>
-    <keyvalrow key="Number of CPUs" val="{{ host_info.number_of_cpus }}"></keyvalrow>
-    <keyvalrow key="CPU vendor" val="{{ host_info.cpu_vendor }}"></keyvalrow>
-    <keyvalrow key="CPU Model" val="{{ host_info.cpu_model }}"></keyvalrow>
-    <keyvalrow key="CPU floating point operations/second" val="{{ host_info.cpu_fps_ops }}"></keyvalrow>
-    <keyvalrow key="CPU integer operations/second" val="{{ host_info.cpu_int_ops }}"></keyvalrow>
-    <keyvalrow key="CPU memory bandwidth" val="{{ host_info.cpu_mem_bw }}"></keyvalrow>
-    <keyvalrow key="Operating system name" val="{{ host_info.os_name }}"></keyvalrow>
-    <keyvalrow key="Operating system version" val="{{ host_info.os_version }}"></keyvalrow>
-    <keyvalrow key="Memory size" val="{{ host_info.memory_size }}"></keyvalrow>
-    <keyvalrow key="Cache size" val="{{ host_info.cache_size }}"></keyvalrow>
-    <keyvalrow key="Swap size" val="{{ host_info.swap_size }}"></keyvalrow>
-    <keyvalrow key="Disk size" val="{{ host_info.disk_size }}"></keyvalrow>
-    <keyvalrow key="Disk free" val="{{ host_info.disk_free }}"></keyvalrow>
+  <div ng-show="vm.ready">
+    <keyvalrow key="System uptime" val="{{ vm.host_info.uptime }}"></keyvalrow>
+    <keyvalrow key="Timezone" val="{{ vm.host_info.timezone  }}"></keyvalrow>
+    <keyvalrow key="Domain name" val="{{ vm.host_info.domain_name }}"></keyvalrow>
+    <keyvalrow key="IP address" val="{{ vm.host_info.ip_address }}"></keyvalrow>
+    <keyvalrow key="Number of CPUs" val="{{ vm.host_info.number_of_cpus }}"></keyvalrow>
+    <keyvalrow key="CPU vendor" val="{{ vm.host_info.cpu_vendor }}"></keyvalrow>
+    <keyvalrow key="CPU Model" val="{{ vm.host_info.cpu_model }}"></keyvalrow>
+    <keyvalrow key="CPU floating point operations/second" val="{{ vm.host_info.cpu_fps_ops }}"></keyvalrow>
+    <keyvalrow key="CPU integer operations/second" val="{{ vm.host_info.cpu_int_ops }}"></keyvalrow>
+    <keyvalrow key="CPU memory bandwidth" val="{{ vm.host_info.cpu_mem_bw }}"></keyvalrow>
+    <keyvalrow key="Operating system name" val="{{ vm.host_info.os_name }}"></keyvalrow>
+    <keyvalrow key="Operating system version" val="{{ vm.host_info.os_version }}"></keyvalrow>
+    <keyvalrow key="Memory size" val="{{ vm.host_info.memory_size }}"></keyvalrow>
+    <keyvalrow key="Cache size" val="{{ vm.host_info.cache_size }}"></keyvalrow>
+    <keyvalrow key="Swap size" val="{{ vm.host_info.swap_size }}"></keyvalrow>
+    <keyvalrow key="Disk size" val="{{ vm.host_info.disk_size }}"></keyvalrow>
+    <keyvalrow key="Disk free" val="{{ vm.host_info.disk_free }}"></keyvalrow>
   </div>
   <div class="row">
     <div class="col-xs-3"></div>
     <div class="col-xs-3"></div>
     <div class="col-xs-3"></div>
     <div class="col-xs-3">
-      <input type="checkbox" ng-model="showRawData">Show raw data</input>
+      <input type="checkbox" ng-model="vm.showRawData">Show raw data</input>
     </div>
   </div>
 
-  <div class="row" ng-show="showRawData">
+  <div class="row" ng-show="vm.showRawData">
     {{ host_info }}
   </div>
 </div>

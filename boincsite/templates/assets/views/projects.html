@@ -1,16 +1,16 @@
-<div ng-controller="ProjectsCtrl">
+<div ng-controller="ProjectsCtrl as vm">
   <h1>{{ title }}</h1>
-  <div ng-show="!ready" class="text-center">
+  <div ng-show="!vm.ready" class="text-center">
     <img src="/static/img/loading.gif" />
   </div>
-  <div ng-show="ready">
+  <div ng-show="vm.ready">
     <table class="table table-striped">
       <thead>
-        <th><a ng-click="orderProp='name'; reverseSort=!reverseSort">Project Name</a></th>
-        <th><a ng-click="orderProp='user_total_credit'; reverseSort=!reverseSort">Total Credit</a></th>
-        <th><a ng-click="orderProp='user_expavg_credit'; reverseSort=!reverseSort">Recent Average Credit</a></th>
+        <th><a ng-click="vm.orderProp='name'; vm.reverseSort=!vm.reverseSort">Project Name</a></th>
+        <th><a ng-click="vm.orderProp='user_total_credit'; vm.reverseSort=!vm.reverseSort">Total Credit</a></th>
+        <th><a ng-click="vm.orderProp='user_expavg_credit'; vm.reverseSort=!vm.reverseSort">Recent Average Credit</a></th>
       </thead>
-      <tr ng-repeat="p in projects | orderBy:orderProp:reverseSort">
+      <tr ng-repeat="p in vm.projects | orderBy:vm.orderProp:vm.reverseSort">
         <td><a href="#/project?project={{ p.name }}">{{ p.name }}</a></td>
         <td>{{ p.user_total_credit }}</td>
         <td>{{ p.user_expavg_credit }}</td>
@@ -21,10 +21,10 @@
       <div class="col-xs-3"></div>
       <div class="col-xs-3"></div>
       <div class="col-xs-3">
-        <input type="checkbox" ng-model="showRawData">Show raw data</input>
+        <input type="checkbox" ng-model="vm.showRawData">Show raw data</input>
       </div>
     </div>
-    <div class="row" ng-show="showRawData">
+    <div class="row" ng-show="vm.showRawData">
       {{ projects }}
     </div>
   </div>

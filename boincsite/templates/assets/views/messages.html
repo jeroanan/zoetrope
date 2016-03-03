@@ -1,30 +1,30 @@
-<div ng-controller="MessagesCtrl">
-  <h1>{{ title }}</h1>
-  <div ng-show="!ready" class="text-center">
+<div ng-controller="MessagesCtrl as vm">
+  <h1>{{ vm.title }}</h1>
+  <div ng-show="!vm.ready" class="text-center">
     <img src="/static/img/loading.gif" />
   </div>
-  <div ng-show="ready">
+  <div ng-show="vm.ready">
     <h2>Filter</h2>
     <label for="selectProject">Project</label>
-    <select ng-model="filterProp" name="selectProject">
-      <option ng-repeat="(k, v) in project_name_counts" value="{{ k }}">
-        {{ get_project_name(k) }} ({{ v }} messages)
+    <select ng-model="vm.filterProp" name="selectProject">
+      <option ng-repeat="(k, v) in vm.project_name_counts" value="{{ k }}">
+        {{ vm.get_project_name(k) }} ({{ v }} messages)
       </option>
     </select>
 
-    <input type="text" ng-model="filterProp" id="enterFilter" placeholder="Enter filter..." />
+    <input type="text" ng-model="vm.filterProp" id="enterFilter" placeholder="Enter filter..." />
 
     <h2>Messages</h2>
 
     <table class="table table-striped">
       <thead>
-        <th><a ng-click="orderProp='message_number'; reverseSort=!reverseSort">#</a></th>
-        <th><a ng-click="orderProp='date_time'; reverseSort=!reverseSort">Message Date</a></th>
-        <th><a ng-click="orderProp='message_type'; reverseSort=!reverseSort">Message Type</a></th>
-        <th><a ng-click="orderProp='project_name'; reverseSort=!reverseSort">Project</a></th>
-        <th><a ng-click="orderProp='message_text'; reverseSort=!reverseSort">Message Text</a></th>
+        <th><a ng-click="vm.orderProp='message_number'; vm.reverseSort=!vm.reverseSort">#</a></th>
+        <th><a ng-click="vm.orderProp='date_time'; vm.reverseSort=!vm.reverseSort">Message Date</a></th>
+        <th><a ng-click="vm.orderProp='message_type'; vm.reverseSort=!vm.reverseSort">Message Type</a></th>
+        <th><a ng-click="vm.orderProp='project_name'; vm.reverseSort=!vm.reverseSort">Project</a></th>
+        <th><a ng-click="vm.orderProp='message_text'; vm.reverseSort=!vm.reverseSort">Message Text</a></th>
       </thead>
-      <tr ng-repeat="m in messages | orderBy:orderProp:reverseSort | filter:filterProp">
+      <tr ng-repeat="m in vm.messages | orderBy:vm.orderProp:vm.reverseSort | filter:vm.filterProp">
         <td>{{ m.message_number }}</td>
         <td>{{ m.date_time }}</td>
         <td>{{ m.message_type }}</td>

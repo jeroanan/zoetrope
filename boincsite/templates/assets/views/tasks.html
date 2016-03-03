@@ -1,26 +1,26 @@
-<div ng-controller="IndexCtrl">
-  <h1>{{ title }}</h1>
+<div ng-controller="IndexCtrl as vm">
+  <h1>{{ vm.title }}</h1>
 
-  <div ng-show="!ready" class="text-center">
+  <div ng-show="!vm.ready" class="text-center">
     <img src="/static/img/loading.gif" />
   </div>
-  <div ng-show="ready">
+  <div ng-show="vm.ready">
     <table class="table table-striped">
       <thead>
-        <th><a ng-click="sortProp='idx'; reverseSort=!reverseSort;">#</a></th>
-        <th><a ng-click="sortProp='project_name'; reverseSort=!reverseSort;">Project Name</a></th>
-        <th><a ng-click="sortProp='fraction_done'; reverseSort=!reverseSort;">Progress</a></th>
-        <th><a ng-click="sortProp='state'; reverseSort=!reverseSort;">State</a></th>
-        <th><a ng-click="sortProp='time_so_far'; reverseSort=!reverseSort;">Time So Far</a></th>
+        <th><a ng-click="vm.sortProp='idx'; vm.reverseSort=!vm.reverseSort;">#</a></th>
+        <th><a ng-click="vm.sortProp='project_name'; vm.reverseSort=!vm.reverseSort;">Project Name</a></th>
+        <th><a ng-click="vm.sortProp='fraction_done'; vm.reverseSort=!vm.reverseSort;">Progress</a></th>
+        <th><a ng-click="vm.sortProp='state'; vm.reverseSort=!vm.reverseSort;">State</a></th>
+        <th><a ng-click="vm.sortProp='time_so_far'; vm.reverseSort=!vm.reverseSort;">Time So Far</a></th>
         <th>
-          <a href="#" ng-click="sortProp='estimated_cpu_time_remaining'; reverseSort=!reverseSort;">
+          <a href="#" ng-click="vm.sortProp='estimated_cpu_time_remaining'; vm.reverseSort=!reverseSort;">
             Est. Time Remaining
           </a>
         </th>
-        <th><a href="#" ng-click="sortProp='report_deadline'; reverseSort=!reverseSort;">Deadline</a></th>
+        <th><a href="#" ng-click="vm.sortProp='report_deadline'; vm.reverseSort=!reverseSort;">Deadline</a></th>
       </thead>
       <tbody>
-        <tr ng-repeat="task in tasks | orderBy:sortProp:reverseSort">
+        <tr ng-repeat="task in vm.tasks | orderBy:vm.sortProp:vm.reverseSort">
 
           <td><a href="#/task?task_name={{ task.name }}">{{ task.idx }}</a></td>
 
@@ -56,11 +56,11 @@
       <div class="col-xs-3"></div>
       <div class="col-xs-3"></div>
       <div class="col-xs-3">
-        <input type="checkbox" ng-model="showRawData">Show raw data</input>
+        <input type="checkbox" ng-model="vm.showRawData">Show raw data</input>
       </div>
     </div>
 
-    <div class="row" ng-show="showRawData">
+    <div class="row" ng-show="vm.showRawData">
       {{ tasks }}
     </div>
   </div>
