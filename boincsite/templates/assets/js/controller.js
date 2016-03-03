@@ -1,6 +1,11 @@
 var zoetropeControllers = angular.module('zoetropeControllers', ['ngRoute'])
 
-zoetropeControllers.controller('DiskUsageCtrl', function($scope, $http) {
+
+zoetropeControllers.controller('DiskUsageCtrl', DiskUsageController);
+
+DiskUsageController.$inject = ['$scope', '$http'];
+
+function DiskUsageController($scope, $http) {
   $http.get('/disk_usage_json').success(function(data) {
     $scope.disk_usages = data;
     $scope.ready = true;
@@ -10,20 +15,26 @@ zoetropeControllers.controller('DiskUsageCtrl', function($scope, $http) {
   $scope.reverseSort = false;
   $scope.ready = false;
   $scope.title = 'Disk Usage';
-});
+}
 
-zoetropeControllers.controller('IndexCtrl', function ($scope, $http, $routeParams) {
-  $http.get('/tasks_json').success(function(data) {
+
+zoetropeControllers.controller('IndexCtrl', ['$scope', '$http', IndexController]);
+
+IndexController.$inject = ['$scope', '$http'];
+
+function IndexController($scope, $http) {
+  $http.get('/tasks_json').success(function(tasks) {
     $http.get('/projects_json').success(function(projects) {
 
       $scope.projects = projects;
-      $scope.tasks = data;
+      $scope.tasks = tasks;
 
-      for (var i=0; i<data.length; i++) {
-        data[i].idx = i + 1;
-        data[i].project_name = get_project_name(data[i], $scope.projects);
-        data[i].state = get_state_string(data[i]);
-        data[i].time_so_far = get_time_so_far(data[i]);
+      // We've got the tasks. But they need more info in them  in order for us to display.
+      for (var i=0; i<tasks.length; i++) {
+        tasks[i].idx = i + 1;
+        tasks[i].project_name = get_project_name(tasks[i], $scope.projects);
+        tasks[i].state = get_state_string(tasks[i]);
+        tasks[i].time_so_far = get_time_so_far(tasks[i]);
       }
 
       $scope.ready = true;
@@ -35,33 +46,43 @@ zoetropeControllers.controller('IndexCtrl', function ($scope, $http, $routeParam
   $scope.sortProp = 'index';
   $scope.reverseSort = false;
   $scope.ready = false;
-});
+}
 
-zoetropeControllers.controller('TaskCtrl', function($scope, $http, $routeParams) {
-  $http.get('/task_json?task_name=' + $routeParams.task_name).then(function successCallback(response) {
 
-    var task = response.data;
 
-    $http.get('/projects_json').then(function successCallback(response) {
-      var projects = response.data;
+zoetropeControllers.controller('TaskCtrl', TaskController);
 
-      $scope.task = task;
-      task.project_name = get_project_name(task, projects);
-      task.state = get_state_string(task);
-      task.time_so_far = get_time_so_far(task);
+TaskController.$inject = ['$scope', '$http', '$routeParams'];
 
-      $scope.suspend_button_text = task.suspended_via_gui ? 'Resume' : 'Suspend';
+function TaskController($scope, $http, $routeParams) {
+  $http.get('/task_json?task_name=' + $routeParams.task_name).then(
+    function successCallback(response) {
+
+      var task = response.data;
+
+      $http.get('/projects_json').then(function successCallback(response) {
+        var projects = response.data;
+
+        $scope.task = task;
+        task.project_name = get_project_name(task, projects);
+        task.state = get_state_string(task);
+        task.time_so_far = get_time_so_far(task);
+
+        $scope.suspend_button_text = task.suspended_via_gui ? 'Resume' : 'Suspend';
+        $scope.ready = true;
+      });
+    },
+    function errorCallback(response) {
+      $scope.error = true;
+      if (response.status===500) $scope.errorMessage = "Task not found.";
       $scope.ready = true;
     });
-  }, function errorCallback(response) {
-    $scope.error = true;
-    if (response.status===500) $scope.errorMessage = "Task not found.";
-    $scope.ready = true;
-  });
 
   $scope.ready = false;
   $scope.title = 'Task Summary';
-});
+}
+
+
 
 var get_project_name = function(task, projects) {
 
@@ -101,48 +122,69 @@ var get_state_string = function(task) {
   }
 };
 
-zoetropeControllers.controller('ProjectsCtrl', function($scope, $http) {
 
-    $http.get('/projects_json').success(function(data) {
-      $scope.projects = data;
-      $scope.ready = true;
-    });
 
-    $scope.orderProp = 'name';
-    $scope.reverseSort = false;
-    $scope.ready = false;
-    $scope.showRawData = false;
-    $scope.title = "BOINC Projects";
-});
+zoetropeControllers.controller('ProjectsCtrl', ProjectsController);
 
-zoetropeControllers.controller('ProjectCtrl', function($scope, $http, $routeParams) {
+ProjectsController.$inject = ['$scope', '$http'];
 
-    var project = $routeParams.project;
-    $http.get('/project_json?project=' + project).then(function successCallback(response) {
-      $scope.project = response.data;
-      $scope.ready = true;
-    }, function errorCallback(response){
-      $scope.error = true;
-      $scope.errorMessage = 'Project not found.'
-      $scope.ready = true;
-    });
+function ProjectsController($scope, $http) {
+  $http.get('/projects_json').success(function(data) {
+    $scope.projects = data;
+    $scope.ready = true;
+  });
 
-    $scope.ready = false;
-    $scope.title = 'Project Summary';
-});
+  $scope.orderProp = 'name';
+  $scope.reverseSort = false;
+  $scope.ready = false;
+  $scope.showRawData = false;
+  $scope.title = "BOINC Projects";
+}
 
-zoetropeControllers.controller('HostInfoCtrl', function($scope, $http) {
 
-    $http.get('/host_info_json').success(function(data) {
-      $scope.host_info = data;
-      $scope.ready = true;
-    });
 
-    $scope.ready = false;
-    $scope.title = 'Host Info';
-});
+zoetropeControllers.controller('ProjectCtrl', ProjectController);
 
-zoetropeControllers.controller('DailyTransferCtrl', function($scope, $http) {
+ProjectController.$inject('$scope', '$http', '$routeParams');
+
+function ProjectController($scope, $http, $routeParams) {
+  var project = $routeParams.project;
+  $http.get('/project_json?project=' + project).then(function successCallback(response) {
+    $scope.project = response.data;
+    $scope.ready = true;
+  }, function errorCallback(response){
+    $scope.error = true;
+    $scope.errorMessage = 'Project not found.'
+    $scope.ready = true;
+  });
+
+  $scope.ready = false;
+  $scope.title = 'Project Summary';
+}
+
+
+
+zoetropeControllers.controller('HostInfoCtrl', HostInfoController);
+
+HostInfoController.$inject = ['$scope', '$http']
+
+function HostInfoController($scope, $http) {
+  $http.get('/host_info_json').success(function(data) {
+    $scope.host_info = data;
+    $scope.ready = true;
+  });
+
+  $scope.ready = false;
+  $scope.title = 'Host Info';
+}
+
+
+
+zoetropeControllers.controller('DailyTransferCtrl', DailyTransferController);
+
+DailyTransferController.$inject = ['$scope', '$http'];
+
+function DailyTransferController($scope, $http) {
   $http.get('/daily_transfer_history_json').success(function(data) {
 
     for (var d in data) {
@@ -169,43 +211,48 @@ zoetropeControllers.controller('DailyTransferCtrl', function($scope, $http) {
 
   });
   $scope.ready = false;
-});
+}
 
-zoetropeControllers.controller('MessagesCtrl', function($scope, $http) {
 
-    $http.get('/messages_json').success(function(data) {
-        $scope.messages = data;
 
-        var project_names = Array.map(data, function(x) { return x.project_name});
-        $scope.unique_project_names = Array.filter(project_names, function(el,i,a) {
-          return i==a.indexOf(el);
-        });
+zoetropeControllers.controller('MessagesCtrl', MessagesController);
 
-        var count_project_name = function(pn) {
-          var project_name_array = Array.filter(project_names, function(el) { return el == pn; });
-          return project_name_array.length;
-        };
+MessagesController.$inject = ['$scope', '$http'];
 
-        var tmp_name_counts = new Object();
-        for (upn in $scope.unique_project_names) {
-          var pn = $scope.unique_project_names[upn];
-          tmp_name_counts[pn] = count_project_name(pn);
-        }
+function MessagesController($scope, $http) {
+  $http.get('/messages_json').success(function(data) {
+      $scope.messages = data;
 
-        $scope.project_name_counts = tmp_name_counts;
-        $scope.ready = true;
-    });
+      var project_names = Array.map(data, function(x) { return x.project_name});
+      $scope.unique_project_names = Array.filter(project_names, function(el,i,a) {
+        return i==a.indexOf(el);
+      });
 
-    $scope.get_project_name = function(pn) {
-      return pn === '' ? '(no project)' : pn;
-    };
+      var count_project_name = function(pn) {
+        var project_name_array = Array.filter(project_names, function(el) { return el == pn; });
+        return project_name_array.length;
+      };
 
-    $scope.orderProp = 'message_number';
-    $scope.reverseSort = true;
-    $scope.filterProp = '';
-    $scope.ready = false;
-    $scope.title = "Messages"
-});
+      var tmp_name_counts = new Object();
+      for (upn in $scope.unique_project_names) {
+        var pn = $scope.unique_project_names[upn];
+        tmp_name_counts[pn] = count_project_name(pn);
+      }
+
+      $scope.project_name_counts = tmp_name_counts;
+      $scope.ready = true;
+  });
+
+  $scope.get_project_name = function(pn) {
+    return pn === '' ? '(no project)' : pn;
+  };
+
+  $scope.orderProp = 'message_number';
+  $scope.reverseSort = true;
+  $scope.filterProp = '';
+  $scope.ready = false;
+  $scope.title = "Messages"
+}
 
 function getQueryStrings() {
   var assoc  = {};
