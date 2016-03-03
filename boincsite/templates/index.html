@@ -11,14 +11,14 @@
       crossorigin="anonymous"></script>
     <script src="/static/js/angular.min.js"></script>
     <script src="/static/js/angular-route.min.js"></script>
-    <script src='/static/js/controller.js'></script>
+    <script src='/static/js/controllers/controller.js'></script>
     <script src='/static/js/app.js'></script>
 
   </head>
   <body>
     {% include 'navbar.html' %}
     {% raw %}
-    <div class="container">      
+    <div class="container">
       <div ng-view></div>
 
       {% endraw %}

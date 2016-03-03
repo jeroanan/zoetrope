@@ -6,16 +6,16 @@ module.exports = function(grunt) {
       controllers: {
         options: {
           sourceMap: true,
-          sourceMapName: 'boincsite/templates/assets/js/controller.js.map'
+          sourceMapName: 'boincsite/templates/assets/js/controllers/controller.js.map'
         },
         files: {
-          'boincsite/templates/assets/js/controller.min.js': 'boincsite/templates/assets/js/controller.js'
+          'boincsite/templates/assets/js/controllers/controller.min.js': 'boincsite/templates/assets/js/controllers/controller.js'
         }
       }
     },
     watch: {
       controllers: {
-        files: ['boincsite/templates/assets/js/controller.js'],
+        files: ['boincsite/templates/assets/js/controllers/controller.js'],
         tasks: ['uglify']
       }
     }
