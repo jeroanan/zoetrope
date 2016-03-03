@@ -1,9 +1,8 @@
-var zoetrope = angular.module('zoetrope', [
+angular.module('zoetrope', [
   'ngRoute',
   'zoetropeControllers'
 ])
-
-zoetrope.config(['$routeProvider',
+.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/', {

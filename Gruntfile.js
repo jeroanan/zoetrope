@@ -3,6 +3,15 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     uglify: {
+      app: {
+        options: {
+          sourceMap: true,
+          sourceMapName: 'boincsite/templates/assets/js/app.js.map'
+        },
+        files: {
+          'boincsite/templates/assets/js/app.min.js': ['boincsite/templates/assets/js/app.js']
+        }
+      },
       controllers: {
         options: {
           sourceMap: true,
@@ -24,6 +33,9 @@ module.exports = function(grunt) {
       }
     },
     watch: {
+      app: {
+        files: ['boincsite/templates/assets/js/app.js']
+      },
       controllers: {
         files: [
           'boincsite/templates/assets/js/controllers/controller.js',
