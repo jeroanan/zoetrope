@@ -30,11 +30,25 @@ module.exports = function(grunt) {
             'boincsite/templates/assets/js/controllers/messagesCtrl.js'
             ]
         }
+      },
+      services: {
+        options: {
+          sourceMap: true,
+          sourceMapName: 'boincsite/templates/assets/js/services/services.js.map'
+        },
+        files: {
+          'boincsite/templates/assets/js/services/services.min.js': [
+            'boincsite/templates/assets/js/services/services.js',
+            'boincsite/templates/assets/js/services/dailyTransferHistorySvc.js',
+            'boincsite/templates/assets/js/services/taskSvc.js'
+          ]
+        }
       }
     },
     watch: {
       app: {
-        files: ['boincsite/templates/assets/js/app.js']
+        files: ['boincsite/templates/assets/js/app.js'],
+        tasks: ['uglify']
       },
       controllers: {
         files: [
@@ -47,6 +61,13 @@ module.exports = function(grunt) {
           'boincsite/templates/assets/js/controllers/hostInfoCtrl.js',
           'boincsite/templates/assets/js/controllers/dailyTransferCtrl.js',
           'boincsite/templates/assets/js/controllers/messagesCtrl.js'
+        ],
+        tasks: ['uglify']
+      },
+      services: {
+        files: [
+          'boincsite/templates/assets/js/services/dailyTransferHistorySvc.js',
+          'boincsite/templates/assets/js/services/taskSvc.js'
         ],
         tasks: ['uglify']
       }

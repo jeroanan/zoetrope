@@ -1,4 +1,4 @@
-var zoetropeControllers = angular.module('zoetropeControllers', ['ngRoute'])
+angular.module('zoetropeControllers', ['ngRoute', 'zoetropeServices']);
 
 var get_project_name = function(task, projects) {
 
@@ -55,7 +55,7 @@ function getQueryStrings() {
   return assoc;
 }
 
-zoetropeControllers.directive('keyvalrow', function() {
+angular.module('zoetropeControllers').directive('keyvalrow', function() {
   return {
     restrict: 'E',
     scope: {

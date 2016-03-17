@@ -12,5 +12,9 @@ import boincsite.status.rpc.Project as p
 class GetProjectStatus(object):
 
     def execute(self):
-        result = client.BoincClient().get_project_status()
-        return map(lambda r: p.Project(r), result)
+        try:
+            result = client.BoincClient().get_project_status()
+            return map(lambda r: p.Project(r), result)
+        except ConnectionRefusedError:
+            # ConnectionRefusedError will happen if the site is running on a box with no boinc installation.
+            return []

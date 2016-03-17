@@ -1,8 +1,6 @@
 angular.module('zoetropeControllers')
   .controller('HostInfoCtrl', HostInfoController);
 
-zoetropeControllers.controller('HostInfoCtrl', HostInfoController);
-
 HostInfoController.$inject = ['$http']
 
 function HostInfoController($http) {

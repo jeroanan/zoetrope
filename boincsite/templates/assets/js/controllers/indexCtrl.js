@@ -1,16 +1,22 @@
 angular.module('zoetropeControllers').controller('IndexCtrl', IndexController);
 
-IndexController.$inject = ['$http'];
+IndexController.$inject = ['$http', 'taskSvc'];
 
-function IndexController($http) {
+function IndexController($http, taskSvc) {
 
   var vm = this;
+
+  var ts = null;
+
+  taskSvc().query().$promise.then(function(d) {
+    vm.tasks = d;
+  });
 
   $http.get('/tasks_json').success(function(tasks) {
     $http.get('/projects_json').success(function(projects) {
 
       vm.projects = projects;
-      vm.tasks = tasks;
+      //vm.tasks = tasks;
 
       // We've got the tasks. But they need more info in them  in order for us to display.
       for (var i=0; i<tasks.length; i++) {

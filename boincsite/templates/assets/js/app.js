@@ -1,6 +1,8 @@
 angular.module('zoetrope', [
   'ngRoute',
-  'zoetropeControllers'
+  'ngResource',
+  'zoetropeControllers',
+  'zoetropeServices'
 ])
 .config(['$routeProvider',
   function($routeProvider) {

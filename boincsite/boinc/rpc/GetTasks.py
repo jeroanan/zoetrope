@@ -9,5 +9,9 @@ import boincsite.status.rpc.Task as t
 class GetTasks(object):
 
     def execute(self):
-        results = client.BoincClient().get_results(False)
-        return map(lambda r: t.Task(r), results)
+        try:
+            results = client.BoincClient().get_results(False)
+            return map(lambda r: t.Task(r), results)
+        except ConnectionRefusedError:
+            # ConnectionRefusedError will happen if the site is running on a box with no boinc installation.
+            return []
