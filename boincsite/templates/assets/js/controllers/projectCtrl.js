@@ -9,7 +9,6 @@ function ProjectController(projectSvc) {
 
   projectSvc().query().$promise.then(function(d) {
     vm.project = d;
-    console.log(d);
     vm.ready = true;
   })
 

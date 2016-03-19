@@ -47,7 +47,8 @@ module.exports = function(grunt) {
             'boincsite/templates/assets/js/services/messagesSvc.js',
             'boincsite/templates/assets/js/services/diskUsageSvc.js',
             'boincsite/templates/assets/js/services/hostInfoSvc.js',
-            'boincsite/templates/assets/js/services/taskSvc.js'
+            'boincsite/templates/assets/js/services/taskSvc.js',
+            'boincsite/templates/assets/js/services/jsonServices.js'
           ]
         }
       }
@@ -84,7 +85,8 @@ module.exports = function(grunt) {
           'boincsite/templates/assets/js/services/messagesSvc.js',
           'boincsite/templates/assets/js/services/diskUsageSvc.js',
           'boincsite/templates/assets/js/services/hostInfoSvc.js',
-          'boincsite/templates/assets/js/services/taskSvc.js'
+          'boincsite/templates/assets/js/services/taskSvc.js',
+          'boincsite/templates/assets/js/services/jsonServices.js'
         ],
         tasks: ['uglify:services']
       }

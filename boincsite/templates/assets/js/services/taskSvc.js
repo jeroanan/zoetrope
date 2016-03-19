@@ -1,17 +1,8 @@
 angular.module('zoetropeServices')
   .factory('taskSvc', TaskService);
 
-TaskService.$inject = ['$resource', '$routeParams', 'jsonPathSvc'];
+TaskService.$inject = ['$routeParams', 'jsonSvc'];
 
-function TaskService($resource, $routeParams, jsonPathSvc) {
-
-  path = jsonPathSvc.getPath('/static/json/task.json', '/task_json?task_name=' + $routeParams.task_name);
-
-  return function() {
-    var res = $resource(path, {}, {
-      query: {method: 'GET', isArray: false}
-    });
-
-    return res;
-  }
+function TaskService($routeParams, jsonSvc) {
+  return jsonSvc.get('/static/json/task.json', '/task_json?task_name=' + $routeParams.task_name)
 }

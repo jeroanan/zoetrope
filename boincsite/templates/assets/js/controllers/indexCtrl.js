@@ -6,12 +6,9 @@ function IndexController(tasksSvc, projectsSvc) {
 
   var vm = this;
 
-  var ts = null;
-
-  tasksSvc().query().$promise.then(function(d) {
+  tasksSvc.get()().query().$promise.then(function(d) {
     vm.tasks = d;
-
-    projectsSvc().query().$promise.then(function(e) {
+    projectsSvc.get()().query().$promise.then(function(e) {
       vm.projects = e;
 
       for (var i=0; i<vm.tasks.length; i++) {
@@ -25,7 +22,7 @@ function IndexController(tasksSvc, projectsSvc) {
       vm.showRawData = false;
       vm.title = 'BOINC Tasks';
     });
-  });
+  }) ;
 
   vm.sortProp = 'index';
   vm.reverseSort = false;
