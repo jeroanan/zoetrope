@@ -10,7 +10,7 @@ function TaskController($http, $routeParams, taskSvc, projectsSvc) {
   taskSvc().query().$promise.then(function(d) {
     var task = d;
 
-    projectsSvc().query().$promise.then(function(d) {
+    projectsSvc.get()().query().$promise.then(function(d) {
       var projects = d;
 
       task.project_name = get_project_name(task, projects);

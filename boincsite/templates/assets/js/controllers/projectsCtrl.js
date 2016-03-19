@@ -7,7 +7,7 @@ function ProjectsController(projectsSvc) {
 
   var vm = this;
 
-  projectsSvc().query().$promise.then(function(d) {
+  projectsSvc.get()().query().$promise.then(function(d) {
     vm.projects = d;
     vm.ready = true;
   })
