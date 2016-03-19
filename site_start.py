@@ -95,7 +95,7 @@ class WebServer(object):
 
     @cherrypy.expose
     def daily_transfer_history_json(self, **kwargs):
-        return self.__straight_json_dump(self.__command_factory, 'DailyTransferHistory', dt, lambda x: list(x))       
+        return self.__straight_json_dump(self.__command_factory, 'DailyTransferHistory', dt, lambda x: list(x))
 
     def __straight_json_dump(self, factory, command_type, result_type, post_process=None):
         command = factory.create(command_type)

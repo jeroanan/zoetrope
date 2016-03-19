@@ -1,29 +1,24 @@
 angular.module('zoetropeControllers').controller('IndexCtrl', IndexController);
 
-IndexController.$inject = ['$http', 'taskSvc'];
+IndexController.$inject = ['tasksSvc', 'projectsSvc'];
 
-function IndexController($http, taskSvc) {
+function IndexController(tasksSvc, projectsSvc) {
 
   var vm = this;
 
   var ts = null;
 
-  taskSvc().query().$promise.then(function(d) {
+  tasksSvc().query().$promise.then(function(d) {
     vm.tasks = d;
-  });
 
-  $http.get('/tasks_json').success(function(tasks) {
-    $http.get('/projects_json').success(function(projects) {
+    projectsSvc().query().$promise.then(function(e) {
+      vm.projects = e;
 
-      vm.projects = projects;
-      //vm.tasks = tasks;
-
-      // We've got the tasks. But they need more info in them  in order for us to display.
-      for (var i=0; i<tasks.length; i++) {
-        tasks[i].idx = i + 1;
-        tasks[i].project_name = get_project_name(tasks[i], vm.projects);
-        tasks[i].state = get_state_string(tasks[i]);
-        tasks[i].time_so_far = get_time_so_far(tasks[i]);
+      for (var i=0; i<vm.tasks.length; i++) {
+        vm.tasks[i].idx = i + 1;
+        vm.tasks[i].project_name = get_project_name(vm.tasks[i], vm.projects);
+        vm.tasks[i].state = get_state_string(vm.tasks[i]);
+        vm.tasks[i].time_so_far = get_time_so_far(vm.tasks[i]);
       }
 
       vm.ready = true;

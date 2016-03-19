@@ -1,16 +1,21 @@
 angular.module('zoetropeControllers')
   .controller('DailyTransferCtrl', DailyTransferController);
 
-DailyTransferController.$inject = ['$http'];
+DailyTransferController.$inject = ['dailyTransferHistorySvc'];
 
-function DailyTransferController($http) {
+function DailyTransferController(dailyTransferHistorySvc) {
 
   var vm = this;
 
-  $http.get('/daily_transfer_history_json').success(function(data) {
+  dailyTransferHistorySvc().query().$promise.then(function(data) {
 
     for (var d in data) {
       var transfer = data[d];
+
+      if (!transfer.date) {
+        continue;
+      }
+      
       var dateSplit = transfer.date.split('-');
       var theDate = new Date(dateSplit[0], dateSplit[1]-1, dateSplit[2]);
       data[d].date = theDate;
@@ -30,7 +35,7 @@ function DailyTransferController($http) {
     vm.totalDownloaded = totalMegabytes('downloaded') + 'MB';
     vm.ready = true;
     vm.title = 'Daily Transfer History';
+  })
 
-  });
   vm.ready = false;
 }

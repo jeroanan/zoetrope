@@ -1,22 +1,15 @@
 angular.module('zoetropeServices')
   .factory('taskSvc', TaskService);
 
-TaskService.$inject = ['$http', '$resource'];
+TaskService.$inject = ['$resource', '$routeParams', 'jsonPathSvc'];
 
-function TaskService($http, $resource) {
+function TaskService($resource, $routeParams, jsonPathSvc) {
 
-  var offlineMode = window.location.hostname === 'localhost';
-
-  var path = ''
-  if (offlineMode) {
-    path = '/static/json/tasks.json';
-  } else {
-    path = '/tasks_json';
-  }
+  path = jsonPathSvc.getPath('/static/json/task.json', '/task_json?task_name=' + $routeParams.task_name);
 
   return function() {
     var res = $resource(path, {}, {
-      query: {method: 'GET', isArray: true}
+      query: {method: 'GET', isArray: false}
     });
 
     return res;

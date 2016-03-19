@@ -17,4 +17,5 @@ class GetProjectStatus(object):
             return map(lambda r: p.Project(r), result)
         except ConnectionRefusedError:
             # ConnectionRefusedError will happen if the site is running on a box with no boinc installation.
+            print("Connection Refused. Is boinc running?")
             return []

@@ -1,16 +1,16 @@
 angular.module('zoetropeControllers')
   .controller('DiskUsageCtrl', DiskUsageController);
 
-DiskUsageController.$inject = ['$http'];
+DiskUsageController.$inject = ['diskUsageSvc'];
 
-function DiskUsageController($http) {
+function DiskUsageController(diskUsageSvc) {
 
   var vm = this;
 
-  $http.get('/disk_usage_json').success(function(data) {
-    vm.disk_usages = data;
+  diskUsageSvc().query().$promise.then(function(d) {
+    vm.disk_usages = d;
     vm.ready = true;
-  });
+  })
 
   vm.orderProp = 'master_url';
   vm.reverseSort = false;

@@ -5,7 +5,12 @@ var get_project_name = function(task, projects) {
   for (p in projects) {
     var proj = projects[p];
 
-    if (proj.master_url == task.project_url) return proj.name;
+    if (proj.master_url == task.project_url){
+      if (proj.name==='') {
+        return task.project_url;
+      }
+      return proj.name;
+    }
   }
 
   return '';

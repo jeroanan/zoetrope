@@ -1,0 +1,22 @@
+{
+  "ended": false,
+  "master_fetch_pending": false,
+  "team_name": "BOINC Synergy",
+  "host_expavg_credit": "0.000000",
+  "user_total_credit": 177201,
+  "master_fetch_failures": "0",
+  "project_files_downloaded": "1458339857.460607",
+  "suspended_via_gui": false,
+  "user_name": "David",
+  "trickle_upload_pending": false,
+  "master_url": "http://www.enigmaathome.net/",
+  "gui_urls": [],
+  "dont_request_more_work": false,
+  "resource_share": "100.000000",
+  "last_rpc": "1458340086.321602",
+  "host_total_credit": "0.000000",
+  "nrpc_failures": "0",
+  "disk_usage": "",
+  "name": "Enigma@Home",
+  "user_expavg_credit": 148.126263
+}

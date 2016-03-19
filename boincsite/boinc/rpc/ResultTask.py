@@ -13,7 +13,7 @@ class ResultTask(object):
         self.__task = gt.GetTask().execute(task_name)
 
         # TODO: Obviously, this is only going to work on my pi.
-        client.GUI_RPC_PASSWD_FILE = "/home/pi/gui_rpc_auth.cfg"
+        client.GUI_RPC_PASSWD_FILE = "/etc/boinc-client/gui_rpc_auth.cfg"
         self.__password = client.read_gui_rpc_password()
 
     def execute(self, result_func):

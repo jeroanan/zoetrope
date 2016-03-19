@@ -40,12 +40,22 @@ module.exports = function(grunt) {
           'boincsite/templates/assets/js/services/services.min.js': [
             'boincsite/templates/assets/js/services/services.js',
             'boincsite/templates/assets/js/services/dailyTransferHistorySvc.js',
+            'boincsite/templates/assets/js/services/tasksSvc.js',
+            'boincsite/templates/assets/js/services/projectsSvc.js',
+            'boincsite/templates/assets/js/services/jsonPathSvc.js',
+            'boincsite/templates/assets/js/services/projectSvc.js',
+            'boincsite/templates/assets/js/services/messagesSvc.js',
+            'boincsite/templates/assets/js/services/diskUsageSvc.js',
+            'boincsite/templates/assets/js/services/hostInfoSvc.js',
             'boincsite/templates/assets/js/services/taskSvc.js'
           ]
         }
       }
     },
     watch: {
+      config: {
+        files: ['Gruntfile.js']
+      },
       app: {
         files: ['boincsite/templates/assets/js/app.js'],
         tasks: ['uglify']
@@ -62,14 +72,21 @@ module.exports = function(grunt) {
           'boincsite/templates/assets/js/controllers/dailyTransferCtrl.js',
           'boincsite/templates/assets/js/controllers/messagesCtrl.js'
         ],
-        tasks: ['uglify']
+        tasks: ['uglify:controllers']
       },
       services: {
         files: [
           'boincsite/templates/assets/js/services/dailyTransferHistorySvc.js',
+          'boincsite/templates/assets/js/services/tasksSvc.js',
+          'boincsite/templates/assets/js/services/projectsSvc.js',
+          'boincsite/templates/assets/js/services/jsonPathSvc.js',
+          'boincsite/templates/assets/js/services/projectSvc.js',
+          'boincsite/templates/assets/js/services/messagesSvc.js',
+          'boincsite/templates/assets/js/services/diskUsageSvc.js',
+          'boincsite/templates/assets/js/services/hostInfoSvc.js',
           'boincsite/templates/assets/js/services/taskSvc.js'
         ],
-        tasks: ['uglify']
+        tasks: ['uglify:services']
       }
     }
   });

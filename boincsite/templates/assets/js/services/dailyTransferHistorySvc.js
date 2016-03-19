@@ -1,15 +1,17 @@
 angular.module('zoetropeServices')
   .factory('dailyTransferHistorySvc', DailyTransferHistoryService);
 
-DailyTransferHistoryService.$inject = ['$http', '$resource'];
+DailyTransferHistoryService.$inject = ['$resource', 'jsonPathSvc'];
 
-function DailyTransferHistoryService($http, $resource) {
+function DailyTransferHistoryService($resource, jsonPathSvc) {
 
-  var offlineMode = window.location.hostname === 'localhost';
+  var path = jsonPathSvc.getPath('/static/json/daily_transfer_history.json', '/daily_transfer_history_json');
 
-  if (offlineMode) {
+  return function() {
+    var res = $resource(path, {}, {
+      query: {method: 'GET', isArray: true}
+    });
 
-  } else {
-
+    return res;
   }
 }

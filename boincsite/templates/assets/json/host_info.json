@@ -1,0 +1,19 @@
+{
+  "os_version": "4.1.18-v7+",
+  "cpu_model": "",
+  "timezone": "0",
+  "number_of_cpus": "4",
+  "cpu_vendor": "ARM",
+  "domain_name": "raspberrypi",
+  "disk_free": "9.63GB",
+  "swap_size": "0.10GB",
+  "os_name": "Linux",
+  "memory_size": "0.90GB",
+  "cpu_int_ops": "1743168979.405316",
+  "cpu_fps_ops": "436405922.247215",
+  "uptime": "3:14:19.840000",
+  "cache_size": "-1.000000",
+  "cpu_mem_bw": "1000000000.000000",
+  "disk_size": "14.14GB",
+  "ip_address": "127.0.1.1"
+}

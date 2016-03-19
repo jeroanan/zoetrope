@@ -1,21 +1,17 @@
 angular.module('zoetropeControllers')
   .controller('ProjectCtrl', ProjectController);
 
-ProjectController.$inject = ['$http', '$routeParams'];
+ProjectController.$inject = ['projectSvc'];
 
-function ProjectController($http, $routeParams) {
+function ProjectController(projectSvc) {
 
   var vm = this;
 
-  var project = $routeParams.project;
-  $http.get('/project_json?project=' + project).then(function successCallback(response) {
-    vm.project = response.data;
+  projectSvc().query().$promise.then(function(d) {
+    vm.project = d;
+    console.log(d);
     vm.ready = true;
-  }, function errorCallback(response){
-    vm.error = true;
-    vm.errorMessage = 'Project not found.'
-    vm.ready = true;
-  });
+  })
 
   vm.ready = false;
   vm.title = 'Project Summary';

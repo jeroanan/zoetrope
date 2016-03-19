@@ -1,3 +1,4 @@
 cherrypy
+markupsafe
 jinja2
 uptime
