@@ -1,3 +1,8 @@
+/**
+ * Controller for the projects screen.
+ *
+ * (c) David Wilson 2016, licensed under GPL V3.
+ */
 angular.module('zoetropeControllers')
   .controller('ProjectsCtrl', ProjectsController);
 
@@ -8,7 +13,7 @@ function ProjectsController(projectsSvc) {
   var vm = this;
 
   projectsSvc.get()().query().$promise.then(function(d) {
-    vm.projects = d;
+    vm.projects = d.filter(function(x) { return x.name.length > 0 });
     vm.ready = true;
   })
 
@@ -17,4 +22,5 @@ function ProjectsController(projectsSvc) {
   vm.ready = false;
   vm.showRawData = false;
   vm.title = "BOINC Projects";
+  document.title = vm.title;
 }

@@ -1,3 +1,8 @@
+/**
+ * Service to get the main contents of the Tasks screen.
+ *
+ * (c) David Wilson 2016, licensed under GPL V3.
+ */
 angular.module('zoetropeServices')
   .factory('tasksSvc', TasksService);
 

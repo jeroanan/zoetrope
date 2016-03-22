@@ -1,3 +1,8 @@
+/**
+ * Controller for the messages screen.
+ *
+ * (c) David Wilson 2016, licensed under GPL V3.
+ */
 angular.module('zoetropeControllers')
   .controller('MessagesCtrl', MessagesController);
 
@@ -39,4 +44,5 @@ function MessagesController(messagesSvc) {
   vm.filterProp = '';
   vm.ready = false;
   vm.title = "Messages"
+  document.title = vm.title;
 }

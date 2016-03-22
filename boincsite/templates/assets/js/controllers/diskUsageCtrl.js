@@ -1,3 +1,8 @@
+/**
+ * Controller for the Disk Usage screen.
+ *
+ * (c) David Wilson 2016, licensed under GPL V3.
+ */
 angular.module('zoetropeControllers')
   .controller('DiskUsageCtrl', DiskUsageController);
 
@@ -16,4 +21,5 @@ function DiskUsageController(diskUsageSvc) {
   vm.reverseSort = false;
   vm.ready = false;
   vm.title = 'Disk Usage';
+  document.title = vm.title;
 }

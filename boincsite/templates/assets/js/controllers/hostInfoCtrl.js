@@ -1,3 +1,8 @@
+/**
+ * Controller for the Host Info screen.
+ *
+ * (c) David Wilson 2016, licensed under GPL V3.
+ */
 angular.module('zoetropeControllers')
   .controller('HostInfoCtrl', HostInfoController);
 
@@ -14,4 +19,5 @@ function HostInfoController(hostInfoSvc) {
 
   vm.ready = false;
   vm.title = 'Host Info';
+  document.title = vm.title;
 }

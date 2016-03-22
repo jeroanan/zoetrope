@@ -1,3 +1,8 @@
+/**
+ * Controller for the Daily Transfer History screen.
+ *
+ * (c) David Wilson 2016, licensed under GPL V3.
+ */
 angular.module('zoetropeControllers')
   .controller('DailyTransferCtrl', DailyTransferController);
 
@@ -15,7 +20,7 @@ function DailyTransferController(dailyTransferHistorySvc) {
       if (!transfer.date) {
         continue;
       }
-      
+
       var dateSplit = transfer.date.split('-');
       var theDate = new Date(dateSplit[0], dateSplit[1]-1, dateSplit[2]);
       data[d].date = theDate;
@@ -35,6 +40,7 @@ function DailyTransferController(dailyTransferHistorySvc) {
     vm.totalDownloaded = totalMegabytes('downloaded') + 'MB';
     vm.ready = true;
     vm.title = 'Daily Transfer History';
+    document.title = vm.title;
   })
 
   vm.ready = false;

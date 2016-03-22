@@ -1,3 +1,8 @@
+/**
+ * Controller for the index screen.
+ *
+ * (c) David Wilson 2016, licensed under GPL V3.
+ */
 angular.module('zoetropeControllers').controller('IndexCtrl', IndexController);
 
 IndexController.$inject = ['tasksSvc', 'projectsSvc'];
@@ -21,6 +26,7 @@ function IndexController(tasksSvc, projectsSvc) {
       vm.ready = true;
       vm.showRawData = false;
       vm.title = 'BOINC Tasks';
+      document.title = vm.title;
     });
   }) ;
 

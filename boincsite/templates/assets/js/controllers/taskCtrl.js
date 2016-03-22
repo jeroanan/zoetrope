@@ -1,3 +1,8 @@
+/**
+ * Controller for the task detail screen.
+ *
+ * (c) David Wilson 2016, licensed under GPL V3.
+ */
 angular.module('zoetropeControllers')
   .controller('TaskCtrl', TaskController);
 
@@ -26,4 +31,5 @@ function TaskController($http, $routeParams, taskSvc, projectsSvc) {
 
   vm.ready = false;
   vm.title = 'Task Summary';
+  document.title = vm.title;
 }

@@ -1,3 +1,8 @@
+/**
+ * Controller for the project detail screen.
+ *
+ * (c) David Wilson 2016, licensed under GPL V3.
+ */
 angular.module('zoetropeControllers')
   .controller('ProjectCtrl', ProjectController);
 
@@ -14,4 +19,5 @@ function ProjectController(projectSvc) {
 
   vm.ready = false;
   vm.title = 'Project Summary';
+  document.title = vm.title;
 }

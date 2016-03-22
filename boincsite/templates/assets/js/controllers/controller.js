@@ -1,7 +1,7 @@
 angular.module('zoetropeControllers', ['ngRoute', 'zoetropeServices']);
 
 var get_project_name = function(task, projects) {
-  
+
   for (p in projects) {
     var proj = projects[p];
 
@@ -43,7 +43,6 @@ var get_state_string = function(task) {
       return task.state;
   }
 };
-
 
 function getQueryStrings() {
   var assoc  = {};
