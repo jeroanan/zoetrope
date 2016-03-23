@@ -6,7 +6,6 @@ import unittest
 
 import boincsite.boinc.commandline.DoNetworkCommunication as dnc
 import boincsite.boinc.commandline.GetMessages as gm
-import boincsite.boinc.commandline.HostInfo as hi
 
 import boincsite.boinc.CommandLineFactory as clf
 
@@ -17,7 +16,6 @@ class TestCommandLineFactory(unittest.TestCase):
         mappings = {
             'DoNetworkCommunication': dnc.DoNetworkCommunication,
             'GetMessages': gm.GetMessages,
-            'HostInfo': hi.HostInfo
         }
 
         for type_string, return_type in mappings.items():

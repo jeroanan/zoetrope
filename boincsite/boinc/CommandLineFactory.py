@@ -4,7 +4,6 @@
 
 import boincsite.boinc.commandline.DoNetworkCommunication as dnc
 import boincsite.boinc.commandline.GetMessages as gm
-import boincsite.boinc.commandline.HostInfo as hi
 
 
 class CommandLineFactory(object):
@@ -14,7 +13,6 @@ class CommandLineFactory(object):
         mappings = {
             'DoNetworkCommunication': dnc.DoNetworkCommunication,
             'GetMessages': gm.GetMessages,
-            'HostInfo': hi.HostInfo
         }
 
         if command_type in mappings:
