@@ -91,7 +91,7 @@ class WebServer(object):
 
     @cherrypy.expose
     def host_info_json(self, **kwargs):
-        return self.__straight_json_dump(self.__command_factory, 'HostInfo', jse)
+        return self.__straight_json_dump(self.__rpc_factory, 'HostInfo', jse)
 
     @cherrypy.expose
     def daily_transfer_history_json(self, **kwargs):
@@ -137,7 +137,7 @@ class WebServer(object):
 
     @cherrypy.expose
     def experimental_task(self, **kwargs):
-        command = self.__rpc_factory.create('DailyTransferHistory')
+        command = self.__rpc_factory.create('HostInfo')
         command.execute()
 
 if __name__=='__main__':
