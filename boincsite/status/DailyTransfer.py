@@ -14,6 +14,10 @@ class DailyTransfer(object):
         self.bytes_downloaded = 0.0
         self.transfers_date = ''
 
+    def __str__(self):
+        return 'Date: {date}: uploaded: {uploaded}, downloaded: {downloaded}'.format(
+            date=self.date, uploaded=self.uploaded, downloaded=self.downloaded)
+
     @property
     def date(self):
         return self.transfers_date

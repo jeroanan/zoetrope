@@ -10,6 +10,7 @@ import boincsite.boinc.rpc.AbortTask as at
 import boincsite.boinc.rpc.SuspendTask as st
 import boincsite.boinc.rpc.ResumeTask as rt
 import boincsite.boinc.rpc.GetProjectStatus as gps
+import boincsite.boinc.rpc.DailyTransferHistory as dth
 
 
 class RpcFactory(object):
@@ -25,7 +26,13 @@ class RpcFactory(object):
             'SuspendTask': st.SuspendTask,
             'ResumeTask': rt.ResumeTask,
             'GetProjectStatus': gps.GetProjectStatus,
+            'DailyTransferHistory': dth.DailyTransferHistory
         }
 
         if command_type in mappings:
             return mappings[command_type]()
+
+        raise UnknownCommandException
+
+class UnknownCommandException(Exception):
+    pass

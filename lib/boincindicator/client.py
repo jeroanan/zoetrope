@@ -429,6 +429,7 @@ class JoinedProject(_Struct):
         self.send_full_workload = ''
         self.dont_use_dcf = ''
         self.project_dir = ''
+        self.master_url_fetch_pending = ''
 
 
 class DiskUsageProject(_Struct):
@@ -463,6 +464,12 @@ class Message(_Struct):
         self.body = ''
         self.time = ''
 
+class DailyTransfer(_Struct):
+
+    def __init__(self):
+        self.when = ''
+        self.up = ''
+        self.down = ''
 
 class Coproc(_Struct):
     ''' represents a set of identical coprocessors on a particular computer.
@@ -841,6 +848,26 @@ class BoincClient(object):
         projects.append(disk_free)
 
         return projects
+
+    def get_daily_transfer_history(self):
+        # The get_daily_xfer_history RPC call returns an xml document similar to:
+        #
+        # <daily_xfers>
+        #  <dx>
+        #    <when>16882</when>
+        #    <up>158287.000000</up>
+        #    <down>1127055.000000</down>
+        #  </dx>
+        # </daily_xfers>
+        #
+        # ...There are as many dx elements as there are days recorded
+        # that have had network transfer activity.
+        #
+        # when is the numnber of days since 1970-01-01.
+        # up and down are the number of bytes uploaded and downloaded respectively.
+        xml = '<get_daily_xfer_history />'
+        results = self.rpc.call(xml)
+        return map(lambda x: DailyTransfer.parse(x), parse_list(results))
 
     def get_messages(self):
         xml = '<get_messages />'

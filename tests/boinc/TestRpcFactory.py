@@ -13,7 +13,7 @@ import boincsite.boinc.rpc.AbortTask as at
 import boincsite.boinc.rpc.SuspendTask as st
 import boincsite.boinc.rpc.ResumeTask as rt
 import boincsite.boinc.rpc.GetProjectStatus as gps
-
+import boincsite.boinc.rpc.DailyTransferHistory as dth
 
 class TestRpcFactory(unittest.TestCase):
 
@@ -27,6 +27,7 @@ class TestRpcFactory(unittest.TestCase):
             'SuspendTask': st.SuspendTask,
             'ResumeTask': rt.ResumeTask,
             'GetProjectStatus': gps.GetProjectStatus,
+            'DailyTransferHistory': dth.DailyTransferHistory
         }
 
         for command_type, command_class in mappings.items():
@@ -36,3 +37,6 @@ class TestRpcFactory(unittest.TestCase):
                                   'Did not get type {cc} when creating with string {ct}. Instead got {r}'.format(
                                     cc=command_class, ct=command_type, r=result
                                   ))
+
+    def test_unknown_command_raises_unknown_command_exception(self):
+        self.assertRaises(rf.UnknownCommandException, rf.RpcFactory.create, 'SomeUnknownCommand')
