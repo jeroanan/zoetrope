@@ -1,20 +1,20 @@
-<div ng-controller="DiskUsageCtrl as vm">
-  <h1>{{ vm.title }}</h1>
-  <div ng-show="!vm.ready" class="text-center">
+<div>
+  <h1>{{ duvm.title }}</h1>
+  <div ng-show="!duvm.ready" class="text-center">
     <img src="/static/img/loading.gif" />
   </div>
-  <div ng-show="vm.ready">
-    <keyvalrow key="Total Disk Space" val="{{ vm.disk_usages.total_disk_space }}"></keyvalrow>
-    <keyvalrow key="Free Disk Space" val="{{ vm.disk_usages.free_disk_space }}"></keyvalrow>
+  <div ng-show="duvm.ready">
+    <keyvalrow key="Total Disk Space" val="{{ duvm.disk_usages.total_disk_space }}"></keyvalrow>
+    <keyvalrow key="Free Disk Space" val="{{ duvm.disk_usages.free_disk_space }}"></keyvalrow>
 
     <h2>By project</h2>
 
     <table class="table table-striped" >
       <thead>
-        <th><a href="#" ng-click="vm.orderProp='master_url';vm.reverseSort=!vm.reverseSort">Project Url</a></th>
-        <th ><a href="#" ng-click="vm.orderProp='disk_usage';vm.reverseSort=!vm.reverseSort;">Disk Usage</a></th>
+        <th><a href="#" ng-click="duvm.orderProp='master_url';duvm.reverseSort=!duvm.reverseSort">Project Url</a></th>
+        <th ><a href="#" ng-click="duvm.orderProp='disk_usage';duvm.reverseSort=!duvm.reverseSort;">Disk Usage</a></th>
       </thead>
-      <tr ng-repeat="pdu in vm.disk_usages.project_disk_usages | orderBy:vm.orderProp:vm.reverseSort">
+      <tr ng-repeat="pdu in duvm.disk_usages.project_disk_usages | orderBy:duvm.orderProp:duvm.reverseSort">
         <td><a href="{{pdu.master_url}}">{{pdu.master_url}}</a></td>
         <td>{{pdu.disk_usage + 'MB'}}</td>
       </tr>

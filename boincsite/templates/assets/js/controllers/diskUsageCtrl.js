@@ -12,7 +12,7 @@ function DiskUsageController(diskUsageSvc) {
 
   var vm = this;
 
-  diskUsageSvc().query().$promise.then(function(d) {
+  diskUsageSvc.get()().query().$promise.then(function(d) {
     vm.disk_usages = d;
     vm.ready = true;
   })

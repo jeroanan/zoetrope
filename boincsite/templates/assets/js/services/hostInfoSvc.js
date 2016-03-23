@@ -9,5 +9,12 @@ angular.module('zoetropeServices')
 HostInfoService.$inject = ['jsonSvc'];
 
 function HostInfoService(jsonSvc) {
-  return jsonSvc.get('/static/json/host_info.json', '/host_info_json')
+
+  var svc = {
+    get: function() {
+      return jsonSvc.get('/static/json/host_info.json', '/host_info_json');
+    }
+  };
+
+  return svc;
 }

@@ -9,5 +9,11 @@ angular.module('zoetropeServices')
 DiskUsageService.$inject = ['jsonSvc'];
 
 function DiskUsageService(jsonSvc) {
-  return jsonSvc.get('/static/json/disk_usage.json', '/disk_usage_json');
+  var svc = {
+    get: function() {
+      return jsonSvc.get('/static/json/disk_usage.json', '/disk_usage_json');
+    }
+  }
+
+  return svc;
 }

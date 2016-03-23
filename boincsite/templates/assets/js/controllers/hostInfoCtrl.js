@@ -12,7 +12,7 @@ function HostInfoController(hostInfoSvc) {
 
   vm = this;
 
-  hostInfoSvc().query().$promise.then(function(d) {
+  hostInfoSvc.get()().query().$promise.then(function(d) {
     vm.host_info = d;
     vm.ready = true;
   })

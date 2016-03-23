@@ -18,19 +18,20 @@ JsonService.$inject = ['$resource']
 
 function JsonService($resource) {
 
-  function getPath(offlinePath, onlinePath) {
-    var offlineMode = window.location.hostname === 'localhost';
-
-    var path = ''
-    if (offlineMode===true) {
-      return offlinePath;
-    } else {
-      return onlinePath;
-    }
-  }
-
   var svc = {
     get: function(offlinePath, onlinePath, isArray) {
+
+
+      function getPath(offlinePath, onlinePath) {
+        var offlineMode = window.location.hostname === 'localhost';
+
+        var path = ''
+        if (offlineMode===true) {
+          return offlinePath;
+        } else {
+          return onlinePath;
+        }
+      }
 
       path = getPath(offlinePath, onlinePath);
 

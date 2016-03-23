@@ -11,9 +11,7 @@ DailyTransferController.$inject = ['dailyTransferHistorySvc'];
 function DailyTransferController(dailyTransferHistorySvc) {
 
   var vm = this;
-
-  dailyTransferHistorySvc().query().$promise.then(function(data) {
-
+  dailyTransferHistorySvc.get()().query().$promise.then(function(data) {
     for (var d in data) {
       var transfer = data[d];
 
