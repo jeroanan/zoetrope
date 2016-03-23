@@ -12,7 +12,7 @@ function TaskController($http, $routeParams, taskSvc, projectsSvc) {
 
   var vm = this;
 
-  taskSvc().query().$promise.then(function(d) {
+  taskSvc.get()().query().$promise.then(function(d) {
     var task = d;
 
     projectsSvc.get()().query().$promise.then(function(d) {
