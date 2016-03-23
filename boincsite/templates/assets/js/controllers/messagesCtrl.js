@@ -12,7 +12,7 @@ function MessagesController(messagesSvc) {
 
   var vm = this;
 
-  messagesSvc().query().$promise.then(function(d) {
+  messagesSvc.get()().query().$promise.then(function(d) {
     vm.messages = d;
 
     var project_names = Array.map(d, function(x) { return x.project_name});
