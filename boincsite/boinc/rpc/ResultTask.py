@@ -1,8 +1,8 @@
-# Copyright (c) David Wilson 2015
+# Copyright (c) David Wilson 2015, 2016
 #
 # Licensed under the GPL version 3
 
-import boincsite.boinc.commandline.GetTask as gt
+import boincsite.boinc.rpc.GetTask as gt
 
 import lib.boincindicator.client as client
 

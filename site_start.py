@@ -116,7 +116,7 @@ class WebServer(object):
         return_url = kwargs.get('return_url', '/')
 
         if task_name!='':
-            task_command = self.__command_factory.create('GetTask')
+            task_command = self.__rpc_factory.create('GetTask')
             task = task_command.execute(task_name)
 
             factory_string = 'ResumeTask' if task.suspended_via_gui else 'SuspendTask'
