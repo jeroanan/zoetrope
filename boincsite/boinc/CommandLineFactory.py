@@ -3,7 +3,6 @@
 # Licensed under the GPL version 3
 
 import boincsite.boinc.commandline.DoNetworkCommunication as dnc
-import boincsite.boinc.commandline.GetMessages as gm
 
 
 class CommandLineFactory(object):
@@ -12,7 +11,6 @@ class CommandLineFactory(object):
     def create(command_type):
         mappings = {
             'DoNetworkCommunication': dnc.DoNetworkCommunication,
-            'GetMessages': gm.GetMessages,
         }
 
         if command_type in mappings:
