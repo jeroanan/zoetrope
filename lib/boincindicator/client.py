@@ -464,6 +464,21 @@ class Message(_Struct):
         self.body = ''
         self.time = ''
 
+
+class Notice(_Struct):
+
+    def __init__(self):
+        self.title = ''
+        self.description = ''
+        self.create_time = ''
+        self.arrival_time = ''
+        self.is_private = ''
+        self.project_name = ''
+        self.category = ''
+        self.link = ''
+        self.seqno = ''
+
+
 class DailyTransfer(_Struct):
 
     def __init__(self):
@@ -871,20 +886,13 @@ class BoincClient(object):
 
     def get_messages(self):
         xml = '<get_messages />'
-        ret = []
-
         results = self.rpc.call(xml)
-
-        for r in results:
-            ret.append(Message.parse(r))
-
-        return ret
+        return map(lambda x: Message.parse(x), results)
 
     def get_notices(self):
-        #TODO: Jeroanan: Should get this for the front-end
         xml = '<get_notices />'
         results = self.rpc.call(xml)
-        print(ElementTree.tostring(results))
+        return map(lambda x: Notice.parse(x), results)
 
     def get_notices_public(self):
         #TODO: Jeroanan: Should get this for the front-end

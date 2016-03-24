@@ -1,0 +1,18 @@
+<div ng-show="!vm.ready" class="text-center">
+  <img src="/static/img/loading.gif" />
+</div>
+<div ng-show="vm.ready">
+  <h1 ng-bind="vm.title"></h1>
+
+  <div ng-repeat="notice in vm.notices | orderBy:seqNo">
+    <h2 ng-bind="notice.title"></h2>
+    <p>
+      <small>
+        From <span ng-bind="notice.project_name"></span>.
+        Published <span ng-bind="notice.create_time"></span>
+        and received <span ng-bind="notice.arrival_time"></span>
+      </small>
+    </p>
+    <p ng-bind="notice.description"></p>
+  </div>
+</div>

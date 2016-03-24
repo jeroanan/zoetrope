@@ -15,6 +15,7 @@ import boincsite.boinc.commandline.GetTask as get_task
 
 import boincsite.status.DailyTransfer as dt
 import boincsite.status.DiskUsage as duj
+import boincsite.status.rpc.Notice as notice
 
 import boincsite.templates.TemplateRenderer as tr
 
@@ -97,6 +98,10 @@ class WebServer(object):
     def daily_transfer_history_json(self, **kwargs):
         return self.__straight_json_dump(self.__rpc_factory, 'DailyTransferHistory', dt, lambda x: list(x))
 
+    @cherrypy.expose
+    def notices_json(self, **kwargs):
+        return self.__straight_json_dump(self.__rpc_factory, 'GetNotices', notice, lambda x: list(x))
+
     def __straight_json_dump(self, factory, command_type, result_type, post_process=None):
         command = factory.create(command_type)
         result = command.execute()
@@ -137,7 +142,7 @@ class WebServer(object):
 
     @cherrypy.expose
     def experimental_task(self, **kwargs):
-        command = self.__rpc_factory.create('GetMessages')
+        command = self.__rpc_factory.create('GetNotices')
         command.execute()
 
 if __name__=='__main__':

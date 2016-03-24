@@ -27,7 +27,8 @@ module.exports = function(grunt) {
             'boincsite/templates/assets/js/controllers/projectCtrl.js',
             'boincsite/templates/assets/js/controllers/hostInfoCtrl.js',
             'boincsite/templates/assets/js/controllers/dailyTransferCtrl.js',
-            'boincsite/templates/assets/js/controllers/messagesCtrl.js'
+            'boincsite/templates/assets/js/controllers/messagesCtrl.js',
+            'boincsite/templates/assets/js/controllers/noticesCtrl.js'
             ]
         }
       },
@@ -47,6 +48,7 @@ module.exports = function(grunt) {
             'boincsite/templates/assets/js/services/diskUsageSvc.js',
             'boincsite/templates/assets/js/services/hostInfoSvc.js',
             'boincsite/templates/assets/js/services/taskSvc.js',
+            'boincsite/templates/assets/js/services/noticesSvc.js',
             'boincsite/templates/assets/js/services/jsonServices.js'
           ]
         }
@@ -58,7 +60,7 @@ module.exports = function(grunt) {
       },
       app: {
         files: ['boincsite/templates/assets/js/app.js'],
-        tasks: ['uglify']
+        tasks: ['uglify:app']
       },
       controllers: {
         files: [
@@ -70,7 +72,8 @@ module.exports = function(grunt) {
           'boincsite/templates/assets/js/controllers/projectCtrl.js',
           'boincsite/templates/assets/js/controllers/hostInfoCtrl.js',
           'boincsite/templates/assets/js/controllers/dailyTransferCtrl.js',
-          'boincsite/templates/assets/js/controllers/messagesCtrl.js'
+          'boincsite/templates/assets/js/controllers/messagesCtrl.js',
+          'boincsite/templates/assets/js/controllers/noticesCtrl.js'
         ],
         tasks: ['uglify:controllers']
       },
@@ -83,7 +86,8 @@ module.exports = function(grunt) {
           'boincsite/templates/assets/js/services/messagesSvc.js',
           'boincsite/templates/assets/js/services/diskUsageSvc.js',
           'boincsite/templates/assets/js/services/hostInfoSvc.js',
-          'boincsite/templates/assets/js/services/taskSvc.js',
+          'boincsite/templates/assets/js/services/taskSvc.js',          
+          'boincsite/templates/assets/js/services/noticesSvc.js',
           'boincsite/templates/assets/js/services/jsonServices.js'
         ],
         tasks: ['uglify:services']

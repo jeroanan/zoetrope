@@ -12,6 +12,7 @@ import boincsite.boinc.rpc.ResumeTask as rt
 import boincsite.boinc.rpc.GetProjectStatus as gps
 import boincsite.boinc.rpc.DailyTransferHistory as dth
 import boincsite.boinc.rpc.HostInfo as hi
+import boincsite.boinc.rpc.GetNotices as gn
 
 
 class RpcFactory(object):
@@ -28,7 +29,8 @@ class RpcFactory(object):
             'ResumeTask': rt.ResumeTask,
             'GetProjectStatus': gps.GetProjectStatus,
             'DailyTransferHistory': dth.DailyTransferHistory,
-            'HostInfo': hi.HostInfo            
+            'HostInfo': hi.HostInfo,
+            'GetNotices': gn.GetNotices
         }
 
         if command_type in mappings:

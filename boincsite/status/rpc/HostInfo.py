@@ -2,8 +2,6 @@
 #
 # Licensed under the GPL version 3
 
-import lib.boincindicator.client as client
-
 import boincsite.status.HostInfo as hi
 
 

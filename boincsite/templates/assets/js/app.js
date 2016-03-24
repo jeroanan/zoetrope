@@ -34,6 +34,11 @@ angular.module('zoetrope', [
       when('/task', {
         templateUrl: '/static/views/task.html',
       }).
+      when('/notices', {
+        templateUrl: '/static/views/notices.html',
+        controller: 'NoticesCtrl',
+        controllerAs: 'vm'
+      }).
       otherwise({
         redirectTo: '/'
       });
