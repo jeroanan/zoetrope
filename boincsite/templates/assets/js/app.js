@@ -1,6 +1,7 @@
 angular.module('zoetrope', [
   'ngRoute',
   'ngResource',
+  'ngSanitize',
   'zoetropeControllers',
   'zoetropeServices'
 ])

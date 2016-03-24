@@ -1,4 +1,4 @@
-angular.module('zoetropeControllers', ['ngRoute', 'zoetropeServices']);
+angular.module('zoetropeControllers', ['ngRoute', 'ngSanitize', 'zoetropeServices']);
 
 var get_project_name = function(task, projects) {
 
