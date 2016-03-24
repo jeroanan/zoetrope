@@ -880,6 +880,19 @@ class BoincClient(object):
 
         return ret
 
+    def get_notices(self):
+        #TODO: Jeroanan: Should get this for the front-end
+        xml = '<get_notices />'
+        results = self.rpc.call(xml)
+        print(ElementTree.tostring(results))
+
+    def get_notices_public(self):
+        #TODO: Jeroanan: Should get this for the front-end
+        xml = '<get_notices_public />'
+        results = self.rpc.call(xml)
+        print(ElementTree.tostring(results))
+
+
 
 def read_gui_rpc_password():
     ''' Read password string from GUI_RPC_PASSWD_FILE file, trim the last CR

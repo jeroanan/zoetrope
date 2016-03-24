@@ -10,7 +10,6 @@ import boincsite.util.uptime as uptime
 
 class HostInfo(object):
 
-
     def execute(self):
         ho = client.BoincClient().get_host_info()
         host_info = hi.HostInfo(ho)

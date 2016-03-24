@@ -79,7 +79,7 @@ class WebServer(object):
 
     @cherrypy.expose
     def messages_json(self, **kwargs):
-        return self.__straight_json_dump(self.__command_factory, 'GetMessages', jse, lambda x: list(x))
+        return self.__straight_json_dump(self.__rpc_factory, 'GetMessages', jse, lambda x: list(x))
 
     @cherrypy.expose
     def tasks_json(self, **kwargs):
@@ -137,7 +137,7 @@ class WebServer(object):
 
     @cherrypy.expose
     def experimental_task(self, **kwargs):
-        command = self.__rpc_factory.create('HostInfo')
+        command = self.__rpc_factory.create('GetMessages')
         command.execute()
 
 if __name__=='__main__':
