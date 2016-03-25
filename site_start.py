@@ -11,7 +11,6 @@ import cherrypy
 
 import boincsite.boinc.CommandLineFactory as clf
 import boincsite.boinc.RpcFactory as rf
-import boincsite.boinc.commandline.GetTask as get_task
 
 import boincsite.status.DailyTransfer as dt
 import boincsite.status.DiskUsage as duj
