@@ -38,7 +38,9 @@ var get_state_string = function(task) {
     case 5:
       return 'Ready to report';
       break;
-    case 6: 'Aborted by user';
+    case 6:
+      return 'Aborted by user';
+      break;
     default:
       return task.state;
   }

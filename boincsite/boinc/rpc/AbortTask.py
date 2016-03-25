@@ -8,4 +8,4 @@ import boincsite.boinc.rpc.ResultTask as rt
 class AbortTask(object):
 
     def execute(self, task_name):
-        rt.ResultTask(task_name).execute('resume_result')
+        rt.ResultTask(task_name).execute('abort_result')
