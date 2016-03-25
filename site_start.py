@@ -141,7 +141,7 @@ class WebServer(object):
 
     @cherrypy.expose
     def experimental_task(self, **kwargs):
-        command = self.__rpc_factory.create('GetNotices')
+        command = self.__rpc_factory.create('ExperimentalTask')
         command.execute()
 
 if __name__=='__main__':
