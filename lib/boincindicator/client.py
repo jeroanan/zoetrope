@@ -486,6 +486,49 @@ class DailyTransfer(_Struct):
         self.up = ''
         self.down = ''
 
+
+class GlobalPreferences(_Struct):
+
+    def __init__(self):
+        self.source_project = ''
+        self.mod_time = ''
+        self.battery_charge_min_pct = ''
+        self.battery_max_temperature = ''
+        self.run_on_batteries = ''
+        self.run_if_user_active = ''
+        self.run_gpu_if_user_active = ''
+        self.suspend_if_no_recent_input = ''
+        self.suspend_cpu_usage = ''
+        self.start_hour = ''
+        self.end_hour = ''
+        self.net_start_hour = ''
+        self.net_end_hour = ''
+        self.leave_apps_in_memory = ''
+        self.confirm_before_connecting = ''
+        self.hangup_if_dialed = ''
+        self.dont_verify_images = ''
+        self.work_buf_min_days = ''
+        self.work_buf_additional_days = ''
+        self.max_ncpus_pct = ''
+        self.cpu_scheduling_period_minutes = ''
+        self.disk_interval = ''
+        self.disk_max_used_gb = ''
+        self.disk_max_used_pct = ''
+        self.disk_min_free_gb = ''
+        self.vm_max_used_pct = ''
+        self.ram_max_used_busy_pct = ''
+        self.ram_max_used_idle_pct = ''
+        self.idle_time_to_run = ''
+        self.max_bytes_sec_up = ''
+        self.max_bytes_sec_down = ''
+        self.cpu_usage_limit = ''
+        self.daily_xfer_limit_mb = ''
+        self.daily_xfer_period_days = ''
+        self.override_file_present = ''
+        self.network_wifi_only = ''
+        self.max_cpus = ''
+
+
 class Coproc(_Struct):
     ''' represents a set of identical coprocessors on a particular computer.
         Abstract class;
@@ -895,11 +938,32 @@ class BoincClient(object):
         return map(lambda x: Notice.parse(x), results)
 
     def get_notices_public(self):
-        #TODO: Jeroanan: Should get this for the front-end
+        # How does this differ from get_notices?
+        # Not much I think. Presumably it filters out the private notices,
+        # of which I have yet to see any examples.
         xml = '<get_notices_public />'
+        results = self.rpc.call(xml)
+        return map(lambda x: Notice.parse(x), results)
+
+    def get_account_manager_info(self):
+        # The get_acct_mgr_info RPC call returns an XML document similar to:
+        #
+        # <acct_mgr_info>
+        #   <acct_mgr_url>https://bam.boincstats.com/</acct_mgr_url>
+        #   <acct_mgr_name>BOINCstatsBAM!</acct_mgr_name>
+        #   <have_credentials /> <!-- I don't know what this is for yet. -->
+        # </acct_mgr_info>
+        xml = '<acct_mgr_info />'
         results = self.rpc.call(xml)
         print(ElementTree.tostring(results))
 
+    def get_global_prefs_file(self):
+        # The get_globals_prefs_file ROC cakk returns a quite large XML
+        # document containing global preferences. See the struct class
+        # for details.
+        xml = '<get_global_prefs_file />'
+        results = self.rpc.call(xml)
+        return GlobalPreferences.parse(results)
 
 
 def read_gui_rpc_password():

@@ -40,6 +40,11 @@ angular.module('zoetrope', [
         controller: 'NoticesCtrl',
         controllerAs: 'vm'
       }).
+      when('/globalpreferences', {
+        templateUrl: '/static/views/globalpreferences.html',
+        controller: 'globalPreferencesCtrl',
+        controllerAs: 'vm'
+      }).
       otherwise({
         redirectTo: '/'
       });

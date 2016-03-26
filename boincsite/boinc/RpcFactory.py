@@ -14,6 +14,7 @@ import boincsite.boinc.rpc.DailyTransferHistory as dth
 import boincsite.boinc.rpc.HostInfo as hi
 import boincsite.boinc.rpc.GetNotices as gn
 import boincsite.boinc.rpc.ExperimentalTask as et
+import boincsite.boinc.rpc.GetGlobalPreferences as ggp
 
 
 class RpcFactory(object):
@@ -32,7 +33,8 @@ class RpcFactory(object):
             'DailyTransferHistory': dth.DailyTransferHistory,
             'HostInfo': hi.HostInfo,
             'GetNotices': gn.GetNotices,
-            'ExperimentalTask': et.ExperimentalTask
+            'ExperimentalTask': et.ExperimentalTask,
+            'GetGlobalPreferences': ggp.GetGlobalPreferences
         }
 
         if command_type in mappings:

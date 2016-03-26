@@ -11,7 +11,7 @@ import config as conf
 import boincsite.status.rpc.GlobalPreferences as gp
 
 
-class ExperimentalTask(object):
+class GetGlobalPreferences(object):
 
     def execute(self):
         client.GUI_RPC_PASSWD_FILE = conf.gui_rpc_file_location
@@ -19,6 +19,4 @@ class ExperimentalTask(object):
 
         with client.BoincClient(passwd=password) as c:
             c.authorize(password)
-            global_preferences = gp.GlobalPreferences(c.get_global_prefs_file())
-            print(json.dumps(global_preferences, StringIO(), cls=gp.JSONEncoder))
-            
+            return gp.GlobalPreferences(c.get_global_prefs_file())

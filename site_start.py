@@ -6,6 +6,7 @@
 from io import StringIO
 import json
 import os
+import sys
 
 import cherrypy
 
@@ -15,6 +16,7 @@ import boincsite.boinc.RpcFactory as rf
 import boincsite.status.DailyTransfer as dt
 import boincsite.status.DiskUsage as duj
 import boincsite.status.rpc.Notice as notice
+import boincsite.status.rpc.GlobalPreferences as ggp
 
 import boincsite.templates.TemplateRenderer as tr
 
@@ -100,6 +102,10 @@ class WebServer(object):
     @cherrypy.expose
     def notices_json(self, **kwargs):
         return self.__straight_json_dump(self.__rpc_factory, 'GetNotices', notice, lambda x: list(x))
+
+    @cherrypy.expose
+    def get_global_preferences_json(self, **kwargs):
+        return self.__straight_json_dump(self.__rpc_factory, 'GetGlobalPreferences', ggp)
 
     def __straight_json_dump(self, factory, command_type, result_type, post_process=None):
         command = factory.create(command_type)
