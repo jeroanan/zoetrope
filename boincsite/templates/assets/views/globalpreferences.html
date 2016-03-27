@@ -4,7 +4,8 @@
 </div>
 <div ng-show="vm.ready">
   <p>
-    <small>Note: I still don't know what some of these things are for.</small>
+    <small>Note: I still don't know what some of these things are for. I have coloured the things I am not sure about
+    <span class="text-danger">like this.</span></small>
   </p>
   <keyvalrow key="Run if User Active" val="{{ vm.prefs.run_if_user_active }}"></keyvalrow>
   <keyvalrow key="Run GPU if User Active" val="{{ vm.prefs.run_gpu_if_user_active }}"></keyvalrow>
@@ -12,7 +13,11 @@
   <keyvalrow key="Maximum % of RAM to use when Idle" val="{{ vm.prefs.ram_max_used_idle_pct }}%"></keyvalrow>
   <keyvalrow key="Start Hour" val="{{ vm.prefs.start_hour }}"></keyvalrow>
   <keyvalrow key="End Hour" val="{{ vm.prefs.end_hour }}"></keyvalrow>
-  <keyvalrow key="max_ncpus_pct" val="{{ vm.prefs.max_ncpus_pct }}%"></keyvalrow>
+
+  <div class="text-danger">
+    <keyvalrow key="max_ncpus_pct" val="{{ vm.prefs.max_ncpus_pct }}%"></keyvalrow>
+  </div>
+
   <keyvalrow key="Suspend if battery temperature exceeds:" val="{{ vm.prefs.battery_max_temperature }}&#176;C"></keyvalrow>
   <keyvalrow key="Suspend if CPU usage exceeds:" val="{{ vm.prefs.suspend_cpu_usage }}%"></keyvalrow>
   <keyvalrow key="Maximum % of RAM to use when in use" val="{{ vm.prefs.ram_max_used_busy_pct }}%"></keyvalrow>
@@ -20,28 +25,52 @@
   <keyvalrow key="Confirm Before Making an Internet Connection:" val="{{ vm.prefs.confirm_before_connecting }}"></keyvalrow>
   <keyvalrow key="CPU Scheduling Period:" val="{{ vm.prefs.cpu_scheduling_period_minutes }} minutes"></keyvalrow>
   <keyvalrow key="Suspend if CPU Usage Exceeds:" val="{{ vm.prefs.cpu_usage_limit }}%"></keyvalrow>
-  <keyvalrow key="daily_xfer_period_days:" val="{{ vm.prefs.daily_xfer_period_days }}"></keyvalrow>
-  <keyvalrow key="disk_interval:" val="{{ vm.prefs.disk_interval }}"></keyvalrow>
+
+  <div class="text-danger">
+    <keyvalrow key="daily_xfer_period_days:" val="{{ vm.prefs.daily_xfer_period_days }}"></keyvalrow>
+  </div>
+
+  <div class="text-danger">
+    <keyvalrow key="disk_interval:" val="{{ vm.prefs.disk_interval }}"></keyvalrow>
+  </div>
+
   <keyvalrow key="Maximum disk space to use:" val="{{ vm.prefs.disk_max_used_gb }}GB"></keyvalrow>
   <keyvalrow key="Maximum disk space to use:" val="{{ vm.prefs.disk_max_used_pct }}%"></keyvalrow>
   <keyvalrow key="Minimum disk space to leave free:" val="{{ vm.prefs.disk_min_free_gb }}GB"></keyvalrow>
-  <keyvalrow key="Don't verify images:" val="{{ vm.prefs.dont_verify_images }}"></keyvalrow>
+
+  <div class="text-danger">
+    <keyvalrow key="Don't verify images:" val="{{ vm.prefs.dont_verify_images }}"></keyvalrow>
+  </div>
+
   <keyvalrow key="Run when idle for:" val="{{ vm.prefs.idle_time_to_run }}"></keyvalrow>
-  <keyvalrow key="Leave apps in memory?:" val="{{ vm.prefs.leave_apps_in_memory }}"></keyvalrow>
+
+  <div class="text-danger">
+    <keyvalrow key="Leave apps in memory?:" val="{{ vm.prefs.leave_apps_in_memory }}"></keyvalrow>
+  </div>
+
   <keyvalrow key="Maximum download speed:" val="{{ vm.prefs.max_bytes_sec_down }} bytes/second"></keyvalrow>
   <keyvalrow key="Maximum upload speed:" val="{{ vm.prefs.max_bytes_sec_up }} bytes/second"></keyvalrow>
   <keyvalrow key="Maximum number of CPUs to use:" val="{{ vm.prefs.max_cpus }}"></keyvalrow>
-  <keyvalrow key="mod_time" val="{{ vm.prefs.mod_time }}"></keyvalrow>
+
+  <div class="text-danger">
+    <keyvalrow key="mod_time" val="{{ vm.prefs.mod_time }}"></keyvalrow>
+  </div>
+
   <keyvalrow key="Starting hour for network traffic" val="{{ vm.prefs.net_start_hour }}"></keyvalrow>
   <keyvalrow key="Ending hour for network traffic" val="{{ vm.prefs.net_end_hour }}"></keyvalrow>
   <keyvalrow key="WiFi only?" val="{{ vm.prefs.network_wifi_only }}"></keyvalrow>
   <keyvalrow key="Override file present" val="{{ vm.prefs.override_file_present }}"></keyvalrow>
   <keyvalrow key="Run on batteries?" val="{{ vm.prefs.run_on_batteries }}"></keyvalrow>
   <keyvalrow key="Source project" val="{{ vm.prefs.source_project }}"></keyvalrow>
-  <keyvalrow key="suspend_if_no_recent_input" val="{{ vm.prefs.suspend_if_no_recent_input }}"></keyvalrow>
-  <keyvalrow key="vm_max_used_pct" val="{{ vm.prefs.vm_max_used_pct }}"></keyvalrow>
+
+  <div class="text-danger">
+    <keyvalrow key="suspend_if_no_recent_input" val="{{ vm.prefs.suspend_if_no_recent_input }}"></keyvalrow>
+  </div>
+
+  <div class="text-danger">
+    <keyvalrow key="vm_max_used_pct" val="{{ vm.prefs.vm_max_used_pct }}"></keyvalrow>
+  </div>
+
   <keyvalrow key="Minimum work to buffer:" val="{{ vm.prefs.work_buf_min_days }} days"></keyvalrow>
   <keyvalrow key="Amount of extra work to buffer:" val="{{ vm.prefs.work_buf_additional_days }} days"></keyvalrow>
-
-
 </div>

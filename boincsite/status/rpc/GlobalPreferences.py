@@ -135,14 +135,3 @@ class JSONEncoder(json.JSONEncoder):
             d[a] = getattr(o, a)
 
         return d
-        # return {
-        #     'title': o.title,
-        #     'description': o.description,
-        #     'create_time': o.create_time,
-        #     'arrival_time': o.arrival_time,
-        #     'is_private': o.is_private,
-        #     'project_name': o.project_name,
-        #     'category': o.category,
-        #     'link': o.link,
-        #     'seqno': o.seqno
-        # }

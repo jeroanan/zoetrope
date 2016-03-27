@@ -2,7 +2,7 @@
 #
 # Licensed under the GPL version 3
 
-import datetime as dt
+import boincsite.util.DateTimeUtil as dt
 
 import boincsite.status.Message as message
 
@@ -16,12 +16,8 @@ class Message(message.Message):
         self.project_name = message.project
         self.message_text = message.body
         self.message_type = message.pri
-        self.date_time = self.get_date_time(int(message.time))
+        self.date_time = dt.get_date_from_epoch_seconds(int(message.time))
 
-    def get_date_time(self, seconds_in):
-        epoch = dt.datetime(1970, 1, 1)
-        delta = dt.timedelta(seconds=seconds_in)
-        return str(epoch + delta)
 
     def __str__(self):
         return """Message no: {message_number}

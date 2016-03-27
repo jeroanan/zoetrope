@@ -2,7 +2,7 @@
 #
 # Licensed under the GPL version 3
 
-import datetime as dt
+import boincsite.util.DateTimeUtil as dt
 import json
 
 
@@ -11,18 +11,13 @@ class Notice(object):
     def __init__(self, notice):
         self.title=notice.title
         self.description=notice.description
-        self.create_time=self.get_date(round(float(notice.create_time)))
-        self.arrival_time=self.get_date(round(float(notice.arrival_time)))
+        self.create_time=dt.get_date_from_epoch_seconds(round(float(notice.create_time)))
+        self.arrival_time=dt.get_date_from_epoch_seconds(round(float(notice.arrival_time)))
         self.is_private=notice.is_private
         self.project_name=notice.project_name
         self.category=notice.category
         self.link=notice.link
         self.seqno=int(notice.seqno)
-
-    def get_date(self, seconds_in):
-        epoch = dt.date(1970, 1, 1)
-        delta = dt.timedelta(seconds=seconds_in)
-        return str(epoch + delta)
 
     def __str__(self):
         return """Title: {title}
