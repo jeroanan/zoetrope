@@ -4,6 +4,8 @@
 
 import json
 
+import boincsite.util.DateTimeUtil as dt
+
 attrs = [
    'source_project',
    'mod_time',
@@ -47,8 +49,44 @@ attrs = [
 class GlobalPreferences(object):
 
     def __init__(self, global_preferences):
+
+        round_number = lambda x: round(float(x))
+        round_2dp = lambda x: (round(float(x), 2))
+
+        get_date = lambda x: dt.get_date_from_epoch_seconds(round(float(x)))
+
+        process_fields = {
+            'ram_max_used_idle_pct': round_number,
+            'start_hour': round_number,
+            'end_hour': round_number,
+            'max_ncpus_pct': round_number,
+            'battery_max_temperature': round_number,
+            'suspend_cpu_usage': round_number,
+            'ram_max_used_busy_pct': round_number,
+            'battery_charge_min_pct': round_number,
+            'cpu_scheduling_period_minutes': round_number,
+            'cpu_usage_limit': round_number,
+            'disk_interval': round_number,
+            'disk_max_used_gb': round_number,
+            'disk_max_used_pct': round_number,
+            'idle_time_to_run': round_number,
+            'max_bytes_sec_down': round_number,
+            'max_bytes_sec_up': round_number,
+            'mod_time': get_date,
+            'net_start_hour': round_number,
+            'net_end_hour': round_number,
+            'suspend_if_no_recent_input': round_number,
+            'vm_max_used_pct': round_number,
+            'disk_min_free_gb': round_2dp,
+            'work_buf_min_days': round_2dp,
+            'work_buf_additional_days': round_2dp
+        }
+
         for a in attrs:
-            setattr(self, a, getattr(global_preferences, a))
+            if a in process_fields:
+                setattr(self, a, process_fields[a](getattr(global_preferences, a)))
+            else:
+                setattr(self, a, getattr(global_preferences, a))
 
     def __str__(self):
         return '''Source Project: {source_project}
