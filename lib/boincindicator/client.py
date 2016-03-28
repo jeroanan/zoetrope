@@ -788,6 +788,19 @@ class BoincClient(object):
         except socket.error:
             self.connected = False
 
+    def get_cc_config(self):
+        # The get_cc_config RPC call returns an xml document similar to:
+        #
+        # <cc_config>
+        #   <log_flags>
+        #     <task>1</task>
+        #     <file_xfer>1</file_xfer>
+        #     <sched_ops>1</sched_ops>
+        #   </log_flags>
+        # </cc_config>
+        result = self.rpc.call('<get_cc_config />')
+        print(ElementTree.tostring(result))
+
     def get_host_info(self):
         ''' Get information about host hardware and usage. '''
         return HostInfo.parse(self.rpc.call('<get_host_info/>'))
@@ -1020,7 +1033,7 @@ class BoincClient(object):
         print(ElementTree.tostring(results))
 
     def get_global_prefs_file(self):
-        # The get_globals_prefs_file ROC cakk returns a quite large XML
+        # The get_globals_prefs_file RPC call returns a quite large XML
         # document containing global preferences. See the struct class
         # for details.
         xml = '<get_global_prefs_file />'
@@ -1028,6 +1041,13 @@ class BoincClient(object):
         return GlobalPreferences.parse(results)
 
     def get_project_init_status(self):
+        # The get_project_init_status RPC call returns an xml document similar to:
+        # <get_project_init_status>
+        #   <url />
+        #   <name />
+        #   <team_name />
+        # </get_project_init_status>
+        # .. for me at least. I probably have to supply a project name to actually get anything.
         xml = '<get_project_init_status />'
         results = self.rpc.call(xml)
         print(ElementTree.tostring(results))

@@ -3,6 +3,9 @@
   <img src="/static/img/loading.gif" />
 </div>
 <div ng-show="vm.ready">
+  <p>
+    <input type="text" ng-model="vm.filterProp" id="enterFilter" placeholder="Enter filter..." />
+  </p>
   <table class="table table-striped">
     <tr>
       <th>
@@ -15,14 +18,13 @@
         Summary
       </th>
     </tr>
-    <tr ng-repeat="ap in vm.availableProjects">
+    <tr ng-repeat="ap in vm.availableProjects | filter:vm.filterProp">
       <td><a ng-href="/#/projectdetail/{{ap.name}}"><span ng-bind="ap.name"></span></a></td>
       <td>
         <span ng-bind="ap.general_area"></span>
         <span ng-show="ap.specific_area.length>0">(<span ng-bind="ap.specific_area"></span>)</span>
       </td>
       <td><span ng-bind="ap.summary"></span></td>
-
     </tr>
   </table>
 </div>
