@@ -17,6 +17,7 @@ import boincsite.status.DailyTransfer as dt
 import boincsite.status.DiskUsage as duj
 import boincsite.status.rpc.Notice as notice
 import boincsite.status.rpc.GlobalPreferences as ggp
+import boincsite.status.rpc.AvailableProject as ap
 
 import boincsite.templates.TemplateRenderer as tr
 
@@ -106,6 +107,10 @@ class WebServer(object):
     @cherrypy.expose
     def get_global_preferences_json(self, **kwargs):
         return self.__straight_json_dump(self.__rpc_factory, 'GetGlobalPreferences', ggp)
+
+    @cherrypy.expose
+    def get_all_projects_list_json(self, **kwargs):
+        return self.__straight_json_dump(self.__rpc_factory, 'GetAllProjectsList', ap, lambda x: list(x))
 
     def __straight_json_dump(self, factory, command_type, result_type, post_process=None):
         command = factory.create(command_type)

@@ -1,0 +1,28 @@
+<h1>{{ vm.title }}</h1>
+<div ng-show="!vm.ready" class="text-center">
+  <img src="/static/img/loading.gif" />
+</div>
+<div ng-show="vm.ready">
+  <table class="table table-striped">
+    <tr>
+      <th>
+        Project Name
+      </th>
+      <th>
+        Research Area
+      </th>
+      <th>
+        Summary
+      </th>
+    </tr>
+    <tr ng-repeat="ap in vm.availableProjects">
+      <td><a ng-href="/#/projectdetail/{{ap.name}}"><span ng-bind="ap.name"></span></a></td>
+      <td>
+        <span ng-bind="ap.general_area"></span>
+        <span ng-show="ap.specific_area.length>0">(<span ng-bind="ap.specific_area"></span>)</span>
+      </td>
+      <td><span ng-bind="ap.summary"></span></td>
+
+    </tr>
+  </table>
+</div>

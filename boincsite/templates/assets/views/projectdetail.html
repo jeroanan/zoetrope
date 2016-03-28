@@ -1,0 +1,22 @@
+<h1>{{ vm.title }}</h1>
+<div ng-show="!vm.ready" class="text-center">
+  <img src="/static/img/loading.gif" />
+</div>
+<div ng-show="vm.ready">
+  <p class="text-center">
+    <img ng-src="{{vm.project.image}}" alt="{{vm.name}}" />
+  </p>
+  <p>
+    Computing for
+    <span ng-bind="vm.project.general_area"></span>
+    <span ng-show="vm.project.specific_area.length>0">(<span ng-bind="vm.project.specific_area"></span>)</span>
+  </p>
+  <p ng-bind="vm.project.description"></p>
+  <p>
+    <a ng-href="{{vm.project.url}}">Project homepage</a>
+  </p>
+  <h2>Supported Platforms</h2>
+  <ul>
+    <li ng-repeat="p in vm.project.platforms" ng-bind="p.name"></li>
+  </ul>
+</div>

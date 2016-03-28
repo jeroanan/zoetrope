@@ -45,6 +45,16 @@ angular.module('zoetrope', [
         controller: 'globalPreferencesCtrl',
         controllerAs: 'vm'
       }).
+      when('/getallprojectlist', {
+        templateUrl: '/static/views/allprojectlist.html',
+        controller: 'allProjectListCtrl',
+        controllerAs: 'vm'
+      }).
+      when('/projectdetail/:projectname', {
+        templateUrl: '/static/views/projectdetail.html',
+        controller: 'projectDetailCrl',
+        controllerAs: 'vm'
+      }).
       otherwise({
         redirectTo: '/'
       });

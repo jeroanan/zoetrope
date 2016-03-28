@@ -29,7 +29,9 @@ module.exports = function(grunt) {
             'boincsite/templates/assets/js/controllers/dailyTransferCtrl.js',
             'boincsite/templates/assets/js/controllers/messagesCtrl.js',
             'boincsite/templates/assets/js/controllers/noticesCtrl.js',
-            'boincsite/templates/assets/js/controllers/globalPreferencesCtrl.js'
+            'boincsite/templates/assets/js/controllers/globalPreferencesCtrl.js',
+            'boincsite/templates/assets/js/controllers/allProjectListCtrl.js',
+            'boincsite/templates/assets/js/controllers/projectDetailCtrl.js'
             ]
         }
       },
@@ -51,7 +53,8 @@ module.exports = function(grunt) {
             'boincsite/templates/assets/js/services/taskSvc.js',
             'boincsite/templates/assets/js/services/noticesSvc.js',
             'boincsite/templates/assets/js/services/globalPreferencesSvc.js',
-            'boincsite/templates/assets/js/services/jsonServices.js'
+            'boincsite/templates/assets/js/services/jsonServices.js',
+            'boincsite/templates/assets/js/services/allProjectListSvc.js'
           ]
         }
       }
@@ -76,7 +79,9 @@ module.exports = function(grunt) {
           'boincsite/templates/assets/js/controllers/dailyTransferCtrl.js',
           'boincsite/templates/assets/js/controllers/messagesCtrl.js',
           'boincsite/templates/assets/js/controllers/noticesCtrl.js',
-          'boincsite/templates/assets/js/controllers/globalPreferencesCtrl.js'
+          'boincsite/templates/assets/js/controllers/globalPreferencesCtrl.js',
+          'boincsite/templates/assets/js/controllers/allProjectListCtrl.js',
+          'boincsite/templates/assets/js/controllers/projectDetailCtrl.js'
         ],
         tasks: ['uglify:controllers']
       },
@@ -92,7 +97,8 @@ module.exports = function(grunt) {
           'boincsite/templates/assets/js/services/taskSvc.js',
           'boincsite/templates/assets/js/services/noticesSvc.js',
           'boincsite/templates/assets/js/services/globalPreferencesSvc.js',
-          'boincsite/templates/assets/js/services/jsonServices.js'
+          'boincsite/templates/assets/js/services/jsonServices.js',
+          'boincsite/templates/assets/js/services/allProjectListSvc.js'
         ],
         tasks: ['uglify:services']
       }

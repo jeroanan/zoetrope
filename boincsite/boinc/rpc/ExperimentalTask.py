@@ -8,7 +8,7 @@ import json
 import lib.boincindicator.client as client
 
 import config as conf
-import boincsite.status.rpc.GlobalPreferences as gp
+
 
 
 class ExperimentalTask(object):
@@ -19,6 +19,4 @@ class ExperimentalTask(object):
 
         with client.BoincClient(passwd=password) as c:
             c.authorize(password)
-            global_preferences = gp.GlobalPreferences(c.get_global_prefs_file())
-            print(json.dumps(global_preferences, StringIO(), cls=gp.JSONEncoder))
-            
+            print(c.get_cc_status())

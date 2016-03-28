@@ -431,6 +431,43 @@ class JoinedProject(_Struct):
         self.project_dir = ''
         self.master_url_fetch_pending = ''
 
+class AvailableProject(_Struct):
+
+    def __init__(self):
+        self.name = ''
+        self.url = ''
+        self.general_area = ''
+        self.specific_area = ''
+        self.description = ''
+        self.home = ''
+        self.platforms = []
+        self.image = ''
+        self.summary = ''
+
+    @classmethod
+    def parse(cls, xml):
+        if not isinstance(xml, ElementTree.Element):
+            xml = ElementTree.fromstring(xml)
+
+        available_project = super(AvailableProject, cls).parse(xml)
+
+        aux = []
+        for c in available_project.platforms:
+            platform = AvailableProjectPlatform()
+            platform.parse(c)
+
+            aux.append(platform)
+        available_project.platforms = aux
+
+        return available_project
+
+class AvailableProjectPlatform(_Struct):
+
+    def __init__(self):
+        self.name = ''
+
+    def parse(self, xml):
+        self.name = parse_str(xml)
 
 class DiskUsageProject(_Struct):
 
@@ -857,8 +894,33 @@ class BoincClient(object):
         return result
 
     def get_all_projects_list(self):
+        # Returns a list of available projects for the client to attach to.
+        #
+        # The get_all_projects_list RPC call returns an xml document similar to:
+        #
+        # <projects>
+        #   <project>
+        #     <name>Radioactive@Home</name>
+        #     <url>http://radioactiveathome.org/boinc/</url>
+        #     <general_area>Distributed sensing</general_area>
+        #     <specific_area>Environmental research</specific_area>
+        #     <description>Radioactive@Home is creating a free and continuously updated map of radiation levels
+        #           using sensors connected to volunteers\' computers.  You must buy a sensor to participate.</description>
+        #     <home>BOINC Poland Foundation</home>
+        #     <platforms>
+        #       <name>windows_intelx86</name>
+        #       <name>i686-pc-linux-gnu[nci]</name>
+        #       <name>armv7l-unknown-linux-gnueabihf</name>
+        #     </platforms>
+        #     <image>http://boinc.berkeley.edu/images/radioactive.jpg</image>
+        #     <summary>Monitor radiation levels</summary>
+        #   </project>
+        # </projects>
+        #
+        # There are an arbitrary number of projects. Each project can have an arbitrary number of platforms.
         xml = '<get_all_projects_list />'
-        return self.rpc.call(xml)
+        results = self.rpc.call(xml)
+        return map(lambda x: AvailableProject.parse(x), parse_list(results))
 
     def get_project_status(self):
         xml = '<get_project_status />'
@@ -965,6 +1027,10 @@ class BoincClient(object):
         results = self.rpc.call(xml)
         return GlobalPreferences.parse(results)
 
+    def get_project_init_status(self):
+        xml = '<get_project_init_status />'
+        results = self.rpc.call(xml)
+        print(ElementTree.tostring(results))
 
 def read_gui_rpc_password():
     ''' Read password string from GUI_RPC_PASSWD_FILE file, trim the last CR
