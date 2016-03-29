@@ -2,7 +2,7 @@
 #
 # Licensed under the GPL version 3
 
-import boincsite.boinc.rpc.ResultTask as rt
+import boincsite.boinc.ResultTask as rt
 
 
 class AbortTask(object):

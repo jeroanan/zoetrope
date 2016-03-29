@@ -2,20 +2,20 @@
 #
 # Licensed under the GPL version 3
 
-import boincsite.boinc.rpc.GetDiskUsage as gdu
-import boincsite.boinc.rpc.GetMessages as gm
-import boincsite.boinc.rpc.GetTask as gt
-import boincsite.boinc.rpc.GetTasks as gts
-import boincsite.boinc.rpc.AbortTask as at
-import boincsite.boinc.rpc.SuspendTask as st
-import boincsite.boinc.rpc.ResumeTask as rt
-import boincsite.boinc.rpc.GetProjectStatus as gps
-import boincsite.boinc.rpc.DailyTransferHistory as dth
-import boincsite.boinc.rpc.HostInfo as hi
-import boincsite.boinc.rpc.GetNotices as gn
-import boincsite.boinc.rpc.ExperimentalTask as et
-import boincsite.boinc.rpc.GetGlobalPreferences as ggp
-import boincsite.boinc.rpc.GetAllProjectsList as gap
+import boincsite.boinc.GetDiskUsage as gdu
+import boincsite.boinc.GetMessages as gm
+import boincsite.boinc.GetTask as gt
+import boincsite.boinc.GetTasks as gts
+import boincsite.boinc.AbortTask as at
+import boincsite.boinc.SuspendTask as st
+import boincsite.boinc.ResumeTask as rt
+import boincsite.boinc.GetProjectStatus as gps
+import boincsite.boinc.DailyTransferHistory as dth
+import boincsite.boinc.HostInfo as hi
+import boincsite.boinc.GetNotices as gn
+import boincsite.boinc.ExperimentalTask as et
+import boincsite.boinc.GetGlobalPreferences as ggp
+import boincsite.boinc.GetAllProjectsList as gap
 
 
 class RpcFactory(object):

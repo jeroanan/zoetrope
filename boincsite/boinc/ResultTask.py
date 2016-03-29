@@ -3,7 +3,7 @@
 # Licensed under the GPL version 3
 
 import config as c
-import boincsite.boinc.rpc.GetTask as gt
+import boincsite.boinc.GetTask as gt
 
 import lib.boincindicator.client as client
 
