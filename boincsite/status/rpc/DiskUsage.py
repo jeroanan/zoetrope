@@ -2,7 +2,7 @@
 #
 # Licensed under the GPL version 3
 
-import lib.boincindicator.client as client
+import lib.boincindicator.resulttypes.DiskUsage as diskusage
 
 import boincsite.status.DiskUsage as du
 import boincsite.util.ByteConversion as bc
@@ -15,9 +15,9 @@ class DiskUsage(du.DiskUsage):
         def list_from_type(type_name):
             return [x for x in disk_usage if type(x) == type_name]
 
-        projects = list_from_type(client.DiskUsageProject)
-        self.total_disk_space = list_from_type(client.DiskUsageDiskTotal)[0].disk_bytes
-        self.free_disk_space = list_from_type(client.DiskUsageDiskFree)[0].disk_bytes
+        projects = list_from_type(diskusage.DiskUsageProject)
+        self.total_disk_space = list_from_type(diskusage.DiskUsageDiskTotal)[0].disk_bytes
+        self.free_disk_space = list_from_type(diskusage.DiskUsageDiskFree)[0].disk_bytes
 
         self.project_disk_usages = map(lambda x: ProjectDiskUsage(x), projects)
 

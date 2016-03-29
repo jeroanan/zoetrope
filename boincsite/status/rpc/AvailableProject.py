@@ -4,7 +4,7 @@
 
 import json
 
-import lib.boincindicator.client as client
+import lib.boincindicator.resulttypes.AvailableProject as available_project
 
 attrs = [
     'name',
@@ -22,11 +22,10 @@ attrs = [
 class JSONEncoder(json.JSONEncoder):
     def default(self, o):
 
-        if isinstance(o, client.AvailableProjectPlatform):
+        if isinstance(o, available_project.AvailableProjectPlatform):
             return {
                 'name': o.name
             }
-
 
         d = {}
 
