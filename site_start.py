@@ -10,7 +10,6 @@ import sys
 
 import cherrypy
 
-import boincsite.boinc.CommandLineFactory as clf
 import boincsite.boinc.RpcFactory as rf
 
 import boincsite.status.AvailableProject as ap
@@ -29,7 +28,6 @@ WorkingDirectory = os.path.dirname(os.path.abspath(__file__))
 class WebServer(object):
 
     def __init__(self):
-        self.__command_factory = clf.CommandLineFactory
         self.__rpc_factory = rf.RpcFactory
 
         self.__renderer = tr.TemplateRenderer()
@@ -73,12 +71,6 @@ class WebServer(object):
     def __get_projects(self):
         projects_command = self.__rpc_factory.create('GetProjectStatus')
         return list(projects_command.execute())
-
-    @cherrypy.expose
-    def do_network_communication(self, **kwargs):
-        command = self.__command_factory.create('DoNetworkCommunication')
-        command.execute()
-        raise cherrypy.HTTPRedirect('/')
 
     @cherrypy.expose
     def messages_json(self, **kwargs):
