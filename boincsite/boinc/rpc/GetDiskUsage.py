@@ -3,7 +3,7 @@
 # Licensed under the GPL version 3
 
 import lib.boincindicator.client as client
-import boincsite.status.rpc.DiskUsage as du
+import boincsite.status.DiskUsage as du
 
 
 class GetDiskUsage(object):

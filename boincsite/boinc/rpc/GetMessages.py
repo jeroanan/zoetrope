@@ -4,7 +4,7 @@
 
 import lib.boincindicator.client as client
 
-import boincsite.status.rpc.Message as message
+import boincsite.status.Message as message
 
 
 class GetMessages(object):

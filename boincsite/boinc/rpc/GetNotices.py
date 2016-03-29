@@ -4,7 +4,7 @@
 
 import lib.boincindicator.client as client
 
-import boincsite.status.rpc.Notice as n
+import boincsite.status.Notice as n
 
 
 class GetNotices(object):

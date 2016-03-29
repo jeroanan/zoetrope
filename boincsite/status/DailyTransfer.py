@@ -2,6 +2,7 @@
 #
 # Licensed under the GPL version 3
 
+import datetime as dtime
 import json
 
 import boincsite.util.ByteConversion as bc
@@ -10,9 +11,14 @@ import boincsite.util.ByteConversion as bc
 class DailyTransfer(object):
 
     def __init__(self, daily_transfer):
-        self.bytes_uploaded = 0.0
-        self.bytes_downloaded = 0.0
-        self.transfers_date = ''
+        self.transfers_date = str(self.get_transfer_date(int(daily_transfer.when)))
+        self.bytes_uploaded = daily_transfer.up
+        self.bytes_downloaded = daily_transfer.down
+
+    def get_transfer_date(self, epoch_days):
+        first_day = dtime.date(1970, 1, 1)
+        delta = dtime.timedelta(epoch_days)
+        return first_day + delta
 
     def __str__(self):
         return 'Date: {date}: uploaded: {uploaded}, downloaded: {downloaded}'.format(

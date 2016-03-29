@@ -5,28 +5,47 @@
 
 class Project(object):
 
-    def __init__(self, project_string):
-        self.__name = ''
-        self.__master_url = ''
-        self.__user_name = ''
-        self.__team_name = ''
-        self.__resource_share = ''
-        self.__user_total_credit = 0.0
-        self.__user_expavg_credit = 0.0
-        self.__host_total_credit = ''
-        self.__host_expavg_credit = ''
-        self.__nrpc_failures = ''
-        self.__master_fetch_failures = ''
+    def __init__(self, project):
+        # can't do master_fetch_pending, trickle_upload_pending, ended, suspended_via_gui, dont_request_more_work,
+        #   disk_usage
+
+        # 'project_name': 'name',
+        # 'master_url': 'master_url',
+        # 'user_name': 'user_name',
+        # 'team_name': 'team_name',
+        # 'resource_share': 'resource_share',
+        # 'user_total_credit': 'user_total_credit',
+        # 'user_expavg_credit': 'user_expavg_credit',
+        # 'host_total_credit': 'host_total_credit',
+        # 'host_expavg_credit': 'host_expavg_credit',
+        # 'nrpc_failures': 'nrpc_failures',
+        # 'master_fetch_failures': 'master_fetch_failures',
+        # 'sched_rpc_pending': 'scheduler_rpc_pending',
+        # 'attached_via_acct_mgr': 'attached_via_account_manager',
+        # 'last_rpc_time': 'last_rpc',
+        # 'project_files_downloaded_time': 'project_files_downloaded'
+
+        self.__name = project.project_name
+        self.__master_url = project.master_url
+        self.__user_name = project.user_name
+        self.__team_name = project.team_name
+        self.__resource_share = project.resource_share
+        self.__user_total_credit = project.user_total_credit
+        self.__user_expavg_credit = project.user_expavg_credit
+        self.__host_total_credit = project.host_total_credit
+        self.__host_expavg_credit = project.host_expavg_credit
+        self.__nrpc_failures = project.nrpc_failures
+        self.__master_fetch_failures = project.master_fetch_failures
         self.__master_fetch_pending = ''
-        self.__scheduler_rpc_pending = ''
+        self.__scheduler_rpc_pending = project.sched_rpc_pending
         self.__trickle_upload_pending = ''
-        self.__attached_via_account_manager = ''
+        self.__attached_via_account_manager = project.attached_via_acct_mgr
         self.__ended = ''
         self.__suspended_via_gui = ''
         self.__dont_request_more_work = ''
         self.__disk_usage = ''
-        self.__last_rpc = ''
-        self.__project_files_downloaded = ''
+        self.__last_rpc = project.last_rpc_time
+        self.__project_files_downloaded = project.project_files_downloaded_time
         self.__gui_urls = []
 
     @property
@@ -188,6 +207,14 @@ class Project(object):
     @master_url.setter
     def master_url(self, val):
         self.__master_url = val
+
+    @property
+    def scheduler_rpc_pending(self):
+        return self.__scheduler_rpc_pending
+
+    @scheduler_rpc_pending.setter
+    def scheduler_rpc_pending(self, val):
+        self.__scheduler_rpc_pending = val
 
 
 class GuiUrl(object):

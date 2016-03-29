@@ -4,7 +4,7 @@
 
 import lib.boincindicator.client as client
 
-import boincsite.status.rpc.HostInfo as hi
+import boincsite.status.HostInfo as hi
 import boincsite.util.uptime as uptime
 
 

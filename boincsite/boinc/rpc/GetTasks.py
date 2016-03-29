@@ -4,7 +4,7 @@
 
 import lib.boincindicator.client as client
 
-import boincsite.status.rpc.Task as t
+import boincsite.status.Task as t
 
 class GetTasks(object):
 

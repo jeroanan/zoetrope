@@ -13,11 +13,11 @@ import cherrypy
 import boincsite.boinc.CommandLineFactory as clf
 import boincsite.boinc.RpcFactory as rf
 
+import boincsite.status.AvailableProject as ap
 import boincsite.status.DailyTransfer as dt
 import boincsite.status.DiskUsage as duj
-import boincsite.status.rpc.Notice as notice
-import boincsite.status.rpc.GlobalPreferences as ggp
-import boincsite.status.rpc.AvailableProject as ap
+import boincsite.status.GlobalPreferences as ggp
+import boincsite.status.Notice as notice
 
 import boincsite.templates.TemplateRenderer as tr
 

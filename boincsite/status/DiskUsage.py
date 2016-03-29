@@ -4,15 +4,23 @@
 
 import json
 
+import lib.boincindicator.resulttypes.DiskUsage as diskusage
+
 import boincsite.util.ByteConversion as bc
 
 
 class DiskUsage(object):
 
     def __init__(self, disk_usage):
-        self.__total_disk_space = 0
-        self.__free_disk_space = 0
-        self.__project_disk_usages = []
+
+        def list_from_type(type_name):
+            return [x for x in disk_usage if type(x) == type_name]
+
+        projects = list_from_type(diskusage.DiskUsageProject)
+        self.__total_disk_space = list_from_type(diskusage.DiskUsageDiskTotal)[0].disk_bytes
+        self.__free_disk_space = list_from_type(diskusage.DiskUsageDiskFree)[0].disk_bytes
+
+        self.__project_disk_usages = map(lambda x: ProjectDiskUsage(x), projects)
 
     @property
     def total_disk_space(self):
@@ -69,8 +77,8 @@ class ProjectDiskUsage(object):
            master URL: http://setiathome.berkeley.edu/
            disk usage: 0.11MB
         """
-        self.master_url = ''
-        self.disk_usage = ''
+        self.__master_url = project_disk_usage.master_url
+        self.__disk_usage = bc.bytes_to_megabytes(project_disk_usage.disk_usage)
 
     @property
     def master_url(self):

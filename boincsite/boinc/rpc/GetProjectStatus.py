@@ -6,7 +6,7 @@ from xml.etree import ElementTree
 
 import lib.boincindicator.client as client
 
-import boincsite.status.rpc.Project as p
+import boincsite.status.Project as p
 
 
 class GetProjectStatus(object):

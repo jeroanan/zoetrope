@@ -8,7 +8,7 @@ import json
 import lib.boincindicator.client as client
 
 import config as conf
-import boincsite.status.rpc.GlobalPreferences as gp
+import boincsite.status.GlobalPreferences as gp
 
 
 class GetGlobalPreferences(object):

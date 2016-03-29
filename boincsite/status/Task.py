@@ -2,31 +2,32 @@
 #
 # Licensed under the GPL version 3
 
+import time
+
 
 class Task(object):
 
     def __init__(self, task):
-        self.__name = ''
-        self.__workunit_name = ''
-        self.__project_url = ''
-        self.__project_name = ''
-        self._report_deadline = ''
-        self._ready_to_report = ''
-        self.__got_server_ack = ''
-        self.__final_cpu_time = ''
-        self.__state = ''
-        self.__scheduler_state = ''
-        self.__exit_status = ''
-        self.__signal = ''
-        self._suspended_via_gui = ''
-        self.__active_task_state = ''
-        self.__app_version_num = ''
-        self.__checkpoint_cpu_time = ''
-        self.__current_cpu_time = ''
-        self.__fraction_done = 0.0
-        self.__swap_size = ''
-        self.__working_set_size = ''
-        self.__estimated_cpu_time_remaining = ''
+        self.__name = task.name
+        self.__workunit_name = task.wu_name
+        self.__project_url = task.project_url
+        self._report_deadline = task.report_deadline
+        self._ready_to_report = task.ready_to_report
+        self.__got_server_ack = task.got_server_ack
+        self.__final_cpu_time = task.final_cpu_time
+        self.__state = task.state
+        self.__scheduler_state = task.scheduler_state
+        self.__exit_status = task.exit_status
+        self.__signal = task.signal
+        self._suspended_via_gui = task.suspended_via_gui
+        self.__active_task_state = task.active_task_state
+        self.__app_version_num = task.app_version_num
+        self.__checkpoint_cpu_time = task.checkpoint_cpu_time
+        self.__current_cpu_time = task.current_cpu_time
+        self.__fraction_done = task.fraction_done
+        self.__swap_size = task.swap_size
+        self.__working_set_size = task.working_set_size
+        self.__estimated_cpu_time_remaining = task.estimated_cpu_time_remaining
 
     @property
     def name(self):
@@ -54,6 +55,7 @@ class Task(object):
 
     @property
     def report_deadline(self):
+        return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(self._report_deadline))
         return self._report_deadline
 
     @report_deadline.setter
@@ -62,7 +64,7 @@ class Task(object):
 
     @property
     def ready_to_report(self):
-        return self._ready_to_report == 'yes'
+        return self._ready_to_report
 
     @ready_to_report.setter
     def ready_to_report(self, val):
@@ -118,7 +120,7 @@ class Task(object):
 
     @property
     def suspended_via_gui(self):
-        return self._suspended_via_gui == 'yes'
+        return self._suspended_via_gui
 
     @suspended_via_gui.setter
     def suspended_via_gui(self, val):
@@ -187,15 +189,7 @@ class Task(object):
     @property
     def estimated_cpu_time_remaining(self):
         return self.formatted_time_from_seconds(self.__estimated_cpu_time_remaining)
-
-    @property
-    def project_name(self):
-        return self.__project_name
-
-    @project_name.setter
-    def project_name(self, val):
-        self.__project_name = val
-
+    
     def formatted_time_from_seconds(self, seconds):
         m, s = divmod(float(seconds), 60)
         h, m = divmod(m, 60)

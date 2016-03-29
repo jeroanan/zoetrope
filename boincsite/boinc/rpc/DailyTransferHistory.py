@@ -4,7 +4,7 @@
 
 import lib.boincindicator.client as client
 
-import boincsite.status.rpc.DailyTransfer as dt
+import boincsite.status.DailyTransfer as dt
 
 
 class DailyTransferHistory(object):

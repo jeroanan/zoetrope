@@ -2,15 +2,17 @@
 #
 # Licensed under the GPL version 3
 
+import boincsite.util.DateTimeUtil as dt
+
 
 class Message(object):
 
     def __init__(self, message):
-        self.__message_number = -1
-        self.__date_time = ''
-        self.__message_type = ''
-        self.__project_name = ''
-        self.__message_text = ''
+        self.__message_number = int(message.seqno)
+        self.__project_name = message.project
+        self.__message_text = message.body
+        self.__message_type = message.pri
+        self.__date_time = dt.get_date_from_epoch_seconds(int(message.time))
 
     @property
     def message_number(self):
@@ -51,3 +53,15 @@ class Message(object):
     @message_text.setter
     def message_text(self, val):
         self.__message_text = val
+
+    def __str__(self):
+        return """Message no: {message_number}
+Project: {project}
+Message Text: {message_text}
+Message Type: {message_type}
+Date/Time: {date_time}
+""".format(message_number=self.message_number,
+           project=self.project_name,
+           message_text=self.message_text,
+           message_type=self.message_type,
+           date_time=self.date_time)
