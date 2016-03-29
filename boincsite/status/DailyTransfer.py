@@ -17,7 +17,7 @@ class DailyTransfer(object):
 
     def get_transfer_date(self, epoch_days):
         first_day = dtime.date(1970, 1, 1)
-        delta = dtime.timedelta(epoch_days)
+        delta = dtime.timedelta(days=epoch_days)
         return first_day + delta
 
     def __str__(self):
@@ -52,14 +52,8 @@ class DailyTransfer(object):
 class JSONEncoder(json.JSONEncoder):
 
     def default(self, o):
-        # Expected date example: 02-Jan-2016
-        date_split = o.date.split('-')
-        date_str = "{year}-{month}-{day}".format(year=date_split[2],
-                                                 month=get_month_num(date_split[1]),
-                                                 day=date_split[0])
-
         return {
-            'date': date_str,
+            'date': o.date,
             'uploaded': float(o.uploaded.strip('MB')),
             'downloaded': float(o.downloaded.strip('MB'))
         }
