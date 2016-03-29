@@ -20,7 +20,6 @@ import boincsite.status.Notice as notice
 
 import boincsite.templates.TemplateRenderer as tr
 
-import boincsite.util.JSONEncoder as jse
 import boincsite.util.JSONAttrEncoder as jsae
 
 WorkingDirectory = os.path.dirname(os.path.abspath(__file__))
