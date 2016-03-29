@@ -21,6 +21,7 @@ import boincsite.status.Notice as notice
 import boincsite.templates.TemplateRenderer as tr
 
 import boincsite.util.JSONEncoder as jse
+import boincsite.util.JSONAttrEncoder as jsae
 
 WorkingDirectory = os.path.dirname(os.path.abspath(__file__))
 
@@ -57,16 +58,16 @@ class WebServer(object):
         task_name = kwargs.get('task_name', '')
         task_command = self.__rpc_factory.create('GetTask')
         task = task_command.execute(task_name)
-        return json.dumps(task, self.__io, cls=jse.JSONEncoder)
+        return json.dumps(task, self.__io, cls=jsae.JSONEncoder)
 
     @cherrypy.expose
     def projects_json(self, **kwargs):
-        return json.dumps(self.__get_projects(), self.__io, cls=jse.JSONEncoder)
+        return json.dumps(self.__get_projects(), self.__io, cls=jsae.JSONEncoder)
 
     @cherrypy.expose
     def project_json(self, **kwargs):
         project = [t for t in self.__get_projects() if t.name==kwargs.get('project', '')].pop()
-        return json.dumps(project, self.__io, cls=jse.JSONEncoder)
+        return json.dumps(project, self.__io, cls=jsae.JSONEncoder)
 
     def __get_projects(self):
         projects_command = self.__rpc_factory.create('GetProjectStatus')
@@ -74,38 +75,38 @@ class WebServer(object):
 
     @cherrypy.expose
     def messages_json(self, **kwargs):
-        return self.__straight_json_dump(self.__rpc_factory, 'GetMessages', jse, lambda x: list(x))
+        return self.__straight_json_dump('GetMessages', jsae, lambda x: list(x))
 
     @cherrypy.expose
     def tasks_json(self, **kwargs):
-        return self.__straight_json_dump(self.__rpc_factory, 'GetTasks', jse, lambda x: list(x))
+        return self.__straight_json_dump('GetTasks', jsae, lambda x: list(x))
 
     @cherrypy.expose
     def disk_usage_json(self, **kwargs):
-        return self.__straight_json_dump(self.__rpc_factory, 'DiskUsage', duj)
+        return self.__straight_json_dump('DiskUsage', duj)
 
     @cherrypy.expose
     def host_info_json(self, **kwargs):
-        return self.__straight_json_dump(self.__rpc_factory, 'HostInfo', jse)
+        return self.__straight_json_dump('HostInfo', jsae)
 
     @cherrypy.expose
     def daily_transfer_history_json(self, **kwargs):
-        return self.__straight_json_dump(self.__rpc_factory, 'DailyTransferHistory', dt, lambda x: list(x))
+        return self.__straight_json_dump('DailyTransferHistory', dt, lambda x: list(x))
 
     @cherrypy.expose
     def notices_json(self, **kwargs):
-        return self.__straight_json_dump(self.__rpc_factory, 'GetNotices', notice, lambda x: list(x))
+        return self.__straight_json_dump('GetNotices', notice, lambda x: list(x))
 
     @cherrypy.expose
     def get_global_preferences_json(self, **kwargs):
-        return self.__straight_json_dump(self.__rpc_factory, 'GetGlobalPreferences', ggp)
+        return self.__straight_json_dump('GetGlobalPreferences', ggp)
 
     @cherrypy.expose
     def get_all_projects_list_json(self, **kwargs):
-        return self.__straight_json_dump(self.__rpc_factory, 'GetAllProjectsList', ap, lambda x: list(x))
+        return self.__straight_json_dump('GetAllProjectsList', ap, lambda x: list(x))
 
-    def __straight_json_dump(self, factory, command_type, result_type, post_process=None):
-        command = factory.create(command_type)
+    def __straight_json_dump(self, command_type, result_type, post_process=None):
+        command = self.__rpc_factory.create(command_type)
         result = command.execute()
 
         if post_process is not None:

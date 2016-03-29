@@ -11,9 +11,9 @@ import boincsite.util.ByteConversion as bc
 class DailyTransfer(object):
 
     def __init__(self, daily_transfer):
-        self.transfers_date = str(self.get_transfer_date(int(daily_transfer.when)))
-        self.bytes_uploaded = daily_transfer.up
-        self.bytes_downloaded = daily_transfer.down
+        self.date = str(self.get_transfer_date(int(daily_transfer.when)))
+        self.uploaded = bc.bytes_to_megabytes(daily_transfer.up)
+        self.downloaded = bc.bytes_to_megabytes(daily_transfer.down)
 
     def get_transfer_date(self, epoch_days):
         first_day = dtime.date(1970, 1, 1)
@@ -23,31 +23,6 @@ class DailyTransfer(object):
     def __str__(self):
         return 'Date: {date}: uploaded: {uploaded}, downloaded: {downloaded}'.format(
             date=self.date, uploaded=self.uploaded, downloaded=self.downloaded)
-
-    @property
-    def date(self):
-        return self.transfers_date
-
-    @date.setter
-    def date(self, val):
-        self.transfers_date = val
-
-    @property
-    def uploaded(self):
-        return bc.bytes_to_megabytes(self.bytes_uploaded)
-
-    @uploaded.setter
-    def uploaded(self, val):
-        self.bytes_uploaded = val
-
-    @property
-    def downloaded(self):
-        return bc.bytes_to_megabytes(self.bytes_downloaded)
-
-    @downloaded.setter
-    def downloaded(self, val):
-        self.bytes_downloaded = val
-
 
 class JSONEncoder(json.JSONEncoder):
 

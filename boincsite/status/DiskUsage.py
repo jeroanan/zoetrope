@@ -17,34 +17,10 @@ class DiskUsage(object):
             return [x for x in disk_usage if type(x) == type_name]
 
         projects = list_from_type(diskusage.DiskUsageProject)
-        self.__total_disk_space = list_from_type(diskusage.DiskUsageDiskTotal)[0].disk_bytes
-        self.__free_disk_space = list_from_type(diskusage.DiskUsageDiskFree)[0].disk_bytes
+        self.total_disk_space = bc.bytes_to_gigabytes(list_from_type(diskusage.DiskUsageDiskTotal)[0].disk_bytes)
+        self.free_disk_space = bc.bytes_to_gigabytes(list_from_type(diskusage.DiskUsageDiskFree)[0].disk_bytes)
 
-        self.__project_disk_usages = map(lambda x: ProjectDiskUsage(x), projects)
-
-    @property
-    def total_disk_space(self):
-        return bc.bytes_to_gigabytes(self.__total_disk_space)
-
-    @total_disk_space.setter
-    def total_disk_space(self, val):
-        self.__total_disk_space = val
-
-    @property
-    def free_disk_space(self):
-        return bc.bytes_to_gigabytes(self.__free_disk_space)
-
-    @free_disk_space.setter
-    def free_disk_space(self, val):
-        self.__free_disk_space = val
-
-    @property
-    def project_disk_usages(self):
-        return self.__project_disk_usages
-
-    @project_disk_usages.setter
-    def project_disk_usages(self, val):
-        self.__project_disk_usages = val
+        self.project_disk_usages = map(lambda x: ProjectDiskUsage(x), projects)
 
 class JSONEncoder(json.JSONEncoder):
 
@@ -77,21 +53,5 @@ class ProjectDiskUsage(object):
            master URL: http://setiathome.berkeley.edu/
            disk usage: 0.11MB
         """
-        self.__master_url = project_disk_usage.master_url
-        self.__disk_usage = bc.bytes_to_megabytes(project_disk_usage.disk_usage)
-
-    @property
-    def master_url(self):
-        return self.__master_url
-
-    @master_url.setter
-    def master_url(self, val):
-        self.__master_url = val
-
-    @property
-    def disk_usage(self):
-        return self.__disk_usage
-
-    @disk_usage.setter
-    def disk_usage(self, val):
-        self.__disk_usage = val
+        self.master_url = project_disk_usage.master_url
+        self.disk_usage = bc.bytes_to_megabytes(project_disk_usage.disk_usage)
