@@ -4,6 +4,7 @@
 
 from io import StringIO
 import json
+import time
 
 import lib.boincindicator.client as client
 
@@ -19,4 +20,17 @@ class ExperimentalTask(object):
 
         with client.BoincClient(passwd=password) as c:
             c.authorize(password)
-            c.get_cc_status()
+
+            project_url = 'http://asteroidsathome.net/boinc'
+            email_address = ''
+
+            # hash of pasword + email_address
+            password = '4d3eeb4a0230a38f84011caa7d1e1b0d'
+            c.lookup_account(project_url, email_address, password, already_hashed=True)
+
+            i = 0
+
+            while i<6:
+                print(c.lookup_account_poll())
+                time.sleep(2)
+                i+=1

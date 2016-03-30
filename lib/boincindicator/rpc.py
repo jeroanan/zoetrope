@@ -110,7 +110,17 @@ class Rpc(object):
         req += buf[:n].decode('UTF-8')
 
         # unpack reply (remove root tag, ie: first and last lines)
-        req = '\n'.join(req.strip().rsplit('\n')[1:-1])
+        new_req = '\n'.join(req.strip().rsplit('\n')[1:-1])
+
+        # If an empty reply is received from the server (i.e. <boinc_gui_rpc></boinc_gui_rpc>) and it gets unpacked
+        # it will results in an empty string, which will cause trouble when doing ElementTree.fromstring further down.
+        # So in this case we should just return the boinc_gui_rpc packed xml. Calling functions can use this as a safe
+        # way to assert that "I asked BOINC to do something, but it gave me back nothing".
+        #
+        # A good way for this situation to occur is to make a call for lookup_account_poll when no prior lookup_account
+        # call has been issued.
+        if new_req != '':
+            req = new_req
 
         if text_output:
             return req

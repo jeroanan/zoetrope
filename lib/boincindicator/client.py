@@ -31,6 +31,7 @@ import lib.boincindicator.resulttypes.DailyTransfer as dailytransfer
 import lib.boincindicator.resulttypes.DiskUsage as diskusage
 import lib.boincindicator.resulttypes.GlobalPreferences as globalpreferences
 import lib.boincindicator.resulttypes.HostInfo as hostinfo
+import lib.boincindicator.resulttypes.LookupAccountPoll as lookupaccountpoll
 import lib.boincindicator.resulttypes.Message as message
 import lib.boincindicator.resulttypes.Notice as notice
 import lib.boincindicator.resulttypes.Result as result
@@ -384,9 +385,78 @@ class BoincClient(object):
          </get_project_init_status>
 
         .. for me at least. I probably have to supply a project name to actually get anything.
-        xml = '<get_project_init_status />''''
+        '''
+        xml = '<get_project_init_status />'
         results = self.rpc.call(xml)
         print(ElementTree.tostring(results))
+
+    def lookup_account(self, project_url, email_address, password, already_hashed=False):
+        ''' Look up an existing account on a BOINC project
+        If the lookup_account RPC call is received successfully by the server, a very simple XML element is returned:
+
+        <success />
+
+        What we're really after is an account key. In order to get that we need to poll until it has been retrieved.
+        Polling is done by calling a different command.
+
+        If already_hashed is True, the password parameter should be an md5 hash of password+email_address.
+        '''
+        if already_hashed:
+            password_hash = password
+        else:
+            hash_input = password + email_address
+            password_hash = hashlib.md5(hash_input.encode()).hexdigest()
+
+        xml = '<lookup_account><url>{url}</url><email_addr>{email_address}</email_addr><passwd_hash>{password_hash}</passwd_hash><ldap_auth>0</ldap_auth></lookup_account>'.format(
+            url=project_url, email_address=email_address, password_hash=password)
+
+        results = self.rpc.call(xml)
+
+    def lookup_account_poll(self):
+        ''' Check up on the progress of a previous lookup_account RPC call.
+
+        The returned XML from the lookup_account_poll differs based on how the request is getting on.
+
+        When it's called right after the lookup_account call is made, the chances are it will be in progress, which is
+        represented by error -204:
+
+        <account_out><error_num>-204</error_num>\n</account_out>
+
+        If the lookup has completed but the password is incorrect, the error is -206 and a descriptive message is
+        returned:
+
+        <error><error_num>-206</error_num><error_msg>Invalid password</error_msg></error>
+
+        There are other possible error numbers for things like incorrect email addresses which for now can be seen in
+        the main BOINC source code in lib/error_numbers.h.
+
+        If the lookup has completed and was successful then the authenticator is returned:
+
+        <account_out><authenticator>[AUTHENTICATOR STRING]</authenticator></account_out>
+
+        The return type is one of two possibilities:
+
+            1. AccountOut for waiting, success or error:
+             a. If successful the authenticator field will be set
+             b. If we're still waiting then the error_num field will be set to -204. Other fields will be empty.
+             c. If there's been an error then the error_num will be something other than empty or -204 and the
+                erorr_msg field will be set.
+
+            2. A string if we get something back that's unrecognised (e.g. If this function is called when there's been
+               no recent call to lookup_account)
+        '''
+        xml = '<lookup_account_poll />'
+        results = self.rpc.call(xml)
+
+        results_str = ElementTree.tostring(results)
+
+        result_is_account_out = results_str.startswith('<account_out>'.encode())
+        result_is_error = results_str.startswith('<error>'.encode())
+
+        if result_is_account_out or result_is_error:
+            return lookupaccountpoll.AccountOut.parse(results)
+
+        return ElementTree.tostring(results) # If all else fails, just return a string containing what we did get.
 
 def read_gui_rpc_password():
     ''' Read password string from GUI_RPC_PASSWD_FILE file, trim the last CR
