@@ -118,15 +118,16 @@ class BoincClient(object):
             self.connected = False
 
     def get_cc_config(self):
-        # The get_cc_config RPC call returns an xml document similar to:
-        #
-        # <cc_config>
-        #   <log_flags>
-        #     <task>1</task>
-        #     <file_xfer>1</file_xfer>
-        #     <sched_ops>1</sched_ops>
-        #   </log_flags>
-        # </cc_config>
+        ''' The get_cc_config RPC call returns an xml document similar to:
+
+        <cc_config>
+          <log_flags>
+            <task>1</task>
+            <file_xfer>1</file_xfer>
+            <sched_ops>1</sched_ops>
+          </log_flags>
+        </cc_config>
+        '''
         result = self.rpc.call('<get_cc_config />')
         print(ElementTree.tostring(result))
 
@@ -236,30 +237,31 @@ class BoincClient(object):
         return result
 
     def get_all_projects_list(self):
-        # Returns a list of available projects for the client to attach to.
-        #
-        # The get_all_projects_list RPC call returns an xml document similar to:
-        #
-        # <projects>
-        #   <project>
-        #     <name>Radioactive@Home</name>
-        #     <url>http://radioactiveathome.org/boinc/</url>
-        #     <general_area>Distributed sensing</general_area>
-        #     <specific_area>Environmental research</specific_area>
-        #     <description>Radioactive@Home is creating a free and continuously updated map of radiation levels
-        #           using sensors connected to volunteers\' computers.  You must buy a sensor to participate.</description>
-        #     <home>BOINC Poland Foundation</home>
-        #     <platforms>
-        #       <name>windows_intelx86</name>
-        #       <name>i686-pc-linux-gnu[nci]</name>
-        #       <name>armv7l-unknown-linux-gnueabihf</name>
-        #     </platforms>
-        #     <image>http://boinc.berkeley.edu/images/radioactive.jpg</image>
-        #     <summary>Monitor radiation levels</summary>
-        #   </project>
-        # </projects>
-        #
-        # There are an arbitrary number of projects. Each project can have an arbitrary number of platforms.
+        '''Returns a list of available projects for the client to attach to.
+
+        The get_all_projects_list RPC call returns an xml document similar to:
+
+        <projects>
+          <project>
+            <name>Radioactive@Home</name>
+            <url>http://radioactiveathome.org/boinc/</url>
+            <general_area>Distributed sensing</general_area>
+            <specific_area>Environmental research</specific_area>
+            <description>Radioactive@Home is creating a free and continuously updated map of radiation levels
+                  using sensors connected to volunteers\' computers.  You must buy a sensor to participate.</description>
+            <home>BOINC Poland Foundation</home>
+            <platforms>
+              <name>windows_intelx86</name>
+              <name>i686-pc-linux-gnu[nci]</name>
+              <name>armv7l-unknown-linux-gnueabihf</name>
+            </platforms>
+            <image>http://boinc.berkeley.edu/images/radioactive.jpg</image>
+            <summary>Monitor radiation levels</summary>
+          </project>
+        </projects>
+
+        There are an arbitrary number of projects. Each project can have an arbitrary number of platforms.
+        '''
         xml = '<get_all_projects_list />'
         results = self.rpc.call(xml)
         return map(lambda x: availableproject.AvailableProject.parse(x), xmlutil.parse_list(results))
@@ -312,21 +314,22 @@ class BoincClient(object):
         return projects
 
     def get_daily_transfer_history(self):
-        # The get_daily_xfer_history RPC call returns an xml document similar to:
-        #
-        # <daily_xfers>
-        #  <dx>
-        #    <when>16882</when>
-        #    <up>158287.000000</up>
-        #    <down>1127055.000000</down>
-        #  </dx>
-        # </daily_xfers>
-        #
-        # ...There are as many dx elements as there are days recorded
-        # that have had network transfer activity.
-        #
-        # when is the numnber of days since 1970-01-01.
-        # up and down are the number of bytes uploaded and downloaded respectively.
+        '''The get_daily_xfer_history RPC call returns an xml document similar to:
+
+        <daily_xfers>
+         <dx>
+           <when>16882</when>
+           <up>158287.000000</up>
+           <down>1127055.000000</down>
+         </dx>
+        </daily_xfers>
+
+        ...There are as many dx elements as there are days recorded
+        that have had network transfer activity.
+
+        when is the numnber of days since 1970-01-01.
+        up and down are the number of bytes uploaded and downloaded respectively.
+        '''
         xml = '<get_daily_xfer_history />'
         results = self.rpc.call(xml)
         return map(lambda x: dailytransfer.DailyTransfer.parse(x), xmlutil.parse_list(results))
@@ -342,42 +345,46 @@ class BoincClient(object):
         return map(lambda x: notice.Notice.parse(x), results)
 
     def get_notices_public(self):
-        # How does this differ from get_notices?
-        # Not much I think. Presumably it filters out the private notices,
-        # of which I have yet to see any examples.
+        ''' How does this differ from get_notices?
+        Not much I think. Presumably it filters out the private notices,
+        of which I have yet to see any examples.
+        '''
         xml = '<get_notices_public />'
         results = self.rpc.call(xml)
         return map(lambda x: notice.Notice.parse(x), results)
 
     def get_account_manager_info(self):
-        # The get_acct_mgr_info RPC call returns an XML document similar to:
-        #
-        # <acct_mgr_info>
-        #   <acct_mgr_url>https://bam.boincstats.com/</acct_mgr_url>
-        #   <acct_mgr_name>BOINCstatsBAM!</acct_mgr_name>
-        #   <have_credentials /> <!-- I don't know what this is for yet. -->
-        # </acct_mgr_info>
+        ''' The get_acct_mgr_info RPC call returns an XML document similar to:
+
+        <acct_mgr_info>
+          <acct_mgr_url>https://bam.boincstats.com/</acct_mgr_url>
+          <acct_mgr_name>BOINCstatsBAM!</acct_mgr_name>
+          <have_credentials /> <!-- I don't know what this is for yet. -->
+        </acct_mgr_info>'''
         xml = '<acct_mgr_info />'
         results = self.rpc.call(xml)
         print(ElementTree.tostring(results))
 
     def get_global_prefs_file(self):
-        # The get_globals_prefs_file RPC call returns a quite large XML
-        # document containing global preferences. See the struct class
-        # for details.
+        ''' The get_globals_prefs_file RPC call returns a quite large XML
+        document containing global preferences. See the struct class
+        for details.
+        '''
         xml = '<get_global_prefs_file />'
         results = self.rpc.call(xml)
         return globalpreferences.GlobalPreferences.parse(results)
 
     def get_project_init_status(self):
-        # The get_project_init_status RPC call returns an xml document similar to:
-        # <get_project_init_status>
-        #   <url />
-        #   <name />
-        #   <team_name />
-        # </get_project_init_status>
-        # .. for me at least. I probably have to supply a project name to actually get anything.
-        xml = '<get_project_init_status />'
+        ''' The get_project_init_status RPC call returns an xml document similar to:
+
+         <get_project_init_status>
+          <url />
+          <name />
+          <team_name />
+         </get_project_init_status>
+
+        .. for me at least. I probably have to supply a project name to actually get anything.
+        xml = '<get_project_init_status />''''
         results = self.rpc.call(xml)
         print(ElementTree.tostring(results))
 
