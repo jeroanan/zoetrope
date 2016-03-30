@@ -25,7 +25,7 @@ class ExperimentalTask(object):
             email_address = ''
 
             # hash of pasword + email_address
-            password = '4d3eeb4a0230a38f84011caa7d1e1b0d'
+            password = ''
             c.lookup_account(project_url, email_address, password, already_hashed=True)
 
             i = 0
