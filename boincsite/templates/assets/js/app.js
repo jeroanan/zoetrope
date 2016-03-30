@@ -55,6 +55,11 @@ angular.module('zoetrope', [
         controller: 'projectDetailCrl',
         controllerAs: 'vm'
       }).
+      when('/attachproject', {
+        templateUrl: '/static/views/attachproject.html',
+        controller: 'attachProjectCtrl',
+        controllerAs: 'vm'
+      }).
       otherwise({
         redirectTo: '/'
       });
