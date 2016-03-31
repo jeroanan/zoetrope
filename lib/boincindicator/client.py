@@ -458,6 +458,23 @@ class BoincClient(object):
 
         return ElementTree.tostring(results) # If all else fails, just return a string containing what we did get.
 
+    def project_attach(self, project_url, authenticator):
+        '''Attach to a project.
+
+        authenticator is a string that is used to indicate to the project which account you are. It is obtained by
+        calling lookup_account with the correct details and then calling lookup_account_poll until the authenticator
+        property has been set (assuming no other problem has arisen).
+
+        When the project has been successfully attached to the following xml is returned:
+
+        <success />
+        '''
+        xml = '<project_attach><use_config_file>false</use_config_file><project_url>{project_url}</project_url><authenticator>{authenticator}</authenticator><project_name>{project_url}</project_name></project_attach>'.format(
+                project_url=project_url, authenticator=authenticator)
+
+        result = self.rpc.call(xml)
+        print(ElementTree.tostring(result))
+
 def read_gui_rpc_password():
     ''' Read password string from GUI_RPC_PASSWD_FILE file, trim the last CR
         (if any), and return it

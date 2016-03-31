@@ -35,7 +35,7 @@ class WebServer(object):
 
     def start(self):
         cherrypy.config.update({'server.socket_host': '0.0.0.0',
-                                'server.socket_port': 8080,
+                                'server.socket_port': 8080
         })
         cherrypy.quickstart(WebServer(), '/', 'server.conf')
 
@@ -141,6 +141,15 @@ class WebServer(object):
             abort_task_command.execute(task_name)
 
         raise cherrypy.HTTPRedirect('/')
+
+    @cherrypy.expose
+    def attach_project(self, **kwargs):
+        project_url = kwargs.get('projectUrl', '')
+        email_address = kwargs.get('email', '')
+        password_hash = kwargs.get('password', '')
+
+        command = self.__rpc_factory.create('AttachProject')
+        command.execute(project_url, email_address, password_hash)
 
     @cherrypy.expose
     def experimental_task(self, **kwargs):

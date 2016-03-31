@@ -6,14 +6,23 @@
 angular.module('zoetropeControllers')
   .controller('attachProjectCtrl', AttachProjectController);
 
-function AttachProjectController() {
+AttachProjectController.$inject = ['attachProjectSvc'];
 
-  function submit_clicked() {
-    console.log(vm.projecturl);
-  }
+function AttachProjectController(attachProjectSvc) {
 
   var vm = this;
-  vm.submit_clicked = submit_clicked;
+  vm.projecturl = ''
+  vm.emailaddress = ''
+  vm.password = ''
+  vm.submitClicked = submitClicked;
+
+  function submitClicked() {
+    var hash_in = vm.password + vm.emailaddress;
+    var password_hash = hex_md5(hash_in);
+    attachProjectSvc.query(vm.projecturl, vm.emailaddress, password_hash)().query();
+  }
+
+
 
   vm.title = 'Attach Project';
   document.title = vm.title;
