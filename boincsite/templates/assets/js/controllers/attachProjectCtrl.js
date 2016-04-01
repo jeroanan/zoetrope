@@ -1,5 +1,5 @@
 /**
- * Controller for the All Projects list screen.
+ * Controller for the Attach project screen.
  *
  * (c) David Wilson 2016, licensed under GPL V3.
  */

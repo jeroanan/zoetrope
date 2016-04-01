@@ -32,7 +32,8 @@ module.exports = function(grunt) {
             'boincsite/templates/assets/js/controllers/globalPreferencesCtrl.js',
             'boincsite/templates/assets/js/controllers/allProjectListCtrl.js',
             'boincsite/templates/assets/js/controllers/projectDetailCtrl.js',
-            'boincsite/templates/assets/js/controllers/attachProjectCtrl.js'
+            'boincsite/templates/assets/js/controllers/attachProjectCtrl.js',
+            'boincsite/templates/assets/js/controllers/detachProjectCtrl.js'
             ]
         }
       },
@@ -84,7 +85,8 @@ module.exports = function(grunt) {
           'boincsite/templates/assets/js/controllers/globalPreferencesCtrl.js',
           'boincsite/templates/assets/js/controllers/allProjectListCtrl.js',
           'boincsite/templates/assets/js/controllers/projectDetailCtrl.js',
-          'boincsite/templates/assets/js/controllers/attachProjectCtrl.js'
+          'boincsite/templates/assets/js/controllers/attachProjectCtrl.js',
+          'boincsite/templates/assets/js/controllers/detachProjectCtrl.js'
         ],
         tasks: ['uglify:controllers']
       },

@@ -60,6 +60,11 @@ angular.module('zoetrope', [
         controller: 'attachProjectCtrl',
         controllerAs: 'vm'
       }).
+      when('/detachproject', {
+        templateUrl: '/static/views/detachproject.html',
+        controller: 'detachProjectCtrl',
+        controllerAs: 'vm'
+      }).
       otherwise({
         redirectTo: '/'
       });

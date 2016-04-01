@@ -1,0 +1,61 @@
+<h1>{{ vm.title }}</h1>
+<div ng-show="!vm.ready" class="text-center">
+  <img src="/static/img/loading.gif" />
+</div>
+<div ng-show="vm.ready">
+  <form class="row-horizontal">
+      <div class="row">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-8">
+          <div class="form-group">
+            <label for="projects">Project</label>
+            <select name="projects" ng-model="vm.selectedProject" ng-change="vm.showConfirmDetach=false"
+              class="form-control">
+              <option ng-repeat="p in vm.attachedProjects|orderBy:'name'" value="{{p.master_url}}">
+                {{p.name}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-xs-2"></div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-8">
+          <div class="form-group">
+            <label for="projecturl">Project URL</label>
+            <input type="text" name="projecturl" readonly="true" class="form-control" ng-model="vm.selectedProject">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-8">
+          <div class="form-group">
+            <button type="button" name="detach" class="btn btn-primary pull-right" ng-click="vm.detachButtonClicked()">
+              Detach
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <p></p>
+      </div>
+      <div class="row" ng-show="vm.showConfirmDetach">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-8">
+          <div class="form-group">
+            <div class="pull-right">
+              <span class="text-danger">
+                Really detach from this project?
+                  <a ng-href="/dettach_project?project_url={{vm.selectedProject}}">Yes</a>&nbsp;|&nbsp;
+                  <a href="" ng-click="vm.showConfirmDetach=false">No</a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+  </form>
+
+
+</div>

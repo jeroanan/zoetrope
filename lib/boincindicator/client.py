@@ -475,6 +475,13 @@ class BoincClient(object):
         result = self.rpc.call(xml)
         print(ElementTree.tostring(result))
 
+    def project_detach(self, project_url):
+        '''Detach from a project.
+        '''
+        xml = '<project_detach><project_url>{project_url}</project_url></project_detach>'
+        result = self.rpc.call(xml)
+        print(ElementTree.tostring(result))
+
 def read_gui_rpc_password():
     ''' Read password string from GUI_RPC_PASSWD_FILE file, trim the last CR
         (if any), and return it
