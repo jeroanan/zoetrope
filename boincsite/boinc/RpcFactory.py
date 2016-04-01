@@ -3,6 +3,7 @@
 # Licensed under the GPL version 3
 
 import boincsite.boinc.AttachProject as ap
+import boincsite.boinc.DetachProject as dp
 import boincsite.boinc.GetDiskUsage as gdu
 import boincsite.boinc.GetMessages as gm
 import boincsite.boinc.GetTask as gt
@@ -25,6 +26,7 @@ class RpcFactory(object):
     def create(command_type):
         mappings = {
             'AttachProject': ap.AttachProject,
+            'DetachProject': dp.DetachProject,
             'DiskUsage': gdu.GetDiskUsage,
             'GetTasks': gts.GetTasks,
             'GetTask': gt.GetTask,

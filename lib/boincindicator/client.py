@@ -477,7 +477,14 @@ class BoincClient(object):
 
     def project_detach(self, project_url):
         '''Detach from a project.
+
+        The project_detach RPC call can return the following things:
+
+        If the project being detached from is not recognised by BOINC:
+
+            <error>No such project</error>
         '''
+        print(project_url)
         xml = '<project_detach><project_url>{project_url}</project_url></project_detach>'
         result = self.rpc.call(xml)
         print(ElementTree.tostring(result))

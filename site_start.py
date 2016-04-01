@@ -152,6 +152,13 @@ class WebServer(object):
         command.execute(project_url, email_address, password_hash)
 
     @cherrypy.expose
+    def dettach_project(self, **kwargs):
+        project_url = kwargs.get('project_url', '')
+
+        command = self.__rpc_factory.create('DetachProject')
+        command.execute(project_url)
+
+    @cherrypy.expose
     def experimental_task(self, **kwargs):
         command = self.__rpc_factory.create('ExperimentalTask')
         command.execute()
