@@ -19,4 +19,5 @@ class ResultTask(object):
     def execute(self, result_func):
         with client.BoincClient(passwd=self.__password) as c:
             c.authorize(self.__password)
+            print(self.__task.project_url)
             getattr(c, result_func)(self.__task.name, self.__task.project_url)

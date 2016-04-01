@@ -1,47 +1,65 @@
 <script type="text/javascript" src="/static/js/md5.js"></script>
-
 <h1>{{ vm.title }}</h1>
-<div>
-  <form class="row-horizontal">
-    <div class="row">
-      <div class="col-xs-2"></div>
-      <div class="col-xs-8">
-        <div class="form-group">
-          <label for="projecturl">Project URL</label>
-          <input type="text" class="form-control" name="projecturl" ng-model="vm.projecturl">
+<div ng-show="!vm.ready" class="text-center">
+  <img src="/static/img/loading.gif" />
+</div>
+<div ng-show="vm.ready">
+  <div>
+    <form class="row-horizontal">
+      <div class="row">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-8">
+          <div class="form-group">
+            <label for="projects">Project</label>
+            <select name="projects" ng-model="vm.selectedProject" ng-change="vm.showConfirmDetach=false"
+              class="form-control">
+              <option ng-repeat="p in vm.attachedProjects|orderBy:'name'" value="{{p.url}}">
+                {{p.name}}
+              </option>
+            </select>
+          </div>
         </div>
+        <div class="col-xs-2"></div>
       </div>
-      <div class="col-xs-2"></div>
-    </div>
-    <div class="row">
-      <div class="col-xs-2"></div>
-      <div class="col-xs-8">
-        <div class="form-group">
-          <label for="emailaddress">Email Address</label>
-          <input type="text" class="form-control" name="emailaddress" ng-model="vm.emailaddress">
+      <div class="row">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-8">
+          <div class="form-group">
+            <label for="projecturl">Project URL</label>
+            <input type="text" readonly="true" class="form-control" name="projecturl" ng-model="vm.selectedProject">
+          </div>
         </div>
+        <div class="col-xs-2"></div>
       </div>
-      <div class="col-xs-2"></div>
-    </div>
-    <div class="row">
-      <div class="col-xs-2"></div>
-      <div class="col-xs-8">
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" name="password" ng-model="vm.password">
+      <div class="row">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-8">
+          <div class="form-group">
+            <label for="emailaddress">Email Address</label>
+            <input type="text" class="form-control" name="emailaddress" ng-model="vm.emailaddress">
+          </div>
         </div>
+        <div class="col-xs-2"></div>
       </div>
-      <div class="col-xs-2"></div>
-    </div>
-    <div class="row">
-      <div class="col-xs-2"></div>
-      <div class="col-xs-8">
-        <button type="button" name="submit" class="btn btn-primary pull-right" ng-click="vm.submitClicked()">
-          Submit
-        </button>
+      <div class="row">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-8">
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" ng-model="vm.password">
+          </div>
+        </div>
+        <div class="col-xs-2"></div>
       </div>
-      <div class="col-xs-2"></div>
-    </div>
-  </form>
-
+      <div class="row">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-8">
+          <button type="button" name="submit" class="btn btn-primary pull-right" ng-click="vm.submitClicked()">
+            Submit
+          </button>
+        </div>
+        <div class="col-xs-2"></div>
+      </div>
+    </form>
+  </div>
 </div>

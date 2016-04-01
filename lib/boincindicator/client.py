@@ -483,9 +483,17 @@ class BoincClient(object):
         If the project being detached from is not recognised by BOINC:
 
             <error>No such project</error>
+
+        If the project has been attached via an account manager:
+
+            <boinc_gui_rpc_reply>\n<error>must detach using account manager</error></boinc_gui_rpc_reply>
+
+        Successful detachment:
+
+            <success />
         '''
-        print(project_url)
-        xml = '<project_detach><project_url>{project_url}</project_url></project_detach>'
+        xml = '<project_detach><project_url>{project_url}</project_url></project_detach>'.format(
+            project_url=project_url)
         result = self.rpc.call(xml)
         print(ElementTree.tostring(result))
 
