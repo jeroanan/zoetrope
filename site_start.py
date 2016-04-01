@@ -151,6 +151,8 @@ class WebServer(object):
         command = self.__rpc_factory.create('AttachProject')
         command.execute(project_url, email_address, password_hash)
 
+        raise cherrypy.HTTPRedirect('/')
+
     @cherrypy.expose
     def dettach_project(self, **kwargs):
         project_url = kwargs.get('project_url', '')

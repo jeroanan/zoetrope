@@ -486,7 +486,7 @@ class BoincClient(object):
 
         If the project has been attached via an account manager:
 
-            <boinc_gui_rpc_reply>\n<error>must detach using account manager</error></boinc_gui_rpc_reply>
+            <boinc_gui_rpc_reply><error>must detach using account manager</error></boinc_gui_rpc_reply>
 
         Successful detachment:
 
