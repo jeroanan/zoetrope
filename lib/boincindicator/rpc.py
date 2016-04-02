@@ -113,12 +113,33 @@ class Rpc(object):
         new_req = '\n'.join(req.strip().rsplit('\n')[1:-1])
 
         # If an empty reply is received from the server (i.e. <boinc_gui_rpc></boinc_gui_rpc>) and it gets unpacked
-        # it will results in an empty string, which will cause trouble when doing ElementTree.fromstring further down.
+        # it will result in an empty string, which will cause trouble when doing ElementTree.fromstring further down.
         # So in this case we should just return the boinc_gui_rpc packed xml. Calling functions can use this as a safe
         # way to assert that "I asked BOINC to do something, but it gave me back nothing".
         #
         # A good way for this situation to occur is to make a call for lookup_account_poll when no prior lookup_account
-        # call has been issued.
+        # call has been issued. In this case it is impossible for us to set the text_output param, because when it is
+        # called appropriately actual XML would be returned that we would go on to make use of.
+        #
+        # The unpacking approach also fails if, after the unpacking, we end up with more than one XML node with no
+        # parent node. Take the case of get_newer_version:
+        #
+        # Before unpacking:
+        #
+        # <boinc_gui_rpc_reply>
+        # <newer_version></newer_version>
+        # <download_url>http://boinc.berkeley.edu/download.php</download_url>
+        # </boinc_gui_rpc_reply>
+        #
+        # After unpacking:
+        #
+        # <newer_version></newer_version>
+        # <download_url>http://boinc.berkeley.edu/download.php</download_url>
+        #
+        # ...which is not a valid XML document, so ElementTree.fromstring fails with a parse error. So in this situation
+        # it should also be the case that the packed XML is returned.
+        packed_req = req
+
         if new_req != '':
             req = new_req
 
@@ -128,5 +149,4 @@ class Rpc(object):
             try:
                 return ElementTree.fromstring(req)
             except ElementTree.ParseError:
-                print(req)
-                raise
+                return ElementTree.fromstring(packed_req)

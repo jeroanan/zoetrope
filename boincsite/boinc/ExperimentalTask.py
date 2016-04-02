@@ -21,6 +21,4 @@ class ExperimentalTask(object):
         with client.BoincClient(passwd=password) as c:
             c.authorize(password)
 
-            project_url = 'https://asteroidsathome.net/boinc/'
-
-            c.project_detach(project_url)
+            c.get_simple_gui_info()
