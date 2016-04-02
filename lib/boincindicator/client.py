@@ -278,20 +278,13 @@ class BoincClient(object):
         return ret
 
     def get_disk_usage(self):
+        '''Get disk usage
+
+        Disk usage is returned on a per-project basis. Additionally the disk free and total disk space used on the
+        filesystem BOINC runs in is returned.
+        '''
         xml = '<get_disk_usage />'
         results = self.rpc.call(xml)
-
-        # The problem that we have here is that we're not dealing with a list of the same element type here.
-        # Rather, we're dealing with a list of elements that could be one of a few types:
-        #
-        # * project
-        # * d_total
-        # * d_free
-        # * d_boinc (Whatever that is)
-        # * d_allowed (Whatever that is)
-        #
-        # So I guess we need to test each element's name, make a struct object of a type depending on the name,
-        # and return all that lot as a list.
 
         def objects_from_tag_class(tag_name, cls):
             return list(map(lambda x: cls.parse(x), get_element_by_tag(tag_name)))
@@ -336,11 +329,21 @@ class BoincClient(object):
         return map(lambda x: dailytransfer.DailyTransfer.parse(x), xmlutil.parse_list(results))
 
     def get_messages(self):
+        '''Get BOINC system messages.
+
+        System messages tend to be things like "Finished computation of XXX", so it's basically the log of the BOINC
+        process.
+        '''
         xml = '<get_messages />'
         results = self.rpc.call(xml)
         return map(lambda x: message.Message.parse(x), results)
 
     def get_notices(self):
+        '''Get BOINC notices
+
+        Notices tend to be announcements made by the BOINC projects, although I've also seen things like alerts that
+        a project doesn't support the current processor architecture in there as well.
+        '''
         xml = '<get_notices />'
         results = self.rpc.call(xml)
         return map(lambda x: notice.Notice.parse(x), results)

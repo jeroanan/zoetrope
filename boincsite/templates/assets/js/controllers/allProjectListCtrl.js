@@ -14,7 +14,29 @@ function AllProjectListController(allProjectListSvc) {
 
   vm.ready  = false;
   vm.title = 'All Projects';
+  vm.sortProp = 'name';
+  vm.reverseSort = false;
+  vm.availableProjects = null;
+  vm.doSort = getSortFunc('name');
+
   document.title = vm.title;
+
+
+  function getSortFunc(defaultSortField) {
+
+    var currentSortField = defaultSortField;
+
+    function doSort(sortField) {
+      if (sortField==currentSortField) {
+        vm.reverseSort = !vm.reverseSort;
+        return;
+      }
+      currentSortField = sortField;
+      vm.sortProp = sortField;
+      vm.reverseSort = false;
+    }
+    return doSort;
+  }
 
   allProjectListSvc.get()().query().$promise.then(function(d) {
     vm.ready = true;

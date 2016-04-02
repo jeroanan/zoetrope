@@ -16,6 +16,7 @@ function AttachProjectController(attachProjectSvc, allProjectListSvc) {
   vm.password = ''
   vm.submitClicked = submitClicked;
   vm.ready = false;
+  vm.title = 'Attach Project';
 
   function submitClicked() {
     var hash_in = vm.password + vm.emailaddress;
@@ -28,6 +29,6 @@ function AttachProjectController(attachProjectSvc, allProjectListSvc) {
     vm.ready = true;
   });
 
-  vm.title = 'Attach Project';
+
   document.title = vm.title;
 }

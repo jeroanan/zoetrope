@@ -12,7 +12,18 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="#/projects">Projects</a></li>
+
+        <li class="dropdown collapse">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            Projects <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#/projects">Attached Projects</a></li>
+            <li><a href="#/getallprojectlist">All BOINC Projects</a></li>
+            <li><a href="#/attachproject">Attach Project</a></li>
+            <li><a href="#/detachproject">Detach Project</a></li>
+          </ul>
+        </li>
+
         <li><a href="#/messages">Messages</a></li>
         <li><a href="#/notices">Notices</a></li>
 
@@ -29,9 +40,7 @@
           </ul>
         </li>
 
-        <li><a href="#/getallprojectlist">All BOINC Projects</a></li>
-        <li><a href="#/attachproject">Attach Project</a></li>
-        <li><a href="#/detachproject">Detach Project</a></li>
+
       </ul>
     </div>
   </div>

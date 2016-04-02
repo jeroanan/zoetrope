@@ -1,4 +1,4 @@
-<h1>{{ vm.title }}</h1>
+<h1 ng-bind="vm.title"></h1>
 <div ng-show="!vm.ready" class="text-center">
   <img src="/static/img/loading.gif" />
 </div>
@@ -9,16 +9,16 @@
   <table class="table table-striped">
     <tr>
       <th>
-        Project Name
+        <a href="" ng-click="vm.doSort('name');">Project Name</a>
       </th>
       <th>
-        Research Area
+        <a href="" ng-click="vm.doSort('general_area');">Research Area</a>
       </th>
       <th>
-        Summary
+        <a href="" ng-click="vm.doSort('summary');">Summary</a>
       </th>
     </tr>
-    <tr ng-repeat="ap in vm.availableProjects | filter:vm.filterProp">
+    <tr ng-repeat="ap in vm.availableProjects | orderBy:vm.sortProp:vm.reverseSort | filter:vm.filterProp">
       <td><a ng-href="/#/projectdetail/{{ap.name}}"><span ng-bind="ap.name"></span></a></td>
       <td>
         <span ng-bind="ap.general_area"></span>

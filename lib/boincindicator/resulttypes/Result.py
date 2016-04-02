@@ -4,6 +4,8 @@
 #
 # Licensed under the GPL version 3
 
+import time
+
 import lib.boincindicator.basetypes.Struct as struct
 
 import lib.boincindicator.enums.CPUSched as cpusched

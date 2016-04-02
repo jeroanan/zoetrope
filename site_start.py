@@ -33,10 +33,7 @@ class WebServer(object):
         self.__renderer = tr.TemplateRenderer()
         self.__io = StringIO()
 
-    def start(self):
-        cherrypy.config.update({'server.socket_host': '0.0.0.0',
-                                'server.socket_port': 8080
-        })
+    def start(self):        
         cherrypy.quickstart(WebServer(), '/', 'server.conf')
 
     @cherrypy.expose
