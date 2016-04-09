@@ -685,6 +685,7 @@ class BoincClient(object):
         '''
         xml = '<get_statistics />'
         result = self.rpc.call(xml)
+        self.write_xml_to_file('get_statistics.xml', ElementTree.tostring(result))
         print(ElementTree.tostring(result))
 
 def read_gui_rpc_password():

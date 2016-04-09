@@ -21,4 +21,4 @@ class ExperimentalTask(object):
         with client.BoincClient(passwd=password) as c:
             c.authorize(password)
 
-            c.get_project_init_status()
+            c.get_statistics()
