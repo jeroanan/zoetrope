@@ -1,0 +1,30 @@
+<disk_usage_summary>
+<project>
+  <master_url>http://lhcathomeclassic.cern.ch/sixtrack/</master_url>
+  <disk_usage>0.000000</disk_usage>
+</project>
+<project>
+  <master_url>http://setiathome.berkeley.edu/</master_url>
+  <disk_usage>116705.000000</disk_usage>
+</project>
+<project>
+  <master_url>http://www.worldcommunitygrid.org/</master_url>
+  <disk_usage>0.000000</disk_usage>
+</project>
+<project>
+  <master_url>http://www.rnaworld.de/rnaworld/</master_url>
+  <disk_usage>207471.000000</disk_usage>
+</project>
+<project>
+  <master_url>http://einstein.phys.uwm.edu/</master_url>
+  <disk_usage>0.000000</disk_usage>
+</project>
+<project>
+  <master_url>http://www.enigmaathome.net/</master_url>
+  <disk_usage>6747214.000000</disk_usage>
+</project>
+<d_total>15186149376.000000</d_total>
+<d_free>9686007808.000000</d_free>
+<d_boinc>64116595.000000</d_boinc>
+<d_allowed>2147483648.000000</d_allowed>
+</disk_usage_summary>

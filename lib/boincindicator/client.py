@@ -82,6 +82,14 @@ class BoincClient(object):
     def disconnect(self):
         self.rpc.disconnect()
 
+    def write_xml_to_file(self, file_name, file_content):
+        directory = 'lib/boincindicator/doc/samplexml/'
+        file_path = directory + file_name
+        decoded = file_content.decode()
+
+        with open(file_path, 'w') as f:
+            f.write(file_content.decode())
+
     def authorize(self, password):
         ''' Request authorization. If password is None and we are connecting
             to localhost, try to read password from the local config file
@@ -105,18 +113,18 @@ class BoincClient(object):
             return False
 
     def exchange_versions(self):
-        ''' Return VersionInfo instance with core client version info '''
-        return versioninfo.VersionInfo.parse(self.rpc.call('<exchange_versions/>'))
+        ''' Return VersionInfo instance with core client version info
+
+        See doc/samplexml/exchange_versions.xml for an example of what the RPC call returns to this method.
+        '''
+        xml = '<exchange_versions/>'
+        result = self.rpc.call(xml)
+        return versioninfo.VersionInfo.parse(result)
 
     def get_newer_version(self):
         '''Check for a newer version of BOINC.
 
-        The get_newer_version RPC call returns an XML document similar to:
-
-            <boinc_gui_rpc_reply>
-              <newer_version />
-              <download_url>http://boinc.berkeley.edu/download.php</download_url>
-            </boinc_gui_rpc_reply>
+        See doc/samplexml/get_newer_version.xml for an example of what the RPC call returns to this method.
 
         Does the presence of the newer_version element mean that a newer version is available? Or does the fact that it
         is empty mean that there's no newer version available? I don't know at the moment.
@@ -128,30 +136,34 @@ class BoincClient(object):
     def get_cc_status(self):
         ''' Return CcStatus instance containing basic status, such as
             CPU / GPU / Network active/suspended, etc
+
+            See doc/samplexml/get_cc_status.xml for an example of what the RPC call returns to this method.
         '''
         if not self.connected: self.connect()
         try:
-            return ccstatus.CcStatus.parse(self.rpc.call('<get_cc_status/>'))
+            xml = '<get_cc_status/>'
+            result = self.rpc.call(xml)
+            return ccstatus.CcStatus.parse(result)
         except socket.error:
             self.connected = False
 
     def get_cc_config(self):
-        ''' The get_cc_config RPC call returns an xml document similar to:
+        ''' Gets client config
 
-        <cc_config>
-          <log_flags>
-            <task>1</task>
-            <file_xfer>1</file_xfer>
-            <sched_ops>1</sched_ops>
-          </log_flags>
-        </cc_config>
+        See doc/samplexml/get_cc_config.xml for an example of what the RPC call returns to this method.
         '''
-        result = self.rpc.call('<get_cc_config />')
+        xml = '<get_cc_config/>'
+        result = self.rpc.call(xml)
         print(ElementTree.tostring(result))
 
     def get_host_info(self):
-        ''' Get information about host hardware and usage. '''
-        return hostinfo.HostInfo.parse(self.rpc.call('<get_host_info/>'))
+        ''' Get information about host hardware and usage.
+
+        See doc/samplexml/get_host_info.xml for an example of what the RPC call returns to this method.
+        '''
+        xml = '<get_host_info/>'
+        result = self.rpc.call(xml)
+        return hostinfo.HostInfo.parse(result)
 
     def get_tasks(self):
         ''' Same as get_results(active_only=False) '''
@@ -163,9 +175,12 @@ class BoincClient(object):
             and fraction done. Each result includes a name;
             Use CC_STATE::lookup_result() to find this result in the current static state;
             if it's not there, call get_state() again.
+
+            See doc/samplexml/get_results.xml for an example of what the RPC call returns to this method.
         '''
         reply = self.rpc.call("<get_results><active_only>%d</active_only></get_results>"
                                % (1 if active_only else 0))
+
         if not reply.tag == 'results':
             return []
 
@@ -257,48 +272,28 @@ class BoincClient(object):
     def get_all_projects_list(self):
         '''Returns a list of available projects for the client to attach to.
 
-        The get_all_projects_list RPC call returns an xml document similar to:
-
-        <projects>
-          <project>
-            <name>Radioactive@Home</name>
-            <url>http://radioactiveathome.org/boinc/</url>
-            <general_area>Distributed sensing</general_area>
-            <specific_area>Environmental research</specific_area>
-            <description>Radioactive@Home is creating a free and continuously updated map of radiation levels
-                  using sensors connected to volunteers\' computers.  You must buy a sensor to participate.</description>
-            <home>BOINC Poland Foundation</home>
-            <platforms>
-              <name>windows_intelx86</name>
-              <name>i686-pc-linux-gnu[nci]</name>
-              <name>armv7l-unknown-linux-gnueabihf</name>
-            </platforms>
-            <image>http://boinc.berkeley.edu/images/radioactive.jpg</image>
-            <summary>Monitor radiation levels</summary>
-          </project>
-        </projects>
-
-        There are an arbitrary number of projects. Each project can have an arbitrary number of platforms.
+        See See doc/samplexml/get_all_projects_list.xml for an example of what the RPC call returns to this method.
         '''
         xml = '<get_all_projects_list />'
         results = self.rpc.call(xml)
         return map(lambda x: availableproject.AvailableProject.parse(x), xmlutil.parse_list(results))
 
     def get_project_status(self):
+        ''' Get the status of currently-attached projects.
+
+        See See doc/samplexml/get_project_status.xml for an example of what the RPC call returns to this method.
+        '''
         xml = '<get_project_status />'
-        ret = []
         results = self.rpc.call(xml)
-
-        for r in list(results):
-            ret.append(joinedproject.JoinedProject.parse(r))
-
-        return ret
+        return map(lambda x: joinedproject.JoinedProject.parse(x), results)
 
     def get_disk_usage(self):
         '''Get disk usage
 
         Disk usage is returned on a per-project basis. Additionally the disk free and total disk space used on the
         filesystem BOINC runs in is returned.
+
+        See See doc/samplexml/get_disk_usage.xml for an example of what the RPC call returns to this method.
         '''
         xml = '<get_disk_usage />'
         results = self.rpc.call(xml)
@@ -325,15 +320,9 @@ class BoincClient(object):
         return projects
 
     def get_daily_transfer_history(self):
-        '''The get_daily_xfer_history RPC call returns an xml document similar to:
+        '''Gets the history of daily transfers
 
-        <daily_xfers>
-         <dx>
-           <when>16882</when>
-           <up>158287.000000</up>
-           <down>1127055.000000</down>
-         </dx>
-        </daily_xfers>
+        See See doc/samplexml/get_daily_xfer_history.xml for an example of what the RPC call returns to this method.
 
         ...There are as many dx elements as there are days recorded
         that have had network transfer activity.
@@ -350,11 +339,13 @@ class BoincClient(object):
 
         System messages tend to be things like "Finished computation of XXX", so it's basically the log of the BOINC
         process.
+
+        See See doc/samplexml/get_messages.xml for an example of what the RPC call returns to this method.
         '''
         xml = '<get_messages />'
         results = self.rpc.call(xml)
-        return map(lambda x: message.Message.parse(x), results)
 
+        return map(lambda x: message.Message.parse(x), results)
     def get_message_count(self):
         '''Get message count
 
@@ -374,6 +365,8 @@ class BoincClient(object):
 
         Notices tend to be announcements made by the BOINC projects, although I've also seen things like alerts that
         a project doesn't support the current processor architecture in there as well.
+
+        See See doc/samplexml/get_notices.xml for an example of what the RPC call returns to this method.
         '''
         xml = '<get_notices />'
         results = self.rpc.call(xml)
@@ -391,22 +384,20 @@ class BoincClient(object):
     def get_account_manager_info(self):
         ''' The get_acct_mgr_info RPC call returns an XML document similar to:
 
-        <acct_mgr_info>
-          <acct_mgr_url>https://bam.boincstats.com/</acct_mgr_url>
-          <acct_mgr_name>BOINCstatsBAM!</acct_mgr_name>
-          <have_credentials /> <!-- I don't know what this is for yet. -->
-        </acct_mgr_info>'''
+        See doc/samplexml/get_acct_mgr_info.xml for an example of what the RPC call returns to this method.
+        '''
         xml = '<acct_mgr_info />'
-        results = self.rpc.call(xml)
+        results = self.rpc.call(xml)        
         print(ElementTree.tostring(results))
 
     def get_global_prefs_file(self):
         ''' The get_globals_prefs_file RPC call returns a quite large XML
-        document containing global preferences. See the struct class
-        for details.
+        document containing global preferences.
+
+        See doc/samplexml/get_globals_prefs_file.xml for an example of what the RPC call returns to this method. 
         '''
         xml = '<get_global_prefs_file />'
-        results = self.rpc.call(xml)
+        results = self.rpc.call(xml)        
         return globalpreferences.GlobalPreferences.parse(results)
 
     def get_project_init_status(self):
@@ -419,9 +410,12 @@ class BoincClient(object):
          </get_project_init_status>
 
         .. for me at least. I probably have to supply a project name to actually get anything.
+        
+        See doc/samplexml/get_project_init_status.xml for an example of what the RPC call returns to this method.
+
         '''
         xml = '<get_project_init_status />'
-        results = self.rpc.call(xml)
+        results = self.rpc.call(xml)        
         print(ElementTree.tostring(results))
 
     def lookup_account(self, project_url, email_address, password, already_hashed=False):
@@ -676,6 +670,20 @@ class BoincClient(object):
         There are an arbitrary number of project and result elements. The results are just the currently-running ones.
         '''
         xml = '<get_simple_gui_info/>'
+        result = self.rpc.call(xml)
+        print(ElementTree.tostring(result))
+
+    def get_state(self):
+        ''' Gets a whole load of infomration about the overall state of the BOINC process, its tasks and projects.
+        '''
+        xml = '<get_state/>'
+        result = self.rpc.call(xml)
+        print(ElementTree.tostring(result))
+
+    def get_statistics(self):
+        ''' Gets a whole load of statistics
+        '''
+        xml = '<get_statistics />'
         result = self.rpc.call(xml)
         print(ElementTree.tostring(result))
 

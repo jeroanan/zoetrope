@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<msgs>
+  <msg>
+    <project>http://www.worldcommunitygrid.org/</project>
+    <pri>1</pri>
+    <seqno>267</seqno>
+    <body>Requesting new tasks for CPU</body>
+    <time>1459041298</time>
+  </msg>
+  <msg>
+    <project />
+    <pri>1</pri>
+    <seqno>268</seqno>
+    <body>Project communication failed: attempting access to reference site</body>
+    <time>1459041301</time>
+  </msg>
+  <msg>
+    <project>http://www.worldcommunitygrid.org/</project>
+    <pri>1</pri>
+    <seqno>269</seqno>
+    <body>Scheduler request failed: Peer certificate cannot be authenticated with given CA certificates</body>
+    <time>1459041301</time>
+  </msg>
+  <msg>
+    <project />
+    <pri>1</pri>
+    <seqno>270</seqno>
+    <body>Internet access OK - project servers may be temporarily down.</body>
+    <time>1459041305</time>
+  </msg>
+  <msg>
+    <project>Enigma@Home</project>
+    <pri>1</pri>
+    <seqno>271</seqno>
+    <body>Computation for task m4-vroln72-4_1_14030766_723_0 finished</body>
+    <time>1459047113</time>
+</msgs>

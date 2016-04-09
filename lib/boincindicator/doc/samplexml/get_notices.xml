@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notices>
+  <notice>
+    <title>Chemnitzer Linux-Tage 2016: Meet the RNA World Team</title>
+    <description>For those who like to visit the &lt;a href="https://chemnitzer.linux-tage.de/2016/de" rel="nofollow"&gt;Chemnitzer Linux-Tage 2016&lt;/a&gt; on19th or 20th of March: You may meet the RNA World team there at the Rechenkraft.net booth.&lt;br /&gt;&lt;br /&gt;Am kommenden Wochenende (19. und 20.03.2016) wird das RNA World Team auf den &lt;a href="https://chemnitzer.linux-tage.de/2016/de" rel="nofollow"&gt;Chemnitzer Linux-Tagen 2016&lt;/a&gt; am Rechenkraft.net Stand anzutreffen sein.&lt;br /&gt;&lt;br /&gt;Michael.</description>
+    <create_time>1458222154.000000</create_time>
+    <arrival_time>1458339852.360197</arrival_time>
+    <is_private>0</is_private>
+    <project_name>RNA World</project_name>
+    <category />
+    <link>http://www.rnaworld.de/rnaworld/forum_thread.php?id=129</link>
+    <seqno>2</seqno>
+  </notice>
+  <notice>
+    <title />
+    <description>_("Your current settings do not allow tasks from this project.")  _("To fix this, you can ")_("change Project Preferences on the project's web site").</description>
+    <create_time>1459464268.864599</create_time>
+    <arrival_time>1459464268.864599</arrival_time>
+    <is_private>0</is_private>
+    <project_name>Asteroids@home</project_name>
+    <category>client</category>
+    <link />
+    <seqno>4</seqno>
+  </notice>
+  <notice>
+    <title />
+    <description>_("This project doesn't support computers of type") arm-unknown-linux-gnueabihf</description>
+    <create_time>1459599489.364521</create_time>
+    <arrival_time>1459599489.364521</arrival_time>
+    <is_private>0</is_private>
+    <project_name>LHC@home 1.0</project_name>
+    <category>scheduler</category>
+    <link />
+    <seqno>5</seqno>
+  </notice>
+</notices>

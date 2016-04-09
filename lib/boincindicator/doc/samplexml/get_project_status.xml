@@ -1,0 +1,416 @@
+<projects>
+<project>
+    <master_url>http://lhcathomeclassic.cern.ch/sixtrack/</master_url>
+    <project_name>LHC@home 1.0</project_name>
+    <symstore />
+    <user_name>User Name</user_name>
+    <team_name>BOINC</team_name>
+    <host_venue>home</host_venue>
+    <email_hash>fc885430b9d4d55b8d8a9e594a624d</email_hash>
+    <cross_project_id>11a92faedc91e7fb096eaef1137ad6</cross_project_id>
+    <external_cpid>94f8fd68ea6130fabb32010a84ce22</external_cpid>
+    <cpid_time>1098711062.000000</cpid_time>
+    <user_total_credit>26066.036512</user_total_credit>
+    <user_expavg_credit>0.096484</user_expavg_credit>
+    <user_create_time>1098711062.000000</user_create_time>
+    <rpc_seqno>17</rpc_seqno>
+    <userid>1337</userid>
+    <teamid>1414</teamid>
+    <hostid>10388751</hostid>
+    <host_total_credit>0.000000</host_total_credit>
+    <host_expavg_credit>0.000000</host_expavg_credit>
+    <host_create_time>1258339785.000000</host_create_time>
+    <nrpc_failures>0</nrpc_failures>
+    <master_fetch_failures>0</master_fetch_failures>
+    <min_rpc_time>1459772294.824521</min_rpc_time>
+    <next_rpc_time>1459703894.824521</next_rpc_time>
+    <rec>0.000000</rec>
+    <rec_time>1459715834.104525</rec_time>
+    <resource_share>100.000000</resource_share>
+    <desired_disk_usage>0.000000</desired_disk_usage>
+    <duration_correction_factor>1.000000</duration_correction_factor>
+    <sched_rpc_pending>7</sched_rpc_pending>
+    <send_time_stats_log>0</send_time_stats_log>
+    <send_job_log>0</send_job_log>
+    <njobs_success>0</njobs_success>
+    <njobs_error>0</njobs_error>
+    <elapsed_time>0.000000</elapsed_time>
+    <send_full_workload />
+    <dont_use_dcf />
+    <attached_via_acct_mgr />
+    <rsc_backoff_time>
+        <name>CPU</name>
+        <value>0.000000</value>
+    </rsc_backoff_time>
+    <rsc_backoff_interval>
+        <name>CPU</name>
+        <value>0.000000</value>
+    </rsc_backoff_interval>
+    <sched_priority>-0.000000</sched_priority>
+    <last_rpc_time>1459685894.824521</last_rpc_time>
+    <project_files_downloaded_time>0.000000</project_files_downloaded_time>
+    <venue>home</venue>
+    <project_dir>/var/lib/boinc-client/projects/lhcathomeclassic.cern.ch_sixtrack</project_dir>
+</project>
+<project>
+    <master_url>http://setiathome.berkeley.edu/</master_url>
+    <project_name>SETI@home</project_name>
+    <symstore />
+    <user_name>David</user_name>
+    <team_name>BOINC</team_name>
+    <host_venue>home</host_venue>
+    <email_hash>fc84430b9d4d55b83d8a9e594a624d</email_hash>
+    <cross_project_id>1a92faedc971e7fb096eaef1137ad6</cross_project_id>
+    <external_cpid>94f8684ea61340fabb32010a84ce22</external_cpid>
+    <cpid_time>1054557588.000000</cpid_time>
+    <user_total_credit>41861.143780</user_total_credit>
+    <user_expavg_credit>0.074326</user_expavg_credit>
+    <user_create_time>1054557788.000000</user_create_time>
+    <rpc_seqno>11</rpc_seqno>
+    <userid>987460</userid>
+    <teamid>30230</teamid>
+    <hostid>7959213</hostid>
+    <host_total_credit>0.000000</host_total_credit>
+    <host_expavg_credit>0.000000</host_expavg_credit>
+    <host_create_time>1458339771.000000</host_create_time>
+    <nrpc_failures>0</nrpc_failures>
+    <master_fetch_failures>0</master_fetch_failures>
+    <min_rpc_time>1459713303.014525</min_rpc_time>
+    <next_rpc_time>0.000000</next_rpc_time>
+    <rec>0.000000</rec>
+    <rec_time>1459715834.104525</rec_time>
+    <resource_share>25.000000</resource_share>
+    <desired_disk_usage>0.000000</desired_disk_usage>
+    <duration_correction_factor>1.000000</duration_correction_factor>
+    <sched_rpc_pending>0</sched_rpc_pending>
+    <send_time_stats_log>0</send_time_stats_log>
+    <send_job_log>0</send_job_log>
+    <njobs_success>0</njobs_success>
+    <njobs_error>0</njobs_error>
+    <elapsed_time>0.000000</elapsed_time>
+    <dont_use_dcf />
+    <attached_via_acct_mgr />
+    <rsc_backoff_time>
+        <name>CPU</name>
+        <value>1459648912.421345</value>
+    </rsc_backoff_time>
+    <rsc_backoff_interval>
+        <name>CPU</name>
+        <value>19200.000000</value>
+    </rsc_backoff_interval>
+<gui_urls>
+
+    <gui_url>
+        <name>Message boards</name>
+        <description>Correspond with other users on the SETI@home message boards</description>
+        <url>http://setiathome.berkeley.edu/forum_index.php</url>
+    </gui_url>
+    <gui_url>
+        <name>Help</name>
+        <description>Ask questions and report problems</description>
+        <url>http://setiathome.berkeley.edu/forum_help_desk.php</url>
+    </gui_url>
+    <gui_url>
+        <name>Account</name>
+        <description>View your account information</description>
+        <url>http://setiathome.berkeley.edu/home.php</url>
+    </gui_url>
+    <gui_url>
+        <name>Preferences</name>
+        <description>View and modify your computing preferences</description>
+        <url>http://setiathome.berkeley.edu/prefs.php?subset=global</url>
+    </gui_url>
+    <gui_url>
+        <name>Tasks</name>
+        <description>View your recent tasks</description>
+        <url>http://setiathome.berkeley.edu/results.php?userid=987460</url>
+    </gui_url>
+    <gui_url>
+        <name>Computers</name>
+        <description>View a list of the computers on which you are running SETI@Home</description>
+        <url>http://setiathome.berkeley.edu/hosts_user.php?userid=987460</url>
+    </gui_url>
+    <ifteam>
+        <gui_url>
+            <name>Team</name>
+            <description>View information about your team: BOINC Synergy</description>
+            <url>http://setiathome.berkeley.edu/team_display.php?teamid=30230</url>
+        </gui_url>
+    </ifteam>
+    <gui_url>
+        <name>Donate</name>
+        <description>Donate to SETI@home</description>
+        <url>http://setiathome.berkeley.edu/sah_donate.php</url>
+    </gui_url>
+</gui_urls>
+    <sched_priority>-0.000000</sched_priority>
+    <last_rpc_time>1459626903.014525</last_rpc_time>
+    <project_files_downloaded_time>0.000000</project_files_downloaded_time>
+    <venue>home</venue>
+    <project_dir>/var/lib/boinc-client/projects/setiathome.berkeley.edu</project_dir>
+</project>
+<project>
+    <master_url>http://www.worldcommunitygrid.org/</master_url>
+    <project_name />
+    <symstore />
+    <user_name />
+    <team_name />
+    <host_venue />
+    <email_hash />
+    <cross_project_id />
+    <external_cpid />
+    <cpid_time>0.000000</cpid_time>
+    <user_total_credit>0.000000</user_total_credit>
+    <user_expavg_credit>0.000000</user_expavg_credit>
+    <user_create_time>0.000000</user_create_time>
+    <rpc_seqno>1</rpc_seqno>
+    <userid>0</userid>
+    <teamid>0</teamid>
+    <hostid>0</hostid>
+    <host_total_credit>0.000000</host_total_credit>
+    <host_expavg_credit>0.000000</host_expavg_credit>
+    <host_create_time>0.000000</host_create_time>
+    <nrpc_failures>10</nrpc_failures>
+    <master_fetch_failures>0</master_fetch_failures>
+    <min_rpc_time>1459718070.874177</min_rpc_time>
+    <next_rpc_time>0.000000</next_rpc_time>
+    <rec>0.000000</rec>
+    <rec_time>1459715834.104525</rec_time>
+    <resource_share>100.000000</resource_share>
+    <desired_disk_usage>0.000000</desired_disk_usage>
+    <duration_correction_factor>1.000000</duration_correction_factor>
+    <sched_rpc_pending>6</sched_rpc_pending>
+    <send_time_stats_log>0</send_time_stats_log>
+    <send_job_log>0</send_job_log>
+    <njobs_success>0</njobs_success>
+    <njobs_error>0</njobs_error>
+    <elapsed_time>0.000000</elapsed_time>
+    <attached_via_acct_mgr />
+    <rsc_backoff_time>
+        <name>CPU</name>
+        <value>0.000000</value>
+    </rsc_backoff_time>
+    <rsc_backoff_interval>
+        <name>CPU</name>
+        <value>0.000000</value>
+    </rsc_backoff_interval>
+    <sched_priority>-0.000000</sched_priority>
+    <last_rpc_time>0.000000</last_rpc_time>
+    <project_files_downloaded_time>0.000000</project_files_downloaded_time>
+    <project_dir>/var/lib/boinc-client/projects/www.worldcommunitygrid.org</project_dir>
+</project>
+<project>
+    <master_url>http://www.rnaworld.de/rnaworld/</master_url>
+    <project_name>RNA World</project_name>
+    <symstore />
+    <user_name>ssss</user_name>
+    <team_name>BOINC</team_name>
+    <host_venue />
+    <email_hash>fc84430b9d4d55b83d8a9e594a624</email_hash>
+    <cross_project_id>1dc971ef1137ad6</cross_project_id>
+    <external_cpid />
+    <cpid_time>1280610879.000000</cpid_time>
+    <user_total_credit>2502.179491</user_total_credit>
+    <user_expavg_credit>0.076449</user_expavg_credit>
+    <user_create_time>110879.000000</user_create_time>
+    <rpc_seqno>17</rpc_seqno>
+    <userid>2450</userid>
+    <teamid>9</teamid>
+    <hostid>44984</hostid>
+    <host_total_credit>0.000000</host_total_credit>
+    <host_expavg_credit>0.000000</host_expavg_credit>
+    <host_create_time>1339850.000000</host_create_time>
+    <nrpc_failures>0</nrpc_failures>
+    <master_fetch_failures>0</master_fetch_failures>
+    <min_rpc_time>1459773718.274519</min_rpc_time>
+    <next_rpc_time>1459705318.274519</next_rpc_time>
+    <rec>0.000000</rec>
+    <rec_time>1459715834.104525</rec_time>
+    <resource_share>100.000000</resource_share>
+    <desired_disk_usage>0.000000</desired_disk_usage>
+    <duration_correction_factor>1.000000</duration_correction_factor>
+    <sched_rpc_pending>7</sched_rpc_pending>
+    <send_time_stats_log>0</send_time_stats_log>
+    <send_job_log>0</send_job_log>
+    <njobs_success>0</njobs_success>
+    <njobs_error>0</njobs_error>
+    <elapsed_time>0.000000</elapsed_time>
+    <dont_use_dcf />
+    <verify_files_on_app_start />
+    <attached_via_acct_mgr />
+    <rsc_backoff_time>
+        <name>CPU</name>
+        <value>0.000000</value>
+    </rsc_backoff_time>
+    <rsc_backoff_interval>
+        <name>CPU</name>
+        <value>0.000000</value>
+    </rsc_backoff_interval>
+<gui_urls>
+
+    <gui_url>
+        <name>My account</name>
+        <description>View your account information and credit totals</description>
+        <url>http://www.rnaworld.de/rnaworld/home.php</url>
+    </gui_url>
+    <ifteam>
+        <gui_url>
+            <name>My team</name>
+            <description>Info about BOINC Synergy</description>
+            <url>http://www.rnaworld.de/rnaworld/team_display.php?teamid=9</url>
+        </gui_url>
+    </ifteam>
+    <gui_url>
+        <name>Forum</name>
+        <description>Get help about RNA World</description>
+        <url>http://www.rechenkraft.net/phpBB/viewforum.php?f=74</url>
+    </gui_url>
+    <gui_url>
+        <name>Chat</name>
+        <description>Chat with other user about distributed computing</description>
+        <url>http://www.rechenkraft.net/wiki/index.php?title=Rechenkraft:Chat</url>
+    </gui_url>
+    <gui_url>
+        <name>Rechenkraft.net</name>
+        <description>Mehr Projekte</description>
+        <url>http://www.rechenkraft.net</url>
+    </gui_url>
+    <gui_url>
+        <name>- Donation -</name>
+        <description>Make a donation for the running costs</description>
+        <url>http://www.rnaworld.de/rnaworld/donations.php</url>
+    </gui_url>
+</gui_urls>
+    <sched_priority>-0.000000</sched_priority>
+    <last_rpc_time>1459687318.274519</last_rpc_time>
+    <project_files_downloaded_time>0.000000</project_files_downloaded_time>
+    <project_dir>/var/lib/boinc-client/projects/www.rnaworld.de_rnaworld</project_dir>
+</project>
+<project>
+    <master_url>http://einstein.phys.uwm.edu/</master_url>
+    <project_name />
+    <symstore />
+    <user_name />
+    <team_name />
+    <host_venue />
+    <email_hash />
+    <cross_project_id />
+    <external_cpid />
+    <cpid_time>0.000000</cpid_time>
+    <user_total_credit>0.000000</user_total_credit>
+    <user_expavg_credit>0.000000</user_expavg_credit>
+    <user_create_time>0.000000</user_create_time>
+    <rpc_seqno>0</rpc_seqno>
+    <userid>0</userid>
+    <teamid>0</teamid>
+    <hostid>0</hostid>
+    <host_total_credit>0.000000</host_total_credit>
+    <host_expavg_credit>0.000000</host_expavg_credit>
+    <host_create_time>0.000000</host_create_time>
+    <nrpc_failures>2</nrpc_failures>
+    <master_fetch_failures>4</master_fetch_failures>
+    <min_rpc_time>1459723073.114524</min_rpc_time>
+    <next_rpc_time>0.000000</next_rpc_time>
+    <rec>0.000000</rec>
+    <rec_time>1459715834.104525</rec_time>
+    <resource_share>100.000000</resource_share>
+    <desired_disk_usage>0.000000</desired_disk_usage>
+    <duration_correction_factor>1.000000</duration_correction_factor>
+    <sched_rpc_pending>6</sched_rpc_pending>
+    <send_time_stats_log>0</send_time_stats_log>
+    <send_job_log>0</send_job_log>
+    <njobs_success>0</njobs_success>
+    <njobs_error>0</njobs_error>
+    <elapsed_time>0.000000</elapsed_time>
+    <master_url_fetch_pending />
+    <attached_via_acct_mgr />
+    <rsc_backoff_time>
+        <name>CPU</name>
+        <value>0.000000</value>
+    </rsc_backoff_time>
+    <rsc_backoff_interval>
+        <name>CPU</name>
+        <value>0.000000</value>
+    </rsc_backoff_interval>
+    <sched_priority>-0.000000</sched_priority>
+    <last_rpc_time>0.000000</last_rpc_time>
+    <project_files_downloaded_time>0.000000</project_files_downloaded_time>
+    <project_dir>/var/lib/boinc-client/projects/einstein.phys.uwm.edu</project_dir>
+</project>
+<project>
+    <master_url>http://www.enigmaathome.net/</master_url>
+    <project_name>Enigma@Home</project_name>
+    <symstore />
+    <user_name>David</user_name>
+    <team_name>BOINC</team_name>
+    <host_venue />
+    <email_hash>fc848545b83d8a9e594a624d</email_hash>
+    <cross_project_id>1c971e7fb096eaef1137ad6</cross_project_id>
+    <external_cpid />
+    <cpid_time>1424521251.000000</cpid_time>
+    <user_total_credit>188818.000000</user_total_credit>
+    <user_expavg_credit>616.131929</user_expavg_credit>
+    <user_create_time>1521251.000000</user_create_time>
+    <rpc_seqno>155</rpc_seqno>
+    <userid>739</userid>
+    <teamid>1</teamid>
+    <hostid>183182</hostid>
+    <host_total_credit>10620.000000</host_total_credit>
+    <host_expavg_credit>498.263698</host_expavg_credit>
+    <host_create_time>1458339837.000000</host_create_time>
+    <nrpc_failures>0</nrpc_failures>
+    <master_fetch_failures>0</master_fetch_failures>
+    <min_rpc_time>1459713292.484517</min_rpc_time>
+    <next_rpc_time>0.000000</next_rpc_time>
+    <rec>233.370854</rec>
+    <rec_time>1459715834.104525</rec_time>
+    <resource_share>100.000000</resource_share>
+    <desired_disk_usage>0.000000</desired_disk_usage>
+    <duration_correction_factor>1.000000</duration_correction_factor>
+    <sched_rpc_pending>0</sched_rpc_pending>
+    <send_time_stats_log>0</send_time_stats_log>
+    <send_job_log>0</send_job_log>
+    <njobs_success>259</njobs_success>
+    <njobs_error>0</njobs_error>
+    <elapsed_time>5495735.869950</elapsed_time>
+    <dont_use_dcf />
+    <attached_via_acct_mgr />
+    <rsc_backoff_time>
+        <name>CPU</name>
+        <value>0.000000</value>
+    </rsc_backoff_time>
+    <rsc_backoff_interval>
+        <name>CPU</name>
+        <value>0.000000</value>
+    </rsc_backoff_interval>
+<gui_urls>
+
+<gui_url>
+<name>Your account</name>
+<description>View your account information and credit totals</description>
+<url>http://www.enigmaathome.net/home.php</url>
+</gui_url>
+<gui_url>
+<name>Forum</name>
+<description>Message boards</description>
+<url>http://www.enigmaathome.net/forum_index.php</url>
+</gui_url>
+<ifteam>
+<gui_url>
+<name>Team</name>
+<description>Info about BOINC Synergy</description>
+<url>http://www.enigmaathome.net/team_display.php?teamid=12</url>
+</gui_url>
+</ifteam>
+<gui_url>
+<name>Server status</name>
+<description>Server status, statistics</description>
+<url>http://www.enigmaathome.net/server_status.php</url>
+</gui_url>
+</gui_urls>
+    <sched_priority>-1.041667</sched_priority>
+    <last_rpc_time>1459713050.084517</last_rpc_time>
+    <project_files_downloaded_time>0.000000</project_files_downloaded_time>
+    <project_dir>/var/lib/boinc-client/projects/www.enigmaathome.net</project_dir>
+</project>
+</projects>

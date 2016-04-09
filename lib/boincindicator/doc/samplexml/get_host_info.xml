@@ -1,0 +1,24 @@
+<host_info>
+    <timezone>0</timezone>
+    <domain_name>pi2</domain_name>
+    <ip_addr>92.242.132.000</ip_addr>
+    <host_cpid>db27cfd445a42a27af9da44bc1844864</host_cpid>
+    <p_ncpus>4</p_ncpus>
+    <p_vendor>ARM</p_vendor>
+    <p_model />
+    <p_features>half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae evtstrm</p_features>
+    <p_fpops>436405922.247215</p_fpops>
+    <p_iops>1743168979.405316</p_iops>
+    <p_membw>1000000000.000000</p_membw>
+    <p_calculated>1458339756.845076</p_calculated>
+    <p_vm_extensions_disabled>0</p_vm_extensions_disabled>
+    <m_nbytes>970768384.000000</m_nbytes>
+    <m_cache>-1.000000</m_cache>
+    <m_swap>104853504.000000</m_swap>
+    <d_total>15186149376.000000</d_total>
+    <d_free>9686380544.000000</d_free>
+    <os_name>Linux</os_name>
+    <os_version>4.1.19-v7+</os_version>
+    <coprocs>
+    </coprocs>
+</host_info>
