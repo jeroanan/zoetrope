@@ -527,50 +527,8 @@ class BoincClient(object):
 
     def get_screensaver_tasks(self):
         '''Gives me a wealth of information, presumably on tasks that can run as a screensaver.
-
-        An abridged sample of the XML that the get_screensaver_tasks RPC call gives is:
-
-        <handle_get_screensaver_tasks>
-          <suspend_reason>0</suspend_reason>
-          <result>
-            <name>m4-vroln72-4_0_13997898_734_0</name>
-            <wu_name>m4-vroln72-4_0_13997898_734</wu_name>
-            <version_num>533</version_num>
-            <plan_class />
-            <project_url>http://www.enigmaathome.net/</project_url>
-            <final_cpu_time>0.000000</final_cpu_time>
-            <final_elapsed_time>0.000000</final_elapsed_time>
-            <exit_status>0</exit_status>
-            <state>2</state>
-            <report_deadline>1460411683.000000</report_deadline>
-            <received_time>1459547684.494518</received_time>
-            <estimated_cpu_time_remaining>3937.598038</estimated_cpu_time_remaining>
-            <active_task>
-              <active_task_state>1</active_task_state>
-              <app_version_num>533</app_version_num>
-              <slot>2</slot>
-              <pid>29249</pid>
-              <scheduler_state>2</scheduler_state>
-              <checkpoint_cpu_time>0.000000</checkpoint_cpu_time>
-              <fraction_done>0.760355</fraction_done>
-              <current_cpu_time>0.000000</current_cpu_time>
-              <elapsed_time>15533.857821</elapsed_time>
-              <swap_size>3268608.000000</swap_size>
-              <working_set_size>2002944.000000</working_set_size>
-              <working_set_size_smoothed>2002944.000000</working_set_size_smoothed>
-              <page_fault_rate>0.000000</page_fault_rate>
-              <bytes_sent>0.000000</bytes_sent>
-              <bytes_received>0.000000</bytes_received>
-            </active_task>
-          </result>
-         <handle_get_screensaver_tasks>
-
-          ... There can be an arbitrary number of result elements.
-
-          What is interesting to note here is that the active_task element gives me an actual value for elapsed_time.
-          I have been calling get_results to get the stastus of currently-running and queueued tasks, and that has been
-          giving me an empty elapsed time for the project I have been running (Enigma at home). So A possibility is to
-          use this for my main task status retrieval method.
+        
+        See doc/samplexml/get_screensaver_tasks.xml for an example of what the RPC call returns to this method.
         '''
         xml = '<get_screensaver_tasks/>'
         result = self.rpc.call(xml)
@@ -579,102 +537,14 @@ class BoincClient(object):
     def get_simple_gui_info(self):
         '''Returns info for a simple GUI
 
-        Actually it returns loads of details about projects and results. An abridged version:
-
-        <simple_gui_info>
-          <project>
-            <master_url>http://lhcathomeclassic.cern.ch/sixtrack/</master_url>
-            <project_name>LHC@home 1.0</project_name>
-            <symstore />
-            <user_name>David R Wilson</user_name>
-            <team_name>BOINC Synergy</team_name>
-            <host_venue>home</host_venue>
-            <email_hash>fc8485430b9d4d55b83d8a9e594a624d</email_hash>
-            <cross_project_id>191a92faedc971e7fb096eaef1137ad6</cross_project_id>
-            <external_cpid>94f8fd684ea61340fabb32010a84ce22</external_cpid>
-            <cpid_time>1098711062.000000</cpid_time>
-            <user_total_credit>26066.036512</user_total_credit>
-            <user_expavg_credit>0.096484</user_expavg_credit>
-            <user_create_time>1098711062.000000</user_create_time>
-            <rpc_seqno>16</rpc_seqno>
-            <userid>5723</userid>
-            <teamid>97</teamid>
-            <hostid>10388751</hostid>
-            <host_total_credit>0.000000</host_total_credit>
-            <host_expavg_credit>0.000000</host_expavg_credit>
-            <host_create_time>1458339785.000000</host_create_time>
-            <nrpc_failures>0</nrpc_failures>
-            <master_fetch_failures>0</master_fetch_failures>
-            <min_rpc_time>1459685889.364521</min_rpc_time>
-            <next_rpc_time>1459617489.364521</next_rpc_time>
-            <rec>0.000000</rec>
-            <rec_time>1459637458.054517</rec_time>
-            <resource_share>100.000000</resource_share>
-            <desired_disk_usage>0.000000</desired_disk_usage>
-            <duration_correction_factor>1.000000</duration_correction_factor>
-            <sched_rpc_pending>7</sched_rpc_pending>
-            <send_time_stats_log>0</send_time_stats_log>
-            <send_job_log>0</send_job_log>
-            <njobs_success>0</njobs_success>
-            <njobs_error>0</njobs_error>
-            <elapsed_time>0.000000</elapsed_time>
-            <send_full_workload />
-            <dont_use_dcf />
-            <attached_via_acct_mgr />
-            <rsc_backoff_time>
-              <name>CPU</name>
-              <value>0.000000</value>
-            </rsc_backoff_time>
-            <rsc_backoff_interval>
-              <name>CPU</name>
-              <value>0.000000</value>
-            </rsc_backoff_interval>
-            <sched_priority>-0.000000</sched_priority>
-            <last_rpc_time>1459599489.364521</last_rpc_time>
-            <project_files_downloaded_time>0.000000</project_files_downloaded_time>
-            <venue>home</venue>
-            <project_dir>/var/lib/boinc-client/projects/lhcathomeclassic.cern.ch_sixtrack</project_dir>
-        </project>
-        <result>
-            <name>m4-vroln72-4_0_13997898_734_0</name>
-            <wu_name>m4-vroln72-4_0_13997898_734</wu_name>
-            <version_num>533</version_num>
-            <plan_class />
-            <project_url>http://www.enigmaathome.net/</project_url>
-            <final_cpu_time>0.000000</final_cpu_time>
-            <final_elapsed_time>0.000000</final_elapsed_time>
-            <exit_status>0</exit_status>
-            <state>2</state>
-            <report_deadline>1460411683.000000</report_deadline>
-            <received_time>1459547684.494518</received_time>
-            <estimated_cpu_time_remaining>3450.464887</estimated_cpu_time_remaining>
-            <active_task>
-              <active_task_state>1</active_task_state>
-              <app_version_num>533</app_version_num>
-              <slot>2</slot>
-              <pid>29249</pid>
-              <scheduler_state>2</scheduler_state>
-              <checkpoint_cpu_time>0.000000</checkpoint_cpu_time>
-              <fraction_done>0.789941</fraction_done>
-              <current_cpu_time>0.000000</current_cpu_time>
-              <elapsed_time>16093.947794</elapsed_time>
-              <swap_size>3268608.000000</swap_size>
-              <working_set_size>2002944.000000</working_set_size>
-              <working_set_size_smoothed>2002944.000000</working_set_size_smoothed>
-              <page_fault_rate>0.000000</page_fault_rate>
-              <bytes_sent>0.000000</bytes_sent>
-              <bytes_received>0.000000</bytes_received>
-            </active_task>
-        </result>
-
-        There are an arbitrary number of project and result elements. The results are just the currently-running ones.
+        See doc/samplexml/get_simple_gui_info.xml for an example of what the RPC call returns to this method.
         '''
         xml = '<get_simple_gui_info/>'
         result = self.rpc.call(xml)
         print(ElementTree.tostring(result))
 
     def get_state(self):
-        ''' Gets a whole load of infomration about the overall state of the BOINC process, its tasks and projects.
+        ''' Gets a whole load of information about the overall state of the BOINC process, its tasks and projects.
         '''
         xml = '<get_state/>'
         result = self.rpc.call(xml)
@@ -682,6 +552,8 @@ class BoincClient(object):
 
     def get_statistics(self):
         ''' Gets a whole load of statistics
+
+        See doc/samplexml/get_statistics.xml for an example of what the RPC call returns to this method.
         '''
         xml = '<get_statistics />'
         result = self.rpc.call(xml)

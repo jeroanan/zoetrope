@@ -1,0 +1,34 @@
+<handle_get_screensaver_tasks>
+  <suspend_reason>0</suspend_reason>
+  <result>
+    <name>m4-vroln72-4_0_13997898_734_0</name>
+    <wu_name>m4-vroln72-4_0_13997898_734</wu_name>
+    <version_num>533</version_num>
+    <plan_class />
+    <project_url>http://www.enigmaathome.net/</project_url>
+    <final_cpu_time>0.000000</final_cpu_time>
+    <final_elapsed_time>0.000000</final_elapsed_time>
+    <exit_status>0</exit_status>
+    <state>2</state>
+    <report_deadline>1460411683.000000</report_deadline>
+    <received_time>1459547684.494518</received_time>
+    <estimated_cpu_time_remaining>3937.598038</estimated_cpu_time_remaining>
+    <active_task>
+      <active_task_state>1</active_task_state>
+      <app_version_num>533</app_version_num>
+      <slot>2</slot>
+      <pid>29249</pid>
+      <scheduler_state>2</scheduler_state>
+      <checkpoint_cpu_time>0.000000</checkpoint_cpu_time>
+      <fraction_done>0.760355</fraction_done>
+      <current_cpu_time>0.000000</current_cpu_time>
+      <elapsed_time>15533.857821</elapsed_time>
+      <swap_size>3268608.000000</swap_size>
+      <working_set_size>2002944.000000</working_set_size>
+      <working_set_size_smoothed>2002944.000000</working_set_size_smoothed>
+      <page_fault_rate>0.000000</page_fault_rate>
+      <bytes_sent>0.000000</bytes_sent>
+      <bytes_received>0.000000</bytes_received>
+    </active_task>
+  </result>
+  <handle_get_screensaver_tasks>
