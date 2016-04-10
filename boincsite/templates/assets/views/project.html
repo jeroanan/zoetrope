@@ -1,4 +1,4 @@
-<div ng-controller="ProjectCtrl as vm">
+<div>
   <h1>{{ vm.title }}</h1>
   <div ng-show="!vm.ready" class="text-center">
     <img src="/static/img/loading.gif" />
@@ -36,6 +36,20 @@
       <keyvalrow key="Trickle upload pending?" val="{{ vm.project.trickle_upload_pending }}"></keyvalrow>
       <keyvalrow key="Last RPC" val="{{ vm.project.last_rpc }}"></keyvalrow>
       <keyvalrow key="Project files downloaded" val="{{ vm.project.project_files_downloaded }}"></keyvalrow>
+
+		<div class="row">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-3"></div>
+        <div class="col-xs-3">&nbsp;</div>
+        <div class="col-xs-3"></div>
+      </div>
+
+		<div class="row">
+        <div class="col-xs-3"></div>
+        <div class="col-xs-3"></div>
+        <div class="col-xs-3"><button class="btn btn-primary" ng-click="vm.updateProject()">Update Project</button></div>
+        <div class="col-xs-3"></div>
+      </div>
 
       <div class="row">
         <div class="col-xs-3"></div>

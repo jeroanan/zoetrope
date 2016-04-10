@@ -57,7 +57,8 @@ module.exports = function(grunt) {
             'boincsite/templates/assets/js/services/globalPreferencesSvc.js',
             'boincsite/templates/assets/js/services/jsonServices.js',
             'boincsite/templates/assets/js/services/allProjectListSvc.js',
-            'boincsite/templates/assets/js/services/attachProjectSvc.js'
+            'boincsite/templates/assets/js/services/attachProjectSvc.js',
+            'boincsite/templates/assets/js/services/updateProjectSvc.js'            
           ]
         }
       }
@@ -104,7 +105,8 @@ module.exports = function(grunt) {
           'boincsite/templates/assets/js/services/globalPreferencesSvc.js',
           'boincsite/templates/assets/js/services/jsonServices.js',
           'boincsite/templates/assets/js/services/allProjectListSvc.js',
-          'boincsite/templates/assets/js/services/attachProjectSvc.js'
+          'boincsite/templates/assets/js/services/attachProjectSvc.js',
+          'boincsite/templates/assets/js/services/updateProjectSvc.js'
         ],
         tasks: ['uglify:services']
       }

@@ -27,7 +27,9 @@ angular.module('zoetrope', [
         templateUrl: '/static/views/messages.html'
       }).
       when('/project', {
-        templateUrl: '/static/views/project.html'
+			 templateUrl: '/static/views/project.html',
+			 controller: 'ProjectCtrl',
+			 controllerAs: 'vm'
       }).
       when('/projects', {
         templateUrl: '/static/views/projects.html'

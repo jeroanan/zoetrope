@@ -560,6 +560,28 @@ class BoincClient(object):
         self.write_xml_to_file('get_statistics.xml', ElementTree.tostring(result))
         print(ElementTree.tostring(result))
 
+    def project_update(self, project_url):
+        ''' Update a project with the project server.
+        
+        Used to do things like report finished tasks and get new workunits.
+
+        If it is successful then the usual success response is given:
+
+        <success />
+
+        It will also be evident that this was successful by examining the output of get_messages
+
+        If there is an error then the following kind of response is given:
+
+        <error>Missing project URL</error>
+        '''
+        xml = '<project_update><project_url>{project_url}</project_url></project_update>'.format(
+            project_url=project_url)
+
+        result = self.rpc.call(xml)
+        print(ElementTree.tostring(result))
+        
+
 def read_gui_rpc_password():
     ''' Read password string from GUI_RPC_PASSWD_FILE file, trim the last CR
         (if any), and return it

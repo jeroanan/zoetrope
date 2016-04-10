@@ -18,6 +18,7 @@ import boincsite.boinc.GetNotices as gn
 import boincsite.boinc.ExperimentalTask as et
 import boincsite.boinc.GetGlobalPreferences as ggp
 import boincsite.boinc.GetAllProjectsList as gap
+import boincsite.boinc.UpdateProject as up
 
 
 class RpcFactory(object):
@@ -40,7 +41,8 @@ class RpcFactory(object):
             'GetNotices': gn.GetNotices,
             'ExperimentalTask': et.ExperimentalTask,
             'GetGlobalPreferences': ggp.GetGlobalPreferences,
-            'GetAllProjectsList': gap.GetAllProjectsList
+            'GetAllProjectsList': gap.GetAllProjectsList,
+            'UpdateProject': up.UpdateProject
         }
 
         if command_type in mappings:

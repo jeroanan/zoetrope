@@ -162,6 +162,13 @@ class WebServer(object):
         command = self.__rpc_factory.create('ExperimentalTask')
         command.execute()
 
+    @cherrypy.expose
+    def update_project(self, **kwargs):
+        project_url = kwargs.get('projectUrl', '')
+        
+        command = self.__rpc_factory.create('UpdateProject')
+        command.execute(project_url)
+
 if __name__=='__main__':
     ws = WebServer()
     ws.start()

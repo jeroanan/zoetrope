@@ -17,7 +17,7 @@ function AttachProjectController(attachProjectSvc, allProjectListSvc) {
   vm.submitClicked = submitClicked;
   vm.ready = false;
   vm.title = 'Attach Project';
-
+	
   function submitClicked() {
     var hash_in = vm.password + vm.emailaddress;
     var password_hash = hex_md5(hash_in);
@@ -27,8 +27,7 @@ function AttachProjectController(attachProjectSvc, allProjectListSvc) {
   allProjectListSvc.get()().query().$promise.then(function(d) {
     vm.attachedProjects = d.filter(function(x) { return x.name.length > 0 });
     vm.ready = true;
-  });
-
+  });  
 
   document.title = vm.title;
 }

@@ -6,18 +6,27 @@
 angular.module('zoetropeControllers')
   .controller('ProjectCtrl', ProjectController);
 
-ProjectController.$inject = ['projectSvc'];
+ProjectController.$inject = ['projectSvc', 'updateProjectSvc'];
 
-function ProjectController(projectSvc) {
+function ProjectController(projectSvc, updateProjectSvc) {
 
   var vm = this;
+  vm.ready = false;
+  vm.title = 'Project Summary';
+  vm.updateProject = updateProjectClick;
 
   projectSvc().query().$promise.then(function(d) {
     vm.project = d;
     vm.ready = true;
   })
 
-  vm.ready = false;
-  vm.title = 'Project Summary';
+  function updateProjectClick() {
+    if (vm.ready!==true) {
+      return;
+    }
+
+    updateProjectSvc.query(vm.project.master_url)().query()
+  }
+  
   document.title = vm.title;
 }
