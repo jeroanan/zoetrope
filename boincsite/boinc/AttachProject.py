@@ -17,13 +17,16 @@ class AttachProject(object):
         with client.BoincClient(passwd=password) as c:
             c.authorize(password)
 
+            print('Project URL: {project_url}'.format(project_url=project_url))
             c.lookup_account(project_url, email_address, password_hash, already_hashed=True)
 
             lookup_result = c.lookup_account_poll()
-
+            
             while lookup_result.error_num == '-204':
                 lookup_result = c.lookup_account_poll()
                 time.sleep(2)
 
             if lookup_result.authenticator != '':
                 c.project_attach(project_url, lookup_result.authenticator)
+            else:
+                print(lookup_result)

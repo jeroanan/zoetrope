@@ -138,6 +138,7 @@ class Rpc(object):
         #
         # ...which is not a valid XML document, so ElementTree.fromstring fails with a parse error. So in this situation
         # it should also be the case that the packed XML is returned.
+        
         packed_req = req
 
         if new_req != '':
@@ -149,4 +150,8 @@ class Rpc(object):
             try:
                 return ElementTree.fromstring(req)
             except ElementTree.ParseError:
-                return ElementTree.fromstring(packed_req)
+                try:
+                    return ElementTree.fromstring(packed_req)
+                except ElementTree.ParseError:
+                    print('I really could not XML parse {req}'.format(req=req))
+                    raise

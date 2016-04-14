@@ -101,6 +101,14 @@ class WebServer(object):
     def get_all_projects_list_json(self, **kwargs):
         return self.__straight_json_dump('GetAllProjectsList', ap, lambda x: list(x))
 
+    @cherrypy.expose
+    def detach_project(self, **kwargs):
+        project_url = kwargs.get('projectUrl', '')
+
+        command = self.__rpc_factory.create('DetachProject')
+        command_result = command.execute(project_url)
+        return json.dumps(command_result, self.__io, cls=jsae.JSONEncoder)
+
     def __straight_json_dump(self, command_type, result_type, post_process=None):
         command = self.__rpc_factory.create(command_type)
         result = command.execute()
@@ -149,13 +157,6 @@ class WebServer(object):
         command.execute(project_url, email_address, password_hash)
 
         raise cherrypy.HTTPRedirect('/')
-
-    @cherrypy.expose
-    def dettach_project(self, **kwargs):
-        project_url = kwargs.get('project_url', '')
-
-        command = self.__rpc_factory.create('DetachProject')
-        command.execute(project_url)
 
     @cherrypy.expose
     def experimental_task(self, **kwargs):

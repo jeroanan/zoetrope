@@ -15,4 +15,4 @@ class DetachProject(object):
         with client.BoincClient(passwd=password) as c:
             c.authorize(password)
 
-            c.project_detach(project_url)
+            return c.project_detach(project_url)

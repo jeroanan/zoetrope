@@ -31,11 +31,12 @@ import lib.boincindicator.resulttypes.DailyTransfer as dailytransfer
 import lib.boincindicator.resulttypes.DiskUsage as diskusage
 import lib.boincindicator.resulttypes.GlobalPreferences as globalpreferences
 import lib.boincindicator.resulttypes.HostInfo as hostinfo
+import lib.boincindicator.resulttypes.JoinedProject as joinedproject
 import lib.boincindicator.resulttypes.LookupAccountPoll as lookupaccountpoll
 import lib.boincindicator.resulttypes.Message as message
 import lib.boincindicator.resulttypes.Notice as notice
 import lib.boincindicator.resulttypes.Result as result
-import lib.boincindicator.resulttypes.JoinedProject as joinedproject
+import lib.boincindicator.resulttypes.SuccessError as successerror
 import lib.boincindicator.resulttypes.VersionInfo as versioninfo
 
 import lib.boincindicator.util.xmlutil as xmlutil
@@ -523,7 +524,17 @@ class BoincClient(object):
         xml = '<project_detach><project_url>{project_url}</project_url></project_detach>'.format(
             project_url=project_url)
         result = self.rpc.call(xml)
-        print(ElementTree.tostring(result))
+        out = successerror.SuccessError()
+
+        
+        for i in list(result):
+            out.success = i.tag == 'success'
+
+            if not out.success:
+                out.error_message = i.text.strip()
+
+        print(out)
+        return out
 
     def get_screensaver_tasks(self):
         '''Gives me a wealth of information, presumably on tasks that can run as a screensaver.
