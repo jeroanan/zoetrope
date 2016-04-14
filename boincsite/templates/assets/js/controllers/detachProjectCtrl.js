@@ -29,7 +29,12 @@ function DetachProjectController(projectsSvc, detachProjectSvc) {
   function confirmDetach() {
     if (vm.selectedProject) {
       vm.showConfirmDetach = true;
+      return;
     }
+
+    vm.detachClicked = true;
+    vm.detachSuccessful = false;
+    vm.detachErrorMessage = 'Select a project to detach from first.';
   }
 
   // When we get here the user has clicked the secondary
