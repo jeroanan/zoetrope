@@ -7,7 +7,9 @@
     <img ng-src="{{vm.project.image}}" alt="{{vm.name}}" />
   </p>
   <p ng-show="vm.project.attached===true">
-	 This client is already attached to the project.
+	 <span>This client is already attached to the project.</span>
+	 <button class="btn btn-warning" ng-click="vm.detachClicked()">Detach</button>
+	 <detach-dialog projectname="{{vm.project.name}}" projecturl="{{vm.project.url}}"></detach-dialog>
   </p>
   <p ng-show="vm.project.attached!==true">
 	 <button class="btn btn-primary" ng-click="vm.attachClicked()">Attach</button>

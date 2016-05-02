@@ -14,9 +14,14 @@ function ProjectDetailController($routeParams, allProjectListSvc, projectsSvc) {
   vm.ready = false;
   vm.project = {};
   vm.attachClicked = attachClicked;
-
+  vm.detachClicked = detachClicked;
+  
   function attachClicked() {
 	 $('#attachModal').modal('show');
+  }
+
+  function detachClicked() {
+	 $('#detachModal').modal('show');
   }
 
   function setTitle(title) {
