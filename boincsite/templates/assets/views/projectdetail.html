@@ -6,6 +6,13 @@
   <p class="text-center">
     <img ng-src="{{vm.project.image}}" alt="{{vm.name}}" />
   </p>
+  <p ng-show="vm.project.attached===true">
+	 This client is already attached to the project.
+  </p>
+  <p ng-show="vm.project.attached!==true">
+	 <button class="btn btn-primary" ng-click="vm.attachClicked()">Attach</button>
+	 <attach-dialog projectname="{{vm.project.name}}" projecturl="{{vm.project.url}}"></attach-dialog>
+  </p>
   <p>
     Computing for
     <span ng-bind="vm.project.general_area"></span>
@@ -18,5 +25,5 @@
   <h2>Supported Platforms</h2>
   <ul>
     <li ng-repeat="p in vm.project.platforms" ng-bind="p.name"></li>
-  </ul>
+  </ul>  
 </div>

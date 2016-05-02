@@ -6,9 +6,9 @@
 angular.module('zoetropeControllers')
   .controller('attachProjectCtrl', AttachProjectController);
 
-AttachProjectController.$inject = ['attachProjectSvc', 'allProjectListSvc'];
+AttachProjectController.$inject = ['attachProjectSvc', 'allProjectListSvc', 'md5Svc'];
 
-function AttachProjectController(attachProjectSvc, allProjectListSvc) {
+function AttachProjectController(attachProjectSvc, allProjectListSvc, md5Svc) {
 
   var vm = this;
   vm.selectedProject = ''
@@ -20,7 +20,7 @@ function AttachProjectController(attachProjectSvc, allProjectListSvc) {
 	
   function submitClicked() {
     var hash_in = vm.password + vm.emailaddress;
-    var password_hash = hex_md5(hash_in);
+	 var password_hash = md5Svc.query(hash_in)();	 
     attachProjectSvc.query(vm.selectedProject, vm.emailaddress, password_hash)().query();
   }
 

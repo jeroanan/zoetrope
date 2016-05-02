@@ -72,3 +72,29 @@ angular.module('zoetropeControllers').directive('keyvalrow', function() {
     templateUrl: '/static/directives/keyvalrow.html'
   };
 });
+
+angular.module('zoetropeControllers').directive('attachDialog', function() {
+  return {
+    restrict: 'E',
+    scope: {
+		projecturl: '@',
+		projectname: '@'
+    },
+    templateUrl: '/static/directives/attachDialog.html',
+	 controller: ['$scope', 'attachProjectSvc', 'md5Svc', function($scope, attachProjectSvc, md5Svc) {
+
+		$scope.emailaddress = '';
+		$scope.password = '';
+		$scope.submitClicked = submitClicked;
+
+		function submitClicked() {
+		  var hash_in = $scope.password + $scope.emailaddress;
+		  var password_hash = md5Svc.query(hash_in)();
+		  attachProjectSvc.query($scope.projecturl, $scope.emailaddress, password_hash)().query();
+		}
+	 }],
+	 link: function(scope, element, attrs, ctrl) {
+
+	 }
+  };
+});
