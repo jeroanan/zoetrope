@@ -21,3 +21,8 @@ div.confirm-row {
 a {
   cursor: pointer;
 }
+
+img.button-loading {
+	 height: 15px;
+	 width: 15px;
+}

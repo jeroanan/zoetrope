@@ -88,14 +88,25 @@ angular.module('zoetropeControllers').directive('attachDialog', function() {
 		$scope.submitClicked = submitClicked;
 		$scope.errorText = '';
 		$scope.success = false;
+		$scope.loading = false;
 
 		function submitClicked() {
 		  $scope.errorText = '';
 		  $scope.success = false;
+
+		  if ($scope.password === '' || $scope.emailaddress === '') {
+			 $scope.errorText = 'Please enter an email address and password to attach to this project.';
+			 return;
+		  }
 		  
 		  var hash_in = $scope.password + $scope.emailaddress;
 		  var password_hash = md5Svc.query(hash_in)();
+
+		  $scope.loading = true;
+		  
 		  attachProjectSvc.query($scope.projecturl, $scope.emailaddress, password_hash)().query().$promise.then(function(d) {
+			 $scope.loading = false;
+			 
 			 if (d.error_message && d.error_message!=='') {
 				$scope.errorText = d.error_message;
 			 } else {
