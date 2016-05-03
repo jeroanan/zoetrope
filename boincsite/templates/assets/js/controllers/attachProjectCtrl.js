@@ -17,7 +17,7 @@ function AttachProjectController(attachProjectSvc, allProjectListSvc, md5Svc) {
   vm.submitClicked = submitClicked;
   vm.ready = false;
   vm.title = 'Attach Project';
-	
+  
   function submitClicked() {
     var hash_in = vm.password + vm.emailaddress;
 	 var password_hash = md5Svc.query(hash_in)();	 

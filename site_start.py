@@ -154,9 +154,8 @@ class WebServer(object):
         password_hash = kwargs.get('password', '')
 
         command = self.__rpc_factory.create('AttachProject')
-        command.execute(project_url, email_address, password_hash)
-
-        raise cherrypy.HTTPRedirect('/')
+        result = command.execute(project_url, email_address, password_hash)
+        return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
 
     @cherrypy.expose
     def experimental_task(self, **kwargs):

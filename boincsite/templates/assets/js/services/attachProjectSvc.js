@@ -23,7 +23,6 @@ function AttachProjectService($resource) {
         var res = $resource('/attach_project', data, {
           query: {method: 'POST'}
         })
-
         return res;
       }
     }

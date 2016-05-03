@@ -8,6 +8,9 @@
       </div>
 
       <div class="modal-body">
+		  <div class="alert-danger alert" ng-show="errorText!==''">
+			 <span ng-bind="errorText"></span>
+		  </div>
 		  <div>
 			 <div>
 				<form class="row-horizontal">

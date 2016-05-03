@@ -86,11 +86,22 @@ angular.module('zoetropeControllers').directive('attachDialog', function() {
 		$scope.emailaddress = '';
 		$scope.password = '';
 		$scope.submitClicked = submitClicked;
+		$scope.errorText = '';
+		$scope.success = false;
 
 		function submitClicked() {
+		  $scope.errorText = '';
+		  $scope.success = false;
+		  
 		  var hash_in = $scope.password + $scope.emailaddress;
 		  var password_hash = md5Svc.query(hash_in)();
-		  attachProjectSvc.query($scope.projecturl, $scope.emailaddress, password_hash)().query();
+		  attachProjectSvc.query($scope.projecturl, $scope.emailaddress, password_hash)().query().$promise.then(function(d) {
+			 if (d.error_message && d.error_message!=='') {
+				$scope.errorText = d.error_message;
+			 } else {
+				$scope.success = true;
+			 }
+		  });
 		}
 	 }],
 	 link: function(scope, element, attrs, ctrl) {
@@ -110,9 +121,19 @@ angular.module('zoetropeControllers').directive('detachDialog', function() {
 	 controller: ['$scope', 'detachProjectSvc', function($scope, detachProjectSvc) {
 
 		$scope.submitClicked = submitClicked;
-
+		$scope.errorText = '';
+		
 		function submitClicked() {
-		  detachProjectSvc.query($scope.projecturl)().query()
+
+		  $scope.errorText = '';
+		  
+		  detachProjectSvc.query($scope.projecturl)().query().$promise.then(function(d) {
+			 if (d.error_message) {
+				$scope.errorText = d.error_message;
+			 } else {
+				$('#detachModal').modal('hide');
+			 }
+		  });
 		}
 	 }],
 	 link: function(scope, element, attrs, ctrl) {

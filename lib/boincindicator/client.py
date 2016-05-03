@@ -440,6 +440,7 @@ class BoincClient(object):
             url=project_url, email_address=email_address, password_hash=password)
 
         results = self.rpc.call(xml)
+        return ElementTree.tostring(results)
 
     def lookup_account_poll(self):
         ''' Check up on the progress of a previous lookup_account RPC call.

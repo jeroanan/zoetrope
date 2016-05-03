@@ -46,7 +46,10 @@
 
 		<div class="row">
         <div class="col-xs-3"></div>
-        <div class="col-xs-3"></div>
+        <div class="col-xs-3">
+			 <button class="btn btn-warning" ng-click="vm.detachClicked()">Detach Project</button>
+			 <detach-dialog projectname="{{vm.project.name}}" projecturl="{{vm.project.master_url}}"></detach-dialog>
+		  </div>
         <div class="col-xs-3"><button class="btn btn-primary" ng-click="vm.updateProject()">Update Project</button></div>
         <div class="col-xs-3"></div>
       </div>
