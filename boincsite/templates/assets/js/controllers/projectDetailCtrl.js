@@ -15,6 +15,7 @@ function ProjectDetailController($routeParams, allProjectListSvc, projectsSvc) {
   vm.project = {};
   vm.attachClicked = attachClicked;
   vm.detachClicked = detachClicked;
+  vm.projectFound = false;
   
   function attachClicked() {
 	 $('#attachModal').modal('show');
@@ -33,12 +34,19 @@ function ProjectDetailController($routeParams, allProjectListSvc, projectsSvc) {
 	 	 
     vm.project = d.filter(function(x) { return x.name===$routeParams.projectname })[0];
 
+	 if (!vm.project) {
+		vm.projectFound = false;
+		vm.ready = true;
+		return;
+	 }
+
 	 projectsSvc.get()().query().$promise.then(function(e) {
 		var attachedProject = e.filter(function(x) { return x.name==vm.project.name });
 		vm.project.attached = attachedProject.length > 0;
 	 });
 
     setTitle('Project Details -- ' + vm.project.name);
+	 vm.projectFound = true;
     vm.ready = true;
   });
 

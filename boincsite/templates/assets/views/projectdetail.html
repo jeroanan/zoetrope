@@ -2,19 +2,24 @@
 <div ng-show="!vm.ready" class="text-center">
   <img src="/static/img/loading.gif" />
 </div>
-<div ng-show="vm.ready">
+<div ng-show="vm.ready && !vm.projectFound">
+  <h2>Project not found</h2>
+  <a href="/#/getallprojectlist">All Boinc Projects</a>
+</div>
+<div ng-show="vm.ready && vm.projectFound">
   <p class="text-center">
     <img ng-src="{{vm.project.image}}" alt="{{vm.name}}" />
   </p>
-  <p ng-show="vm.project.attached===true">
+  <p ng-show="vm.project.attached">
 	 <span>This client is already attached to the project.</span>
 	 <a ng-href="/#/project?project={{vm.project.name}}">More information</a>
-	 <p>
-		<button class="btn btn-warning" ng-click="vm.detachClicked()">Detach</button>
-		<detach-dialog projectname="{{vm.project.name}}" projecturl="{{vm.project.url}}"></detach-dialog>
-	 </p>
+	 <br />
+	 <button class="btn btn-warning" ng-click="vm.detachClicked()">Detach</button>
+	 <detach-dialog projectname="{{vm.project.name}}" projecturl="{{vm.project.url}}"></detach-dialog>
+	 
   </p>
-  <p ng-show="vm.project.attached!==true">
+
+  <p ng-show="!vm.project.attached">
 	 <button class="btn btn-primary" ng-click="vm.attachClicked()">Attach</button>
 	 <attach-dialog projectname="{{vm.project.name}}" projecturl="{{vm.project.url}}"></attach-dialog>
   </p>

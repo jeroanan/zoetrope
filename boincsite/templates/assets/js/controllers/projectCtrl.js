@@ -15,11 +15,18 @@ function ProjectController(projectSvc, updateProjectSvc) {
   vm.title = 'Project Summary';
   vm.updateProject = updateProjectClick;
   vm.detachClicked = detachClicked;
+  vm.projectFound = false;
   
-  projectSvc().query().$promise.then(function(d) {
-    vm.project = d;
-    vm.ready = true;
-  })
+  projectSvc().query().$promise.then(
+	 function(d) {
+		vm.project = d;
+		vm.projectFound = true;
+		vm.ready = true;
+	 },
+	 function(d) {
+		vm.ready = true;
+		vm.projectFound = false;
+	 })
 
   function updateProjectClick() {
     if (vm.ready!==true) {
@@ -32,8 +39,6 @@ function ProjectController(projectSvc, updateProjectSvc) {
   function detachClicked() {
 	 $('#detachModal').modal('show');
   }
-
-
   
   document.title = vm.title;
 }

@@ -6,7 +6,10 @@
   <div ng-show="vm.ready && vm.error" class="text-center">
     <span ng-bind="vm.errorMessage"></span>
   </div>
-  <div ng-show="vm.ready && !vm.error">
+  <div ng-show="vm.ready && !vm.projectFound">
+	 <h2>Project not found</h2>
+  </div>
+  <div ng-show="vm.ready && !vm.error && vm.projectFound">
 	 <a ng-href="/#/projectdetail/{{vm.project.name}}">Project Details</a>
     <h2>Current Status</h2>
 
