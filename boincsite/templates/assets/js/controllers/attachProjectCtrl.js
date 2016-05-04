@@ -17,11 +17,30 @@ function AttachProjectController(attachProjectSvc, allProjectListSvc, md5Svc) {
   vm.submitClicked = submitClicked;
   vm.ready = false;
   vm.title = 'Attach Project';
+  vm.errorText = '';
+  vm.success = false;
+  vm.loading = false;
   
   function submitClicked() {
+
+	 vm.success = false;
+	 vm.errorText = '';
+
+	 if (vm.selectedProject==='' || vm.emailaddress==='' || vm.password==='') {
+		vm.success = false;
+		vm.errorText = 'Please enter an email address, password and select a project to attach to.';
+		return;
+	 }
+
     var hash_in = vm.password + vm.emailaddress;
-	 var password_hash = md5Svc.query(hash_in)();	 
-    attachProjectSvc.query(vm.selectedProject, vm.emailaddress, password_hash)().query();
+	 var password_hash = md5Svc.query(hash_in)();
+	 vm.loading = true;
+	 
+    attachProjectSvc.query(vm.selectedProject, vm.emailaddress, password_hash)().query().$promise.then(function(d) {
+		vm.loading = false;
+		vm.success = d.success;
+		vm.errorText = d.error_message;
+	 });
   }
 
   allProjectListSvc.get()().query().$promise.then(function(d) {

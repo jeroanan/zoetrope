@@ -5,6 +5,12 @@
 <div ng-show="vm.ready">
   <div>
     <form class="row-horizontal">
+		<div class="alert alert-success" ng-show="vm.success==true">
+		  <span>Attached successfully.</span>
+		</div>
+		<div class="alert alert-danger" ng-show="vm.success==false && vm.errorText!=''">
+		  <span ng-bind="vm.errorText" />
+		</div>
       <div class="row">
         <div class="col-xs-2"></div>
         <div class="col-xs-8">
@@ -52,12 +58,14 @@
       </div>
       <div class="row">
         <div class="col-xs-2"></div>
-        <div class="col-xs-8">
-          <button type="button" name="submit" class="btn btn-primary pull-right" ng-click="vm.submitClicked()">
+        <div class="col-xs-7"></div>
+		  <div class="col-xs-2">			 
+          <button type="button" name="submit" class="btn btn-primary" ng-click="vm.submitClicked()" ng-disabled="vm.loading">
             Submit
           </button>
+			 <img src="/static/img/loading.gif" alt="loading" class="button-loading" ng-show="vm.loading" />
         </div>
-        <div class="col-xs-2"></div>
+        <div class="col-xs-1"></div>
       </div>
     </form>
   </div>
