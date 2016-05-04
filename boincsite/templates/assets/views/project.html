@@ -7,6 +7,7 @@
     <span ng-bind="vm.errorMessage"></span>
   </div>
   <div ng-show="vm.ready && !vm.error">
+	 <a ng-href="/#/projectdetail/{{vm.project.name}}">Project Details</a>
     <h2>Current Status</h2>
 
     <keyvalrow key="URL" val="{{ vm.project.master_url }}"></keyvalrow>
