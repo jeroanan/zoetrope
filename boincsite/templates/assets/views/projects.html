@@ -9,12 +9,25 @@
         <th><a ng-click="vm.orderProp='name'; vm.reverseSort=!vm.reverseSort">Project Name</a></th>
         <th><a ng-click="vm.orderProp='user_total_credit'; vm.reverseSort=!vm.reverseSort">Total Credit</a></th>
         <th><a ng-click="vm.orderProp='user_expavg_credit'; vm.reverseSort=!vm.reverseSort">Recent Average Credit</a></th>
+		  <th ng-show="false">Stuff</th>
       </thead>
       <tr ng-repeat="p in vm.projects | orderBy:vm.orderProp:vm.reverseSort">
         <td><a href="#/project?project={{ p.name }}">{{ p.name }}</a></td>
         <td>{{ p.user_total_credit }}</td>
         <td>{{ p.user_expavg_credit }}</td>
-      </tr>
+		  <td ng-show="false">
+			 <div class="dropdown">
+				<button class="btn btn-default dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				  Actions
+				  <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				  <li><a href="" ng-click="vm.detachClicked(p.name, p.master_url)">Detach</a></li>
+				  <li><a href="" ng-click="vm.updateClicked()">Update</a></li>
+				</ul>
+			 </div>
+		  </td>
+      </tr>		
     </table>
     <div class="row">
       <div class="col-xs-3"></div>
@@ -27,5 +40,6 @@
     <div class="row" ng-show="vm.showRawData">
       {{ vm.projects }}
     </div>
+	 <detach-dialog id="dDialog" projecturl="{{vm.detachUrl}}" projectname="{{vm.detachName}}"></detach-dialog>
   </div>
 </div>

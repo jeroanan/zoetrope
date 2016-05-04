@@ -148,7 +148,15 @@ angular.module('zoetropeControllers').directive('detachDialog', function() {
 		}
 	 }],
 	 link: function(scope, element, attrs, ctrl) {
+		attrs.$observe('projecturl', function(val) {
+		  scope.projecturl = val;
+		});
 
+		attrs.$observe('projectname', function(val) {
+		  scope.projectname = val;
+		});
+
+		console.log(attrs);
 	 }
   };
 });
