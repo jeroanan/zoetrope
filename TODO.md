@@ -19,10 +19,6 @@ When the user navigates to /#/getallprojectlist a list of all available BOINC pr
 
 Once that's done it should also be possible to add this to the main "All Boinc Projects" screen as well as to the screens that show list/details of currently-attached projects.
 
-**Indicate which projects are already attached in the All Boinc Projects list**
-
-And on the details pages that are reached from there.
-
 **Support creation of new accounts when attaching to new projects**
 
 Currently only attaching to an existing account is supported.

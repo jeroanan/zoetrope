@@ -6,9 +6,9 @@
 angular.module('zoetropeControllers')
   .controller('allProjectListCtrl', AllProjectListController);
 
-AllProjectListController.$inject = ['allProjectListSvc']
+AllProjectListController.$inject = ['allProjectListSvc', 'projectsSvc']
 
-function AllProjectListController(allProjectListSvc) {
+function AllProjectListController(allProjectListSvc, projectsSvc) {
 
   var vm = this;
 
@@ -20,7 +20,6 @@ function AllProjectListController(allProjectListSvc) {
   vm.doSort = getSortFunc('name');
 
   document.title = vm.title;
-
 
   function getSortFunc(defaultSortField) {
 
@@ -39,7 +38,18 @@ function AllProjectListController(allProjectListSvc) {
   }
 
   allProjectListSvc.get()().query().$promise.then(function(d) {
-    vm.ready = true;
-    vm.availableProjects = d;
+
+	 projectsSvc.get()().query().$promise.then(function(e) {
+		vm.ready = true;
+
+		vm.availableProjects = d.map(function(x) {
+		  var thisProject = e.filter(function(y) {
+			 return y.name==x.name;
+		  });
+
+		  x.attached = thisProject.length>0;
+		  return x;
+		});
+	 });    
   })
 }

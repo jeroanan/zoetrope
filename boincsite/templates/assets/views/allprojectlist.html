@@ -19,7 +19,10 @@
       </th>
     </tr>
     <tr ng-repeat="ap in vm.availableProjects | orderBy:vm.sortProp:vm.reverseSort | filter:vm.filterProp">
-      <td><a ng-href="/#/projectdetail/{{ap.name}}"><span ng-bind="ap.name"></span></a></td>
+      <td>
+		  <a ng-href="/#/projectdetail/{{ap.name}}"><span ng-bind="ap.name"></span></a>
+		  <span title="This client is attached to this project." ng-show="ap.attached">&#10004;</span>
+		</td>
       <td>
         <span ng-bind="ap.general_area"></span>
         <span ng-show="ap.specific_area.length>0">(<span ng-bind="ap.specific_area"></span>)</span>
