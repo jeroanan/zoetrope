@@ -23,17 +23,9 @@ Once that's done it should also be possible to add this to the main "All Boinc P
 
 And on the details pages that are reached from there.
 
-**Add an "Attach to Project" button on project details pages for projects that are not already attached**
-
-This button can take the user to the "Attach Project" page that can have its url pre-selected.
-
 **Support creation of new accounts when attaching to new projects**
 
 Currently only attaching to an existing account is supported.
-
-**Add a "Detach from Project" button to project details pages for projects already attached**
-
-Similar to the "Attach to Project" button above, this can redirect to the Detach Project screen with the url pre-selected. This button could be added to the details pages reached from listing all available BOINC projects, as well as the details pages reached from the currently-attached projects.
 
 **Add further details to the Host Info page**
 
