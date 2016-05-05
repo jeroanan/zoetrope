@@ -124,15 +124,13 @@ angular.module('zoetropeControllers').directive('attachDialog', function() {
 angular.module('zoetropeControllers').directive('detachDialog', function() {
   return {
     restrict: 'E',
-    scope: {
-		projecturl: '@',
-		projectname: '@'
-    },
     templateUrl: '/static/directives/detachDialog.html',
 	 controller: ['$scope', 'detachProjectSvc', function($scope, detachProjectSvc) {
 
 		$scope.submitClicked = submitClicked;
 		$scope.errorText = '';
+		$scope.projecturl = '';
+		$scope.projectname = '';
 		
 		function submitClicked() {
 

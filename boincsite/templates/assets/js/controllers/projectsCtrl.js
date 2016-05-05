@@ -6,9 +6,9 @@
 angular.module('zoetropeControllers')
   .controller('ProjectsCtrl', ProjectsController);
 
-ProjectsController.$inject = ['projectsSvc'];
+ProjectsController.$inject = ['projectsSvc', 'updateProjectSvc'];
 
-function ProjectsController(projectsSvc) {
+function ProjectsController(projectsSvc, updateProjectSvc) {
 
   var vm = this;
   vm.orderProp = 'name';
@@ -23,16 +23,16 @@ function ProjectsController(projectsSvc) {
   vm.detachName = '';
 
   function detachClicked(projectName, projectUrl) {
-	 var dialog = $('#dDialog');
+	 var dialog = $('#detachModal');
 	 
 	 vm.detachUrl = projectUrl;
 	 vm.detachName = projectName;
 
-	 //dialog.modal('show');
+	 dialog.modal('show');
   }
 
   function updateClicked() {
-
+	 updateProjectSvc.query(vm.project.master_url)().query()
   }
 
   document.title = vm.title;
