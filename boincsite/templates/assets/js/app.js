@@ -10,7 +10,8 @@ angular.module('zoetrope', [
     $routeProvider.
       when('/', {
         templateUrl: '/static/views/tasks.html',
-        conroller: 'IndexCtrl'
+        controller: 'IndexCtrl',
+		  controllerAs: 'vm'
       }).
       when('/daily_transfer_history', {
         templateUrl: '/static/views/dailytransferhistory.html',
@@ -38,10 +39,14 @@ angular.module('zoetrope', [
 			 controllerAs: 'vm'
       }).
       when('/projects', {
-        templateUrl: '/static/views/projects.html'
+        templateUrl: '/static/views/projects.html',
+		  controller: 'ProjectsCtrl',
+		  controllerAs: 'vm'		  
       }).
       when('/task', {
         templateUrl: '/static/views/task.html',
+		  controller: 'TaskCtrl',
+		  controllerAs: 'vm'
       }).
       when('/notices', {
         templateUrl: '/static/views/notices.html',

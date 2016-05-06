@@ -1,5 +1,5 @@
-<div ng-controller="IndexCtrl as vm">
-  <h1>{{ vm.title }}</h1>
+<div>
+  <h1 ng-bind="vm.title" />
 
   <div ng-show="!vm.ready" class="text-center">
     <img src="/static/img/loading.gif" />
@@ -22,9 +22,9 @@
       <tbody>
         <tr ng-repeat="task in vm.tasks | orderBy:vm.sortProp:vm.reverseSort">
 
-          <td><a href="#/task?task_name={{ task.name }}">{{ task.idx }}</a></td>
+          <td><a ng-href="#/task?task_name={{ task.name }}"><span ng-bind="task.idx" /></a></td>
 
-          <td><a href="#/project?project={{ task.project_name }}">{{ task.project_name }}</a></td>
+          <td><a ng-href="#/project?project={{ task.project_name }}"><span ng-bind="task.project_name" /></a></td>
 
           <td>
             <div class="progress">
@@ -32,13 +32,13 @@
                 aria-valuemax="100" style="width: {{task.fraction_done}}%;"></div>
             </div>
             <div>
-              <span><small>{{ task.fraction_done }}%</small></span>
+              <span><small ng-bind="task.fraction_done + '%'" /></span>
             </div>
           </td>
 
-          <td>{{ task.state }}</td>
-          <td>{{ task.time_so_far }}</td>
-          <td>{{ task.estimated_cpu_time_remaining }}</td>
+          <td><span ng-bind="task.state" /></td>
+          <td><span ng-bind="task.time_so_far" /></td>
+          <td><span ng-bind="task.estimated_cpu_time_remaining" /></td>
           <td><span ng-bind="task.report_deadline"></span></td>
         </tr>
       </tbody>

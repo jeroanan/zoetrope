@@ -1,5 +1,5 @@
-<div ng-controller="ProjectsCtrl as vm">
-  <h1>{{ vm.title }}</h1>
+<div>
+  <h1 ng-bind="vm.title" />
   <div ng-show="!vm.ready" class="text-center">
     <img src="/static/img/loading.gif" />
   </div>
@@ -9,12 +9,12 @@
         <th><a ng-click="vm.orderProp='name'; vm.reverseSort=!vm.reverseSort">Project Name</a></th>
         <th><a ng-click="vm.orderProp='user_total_credit'; vm.reverseSort=!vm.reverseSort">Total Credit</a></th>
         <th><a ng-click="vm.orderProp='user_expavg_credit'; vm.reverseSort=!vm.reverseSort">Recent Average Credit</a></th>
-		  <th ng-show="false">Stuff</th>
+		  <th>Actions</th>
       </thead>
       <tr ng-repeat="p in vm.projects | orderBy:vm.orderProp:vm.reverseSort">
-        <td><a href="#/project?project={{ p.name }}">{{ p.name }}</a></td>
-        <td>{{ p.user_total_credit }}</td>
-        <td>{{ p.user_expavg_credit }}</td>
+        <td><a href="#/project?project={{ p.name }}"><span ng-bind="p.name" /></a></td>
+        <td><span ng-bind="p.user_total_credit" /></td>
+        <td><span ng-bind="p.user_expavg_credit" /></td>
 		  <td ng-show="true">
 			 <div class="dropdown">
 				<button class="btn btn-default dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
