@@ -10,14 +10,14 @@ GlobalPreferencesCtrl.$inject = ['globalPreferencesSvc'];
 
 function GlobalPreferencesCtrl(globalPreferencesSvc) {
   var vm = this;
+  vm.ready = false;
+  vm.title = 'Global Preferences';
+  vm.prefs = {};
+
+  document.title = vm.title
 
   globalPreferencesSvc.get()().query().$promise.then(function(d) {
     vm.prefs = d;
     vm.ready = true;
-    console.log(vm.prefs);
-  });
-
-  vm.ready = false;
-  vm.title = 'Global Preferences';
-  document.title = vm.title
+  });  
 }

@@ -16,17 +16,20 @@ function ProjectController(projectSvc, updateProjectSvc) {
   vm.updateProject = updateProjectClick;
   vm.detachClicked = detachClicked;
   vm.projectFound = false;
+  vm.project = {};
+
+  function gotProject(project) {
+	 vm.project = project;
+	 vm.projectFound = true;
+	 vm.ready = true;
+  }
+
+  function gotProjectError() {
+	 vm.ready = true;
+	 vm.projectFound = false;
+  }
   
-  projectSvc().query().$promise.then(
-	 function(d) {
-		vm.project = d;
-		vm.projectFound = true;
-		vm.ready = true;
-	 },
-	 function(d) {
-		vm.ready = true;
-		vm.projectFound = false;
-	 })
+  projectSvc().query().$promise.then(gotProject, gotProjectError)
 
   function updateProjectClick() {
     if (vm.ready!==true) {

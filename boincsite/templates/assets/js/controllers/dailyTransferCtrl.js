@@ -11,35 +11,35 @@ DailyTransferController.$inject = ['dailyTransferHistorySvc'];
 function DailyTransferController(dailyTransferHistorySvc) {
 
   var vm = this;
+  vm.daily_transfers = {};
+  vm.totalUploaded = '';
+  vm.totalDownloaded = '';
+  vm.ready = false;
+  vm.title = 'Daily Transfer History';
+  vm.orderProp = 'date';
+  vm.reverseSort = true;
+  
+  document.title = vm.title;
+
   dailyTransferHistorySvc.get()().query().$promise.then(function(data) {
-    for (var d in data) {
-      var transfer = data[d];
 
-      if (!transfer.date) {
-        continue;
-      }
-
-      var dateSplit = transfer.date.split('-');
+	 vm.daily_transfers = data.filter(function(transfer) {
+		return transfer.date;
+	 }).map(function(transfer) {
+		var dateSplit = transfer.date.split('-');
       var theDate = new Date(dateSplit[0], dateSplit[1]-1, dateSplit[2]);
-      data[d].date = theDate;
-    }
+      transfer.date = theDate;
+		return transfer;		
+	 });
 
-
-    var totalMegabytes = function(fieldName) {
+    function totalMegabytes(fieldName) {
       var megs = Array.map(data, function(x) { return x[fieldName]; });
       var total = Array.reduce(megs, function(a, b) { return a+b });
       return Math.round(total * 100) / 100;
-    };
+    }
 
-    vm.daily_transfers = data;
-    vm.orderProp = 'date';
-    vm.reverseSort = true;
     vm.totalUploaded = totalMegabytes('uploaded') + 'MB';
     vm.totalDownloaded = totalMegabytes('downloaded') + 'MB';
-    vm.ready = true;
-    vm.title = 'Daily Transfer History';
-    document.title = vm.title;
-  })
-
-  vm.ready = false;
+    vm.ready = true;    
+  });  
 }

@@ -1,11 +1,11 @@
 <div>
-  <h1>{{ duvm.title }}</h1>
+  <h1 ng-bind="duvm.title" />
   <div ng-show="!duvm.ready" class="text-center">
     <img src="/static/img/loading.gif" />
   </div>
   <div ng-show="duvm.ready">
-    <keyvalrow key="Total Disk Space" val="{{ duvm.disk_usages.total_disk_space }}"></keyvalrow>
-    <keyvalrow key="Free Disk Space" val="{{ duvm.disk_usages.free_disk_space }}"></keyvalrow>
+    <keyvalrow key="Total Disk Space" val="{{ duvm.disk_usages.total_disk_space }}" />
+    <keyvalrow key="Free Disk Space" val="{{ duvm.disk_usages.free_disk_space }}" />
 
     <h2>By project</h2>
 
@@ -16,7 +16,7 @@
       </thead>
       <tr ng-repeat="pdu in duvm.disk_usages.project_disk_usages | orderBy:duvm.orderProp:duvm.reverseSort">
         <td><a href="{{pdu.master_url}}">{{pdu.master_url}}</a></td>
-        <td>{{pdu.disk_usage + 'MB'}}</td>
+        <td><span ng-bind="pdu.disk_usage + 'MB'" /></td>
       </tr>
     </table>
   </div>

@@ -11,7 +11,16 @@ MessagesController.$inject = ['messagesSvc'];
 function MessagesController(messagesSvc) {
 
   var vm = this;
-
+  vm.orderProp = 'message_number';
+  vm.reverseSort = true;
+  vm.filterProp = '';
+  vm.ready = false;
+  vm.title = "Messages"
+  document.title = vm.title;
+  vm.messages = {};
+  vm.unique_project_names = [];
+  vm.project_name_counts = [];
+  
   messagesSvc.get()().query().$promise.then(function(d) {
     vm.messages = d;
 
@@ -37,12 +46,5 @@ function MessagesController(messagesSvc) {
 
   vm.get_project_name = function(pn) {
     return pn === '' ? '(no project)' : pn;
-  };
-
-  vm.orderProp = 'message_number';
-  vm.reverseSort = true;
-  vm.filterProp = '';
-  vm.ready = false;
-  vm.title = "Messages"
-  document.title = vm.title;
+  };  
 }

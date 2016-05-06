@@ -12,13 +12,12 @@ function NoticesController(noticesSvc) {
 
   var vm = this;
   vm.notices = [];
+  vm.title = 'Notices';
+  vm.ready = false;
+  document.title = vm.title;
 
   noticesSvc.get()().query().$promise.then(function(d) {
     vm.notices = d;
     vm.ready = true;
-  })
-
-  vm.title = 'Notices';
-  vm.ready = false;
-  document.title = vm.title;
+  });  
 }

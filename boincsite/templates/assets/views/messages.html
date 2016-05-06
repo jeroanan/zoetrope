@@ -1,5 +1,5 @@
-<div ng-controller="MessagesCtrl as vm">
-  <h1>{{ vm.title }}</h1>
+<div>
+  <h1 ng-bind=" vm.title" />
   <div ng-show="!vm.ready" class="text-center">
     <img src="/static/img/loading.gif" />
   </div>
@@ -25,11 +25,11 @@
         <th><a ng-click="vm.orderProp='message_text'; vm.reverseSort=!vm.reverseSort">Message Text</a></th>
       </thead>
       <tr ng-repeat="m in vm.messages | orderBy:vm.orderProp:vm.reverseSort | filter:vm.filterProp">
-        <td>{{ m.message_number }}</td>
-        <td>{{ m.date_time }}</td>
-        <td>{{ m.message_type }}</td>
-        <td>{{ m.project_name }}</td>
-        <td>{{ m.message_text }}</td>
+        <td><span ng-bind="m.message_number" /></td>
+        <td><span ng-bind="m.date_time" /></td>
+        <td><span ng-bind="m.message_type" /></td>
+        <td><span ng-bind="m.project_name" /></td>
+        <td><span ng-bind="m.message_text" /></td>
       </tr>
     </table>
   </div>

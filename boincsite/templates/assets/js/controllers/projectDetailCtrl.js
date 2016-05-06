@@ -30,9 +30,13 @@ function ProjectDetailController($routeParams, allProjectListSvc, projectsSvc) {
     document.title = vm.title;
   }  
 
-  allProjectListSvc.get()().query().$promise.then(function(d) {
-	 	 
-    vm.project = d.filter(function(x) { return x.name===$routeParams.projectname })[0];
+  function gotAttachedProjects(projects) {
+	 var attachedProject = projects.filter(function(x) { return x.name==vm.project.name });
+	 vm.project.attached = attachedProject.length > 0;
+  }
+
+  function gotAllProjects(projects) {
+	 vm.project = projects.filter(function(x) { return x.name===$routeParams.projectname })[0];
 
 	 if (!vm.project) {
 		vm.projectFound = false;
@@ -40,15 +44,14 @@ function ProjectDetailController($routeParams, allProjectListSvc, projectsSvc) {
 		return;
 	 }
 
-	 projectsSvc.get()().query().$promise.then(function(e) {
-		var attachedProject = e.filter(function(x) { return x.name==vm.project.name });
-		vm.project.attached = attachedProject.length > 0;
-	 });
+	 projectsSvc.get()().query().$promise.then(gotAttachedProjects);
 
     setTitle('Project Details -- ' + vm.project.name);
 	 vm.projectFound = true;
     vm.ready = true;
-  });
+  }
+
+  allProjectListSvc.get()().query().$promise.then(gotAllProjects);
 
   setTitle('Project Details');
 }

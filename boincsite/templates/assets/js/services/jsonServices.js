@@ -21,7 +21,6 @@ function JsonService($resource) {
   var svc = {
     get: function(offlinePath, onlinePath, isArray) {
 
-
       function getPath(offlinePath, onlinePath) {
         var offlineMode = window.location.hostname === 'localhost';
 

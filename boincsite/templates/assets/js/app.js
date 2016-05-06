@@ -14,6 +14,8 @@ angular.module('zoetrope', [
       }).
       when('/daily_transfer_history', {
         templateUrl: '/static/views/dailytransferhistory.html',
+		  controller: 'DailyTransferCtrl',
+		  controllerAs: 'vm'
       }).
       when('/disk_usage', {
         templateUrl: '/static/views/diskusage.html',
@@ -21,10 +23,14 @@ angular.module('zoetrope', [
         controllerAs: 'duvm'
       }).
       when('/host_info', {
-        templateUrl: '/static/views/hostinfo.html'
+        templateUrl: '/static/views/hostinfo.html',
+		  controller: 'HostInfoCtrl',
+		  controllerAs: 'vm'
       }).
       when('/messages', {
-        templateUrl: '/static/views/messages.html'
+        templateUrl: '/static/views/messages.html',
+		  controller: 'MessagesCtrl',
+		  controllerAs: 'vm'
       }).
       when('/project', {
 			 templateUrl: '/static/views/project.html',

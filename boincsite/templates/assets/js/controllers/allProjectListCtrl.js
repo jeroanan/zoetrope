@@ -18,11 +18,29 @@ function AllProjectListController(allProjectListSvc, projectsSvc) {
   vm.reverseSort = false;
   vm.availableProjects = null;
   vm.doSort = getSortFunc('name');
-
+  vm.allProjects = [];
+  
   document.title = vm.title;
 
+  function gotAttachedProjects(projects) {
+	 vm.ready = true;
+	 
+	 vm.availableProjects = vm.allProjects.map(function(x) {
+		var thisProject = projects.filter(function(y) {
+		  return y.name==x.name;
+		});
+		
+		x.attached = thisProject.length>0;
+		return x;
+	 });
+  }
+  
+  function gotAllProjects(projects) {
+	 vm.allProjects = projects;
+	 projectsSvc.get()().query().$promise.then(gotAttachedProjects);    
+  }
+  
   function getSortFunc(defaultSortField) {
-
     var currentSortField = defaultSortField;
 
     function doSort(sortField) {
@@ -37,19 +55,5 @@ function AllProjectListController(allProjectListSvc, projectsSvc) {
     return doSort;
   }
 
-  allProjectListSvc.get()().query().$promise.then(function(d) {
-
-	 projectsSvc.get()().query().$promise.then(function(e) {
-		vm.ready = true;
-
-		vm.availableProjects = d.map(function(x) {
-		  var thisProject = e.filter(function(y) {
-			 return y.name==x.name;
-		  });
-
-		  x.attached = thisProject.length>0;
-		  return x;
-		});
-	 });    
-  })
+  allProjectListSvc.get()().query().$promise.then(gotAllProjects)
 }

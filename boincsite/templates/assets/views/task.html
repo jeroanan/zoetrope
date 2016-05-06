@@ -1,47 +1,38 @@
 <div ng-controller="TaskCtrl as vm">
-  <h1>{{ vm.title }}</h1>
-  <script type="text/javascript">
-    function confirmAbort() {
-      $('div.confirm-row').removeClass('hide');
-    }
-
-    $(function() {
-      $('a.abort-button').on('click', function() { confirmAbort(); });
-    })
-  </script>
+  <h1 ng-bind="vm.title" />
   <div ng-show="!vm.ready" class="text-center">
     <img src="/static/img/loading.gif" />
   </div>
   <div ng-show="vm.ready && vm.error" class="text-center">
-    <span ng-bind="vm.errorMessage"></span>
+    <span ng-bind="vm.errorMessage" />
   </div>
   <div ng-show="vm.ready && !vm.error">
-    <keyvalrow key="Project name" val="{{ vm.task.project_name }}"></keyvalrow>
-    <keyvalrow key="Percent done" val="{{ vm.task.fraction_done + '%' }}"></keyvalrow>
-    <keyvalrow key="Time Elapsed" val="{{ vm.task.time_so_far }}"></keyvalrow>
-    <keyvalrow key="Time Remaining" val="{{ vm.task.estimated_cpu_time_remaining }}"></keyvalrow>
-    <keyvalrow key="Report Deadline" val="{{ vm.task.report_deadline }}"></keyvalrow>
-    <keyvalrow key="Ready to report?" val="{{ vm.task.ready_to_report }}"></keyvalrow>
-    <keyvalrow key="State" val="{{ vm.task.state }}"></keyvalrow>
-    <keyvalrow key="Suspended via gui?" val="{{ vm.task.suspended_via_gui }}"></keyvalrow>
-    <keyvalrow key="Active task state" val="{{ vm.task.active_task_state }}"></keyvalrow>
+	 <keyvallinkrow key="Project name" link="/#/project?project={{vm.task.project_name}}" text="{{vm.task.project_name}}" />
+    <keyvalrow key="Percent done" val="{{ vm.task.fraction_done + '%' }}" />
+    <keyvalrow key="Time Elapsed" val="{{ vm.task.time_so_far }}" />
+    <keyvalrow key="Time Remaining" val="{{ vm.task.estimated_cpu_time_remaining }}" />
+    <keyvalrow key="Report Deadline" val="{{ vm.task.report_deadline }}" />
+    <keyvalrow key="Ready to report?" val="{{ vm.task.ready_to_report }}" />
+    <keyvalrow key="State" val="{{ vm.task.state }}" />
+    <keyvalrow key="Suspended via gui?" val="{{ vm.task.suspended_via_gui }}" />
+    <keyvalrow key="Active task state" val="{{ vm.task.active_task_state }}" />
 
     <div class="row task-controls">
       <div class="col-xs-3"></div>
       <div class="col-xs-3">
         <a class="btn btn-primary pull-right"
-          href="suspend_resume?task_name={{ vm.task.name }}&return_url=/#/task?task_name={{ vm.task.name }}">
-          {{ vm.suspend_button_text}}
+          ng-href="suspend_resume?task_name={{ vm.task.name }}&return_url=/#/task?task_name={{ vm.task.name }}">
+          <span ng-bind="vm.suspend_button_text" />
         </a>
       </div>
-      <div class="col-xs-3"><a class="btn btn-danger abort-button">Abort</a></div>
+      <div class="col-xs-3"><a class="btn btn-danger" ng-click="vm.abortButtonClicked()">Abort</a></div>
       <div class="col-xs-3"></div>
     </div>
 
-    <div class="row confirm-row hide">
+    <div class="row confirm-row" ng-show="vm.showConfirmAbort">
       <div class="col-xs-3"></div>
       <div class="col-xs-3"></div>
-      <div class="col-xs-3">Confirm task abort: <a href="/abort_task?task_name={{ vm.task.name }}">OK</a></div>
+      <div class="col-xs-3">Confirm task abort: <a ng-href="/abort_task?task_name={{ vm.task.name }}">OK</a></div>
       <div class="col-xs-3"></div>
     </div>
   </div>

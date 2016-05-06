@@ -16,6 +16,13 @@ function TaskController($http, $routeParams, taskSvc, projectsSvc) {
   vm.task = {};
   vm.suspend_button_text = '';
   vm.error = '';
+  vm.errorMessage = '';
+  vm.showConfirmAbort = false;
+  vm.abortButtonClicked = abortButtonClicked;
+
+  function abortButtonClicked() {
+	 vm.showConfirmAbort = !vm.showConfirmAbort;
+  }
 
   function onError() {
 	 var errorText = 'Task not found';
@@ -25,19 +32,16 @@ function TaskController($http, $routeParams, taskSvc, projectsSvc) {
   }
 
   function gotTask(task) {
-	 projectsSvc.get()().query().$promise.then(
-		function(projects) {
-		  gotProjects(projects, task);
-		}, onError);
+	 vm.task = task;	 
+	 projectsSvc.get()().query().$promise.then(gotProjects, onError);
   }
 
-  function gotProjects(projects, task) {
-	 task.project_name = get_project_name(task, projects);
-	 task.state = get_state_string(task);
-	 task.time_so_far = get_time_so_far(task);
-	 vm.task = task;
-	 
-	 vm.suspend_button_text = task.suspended_via_gui ? 'Resume' : 'Suspend';
+  function gotProjects(projects) {
+	 vm.task.project_name = get_project_name(vm.task, projects);
+	 vm.task.state = get_state_string(vm.task);
+	 vm.task.time_so_far = get_time_so_far(vm.task);
+	 	 
+	 vm.suspend_button_text = vm.task.suspended_via_gui ? 'Resume' : 'Suspend';
 	 vm.ready = true;
   }
   

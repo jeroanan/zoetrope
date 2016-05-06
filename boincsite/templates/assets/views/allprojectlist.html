@@ -1,4 +1,4 @@
-<h1 ng-bind="vm.title"></h1>
+<h1 ng-bind="vm.title" />
 <div ng-show="!vm.ready" class="text-center">
   <img src="/static/img/loading.gif" />
 </div>
@@ -20,14 +20,14 @@
     </tr>
     <tr ng-repeat="ap in vm.availableProjects | orderBy:vm.sortProp:vm.reverseSort | filter:vm.filterProp">
       <td>
-		  <a ng-href="/#/projectdetail/{{ap.name}}"><span ng-bind="ap.name"></span></a>
+		  <a ng-href="/#/projectdetail/{{ap.name}}"><span ng-bind="ap.name" /></a>
 		  <span title="This client is attached to this project." ng-show="ap.attached">&#10004;</span>
 		</td>
       <td>
-        <span ng-bind="ap.general_area"></span>
-        <span ng-show="ap.specific_area.length>0">(<span ng-bind="ap.specific_area"></span>)</span>
+        <span ng-bind="ap.general_area" />
+        <span ng-show="ap.specific_area.length>0">(<span ng-bind="ap.specific_area" />)</span>
       </td>
-      <td><span ng-bind="ap.summary"></span></td>
+      <td><span ng-bind="ap.summary" /></td>
     </tr>
   </table>
 </div>

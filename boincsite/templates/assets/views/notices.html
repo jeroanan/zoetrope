@@ -2,17 +2,17 @@
   <img src="/static/img/loading.gif" />
 </div>
 <div ng-show="vm.ready">
-  <h1 ng-bind="vm.title"></h1>
+  <h1 ng-bind="vm.title" />
 
   <div ng-repeat="notice in vm.notices | orderBy:seqNo">
-    <h2 ng-bind="notice.title"></h2>
+    <h2 ng-bind="notice.title" />
     <p>
       <small>
-        From <span ng-bind="notice.project_name"></span>.
-        Published <span ng-bind="notice.create_time"></span>
-        and received <span ng-bind="notice.arrival_time"></span>
+        From <span ng-bind="notice.project_name" />.
+        Published <span ng-bind="notice.create_time" />
+        and received <span ng-bind="notice.arrival_time" />
       </small>
     </p>
-    <p ng-bind-html="notice.description"></p>
+    <p ng-bind-html="notice.description" />
   </div>
 </div>

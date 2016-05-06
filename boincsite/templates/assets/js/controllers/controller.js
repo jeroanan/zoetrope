@@ -73,6 +73,18 @@ angular.module('zoetropeControllers').directive('keyvalrow', function() {
   };
 });
 
+angular.module('zoetropeControllers').directive('keyvallinkrow', function() {
+  return {
+    restrict: 'E',
+    scope: {
+      key: '@',
+      link: '@',
+		text: '@'
+    },
+    templateUrl: '/static/directives/keyvallinkrow.html'
+  };
+});
+
 angular.module('zoetropeControllers').directive('attachDialog', function() {
   return {
     restrict: 'E',
