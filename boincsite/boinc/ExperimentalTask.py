@@ -11,7 +11,6 @@ import lib.boincindicator.client as client
 import config as conf
 
 
-
 class ExperimentalTask(object):
 
     def execute(self):
@@ -21,4 +20,4 @@ class ExperimentalTask(object):
         with client.BoincClient(passwd=password) as c:
             c.authorize(password)
             
-            c.project_update('http://www.enigmaathome.net/')
+            c.get_statistics()

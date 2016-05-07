@@ -37,6 +37,7 @@ import lib.boincindicator.resulttypes.Message as message
 import lib.boincindicator.resulttypes.Notice as notice
 import lib.boincindicator.resulttypes.Result as result
 import lib.boincindicator.resulttypes.SuccessError as successerror
+import lib.boincindicator.resulttypes.Statistics as statistics
 import lib.boincindicator.resulttypes.VersionInfo as versioninfo
 
 import lib.boincindicator.util.xmlutil as xmlutil
@@ -569,8 +570,8 @@ class BoincClient(object):
         '''
         xml = '<get_statistics />'
         result = self.rpc.call(xml)
-        self.write_xml_to_file('get_statistics.xml', ElementTree.tostring(result))
-        print(ElementTree.tostring(result))
+        out = statistics.Statistics.parse(result)
+        return out
 
     def project_update(self, project_url):
         ''' Update a project with the project server.
