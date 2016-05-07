@@ -6,7 +6,7 @@
 angular.module('zoetropeControllers')
   .controller('allProjectListCtrl', AllProjectListController);
 
-AllProjectListController.$inject = ['allProjectListSvc', 'projectsSvc']
+AllProjectListController.$inject = ['allProjectListSvc', 'projectsSvc'];
 
 function AllProjectListController(allProjectListSvc, projectsSvc) {
 
@@ -55,5 +55,5 @@ function AllProjectListController(allProjectListSvc, projectsSvc) {
     return doSort;
   }
 
-  allProjectListSvc.get()().query().$promise.then(gotAllProjects)
+  allProjectListSvc.get()().query().$promise.then(gotAllProjects);
 }

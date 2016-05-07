@@ -15,15 +15,15 @@ function UpdateProjectService($resource) {
 
       data = {
         'projectUrl': projectUrl
-      }
+      };
 
       return function() {
         var res = $resource('/update_project', data, {
           query: {method: 'POST'}
-        })
+        });
 
         return res;
-      }
+      };
     }
   };
 

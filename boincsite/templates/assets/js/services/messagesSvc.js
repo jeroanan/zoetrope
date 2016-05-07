@@ -14,7 +14,7 @@ function MessagesSvc(jsonSvc) {
     get: function() {
       return jsonSvc.get('/static/json/messages.json', '/messages_json', true);
     }
-  }
+  };
 
   return svc;
 }

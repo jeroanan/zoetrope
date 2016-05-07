@@ -12,7 +12,7 @@ function TaskService($routeParams, jsonSvc) {
 
   var svc = {
     get: function() {
-      return jsonSvc.get('/static/json/task.json', '/task_json?task_name=' + $routeParams.task_name)
+      return jsonSvc.get('/static/json/task.json', '/task_json?task_name=' + $routeParams.task_name);
     }
   };
 

@@ -13,7 +13,7 @@ function DiskUsageService(jsonSvc) {
     get: function() {
       return jsonSvc.get('/static/json/disk_usage.json', '/disk_usage_json');
     }
-  }
+  };
 
   return svc;
 }

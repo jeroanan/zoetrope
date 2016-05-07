@@ -11,9 +11,9 @@ AttachProjectController.$inject = ['attachProjectSvc', 'allProjectListSvc', 'md5
 function AttachProjectController(attachProjectSvc, allProjectListSvc, md5Svc) {
 
   var vm = this;
-  vm.selectedProject = ''
-  vm.emailaddress = ''
-  vm.password = ''
+  vm.selectedProject = '';
+  vm.emailaddress = '';
+  vm.password = '';
   vm.submitClicked = submitClicked;
   vm.ready = false;
   vm.title = 'Attach Project';
@@ -44,7 +44,7 @@ function AttachProjectController(attachProjectSvc, allProjectListSvc, md5Svc) {
   }
 
   allProjectListSvc.get()().query().$promise.then(function(d) {
-    vm.attachedProjects = d.filter(function(x) { return x.name.length > 0 });
+    vm.attachedProjects = d.filter(function(x) { return x.name.length > 0; });
     vm.ready = true;
   });  
 

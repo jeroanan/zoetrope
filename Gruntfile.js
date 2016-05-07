@@ -1,5 +1,7 @@
 module.exports = function(grunt) {
 
+  var app = 'boincsite/templates/assets/js/app.js';
+
   var controllers= [
     'boincsite/templates/assets/js/controllers/controller.js',
     'boincsite/templates/assets/js/controllers/diskUsageCtrl.js',
@@ -47,7 +49,7 @@ module.exports = function(grunt) {
           sourceMapName: 'boincsite/templates/assets/js/app.js.map'
         },
         files: {
-          'boincsite/templates/assets/js/app.min.js': ['boincsite/templates/assets/js/app.js']
+          'boincsite/templates/assets/js/app.min.js': [app]
         }
       },
       controllers: {
@@ -74,22 +76,29 @@ module.exports = function(grunt) {
         files: ['Gruntfile.js']
       },
       app: {
-        files: ['boincsite/templates/assets/js/app.js'],
-        tasks: ['uglify:app']
+        files: [app],
+        tasks: ['jshint:app', 'uglify:app']
       },
       controllers: {
         files: controllers,
-        tasks: ['uglify:controllers']
+        tasks: ['jshint:controllers', 'uglify:controllers']
       },
       services: {
         files: services,
-        tasks: ['uglify:services']
+        tasks: ['jshint:services', 'uglify:services']
       }
-    }
+    },
+	 jshint: {
+		controllers: controllers,
+		services: services,
+		app: app
+	 }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-uglify')
-  grunt.loadNpmTasks('grunt-contrib-watch')
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
-  grunt.registerTask('default', ['watch'])
+  grunt.registerTask('default', ['watch']);
+
 }

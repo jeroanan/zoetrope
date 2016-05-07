@@ -6,7 +6,7 @@
 angular.module('zoetropeControllers')
   .controller('NoticesCtrl', NoticesController);
 
-NoticesController.$inject = ['noticesSvc']
+NoticesController.$inject = ['noticesSvc'];
 
 function NoticesController(noticesSvc) {
 

@@ -33,8 +33,10 @@ function DailyTransferController(dailyTransferHistorySvc) {
 	 });
 
     function totalMegabytes(fieldName) {
+		//TODO: data.map, megs.reduce
+
       var megs = Array.map(data, function(x) { return x[fieldName]; });
-      var total = Array.reduce(megs, function(a, b) { return a+b });
+      var total = Array.reduce(megs, function(a, b) { return a+b; });
       return Math.round(total * 100) / 100;
     }
 

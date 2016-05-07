@@ -14,7 +14,7 @@ function GlobalPreferencesCtrl(globalPreferencesSvc) {
   vm.title = 'Global Preferences';
   vm.prefs = {};
 
-  document.title = vm.title
+  document.title = vm.title;
 
   globalPreferencesSvc.get()().query().$promise.then(function(d) {
     vm.prefs = d;

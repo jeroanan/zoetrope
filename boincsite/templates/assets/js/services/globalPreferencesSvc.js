@@ -13,7 +13,7 @@ function GlobalPreferencesService(jsonSvc) {
     get: function() {
       return jsonSvc.get('', '/get_global_preferences_json', false);
     }
-  }
+  };
 
   return svc;
 }

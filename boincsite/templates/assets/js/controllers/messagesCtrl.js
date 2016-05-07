@@ -15,7 +15,7 @@ function MessagesController(messagesSvc) {
   vm.reverseSort = true;
   vm.filterProp = '';
   vm.ready = false;
-  vm.title = "Messages"
+  vm.title = "Messages";
   document.title = vm.title;
   vm.messages = {};
   vm.unique_project_names = [];
@@ -24,7 +24,9 @@ function MessagesController(messagesSvc) {
   messagesSvc.get()().query().$promise.then(function(d) {
     vm.messages = d;
 
-    var project_names = Array.map(d, function(x) { return x.project_name});
+	 // TODO: d.map ?
+    var project_names = Array.map(d, function(x) { return x.project_name; });
+
     vm.unique_project_names = Array.filter(project_names, function(el,i,a) {
       return i==a.indexOf(el);
     });
@@ -34,15 +36,17 @@ function MessagesController(messagesSvc) {
       return project_name_array.length;
     };
 
-    var tmp_name_counts = new Object();
-    for (upn in vm.unique_project_names) {
+    var tmp_name_counts = {};
+
+	 //TODO: map?
+    for (var upn in vm.unique_project_names) {
       var pn = vm.unique_project_names[upn];
       tmp_name_counts[pn] = count_project_name(pn);
     }
 
     vm.project_name_counts = tmp_name_counts;
     vm.ready = true;
-  })
+  });
 
   vm.get_project_name = function(pn) {
     return pn === '' ? '(no project)' : pn;

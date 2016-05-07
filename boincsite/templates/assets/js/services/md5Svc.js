@@ -34,15 +34,14 @@ function md5Service($resource) {
 	*/
   function rstr2hex(input)
   {
-	 try { hexcase } catch(e) { hexcase=0; }
+	 //try { hexcase; } catch(e) { hexcase=0; }
 	 var hex_tab = hexcase ? "0123456789ABCDEF" : "0123456789abcdef";
 	 var output = "";
 	 var x;
 	 for(var i = 0; i < input.length; i++)
 	 {
 		x = input.charCodeAt(i);
-		output += hex_tab.charAt((x >>> 4) & 0x0F)
-        +  hex_tab.charAt( x        & 0x0F);
+		output += hex_tab.charAt((x >>> 4) & 0x0F) + hex_tab.charAt(x & 0x0F);
 	 }
 	 return output;
   }
@@ -90,9 +89,11 @@ function md5Service($resource) {
   function rstr2binl(input)
   {
 	 var output = Array(input.length >> 2);
+
 	 for(var i = 0; i < output.length; i++)
 		output[i] = 0;
-	 for(var i = 0; i < input.length * 8; i += 8)
+
+	 for(i = 0; i < input.length * 8; i += 8)
 		output[i>>5] |= (input.charCodeAt(i / 8) & 0xFF) << (i%32);
 	 return output;
   }
@@ -240,7 +241,7 @@ function md5Service($resource) {
 		
       return function() {
         return hex_md5(text);
-      }
+      };
     }
   };
   

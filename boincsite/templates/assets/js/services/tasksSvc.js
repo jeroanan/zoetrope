@@ -14,7 +14,7 @@ function TasksService(jsonSvc) {
     get: function() {
       return jsonSvc.get('/static/json/tasks.json', '/tasks_json', true);
     }
-  }
+  };
 
   return svc;
 }

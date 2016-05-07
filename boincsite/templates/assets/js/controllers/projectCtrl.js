@@ -29,16 +29,16 @@ function ProjectController(projectSvc, updateProjectSvc) {
 	 vm.projectFound = false;
   }
   
-  projectSvc().query().$promise.then(gotProject, gotProjectError)
+  projectSvc().query().$promise.then(gotProject, gotProjectError);
 
   function updateProjectClick() {
     if (vm.ready!==true) {
       return;
     }
 
-    updateProjectSvc.query(vm.project.master_url)().query()
+    updateProjectSvc.query(vm.project.master_url)().query();
   }
-
+  
   function detachClicked() {
 	 $('#detachModal').modal('show');
   }

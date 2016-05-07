@@ -17,14 +17,14 @@ function AttachProjectService($resource) {
         'projectUrl': projectUrl,
         'email': email,
         'password': password
-      }
+      };
 
       return function() {
         var res = $resource('/attach_project', data, {
           query: {method: 'POST'}
-        })
+        });
         return res;
-      }
+      };
     }
   };
 

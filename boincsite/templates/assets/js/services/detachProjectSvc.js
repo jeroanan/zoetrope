@@ -19,12 +19,12 @@ function DetachProjectService($resource) {
       return function() {
         var res = $resource('/detach_project', data, {
           query: {method: 'POST'}
-        })
+        });
 
         return res;
-      }
+      };
     }
-  }
+  };
 
   return svc;
 }

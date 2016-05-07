@@ -2,7 +2,7 @@ angular.module('zoetropeControllers', ['ngRoute', 'ngSanitize', 'zoetropeService
 
 var get_project_name = function(task, projects) {
 
-  for (p in projects) {
+  for (var p in projects) {
     var proj = projects[p];
 
     if (proj.master_url == task.project_url){
@@ -31,16 +31,12 @@ var get_state_string = function(task) {
   switch (task.state) {
     case 2:
       return 'Running';
-      break;
     case 3:
       return 'Computation error';
-      break;
     case 5:
       return 'Ready to report';
-      break;
     case 6:
       return 'Aborted by user';
-      break;
     default:
       return task.state;
   }

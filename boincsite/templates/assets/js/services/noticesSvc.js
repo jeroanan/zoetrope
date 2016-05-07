@@ -15,7 +15,7 @@ function NoticesSvc(jsonSvc) {
    get: function() {
      return jsonSvc.get('', '/notices_json', true);
    }
- }
+ };
 
  return svc;
 }

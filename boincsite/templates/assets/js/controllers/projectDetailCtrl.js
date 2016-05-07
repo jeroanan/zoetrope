@@ -31,12 +31,12 @@ function ProjectDetailController($routeParams, allProjectListSvc, projectsSvc) {
   }  
 
   function gotAttachedProjects(projects) {
-	 var attachedProject = projects.filter(function(x) { return x.name==vm.project.name });
+	 var attachedProject = projects.filter(function(x) { return x.name==vm.project.name; });
 	 vm.project.attached = attachedProject.length > 0;
   }
 
   function gotAllProjects(projects) {
-	 vm.project = projects.filter(function(x) { return x.name===$routeParams.projectname })[0];
+	 vm.project = projects.filter(function(x) { return x.name===$routeParams.projectname; })[0];
 
 	 if (!vm.project) {
 		vm.projectFound = false;

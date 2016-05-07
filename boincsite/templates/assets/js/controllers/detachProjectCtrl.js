@@ -50,7 +50,7 @@ function DetachProjectController(projectsSvc, detachProjectSvc) {
   }
 
   projectsSvc.get()().query().$promise.then(function(d) {
-    vm.attachedProjects = d.filter(function(x) { return x.name.length > 0 });
+    vm.attachedProjects = d.filter(function(x) { return x.name.length > 0; });
     vm.ready = true;
   });
   

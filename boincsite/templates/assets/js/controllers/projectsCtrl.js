@@ -32,13 +32,13 @@ function ProjectsController(projectsSvc, updateProjectSvc) {
   }
 
   function updateClicked() {
-	 updateProjectSvc.query(vm.project.master_url)().query()
+	 updateProjectSvc.query(vm.project.master_url)().query();
   }
 
   document.title = vm.title;
   
   projectsSvc.get()().query().$promise.then(function(d) {
-    vm.projects = d.filter(function(x) { return x.name.length > 0 });
+    vm.projects = d.filter(function(x) { return x.name.length > 0; });
     vm.ready = true;
-  })  
+  });  
 }

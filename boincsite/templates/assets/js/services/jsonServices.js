@@ -14,7 +14,7 @@
 angular.module('zoetropeServices')
   .factory('jsonSvc', JsonService);
 
-JsonService.$inject = ['$resource']
+JsonService.$inject = ['$resource'];
 
 function JsonService($resource) {
 
@@ -24,7 +24,7 @@ function JsonService($resource) {
       function getPath(offlinePath, onlinePath) {
         var offlineMode = window.location.hostname === 'localhost';
 
-        var path = ''
+        var path = '';
         if (offlineMode===true) {
           return offlinePath;
         } else {
@@ -40,7 +40,7 @@ function JsonService($resource) {
         });
 
         return res;
-      }
+      };
     }
   };
 
