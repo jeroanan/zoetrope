@@ -9,7 +9,6 @@ import boincsite.status.DailyTransfer as dt
 
 class DailyTransferHistory(object):
 
-
     def execute(self):
         ts = client.BoincClient().get_daily_transfer_history()
         return map(lambda x: dt.DailyTransfer(x), ts)

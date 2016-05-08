@@ -21,22 +21,26 @@ class Statistics(struct.Struct):
         statistics = super(Statistics, cls).parse(xml)
 
         children = []
-
+        
         for c in xml:
 
             if c.tag=='project_statistics':
+
+                grandchildren = []
  
                 for d in c:
                     if d.tag=='master_url':
                         master_url = MasterUrl()
                         master_url.parse(d)
-                        children.append(master_url)
+                        grandchildren.append(master_url)
 
                     elif d.tag=='daily_statistics':
                         daily_statistics = DailyStatistics.parse(d)
-                        children.append(daily_statistics)
+                        grandchildren.append(daily_statistics)
                     else:
                         print('Some otther tag (inner): ' + d.tag)
+
+                children.append(grandchildren)
                 
             else:
                 print('Some other tag: ' + c.tag)
@@ -48,6 +52,8 @@ class Statistics(struct.Struct):
 class MasterUrl(struct.Struct):
 
     def __init__(self):
+        self.fields = ['url']
+        
         self.url = ''
 
     def parse(self, xml):
@@ -56,6 +62,12 @@ class MasterUrl(struct.Struct):
 class DailyStatistics(struct.Struct):
 
     def __init__(self):
+        self.fields = ['day',
+                       'user_total_credit',
+                       'user_expavg_credit',
+                       'host_total_credit',
+                       'host_expavg_credit']
+
         self.day = ''
         self.user_total_credit = ''
         self.user_expavg_credit = ''

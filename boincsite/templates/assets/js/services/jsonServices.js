@@ -19,7 +19,7 @@ JsonService.$inject = ['$resource'];
 function JsonService($resource) {
 
   var svc = {
-    get: function(offlinePath, onlinePath, isArray) {
+    get: function(offlinePath, onlinePath, isArray, data) {
 
       function getPath(offlinePath, onlinePath) {
         var offlineMode = window.location.hostname === 'localhost';
@@ -34,8 +34,12 @@ function JsonService($resource) {
 
       path = getPath(offlinePath, onlinePath);
 
+		if (!data) {
+		  data = {};
+		}
+
       return function() {
-        var res = $resource(path, {}, {
+        var res = $resource(path, data, {
           query: {method: 'GET', isArray: isArray}
         });
 

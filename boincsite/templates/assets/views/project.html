@@ -31,7 +31,7 @@
     <keyvalrow key="Recent average credit for this host" val="{{ vm.project.host_expavg_credit }}" />
 
     <h2>Additional</h2>
-
+	 
     <div id="project-additional">
       <keyvalrow key="NRPC failures" val="{{ vm.project.nrpc_failures }}" />
       <keyvalrow key="Master fetch failures" val="{{ vm.project.master_fetch_failures }}" />
@@ -40,38 +40,60 @@
       <keyvalrow key="Trickle upload pending?" val="{{ vm.project.trickle_upload_pending }}" />
       <keyvalrow key="Last RPC" val="{{ vm.project.last_rpc }}" />
       <keyvalrow key="Project files downloaded" val="{{ vm.project.project_files_downloaded }}" />
-
+		
 		<div class="row">
         <div class="col-xs-3"></div>
         <div class="col-xs-3"></div>
         <div class="col-xs-3">&nbsp;</div>
         <div class="col-xs-3"></div>
       </div>
-
-		<div class="row">
-        <div class="col-xs-3"></div>
-        <div class="col-xs-3">
-			 <button class="btn btn-warning" ng-click="vm.detachClicked()">Detach Project</button>
-			 <detach-dialog projectname="{{vm.project.name}}" projecturl="{{vm.project.master_url}}" />
-		  </div>
-        <div class="col-xs-3"><button class="btn btn-primary" ng-click="vm.updateProject()">Update Project</button></div>
-        <div class="col-xs-3"></div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-3"></div>
-        <div class="col-xs-3"></div>
-        <div class="col-xs-3"></div>
-        <div class="col-xs-3">
-          <input type="checkbox" ng-model="vm.showRawData">Show raw data</input>
-        </div>
-      </div>
-      <div class="row" ng-show="vm.showRawData">
-        {{ vm.project }}
-      </div>
+	 </div>	 
+	 
+    
+	 <h2>Statistics</h2>
+	 <div class="row">
+		<table class="table table-striped">
+		  <thead>
+			 <th><a ng-click="vm.statsSortField='day'; vm.statsReverseSort=!vm.statsReverseSort">Day</a></th>
+			 <th><a ng-click="vm.statsSortField='user_total_credit'; vm.statsReverseSort=!vm.statsReverseSort">User Total Credit</a></th>
+			 <th><a ng-click="vm.statsSortField='user_expavg_credit; vm.statsReverseSort=!vm.statsReverseSort">User Recent Average Credit</a></th>
+			 <th><a ng-click="vm.statsSortField='host_total_credit'; vm.statsReverseSort=!vm.statsReverseSort">Host Total Credit</a></th>
+			 <th><a ng-click="vm.statsSortField='host_expavg_credit'; vm.statsReverseSort=!vm.statsReverseSort">Host Recent Average Credit</a></th>
+		  </thead>
+		  <tbody>
+			 <tr ng-repeat="stat in vm.projectStats|orderBy:vm.statsSortField:vm.statsReverseSort">
+				<td><span ng-bind="stat.day"/></td>
+				<td><span ng-bind="stat.user_total_credit"/></td>
+				<td><span ng-bind="stat.user_expavg_credit"/></td>
+				<td><span ng-bind="stat.host_total_credit"/></td>
+				<td><span ng-bind="stat.host_expavg_credit"/></td>
+			 </tr>
+		  </tbody>
+		</table>
+	 </div>
+	 
+	 <div class="row">
+      <div class="col-xs-3"></div>
+      <div class="col-xs-3">
+		  <button class="btn btn-warning" ng-click="vm.detachClicked()">Detach Project</button>
+		  <detach-dialog projectname="{{vm.project.name}}" projecturl="{{vm.project.master_url}}" />
+		</div>
+      <div class="col-xs-3"><button class="btn btn-primary" ng-click="vm.updateProject()">Update Project</button></div>
+      <div class="col-xs-3"></div>
     </div>
+	 
+    <div class="row">
+      <div class="col-xs-3"></div>
+      <div class="col-xs-3"></div>
+      <div class="col-xs-3"></div>
+      <div class="col-xs-3">
+        <input type="checkbox" ng-model="vm.showRawData">Show raw data</input>
+      </div>
+    </div>      	 
   </div>
+  
+  
   <div class="row home-row text-center">
     <a href="/projects">Projects</a></div>
-  </div>
+</div>
 </div>

@@ -61,6 +61,13 @@ class WebServer(object):
         return json.dumps(self.__get_projects(), self.__io, cls=jsae.JSONEncoder)
 
     @cherrypy.expose
+    def get_statistics_json(self, **kwargs):
+        project_url = kwargs.get('projectUrl', '')
+        command = self.__rpc_factory.create('GetStatistics')
+        statistics = command.execute(project_url)
+        return json.dumps(statistics, self.__io, cls=jsae.JSONEncoder)
+
+    @cherrypy.expose
     def project_json(self, **kwargs):
         project = [t for t in self.__get_projects() if t.name==kwargs.get('project', '')].pop()
         return json.dumps(project, self.__io, cls=jsae.JSONEncoder)

@@ -348,6 +348,7 @@ class BoincClient(object):
         results = self.rpc.call(xml)
 
         return map(lambda x: message.Message.parse(x), results)
+
     def get_message_count(self):
         '''Get message count
 

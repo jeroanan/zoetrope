@@ -6,9 +6,9 @@
 angular.module('zoetropeControllers')
   .controller('ProjectCtrl', ProjectController);
 
-ProjectController.$inject = ['projectSvc', 'updateProjectSvc'];
+ProjectController.$inject = ['projectSvc', 'updateProjectSvc', 'statisicsSvc'];
 
-function ProjectController(projectSvc, updateProjectSvc) {
+function ProjectController(projectSvc, updateProjectSvc, statisicsSvc) {
 
   var vm = this;
   vm.ready = false;
@@ -17,9 +17,17 @@ function ProjectController(projectSvc, updateProjectSvc) {
   vm.detachClicked = detachClicked;
   vm.projectFound = false;
   vm.project = {};
+  vm.projectStats = [];
+  vm.statsSortField = 'day';
+  vm.statsReverseSort = true;
 
   function gotProject(project) {
 	 vm.project = project;
+
+	 statisicsSvc.get(project.master_url)().query().$promise.then(function(d) {
+		vm.projectStats = d[0];
+	 });
+
 	 vm.projectFound = true;
 	 vm.ready = true;
   }
