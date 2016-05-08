@@ -7,11 +7,11 @@
   <div ng-show="vm.ready">
     <table class="table table-striped">
       <thead>
-        <th><a ng-click="vm.sortProp='idx'; vm.reverseSort=!vm.reverseSort;">#</a></th>
-        <th><a ng-click="vm.sortProp='project_name'; vm.reverseSort=!vm.reverseSort;">Project Name</a></th>
-        <th><a ng-click="vm.sortProp='fraction_done'; vm.reverseSort=!vm.reverseSort;">Progress</a></th>
-        <th><a ng-click="vm.sortProp='state'; vm.reverseSort=!vm.reverseSort;">State</a></th>
-        <th><a ng-click="vm.sortProp='time_so_far'; vm.reverseSort=!vm.reverseSort;">Time So Far</a></th>
+        <th><a ng-click="vm.sort('idx');">#</a></th>
+        <th><a ng-click="vm.sort('project_name');">Project Name</a></th>
+        <th><a ng-click="vm.sort('fraction_done');">Progress</a></th>
+        <th><a ng-click="vm.sort('state');">State</a></th>
+        <th><a ng-click="vm.sort('time_so_far')">Time So Far</a></th>
         <th>
           <a href="#" ng-click="vm.sortProp='estimated_cpu_time_remaining'; vm.reverseSort=!reverseSort;">
             Est. Time Remaining
