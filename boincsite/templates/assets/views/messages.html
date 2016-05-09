@@ -18,11 +18,31 @@
 
     <table class="table table-striped">
       <thead>
-        <th><a ng-click="vm.sort('message_number');">#</a></th>
-        <th><a ng-click="vm.sort('date_time');">Message Date</a></th>
-        <th><a ng-click="vm.sort('message_type');">Message Type</a></th>
-        <th><a ng-click="vm.sort('project_name');">Project</a></th>
-        <th><a ng-click="vm.sort('message_text');">Message Text</a></th>
+        <th>
+			 <a ng-click="vm.sort('message_number');">#</a>
+			 <span ng-show="vm.orderProp==='message_number' && vm.reverseSort===false" ng-bind-html="vm.upArrow" />
+			 <span ng-show="vm.orderProp==='message_number' && vm.reverseSort===true" ng-bind-html="vm.downArrow" />
+		  </th>
+        <th>
+			 <a ng-click="vm.sort('date_time');">Message Date</a>
+			 <span ng-show="vm.orderProp==='date_time' && vm.reverseSort===false" ng-bind-html="vm.upArrow" />
+			 <span ng-show="vm.orderProp==='date_time' && vm.reverseSort===true" ng-bind-html="vm.downArrow" />
+		  </th>
+        <th>
+			 <a ng-click="vm.sort('message_type');">Message Type</a>
+			 <span ng-show="vm.orderProp==='message_type' && vm.reverseSort===false" ng-bind-html="vm.upArrow" />
+			 <span ng-show="vm.orderProp==='message_type' && vm.reverseSort===true" ng-bind-html="vm.downArrow" />
+		  </th>
+        <th>
+			 <a ng-click="vm.sort('project_name');">Project</a>
+			 <span ng-show="vm.orderProp==='project_name' && vm.reverseSort===false" ng-bind-html="vm.upArrow" />
+			 <span ng-show="vm.orderProp==='project_name' && vm.reverseSort===true" ng-bind-html="vm.downArrow" />
+		  </th>
+        <th>
+			 <a ng-click="vm.sort('message_text');">Message Text</a>
+			 <span ng-show="vm.orderProp==='message_text' && vm.reverseSort===false" ng-bind-html="vm.upArrow" />
+			 <span ng-show="vm.orderProp==='message_text' && vm.reverseSort===true" ng-bind-html="vm.downArrow" />
+		  </th>
       </thead>
       <tr ng-repeat="m in vm.messages | orderBy:vm.orderProp:vm.reverseSort | filter:vm.filterProp">
         <td><span ng-bind="m.message_number" /></td>

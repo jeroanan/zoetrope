@@ -10,12 +10,18 @@
     <tr>
       <th>
         <a href="" ng-click="vm.doSort('name');">Project Name</a>
+		  <span ng-show="vm.sortProp==='name' && vm.reverseSort===false" ng-bind-html="vm.upArrow" />
+		  <span ng-show="vm.sortProp==='name' && vm.reverseSort===true" ng-bind-html="vm.downArrow" />
       </th>
       <th>
         <a href="" ng-click="vm.doSort('general_area');">Research Area</a>
+		  <span ng-show="vm.sortProp==='general_area' && vm.reverseSort===false" ng-bind-html="vm.upArrow" />
+		  <span ng-show="vm.sortProp==='general_area' && vm.reverseSort===true" ng-bind-html="vm.downArrow" />
       </th>
       <th>
         <a href="" ng-click="vm.doSort('summary');">Summary</a>
+		  <span ng-show="vm.sortProp==='summary' && vm.reverseSort===false" ng-bind-html="vm.upArrow" />
+		  <span ng-show="vm.sortProp==='summary' && vm.reverseSort===true" ng-bind-html="vm.downArrow" />
       </th>
     </tr>
     <tr ng-repeat="ap in vm.availableProjects | orderBy:vm.sortProp:vm.reverseSort | filter:vm.filterProp">

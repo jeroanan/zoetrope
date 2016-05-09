@@ -17,6 +17,8 @@ function DiskUsageController(diskUsageSvc) {
   vm.title = 'Disk Usage';
   vm.disk_usages = {};
   vm.sort = getSortFunc(vm, 'orderProp', 'reverseSort');
+  vm.upArrow = upArrow;
+  vm.downArrow = downArrow;
   
   document.title = vm.title;
 

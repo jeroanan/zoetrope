@@ -22,6 +22,8 @@ function MessagesController(messagesSvc) {
   vm.project_name_counts = [];
   vm.get_project_name = getProjectName;
   vm.sort = getSortFunc(vm, 'orderProp', 'reverseSort');
+  vm.upArrow = upArrow;
+  vm.downArrow = downArrow;
 
   messagesSvc.get()().query().$promise.then(gotMessages);
 

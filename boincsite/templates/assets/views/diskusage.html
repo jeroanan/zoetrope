@@ -11,8 +11,16 @@
 
     <table class="table table-striped" >
       <thead>
-        <th><a ng-click="duvm.sort('master_url');">Project Url</a></th>
-        <th ><a ng-click="duvm.sort('disk_usage');">Disk Usage</a></th>
+        <th>
+			 <a ng-click="duvm.sort('master_url');">Project Url</a>
+			 <span ng-show="duvm.orderProp==='master_url' && duvm.reverseSort===false" ng-bind-html="duvm.upArrow" />
+			 <span ng-show="duvm.orderProp==='master_url' && duvm.reverseSort===true" ng-bind-html="duvm.downArrow" />
+		  </th>
+        <th >
+			 <a ng-click="duvm.sort('disk_usage');">Disk Usage</a>
+			 <span ng-show="duvm.orderProp==='disk_usage' && duvm.reverseSort===false" ng-bind-html="duvm.upArrow" />
+			 <span ng-show="duvm.orderProp==='disk_usage' && duvm.reverseSort===true" ng-bind-html="duvm.downArrow" />
+		  </th>
       </thead>
       <tr ng-repeat="pdu in duvm.disk_usages.project_disk_usages | orderBy:duvm.orderProp:duvm.reverseSort">
         <td><a ng-href="{{pdu.master_url}}"><span ng-bind="pdu.master_url" /></a></td>

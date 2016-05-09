@@ -6,9 +6,21 @@
   <div ng-show="vm.ready">
     <table class="table table-striped">
       <thead>
-        <th><a ng-click="vm.sort('name');">Project Name</a></th>
-        <th><a ng-click="vm.sort('user_total_credit');">Total Credit</a></th>
-        <th><a ng-click="vm.sort('user_expavg_credit');">Recent Average Credit</a></th>
+        <th>
+			 <a ng-click="vm.sort('name');">Project Name</a>
+			 <span ng-show="vm.orderProp==='name' && vm.reverseSort===false" ng-bind-html="vm.upArrow" />
+			 <span ng-show="vm.orderProp==='name' && vm.reverseSort===true" ng-bind-html="vm.downArrow" />
+		  </th>
+        <th>
+			 <a ng-click="vm.sort('user_total_credit');">Total Credit</a>
+			 <span ng-show="vm.orderProp==='user_total_credit' && vm.reverseSort===false" ng-bind-html="vm.upArrow" />
+			 <span ng-show="vm.orderProp==='user_total_credit' && vm.reverseSort===true" ng-bind-html="vm.downArrow" />
+		  </th>
+        <th>
+			 <a ng-click="vm.sort('user_expavg_credit');">Recent Average Credit</a>
+			 <span ng-show="vm.orderProp==='user_expavg_credit' && vm.reverseSort===false" ng-bind-html="vm.upArrow" />
+			 <span ng-show="vm.orderProp==='user_expavg_credit' && vm.reverseSort===true" ng-bind-html="vm.downArrow" />
+		  </th>
 		  <th>Actions</th>
       </thead>
       <tr ng-repeat="p in vm.projects | orderBy:vm.orderProp:vm.reverseSort">

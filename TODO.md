@@ -28,10 +28,9 @@ Currently only attaching to an existing account is supported.
 1. Current CPU temperature
 2. Load averages
 
-**get_statistics looks pretty interesting**
-
-See the sample XML at lib/boincindicator/doc/samplexml/get_statistics.xml. Need to make a page based on this data.
-
 **Add the ability to be able to change global preferences**
+
+**Time so Far and Est. Time Remaining on tasks page does not sort properly**
+
 
 

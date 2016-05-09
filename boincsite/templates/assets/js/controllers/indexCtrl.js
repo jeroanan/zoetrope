@@ -12,10 +12,12 @@ function IndexController(tasksSvc, projectsSvc) {
   var vm = this;
   vm.tasks = {};
   vm.projects = {};
-  vm.sortProp = 'index';
+  vm.sortProp = 'idx';
   vm.reverseSort = false;
   vm.ready = false;
   vm.sort = getSortFunc(vm, 'sortProp', 'reverseSort');
+  vm.upArrow = upArrow;
+  vm.downArrow = downArrow;
 
   function gotTasks(tasks) {
 	 vm.tasks = tasks;

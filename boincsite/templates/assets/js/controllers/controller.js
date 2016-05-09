@@ -1,5 +1,8 @@
 angular.module('zoetropeControllers', ['ngRoute', 'ngSanitize', 'zoetropeServices']);
 
+var upArrow = '&#x25B2;';
+var downArrow = '&#x25BC;';
+
 function getSortFunc(viewModel, sortFieldVar, reverseSortVar) {
 
   var currentSortField = viewModel[sortFieldVar];

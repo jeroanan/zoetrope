@@ -55,11 +55,31 @@
 	 <div class="row">
 		<table class="table table-striped">
 		  <thead>
-			 <th><a ng-click="vm.statsSort('day');">Day</a></th>
-			 <th><a ng-click="vm.statsSort('user_total_credit');">User Total Credit</a></th>
-			 <th><a ng-click="vm.statsSort('user_expavg_credit');">User Recent Average Credit</a></th>
-			 <th><a ng-click="vm.statsSort('host_total_credit');">Host Total Credit</a></th>
-			 <th><a ng-click="vm.statsSort('host_expavg_credit');">Host Recent Average Credit</a></th>
+			 <th>
+				<a ng-click="vm.statsSort('day');">Day</a>
+				<span ng-show="vm.statsSortField==='day' && vm.statsReverseSort===false" ng-bind-html="vm.upArrow" />
+				<span ng-show="vm.statsSortField==='day' && vm.statsReverseSort===true" ng-bind-html="vm.downArrow" />
+			 </th>
+			 <th>
+				<a ng-click="vm.statsSort('user_total_credit');">User Total Credit</a>
+				<span ng-show="vm.statsSortField==='user_total_credit' && vm.statsReverseSort===false" ng-bind-html="vm.upArrow" />
+				<span ng-show="vm.statsSortField==='user_total_credit' && vm.statsReverseSort===true" ng-bind-html="vm.downArrow" />
+			 </th>
+			 <th>
+				<a ng-click="vm.statsSort('user_expavg_credit');">User Recent Average Credit</a>
+				<span ng-show="vm.statsSortField==='user_expavg_credit' && vm.statsReverseSort===false" ng-bind-html="vm.upArrow" />
+				<span ng-show="vm.statsSortField==='user_expavg_credit' && vm.statsReverseSort===true" ng-bind-html="vm.downArrow" />
+			 </th>
+			 <th>
+				<a ng-click="vm.statsSort('host_total_credit');">Host Total Credit</a>
+				<span ng-show="vm.statsSortField==='host_total_credit' && vm.statsReverseSort===false" ng-bind-html="vm.upArrow" />
+				<span ng-show="vm.statsSortField==='host_total_credit' && vm.statsReverseSort===true" ng-bind-html="vm.downArrow" />
+			 </th>
+			 <th>
+				<a ng-click="vm.statsSort('host_expavg_credit');">Host Recent Average Credit</a>
+				<span ng-show="vm.statsSortField==='host_expavg_credit' && vm.statsReverseSort===false" ng-bind-html="vm.upArrow" />
+				<span ng-show="vm.statsSortField==='host_expavg_credit' && vm.statsReverseSort===true" ng-bind-html="vm.downArrow" />
+			 </th>
 		  </thead>
 		  <tbody>
 			 <tr ng-repeat="stat in vm.projectStats | orderBy:vm.statsSortField:vm.statsReverseSort">

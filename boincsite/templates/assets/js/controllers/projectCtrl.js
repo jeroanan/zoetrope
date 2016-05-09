@@ -20,7 +20,9 @@ function ProjectController(projectSvc, updateProjectSvc, statisicsSvc) {
   vm.projectStats = [];
   vm.statsSortField = 'day';
   vm.statsReverseSort = true;
-  vm.statsSort = getSortFunc(vm, 'statsSortField', 'statsReverseSort');  //doStatsSort;
+  vm.statsSort = getSortFunc(vm, 'statsSortField', 'statsReverseSort');
+  vm.upArrow = upArrow;
+  vm.downArrow = downArrow;
 
   document.title = vm.title;
 

@@ -21,6 +21,8 @@ function ProjectsController(projectsSvc, updateProjectSvc) {
   vm.detachUrl = '';
   vm.detachName = '';
   vm.sort = getSortFunc(vm, 'orderProp', 'reverseSort');
+  vm.upArrow = upArrow;
+  vm.downArrow = downArrow;
 
   document.title = vm.title;
   

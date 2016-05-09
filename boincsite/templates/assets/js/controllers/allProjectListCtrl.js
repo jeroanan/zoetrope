@@ -19,6 +19,8 @@ function AllProjectListController(allProjectListSvc, projectsSvc) {
   vm.availableProjects = null;
   vm.doSort = getSortFunc(vm, 'sortProp', 'reverseSort');
   vm.allProjects = [];
+  vm.upArrow = upArrow;
+  vm.downArrow = downArrow;
   
   document.title = vm.title;
 
