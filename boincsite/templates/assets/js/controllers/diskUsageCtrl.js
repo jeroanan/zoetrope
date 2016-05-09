@@ -16,11 +16,19 @@ function DiskUsageController(diskUsageSvc) {
   vm.ready = false;
   vm.title = 'Disk Usage';
   vm.disk_usages = {};
+  vm.sort = doSort;
   
   document.title = vm.title;
 
-  diskUsageSvc.get()().query().$promise.then(function(d) {
-    vm.disk_usages = d;
+  diskUsageSvc.get()().query().$promise.then(gotDiskUsages);
+
+  function gotDiskUsages(diskUsages) {
+	 vm.disk_usages = diskUsages;
     vm.ready = true;
-  });  
+  }
+
+  function doSort(field) {
+	 vm.orderProp = field;
+	 vm.reverseSort = !vm.reverseSort;
+  }
 }
