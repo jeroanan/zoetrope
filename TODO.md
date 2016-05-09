@@ -30,7 +30,4 @@ Currently only attaching to an existing account is supported.
 
 **Add the ability to be able to change global preferences**
 
-**Time so Far and Est. Time Remaining on tasks page does not sort properly**
-
-
 

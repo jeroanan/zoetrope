@@ -26,13 +26,33 @@ function IndexController(tasksSvc, projectsSvc) {
 
   function gotProjects(projects) {
 	 vm.projects = projects;
-	 
-    for (var i=0; i<vm.tasks.length; i++) {
-      vm.tasks[i].idx = i + 1;
-      vm.tasks[i].project_name = get_project_name(vm.tasks[i], vm.projects);
-      vm.tasks[i].state = get_state_string(vm.tasks[i]);
-      vm.tasks[i].time_so_far = get_time_so_far(vm.tasks[i]);
-    }
+
+	 function padTime(timeIn) {
+		var timeSplit = timeIn.split(':');
+		var out = '';
+
+		for (var t in timeSplit) {
+		  if (timeSplit[t].length===1) {
+			 out += '0' + timeSplit[t];
+		  } else {
+			 out += timeSplit[t];
+		  }
+
+		  out += ':';		  
+		}
+		return out.slice(0, out.length-1);
+	 }
+
+	 var idx = 0;
+	 vm.tasks = vm.tasks.map(function(x) {
+		idx++;
+		x.idx = idx;
+		x.project_name = get_project_name(x, vm.projects);
+		x.state = get_state_string(x);
+		x.estimated_cpu_time_remaining = padTime(x.estimated_cpu_time_remaining);
+		x.time_so_far = padTime(get_time_so_far(x));
+		return x;
+	 });
 	 
     vm.ready = true;
     vm.showRawData = false;
