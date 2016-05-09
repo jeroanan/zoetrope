@@ -21,7 +21,7 @@ function MessagesController(messagesSvc) {
   vm.unique_project_names = [];
   vm.project_name_counts = [];
   vm.get_project_name = getProjectName;
-  vm.sort = doSort;
+  vm.sort = getSortFunc(vm, 'orderProp', 'reverseSort');
 
   messagesSvc.get()().query().$promise.then(gotMessages);
 
@@ -52,10 +52,5 @@ function MessagesController(messagesSvc) {
 
   function getProjectName(pn) {
     return pn === '' ? '(no project)' : pn;
-  }
-
-  function doSort(field) {
-	 vm.orderProp = field;
-	 vm.reverseSort = !vm.reverseSort;
   }
 }

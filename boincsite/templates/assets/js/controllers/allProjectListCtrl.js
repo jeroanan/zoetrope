@@ -17,7 +17,7 @@ function AllProjectListController(allProjectListSvc, projectsSvc) {
   vm.sortProp = 'name';
   vm.reverseSort = false;
   vm.availableProjects = null;
-  vm.doSort = getSortFunc('name');
+  vm.doSort = getSortFunc(vm, 'sortProp', 'reverseSort');
   vm.allProjects = [];
   
   document.title = vm.title;
@@ -40,20 +40,5 @@ function AllProjectListController(allProjectListSvc, projectsSvc) {
 	 projectsSvc.get()().query().$promise.then(gotAttachedProjects);    
   }
   
-  function getSortFunc(defaultSortField) {
-    var currentSortField = defaultSortField;
-
-    function doSort(sortField) {
-      if (sortField==currentSortField) {
-        vm.reverseSort = !vm.reverseSort;
-        return;
-      }
-      currentSortField = sortField;
-      vm.sortProp = sortField;
-      vm.reverseSort = false;
-    }
-    return doSort;
-  }
-
   allProjectListSvc.get()().query().$promise.then(gotAllProjects);
 }

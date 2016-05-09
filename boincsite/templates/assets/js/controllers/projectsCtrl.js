@@ -18,9 +18,18 @@ function ProjectsController(projectsSvc, updateProjectSvc) {
   vm.title = "BOINC Projects";
   vm.detachClicked = detachClicked;
   vm.updateClicked = updateClicked;
-
   vm.detachUrl = '';
   vm.detachName = '';
+  vm.sort = getSortFunc(vm, 'orderProp', 'reverseSort');
+
+  document.title = vm.title;
+  
+  projectsSvc.get()().query().$promise.then(gotProjects);  
+
+  function gotProjects(projects) {
+	 vm.projects = projects.filter(function(x) { return x.name.length > 0; });
+    vm.ready = true;
+  }
 
   function detachClicked(projectName, projectUrl) {
 	 var dialog = $('#detachModal');
@@ -33,12 +42,5 @@ function ProjectsController(projectsSvc, updateProjectSvc) {
 
   function updateClicked() {
 	 updateProjectSvc.query(vm.project.master_url)().query();
-  }
-
-  document.title = vm.title;
-  
-  projectsSvc.get()().query().$promise.then(function(d) {
-    vm.projects = d.filter(function(x) { return x.name.length > 0; });
-    vm.ready = true;
-  });  
+  }  
 }

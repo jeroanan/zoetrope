@@ -11,9 +11,9 @@
 
     <table class="table table-striped">
       <thead>
-        <th><a ng-click="vm.orderProp='date'; vm.reverseSort = !vm.reverseSort;">Date</a></th>
-        <th><a ng-click="vm.orderProp='uploaded'; vm.reverseSort = !vm.reverseSort">Uploaded</a></th>
-        <th><a ng-click="vm.orderProp='downloaded'; vm.reverseSort = !vm.reverseSort">Downloaded</a></th>
+        <th><a ng-click="vm.sort('date');">Date</a></th>
+        <th><a ng-click="vm.sort('uploaded');">Uploaded</a></th>
+        <th><a ng-click="vm.sort('downloaded');">Downloaded</a></th>
       </thead>
       <tr ng-repeat="dt in vm.daily_transfers | orderBy:vm.orderProp:vm.reverseSort">
         <td><span ng-bind="dt.date.toDateString()" /></td>

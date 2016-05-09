@@ -18,12 +18,14 @@ function DailyTransferController(dailyTransferHistorySvc) {
   vm.title = 'Daily Transfer History';
   vm.orderProp = 'date';
   vm.reverseSort = true;
-  
+  vm.sort = getSortFunc(vm, 'orderProp', 'reverseSort');
+
   document.title = vm.title;
 
-  dailyTransferHistorySvc.get()().query().$promise.then(function(data) {
+  dailyTransferHistorySvc.get()().query().$promise.then(gotDailyTransfers);
 
-	 vm.daily_transfers = data.filter(function(transfer) {
+  function gotDailyTransfers(dailyTransfers) {
+	 vm.daily_transfers = dailyTransfers.filter(function(transfer) {
 		return transfer.date;
 	 }).map(function(transfer) {
 		var dateSplit = transfer.date.split('-');
@@ -33,15 +35,13 @@ function DailyTransferController(dailyTransferHistorySvc) {
 	 });
 
     function totalMegabytes(fieldName) {
-		//TODO: data.map, megs.reduce
-
-      var megs = Array.map(data, function(x) { return x[fieldName]; });
-      var total = Array.reduce(megs, function(a, b) { return a+b; });
+      var megs = dailyTransfers.map(function(x) { return x[fieldName]; });
+      var total = megs.reduce(function(a, b) { return a+b; });
       return Math.round(total * 100) / 100;
     }
 
     vm.totalUploaded = totalMegabytes('uploaded') + 'MB';
     vm.totalDownloaded = totalMegabytes('downloaded') + 'MB';
-    vm.ready = true;    
-  });  
+    vm.ready = true;
+  }
 }

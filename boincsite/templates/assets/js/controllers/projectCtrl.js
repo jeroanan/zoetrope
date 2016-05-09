@@ -20,14 +20,38 @@ function ProjectController(projectSvc, updateProjectSvc, statisicsSvc) {
   vm.projectStats = [];
   vm.statsSortField = 'day';
   vm.statsReverseSort = true;
+  vm.statsSort = getSortFunc(vm, 'statsSortField', 'statsReverseSort');  //doStatsSort;
+
+  document.title = vm.title;
+
+  projectSvc().query().$promise.then(gotProject, gotProjectError);
 
   function gotProject(project) {
 	 vm.project = project;
+	 statisicsSvc.get(project.master_url)().query().$promise.then(gotStats);		
+  }
 
-	 statisicsSvc.get(project.master_url)().query().$promise.then(function(d) {
-		vm.projectStats = d[0];
+  function gotStats(stats) {
+
+	 //TODO: probably need to make this stats control into a directive..
+	 var ps = [];
+	 
+	 for (var p in stats[0]) {
+		
+		var o = stats[0][p];
+		if (o.day) {
+		  ps.push(o);
+		}		  
+	 }
+	 
+	 vm.projectStats = ps.map(function(x) {
+		x.user_total_credit = parseFloat(x.user_total_credit);
+		x.user_expavg_credit = parseFloat(x.user_expavg_credit);
+		x.host_total_credit = parseFloat(x.host_total_credit);
+		x.host_expavg_credit = parseFloat(x.host_expavg_credit);
+		return x;		
 	 });
-
+	 
 	 vm.projectFound = true;
 	 vm.ready = true;
   }
@@ -35,9 +59,7 @@ function ProjectController(projectSvc, updateProjectSvc, statisicsSvc) {
   function gotProjectError() {
 	 vm.ready = true;
 	 vm.projectFound = false;
-  }
-  
-  projectSvc().query().$promise.then(gotProject, gotProjectError);
+  }  
 
   function updateProjectClick() {
     if (vm.ready!==true) {
@@ -49,7 +71,5 @@ function ProjectController(projectSvc, updateProjectSvc, statisicsSvc) {
   
   function detachClicked() {
 	 $('#detachModal').modal('show');
-  }
-  
-  document.title = vm.title;
+  }  
 }

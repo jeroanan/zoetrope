@@ -51,17 +51,18 @@
 	 
     
 	 <h2>Statistics</h2>
+
 	 <div class="row">
 		<table class="table table-striped">
 		  <thead>
-			 <th><a ng-click="vm.statsSortField='day'; vm.statsReverseSort=!vm.statsReverseSort">Day</a></th>
-			 <th><a ng-click="vm.statsSortField='user_total_credit'; vm.statsReverseSort=!vm.statsReverseSort">User Total Credit</a></th>
-			 <th><a ng-click="vm.statsSortField='user_expavg_credit'; vm.statsReverseSort=!vm.statsReverseSort">User Recent Average Credit</a></th>
-			 <th><a ng-click="vm.statsSortField='host_total_credit'; vm.statsReverseSort=!vm.statsReverseSort">Host Total Credit</a></th>
-			 <th><a ng-click="vm.statsSortField='host_expavg_credit'; vm.statsReverseSort=!vm.statsReverseSort">Host Recent Average Credit</a></th>
+			 <th><a ng-click="vm.statsSort('day');">Day</a></th>
+			 <th><a ng-click="vm.statsSort('user_total_credit');">User Total Credit</a></th>
+			 <th><a ng-click="vm.statsSort('user_expavg_credit');">User Recent Average Credit</a></th>
+			 <th><a ng-click="vm.statsSort('host_total_credit');">Host Total Credit</a></th>
+			 <th><a ng-click="vm.statsSort('host_expavg_credit');">Host Recent Average Credit</a></th>
 		  </thead>
 		  <tbody>
-			 <tr ng-repeat="stat in vm.projectStats|orderBy:vm.statsSortField:vm.statsReverseSort">
+			 <tr ng-repeat="stat in vm.projectStats | orderBy:vm.statsSortField:vm.statsReverseSort">
 				<td><span ng-bind="stat.day"/></td>
 				<td><span ng-bind="stat.user_total_credit"/></td>
 				<td><span ng-bind="stat.user_expavg_credit"/></td>

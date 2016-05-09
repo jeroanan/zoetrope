@@ -15,12 +15,7 @@ function IndexController(tasksSvc, projectsSvc) {
   vm.sortProp = 'index';
   vm.reverseSort = false;
   vm.ready = false;
-  vm.sort = doSort;
-
-  function doSort(field) {
-	 vm.sortProp = field;
-	 vm.reverseSort = !vm.reverseSort;
-  }
+  vm.sort = getSortFunc(vm, 'sortProp', 'reverseSort');
 
   function gotTasks(tasks) {
 	 vm.tasks = tasks;

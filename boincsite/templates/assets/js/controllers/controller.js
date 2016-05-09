@@ -1,5 +1,25 @@
 angular.module('zoetropeControllers', ['ngRoute', 'ngSanitize', 'zoetropeServices']);
 
+function getSortFunc(viewModel, sortFieldVar, reverseSortVar) {
+
+  var currentSortField = viewModel[sortFieldVar];
+  
+  function sortFunc(field) {
+	 viewModel[sortFieldVar] = field;
+
+	 if(field===currentSortField) {
+		viewModel[reverseSortVar] = !viewModel[reverseSortVar];
+		return;
+	 }
+
+	 currentSortField = field;
+	 viewModel[sortFieldVar] = field;
+	 viewModel[reverseSortVar] = false;
+  }
+  
+  return sortFunc;
+}
+
 var get_project_name = function(task, projects) {
 
   for (var p in projects) {
