@@ -19,6 +19,8 @@ When the user navigates to /#/getallprojectlist a list of all available BOINC pr
 
 Once that's done it should also be possible to add this to the main "All Boinc Projects" screen as well as to the screens that show list/details of currently-attached projects.
 
+But how to get the current platform? I see it in bonincdatadir/client_state.xml, but can't seem to get this via the RPC. Do I need to read the file directly? It is conceivable that even though Zoetrope can interrogate BOINC via RPC sometimes it will not have read access to boincdatadir.
+
 **Support creation of new accounts when attaching to new projects**
 
 Currently only attaching to an existing account is supported.
