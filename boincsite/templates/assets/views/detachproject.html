@@ -32,8 +32,8 @@
       <div class="col-xs-8">
         <div class="form-group">
           <label for="projects">Project</label>
-          <select name="projects" ng-model="vm.selectedProject" ng-change="vm.showConfirmDetach=false"
-                  class="form-control">
+          <select name="projects" ng-model="vm.selectedProject" class="form-control"
+						ng-change="vm.selectedProjectChanged();">
             <option ng-repeat="p in vm.attachedProjects|orderBy:'name'" value="{{p.master_url}}">
               {{p.name}}
             </option>
@@ -55,7 +55,7 @@
       <div class="col-xs-2"></div>
       <div class="col-xs-8">
         <div class="form-group">
-          <button type="button" name="detach" class="btn btn-primary pull-right" ng-click="vm.detachButtonClicked()" />
+          <button type="button" name="detach" class="btn btn-primary pull-right" ng-click="vm.detachButtonClicked()">
             Detach
           </button>
         </div>

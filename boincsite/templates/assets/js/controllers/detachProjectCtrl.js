@@ -22,6 +22,16 @@ function DetachProjectController(projectsSvc, detachProjectSvc) {
   vm.detachSuccessful = false;
   vm.detachClicked = false;
   vm.detachErrorMessage = '';
+  vm.selectedProjectChanged = selectedProjectChanged;
+
+  projectsSvc.get()().query().$promise.then(gotProjects);
+  
+  document.title = vm.title;
+
+  function gotProjects(projects) {
+	 vm.attachedProjects = projects.filter(function(x) { return x.name.length > 0; });
+    vm.ready = true;
+  }
 
   // When the initial detach button is clicked it shows
   // a div with hyperlinks so the user can confirm that
@@ -41,18 +51,18 @@ function DetachProjectController(projectsSvc, detachProjectSvc) {
   // hyperlinks to confirm that they really want to deatch
   // from the project.
   function detachLinkClicked() {
-    vm.detachClicked = true;
-    
-    detachProjectSvc.query(vm.selectedProject)().query().$promise.then(function(d) {
-      vm.detachSuccessful = d.success;
-      vm.detachErrorMessage = d.error_message;
-    });
+    vm.detachClicked = true;    
+    detachProjectSvc.query(vm.selectedProject)().query().$promise.then(projectDetached);
   }
 
-  projectsSvc.get()().query().$promise.then(function(d) {
-    vm.attachedProjects = d.filter(function(x) { return x.name.length > 0; });
-    vm.ready = true;
-  });
-  
-  document.title = vm.title;
+  function projectDetached(d) {	 
+    vm.detachErrorMessage = d.error_message;
+	 vm.detachSuccessful = d.success;
+  }
+
+  function selectedProjectChanged() {
+	 vm.detachErrorMessage = '';
+	 vm.detachClicked = false;
+	 vm.showConfirmDetach=false;
+  }
 }

@@ -30,4 +30,7 @@ Currently only attaching to an existing account is supported.
 
 **Add the ability to be able to change global preferences**
 
+**What happens if BOINC isn't running?**
+
+**What happens when various requests throw exceptions?**
 

@@ -20,7 +20,17 @@ function AttachProjectController(attachProjectSvc, allProjectListSvc, md5Svc) {
   vm.errorText = '';
   vm.success = false;
   vm.loading = false;
+  vm.selectedProjectChanged = selectedProjectChanged;
   
+  allProjectListSvc.get()().query().$promise.then(gotProjects);  
+
+  document.title = vm.title;
+
+  function gotProjects(projects) {
+	 vm.attachedProjects = projects.filter(function(x) { return x.name.length > 0; });
+    vm.ready = true;
+  }
+
   function submitClicked() {
 
 	 vm.success = false;
@@ -36,17 +46,16 @@ function AttachProjectController(attachProjectSvc, allProjectListSvc, md5Svc) {
 	 var password_hash = md5Svc.query(hash_in)();
 	 vm.loading = true;
 	 
-    attachProjectSvc.query(vm.selectedProject, vm.emailaddress, password_hash)().query().$promise.then(function(d) {
-		vm.loading = false;
-		vm.success = d.success;
-		vm.errorText = d.error_message;
-	 });
+    attachProjectSvc.query(vm.selectedProject, vm.emailaddress, password_hash)().query().$promise.then(projectAttached);
   }
 
-  allProjectListSvc.get()().query().$promise.then(function(d) {
-    vm.attachedProjects = d.filter(function(x) { return x.name.length > 0; });
-    vm.ready = true;
-  });  
+  function projectAttached(d) {
+	 vm.loading = false;
+	 vm.success = d.success;
+	 vm.errorText = d.error_message;
+  }
 
-  document.title = vm.title;
+  function selectedProjectChanged() {
+	 vm.errorText = '';
+  }
 }
