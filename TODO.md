@@ -10,17 +10,6 @@ When the current time is within a (configurable?) period of a task's deadline, i
 
 The thing that most suggests itself here is when we're within the "warning" period, apply Bootstrap's text-warning class. When the deadline is exceeded then apply text-danger.
 
-**Indicate which projects match the current platform**
-
-When the user navigates to /#/getallprojectlist a list of all available BOINC projects is shown. Clicking on a project name allows the user to see more information about the project including the platforms it supports. To begin with on this page it ought to be possible to indicate whether the platform that the connected BOINC is running on matches one of the supported platforms. I am thinking one/both of the following:
-
-1. Have some text at the top of the page saying "This project supports/does not support this platform"
-2. In the list of platforms, apply Bootstrap's text-success class to a matching platform and maybe add an icon alongside.
-
-Once that's done it should also be possible to add this to the main "All Boinc Projects" screen as well as to the screens that show list/details of currently-attached projects.
-
-But how to get the current platform? I see it in bonincdatadir/client_state.xml, but can't seem to get this via the RPC. Do I need to read the file directly? It is conceivable that even though Zoetrope can interrogate BOINC via RPC sometimes it will not have read access to boincdatadir.
-
 **Support creation of new accounts when attaching to new projects**
 
 Currently only attaching to an existing account is supported.

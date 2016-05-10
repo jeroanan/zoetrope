@@ -165,16 +165,23 @@ class WebServer(object):
         return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
 
     @cherrypy.expose
-    def experimental_task(self, **kwargs):
-        command = self.__rpc_factory.create('ExperimentalTask')
-        command.execute()
-
-    @cherrypy.expose
     def update_project(self, **kwargs):
         project_url = kwargs.get('projectUrl', '')
         
         command = self.__rpc_factory.create('UpdateProject')
         command.execute(project_url)
+
+    @cherrypy.expose
+    def get_platform_json(self, **kwargs):
+        command = self.__rpc_factory.create('GetPlatform')
+        platform = command.execute()
+        return '{{"platform": "{platform}"}}'.format(platform=platform)
+
+    @cherrypy.expose
+    def experimental_task(self, **kwargs):
+        command = self.__rpc_factory.create('GetPlatform')
+        command.execute()
+    
 
 if __name__=='__main__':
     ws = WebServer()

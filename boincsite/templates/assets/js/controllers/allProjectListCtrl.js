@@ -6,9 +6,9 @@
 angular.module('zoetropeControllers')
   .controller('allProjectListCtrl', AllProjectListController);
 
-AllProjectListController.$inject = ['allProjectListSvc', 'projectsSvc'];
+AllProjectListController.$inject = ['allProjectListSvc', 'projectsSvc', 'getPlatformSvc'];
 
-function AllProjectListController(allProjectListSvc, projectsSvc) {
+function AllProjectListController(allProjectListSvc, projectsSvc, getPlatformSvc) {
 
   var vm = this;
 
@@ -36,10 +36,25 @@ function AllProjectListController(allProjectListSvc, projectsSvc) {
 		return x;
 	 });
   }
-  
+
+  function gotPlatform(platform) {
+	 var thisPlatform = platform.platform;
+
+	 vm.allProjects = vm.allProjects.map(function(x) {
+		var supportedPlatform = x.platforms.filter(function(y) {
+		  return y.name===thisPlatform;		
+		});
+
+		x.supported = supportedPlatform.length > 0;
+
+		return x;
+	 });
+  }
+
   function gotAllProjects(projects) {
 	 vm.allProjects = projects;
-	 projectsSvc.get()().query().$promise.then(gotAttachedProjects);    
+	 projectsSvc.get()().query().$promise.then(gotAttachedProjects);
+	 getPlatformSvc.get()().query().$promise.then(gotPlatform);
   }
   
   allProjectListSvc.get()().query().$promise.then(gotAllProjects);

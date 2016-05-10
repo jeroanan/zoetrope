@@ -12,6 +12,7 @@ import boincsite.boinc.GetDiskUsage as gdu
 import boincsite.boinc.GetGlobalPreferences as ggp
 import boincsite.boinc.GetMessages as gm
 import boincsite.boinc.GetNotices as gn
+import boincsite.boinc.GetPlatform as gp
 import boincsite.boinc.GetProjectStatus as gps
 import boincsite.boinc.GetStatistics as gs
 import boincsite.boinc.GetTask as gt
@@ -37,6 +38,7 @@ class RpcFactory(object):
             'GetGlobalPreferences': ggp.GetGlobalPreferences,
             'GetMessages': gm.GetMessages,
             'GetNotices': gn.GetNotices,
+            'GetPlatform': gp.GetPlatform,
             'GetProjectStatus': gps.GetProjectStatus,
             'GetTask': gt.GetTask,
             'GetTasks': gts.GetTasks,

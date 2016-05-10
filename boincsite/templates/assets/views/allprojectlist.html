@@ -28,6 +28,7 @@
       <td>
 		  <a ng-href="/#/projectdetail/{{ap.name}}"><span ng-bind="ap.name" /></a>
 		  <span title="This client is attached to this project." ng-show="ap.attached">&#10004;</span>
+		  <span title="This project is supported by the current platform." ng-show="ap.supported">&#9733;</span>
 		</td>
       <td>
         <span ng-bind="ap.general_area" />
