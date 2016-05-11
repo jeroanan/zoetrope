@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html ng-app="zoetrope">
+<html lang="en" ng-app="zoetrope">
   <head>
     <meta charset="utf-8">
+	 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+	 <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> -->
+
     <title>{{title}}</title>
+	 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
+
     <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+
     <link rel="stylesheet" href="/static/css/style.css" />
+
+	 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> -->
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-      integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
-      crossorigin="anonymous"></script>
-    <script src="/static/js/angular.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+   
+	 <script src="/static/js/angular.min.js"></script>
     <script src="/static/js/angular-route.min.js"></script>
     <script src="/static/js/angular-resource.min.js"></script>
     <script src="/static/js/angular-sanitize.min.js"></script>
-
-    <!-- <script type="text/javascript" src="/static/js/controllers/controller.js"></script>
-    <script type="text/javascript" src="/static/js/controllers/diskUsageCtrl.js"></script>
-    <script type="text/javascript" src="/static/js/controllers/indexCtrl.js"></script>
-    <script type="text/javascript" src="/static/js/controllers/taskCtrl.js"></script>
-    <script type="text/javascript" src="/static/js/controllers/projectsCtrl.js"></script>
-    <script type="text/javascript" src="/static/js/controllers/projectCtrl.js"></script>
-    <script type="text/javascript" src="/static/js/controllers/hostInfoCtrl.js"></script>
-    <script type="text/javascript" src="/static/js/controllers/dailyTransferCtrl.js"></script>
-    <script type="text/javascript" src="/static/js/controllers/messagesCtrl.js"></script> -->
 
     <script src="/static/js/services/services.min.js"></script>
     <script src="/static/js/controllers/controller.min.js"></script>
@@ -35,8 +35,9 @@
     <div class="container">
       <div ng-view></div>
 
-      {% endraw %}
+    
+
     </div>
-    <p></p>
+	 {% endraw %}
   </body>
 </html>
