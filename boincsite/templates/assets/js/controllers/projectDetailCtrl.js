@@ -16,7 +16,40 @@ function ProjectDetailController($routeParams, allProjectListSvc, projectsSvc) {
   vm.attachClicked = attachClicked;
   vm.detachClicked = detachClicked;
   vm.projectFound = false;
+  vm.error = false;
+  vm.load = load;
   
+  setTitle('Project Details');
+
+  load();
+
+  function load() {
+	 vm.ready = false;
+	 vm.error = false;
+	 allProjectListSvc.get()().query().$promise.then(gotAllProjects, serviceError);
+  }
+
+  function gotAllProjects(projects) {
+	 vm.project = projects.filter(function(x) { return x.name===$routeParams.projectname; })[0];
+
+	 if (!vm.project) {
+		vm.projectFound = false;
+		vm.ready = true;
+		return;
+	 }
+
+	 projectsSvc.get()().query().$promise.then(gotAttachedProjects, serviceError);
+
+    setTitle('Project Details -- ' + vm.project.name);
+	 vm.projectFound = true;
+    vm.ready = true;
+  }
+
+  function serviceError() {
+	 vm.ready = true;
+	 vm.error = true;
+  }
+
   function attachClicked() {
 	 $('#attachModal').modal('show');
   }
@@ -33,25 +66,5 @@ function ProjectDetailController($routeParams, allProjectListSvc, projectsSvc) {
   function gotAttachedProjects(projects) {
 	 var attachedProject = projects.filter(function(x) { return x.name==vm.project.name; });
 	 vm.project.attached = attachedProject.length > 0;
-  }
-
-  function gotAllProjects(projects) {
-	 vm.project = projects.filter(function(x) { return x.name===$routeParams.projectname; })[0];
-
-	 if (!vm.project) {
-		vm.projectFound = false;
-		vm.ready = true;
-		return;
-	 }
-
-	 projectsSvc.get()().query().$promise.then(gotAttachedProjects);
-
-    setTitle('Project Details -- ' + vm.project.name);
-	 vm.projectFound = true;
-    vm.ready = true;
-  }
-
-  allProjectListSvc.get()().query().$promise.then(gotAllProjects);
-
-  setTitle('Project Details');
+  }  
 }

@@ -6,7 +6,10 @@
   <h2>Project not found</h2>
   <a href="/#/getallprojectlist">All Boinc Projects</a>
 </div>
-<div ng-show="vm.ready && vm.projectFound">
+<div ng-show="vm.ready && vm.error">
+  An error occurred while loading the messages. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>
+</div>
+<div ng-show="vm.ready && vm.projectFound && !vm.error">
   <p class="text-center">
     <img ng-src="{{vm.project.image}}" alt="{{vm.name}}" />
   </p>
