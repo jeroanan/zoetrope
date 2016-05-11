@@ -21,10 +21,18 @@ function DailyTransferController(dailyTransferHistorySvc) {
   vm.sort = getSortFunc(vm, 'orderProp', 'reverseSort');
   vm.upArrow = upArrow;
   vm.downArrow = downArrow;
-
+  vm.error = false;
+  vm.load = load;
+  
   document.title = vm.title;
 
-  dailyTransferHistorySvc.get()().query().$promise.then(gotDailyTransfers);
+  load();
+
+  function load() {
+	 vm.ready = false;
+	 vm.error = false;
+	 dailyTransferHistorySvc.get()().query().$promise.then(gotDailyTransfers, serviceError);
+  }
 
   function gotDailyTransfers(dailyTransfers) {
 	 vm.daily_transfers = dailyTransfers.filter(function(transfer) {
@@ -45,5 +53,10 @@ function DailyTransferController(dailyTransferHistorySvc) {
     vm.totalUploaded = totalMegabytes('uploaded') + 'MB';
     vm.totalDownloaded = totalMegabytes('downloaded') + 'MB';
     vm.ready = true;
+  }
+
+  function serviceError() {
+	 vm.ready = true;
+	 vm.error = true;
   }
 }

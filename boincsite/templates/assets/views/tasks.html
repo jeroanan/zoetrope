@@ -4,7 +4,10 @@
   <div ng-show="!vm.ready" class="text-center">
     <img src="/static/img/loading.gif" />
   </div>
-  <div ng-show="vm.ready">
+  <div ng-show="vm.ready && vm.error===true">
+	 An error occurred while loading the tasks. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>
+  </div>
+  <div ng-show="vm.ready && vm.error===false">
     <table class="table table-striped">
       <thead>
         <th>

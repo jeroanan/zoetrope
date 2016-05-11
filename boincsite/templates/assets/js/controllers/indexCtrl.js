@@ -18,10 +18,25 @@ function IndexController(tasksSvc, projectsSvc) {
   vm.sort = getSortFunc(vm, 'sortProp', 'reverseSort');
   vm.upArrow = upArrow;
   vm.downArrow = downArrow;
+  vm.error = false;
+  vm.load = load;
+
+  load();
+  
+  function load() {
+	 vm.ready = false;
+	 vm.error = false;
+	 tasksSvc.get()().query().$promise.then(gotTasks, serviceError);
+  }
 
   function gotTasks(tasks) {
 	 vm.tasks = tasks;
-	 projectsSvc.get()().query().$promise.then(gotProjects);
+	 projectsSvc.get()().query().$promise.then(gotProjects, serviceError);
+  }
+
+  function serviceError(xhr) {	 
+	 vm.error = true;
+	 vm.ready = true;
   }
 
   function gotProjects(projects) {
@@ -60,5 +75,5 @@ function IndexController(tasksSvc, projectsSvc) {
     document.title = vm.title;
   }
   
-  tasksSvc.get()().query().$promise.then(gotTasks);    
+  
 }

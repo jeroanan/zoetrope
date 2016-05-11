@@ -19,13 +19,26 @@ function DiskUsageController(diskUsageSvc) {
   vm.sort = getSortFunc(vm, 'orderProp', 'reverseSort');
   vm.upArrow = upArrow;
   vm.downArrow = downArrow;
-  
+  vm.error = false;
+  vm.load = load;
+
   document.title = vm.title;
 
-  diskUsageSvc.get()().query().$promise.then(gotDiskUsages);
+  load();
+
+  function load() {
+	 vm.ready = false;
+	 vm.error = false;
+	 diskUsageSvc.get()().query().$promise.then(gotDiskUsages, serviceError);
+  }
 
   function gotDiskUsages(diskUsages) {
 	 vm.disk_usages = diskUsages;
     vm.ready = true;
+  }
+
+  function serviceError() {
+	 vm.ready = true;
+	 vm.error = true;
   }
 }

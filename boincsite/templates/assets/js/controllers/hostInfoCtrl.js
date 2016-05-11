@@ -14,11 +14,26 @@ function HostInfoController(hostInfoSvc) {
   vm.ready = false;
   vm.title = 'Host Info';
   vm.host_info = {};
-
+  vm.error = false;
+  vm.load = load;
+  
   document.title = vm.title;
 
-  hostInfoSvc.get()().query().$promise.then(function(d) {
-    vm.host_info = d;
+  load();
+
+  function load() {
+	 vm.ready = false;
+	 vm.error = false;
+	 hostInfoSvc.get()().query().$promise.then(gotHostInfo, serviceError);
+  }
+
+  function gotHostInfo(hostInfo) {
+	 vm.host_info = hostInfo;
     vm.ready = true;
-  });
+  }
+
+  function serviceError() {
+	 vm.ready = true;
+	 vm.error = true;
+  }
 }

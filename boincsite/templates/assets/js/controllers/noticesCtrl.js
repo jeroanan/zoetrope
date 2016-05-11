@@ -15,9 +15,24 @@ function NoticesController(noticesSvc) {
   vm.title = 'Notices';
   vm.ready = false;
   document.title = vm.title;
+  vm.error = false;
+  vm.load = load;
+  
+  load();
 
-  noticesSvc.get()().query().$promise.then(function(d) {
-    vm.notices = d;
+  function load() {
+	 vm.ready = false;
+	 vm.error = false;
+	 noticesSvc.get()().query().$promise.then(gotNotices, serviceError);
+  }
+
+  function gotNotices(notices) {
+	 vm.notices = notices;
     vm.ready = true;
-  });  
+  }
+
+  function serviceError() {
+	 vm.ready = true;
+	 vm.error = true;
+  }
 }

@@ -24,8 +24,16 @@ function MessagesController(messagesSvc) {
   vm.sort = getSortFunc(vm, 'orderProp', 'reverseSort');
   vm.upArrow = upArrow;
   vm.downArrow = downArrow;
+  vm.error = false;
+  vm.load = load;
+  
+  load();
 
-  messagesSvc.get()().query().$promise.then(gotMessages);
+  function load() {
+	 vm.ready = false;
+	 vm.error = false;
+	 messagesSvc.get()().query().$promise.then(gotMessages, serviceError);
+  }
 
   function gotMessages(messages) {
 	 vm.messages = messages;
@@ -51,6 +59,11 @@ function MessagesController(messagesSvc) {
     vm.project_name_counts = tmp_name_counts;
     vm.ready = true;
   }
+
+  function serviceError() {
+	 vm.ready = true;
+	 vm.error = true;
+  }  
 
   function getProjectName(pn) {
     return pn === '' ? '(no project)' : pn;

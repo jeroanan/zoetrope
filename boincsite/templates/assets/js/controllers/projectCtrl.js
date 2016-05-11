@@ -23,14 +23,20 @@ function ProjectController(projectSvc, updateProjectSvc, statisicsSvc) {
   vm.statsSort = getSortFunc(vm, 'statsSortField', 'statsReverseSort');
   vm.upArrow = upArrow;
   vm.downArrow = downArrow;
+  vm.load = load;
 
   document.title = vm.title;
 
-  projectSvc().query().$promise.then(gotProject, gotProjectError);
+  load();
+  
+  function load() {
+	 vm.ready = false;
+	 projectSvc().query().$promise.then(gotProject, serviceError);
+  }
 
   function gotProject(project) {
 	 vm.project = project;
-	 statisicsSvc.get(project.master_url)().query().$promise.then(gotStats);		
+	 statisicsSvc.get(project.master_url)().query().$promise.then(gotStats, serviceError);		
   }
 
   function gotStats(stats) {
@@ -53,12 +59,12 @@ function ProjectController(projectSvc, updateProjectSvc, statisicsSvc) {
 		x.host_expavg_credit = parseFloat(x.host_expavg_credit);
 		return x;		
 	 });
-	 
+
 	 vm.projectFound = true;
 	 vm.ready = true;
   }
 
-  function gotProjectError() {
+  function serviceError() {
 	 vm.ready = true;
 	 vm.projectFound = false;
   }  

@@ -23,14 +23,26 @@ function ProjectsController(projectsSvc, updateProjectSvc) {
   vm.sort = getSortFunc(vm, 'orderProp', 'reverseSort');
   vm.upArrow = upArrow;
   vm.downArrow = downArrow;
-
-  document.title = vm.title;
+  vm.error = false;
+  vm.load = load;
   
-  projectsSvc.get()().query().$promise.then(gotProjects);  
+  document.title = vm.title;
+  load();
+  
+  function load() {
+	 vm.ready = false;
+	 vm.error = false;
+	 projectsSvc.get()().query().$promise.then(gotProjects, serviceError);
+  }
 
   function gotProjects(projects) {
 	 vm.projects = projects.filter(function(x) { return x.name.length > 0; });
     vm.ready = true;
+  }
+
+  function serviceError(xhr) {
+	 vm.error = true;
+	 vm.ready = true;
   }
 
   function detachClicked(projectName, projectUrl) {

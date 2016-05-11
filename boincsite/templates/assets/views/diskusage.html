@@ -3,7 +3,10 @@
   <div ng-show="!duvm.ready" class="text-center">
     <img src="/static/img/loading.gif" />
   </div>
-  <div ng-show="duvm.ready">
+  <div ng-show="duvm.ready && duvm.error">
+	 An error occurred while loading the disk usages. <a title="Retry" href="javascript:" ng-click="duvm.load();">Retry</a>
+  </div>
+  <div ng-show="duvm.ready && !duvm.error">
     <keyvalrow key="Total Disk Space" val="{{ duvm.disk_usages.total_disk_space }}" />
     <keyvalrow key="Free Disk Space" val="{{ duvm.disk_usages.free_disk_space }}" />
 

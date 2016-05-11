@@ -21,8 +21,28 @@ function AllProjectListController(allProjectListSvc, projectsSvc, getPlatformSvc
   vm.allProjects = [];
   vm.upArrow = upArrow;
   vm.downArrow = downArrow;
+  vm.load = load;
   
   document.title = vm.title;
+
+  load();
+
+  function load() {
+	 vm.ready = false;
+	 vm.error = false;
+	 allProjectListSvc.get()().query().$promise.then(gotAllProjects, serviceError);
+  }
+
+  function gotAllProjects(projects) {
+	 vm.allProjects = projects;
+	 projectsSvc.get()().query().$promise.then(gotAttachedProjects, serviceError);
+	 getPlatformSvc.get()().query().$promise.then(gotPlatform, serviceError);
+  }
+
+  function serviceError() {
+	 vm.ready = true;
+	 vm.error = true;
+  }  
 
   function gotAttachedProjects(projects) {
 	 vm.ready = true;
@@ -49,13 +69,5 @@ function AllProjectListController(allProjectListSvc, projectsSvc, getPlatformSvc
 
 		return x;
 	 });
-  }
-
-  function gotAllProjects(projects) {
-	 vm.allProjects = projects;
-	 projectsSvc.get()().query().$promise.then(gotAttachedProjects);
-	 getPlatformSvc.get()().query().$promise.then(gotPlatform);
-  }
-  
-  allProjectListSvc.get()().query().$promise.then(gotAllProjects);
+  }  
 }

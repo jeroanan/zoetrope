@@ -13,11 +13,26 @@ function GlobalPreferencesCtrl(globalPreferencesSvc) {
   vm.ready = false;
   vm.title = 'Global Preferences';
   vm.prefs = {};
-
+  vm.error = false;
+  vm.load = load;
+  
   document.title = vm.title;
 
-  globalPreferencesSvc.get()().query().$promise.then(function(d) {
-    vm.prefs = d;
+  load();
+
+  function load() {
+	 vm.ready = false;
+	 vm.error = false;
+	 globalPreferencesSvc.get()().query().$promise.then(gotGlobalPreferences, serviceError);
+  }
+
+  function gotGlobalPreferences(preferences) {
+	 vm.prefs = preferences;
     vm.ready = true;
-  });  
+  }
+
+  function serviceError() {
+	 vm.ready = true;
+	 vm.error = true;
+  }
 }
