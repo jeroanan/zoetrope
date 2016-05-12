@@ -10,10 +10,10 @@
     <small>Note: I still don't know what some of these things are for. I have coloured the things I am not sure about
     <span class="text-danger">like this.</span></small>
   </p>
-  <keyvalrow key="Run if User Active" val="{{ vm.prefs.run_if_user_active }}" />
-  <keyvalrow key="Run GPU if User Active" val="{{ vm.prefs.run_gpu_if_user_active }}" />
-  <keyvalrow key="Hangup if Dialed" val="{{ vm.prefs.hangup_if_dialed }}" />
-  <keyvalrow key="Maximum % of RAM to use when Idle" val="{{ vm.prefs.ram_max_used_idle_pct }}%" />
+  <keyvalrow key="Run if computer in use" val="{{ vm.prefs.run_if_user_active }}" />
+  <keyvalrow key="Use GPU if computer in use" val="{{ vm.prefs.run_gpu_if_user_active }}" />
+  <keyvalrow key="Hangup if dialed" val="{{ vm.prefs.hangup_if_dialed }}" />
+  <keyvalrow key="Maximum RAM to use when idle" val="{{ vm.prefs.ram_max_used_idle_pct }}%" />
   <keyvalrow key="Start Hour" val="{{ vm.prefs.start_hour }}" />
   <keyvalrow key="End Hour" val="{{ vm.prefs.end_hour }}" />
 
@@ -21,13 +21,23 @@
     <keyvalrow key="max_ncpus_pct" val="{{ vm.prefs.max_ncpus_pct }}%" />
   </div>
 
-  <keyvalrow key="Suspend if battery temperature exceeds:" val="{{ vm.prefs.battery_max_temperature }}&#176;C" />
-  <keyvalrow key="Suspend if CPU usage exceeds:" val="{{ vm.prefs.suspend_cpu_usage }}%" />
+  <keyvalrow key="Maximum battery temperature:" val="{{ vm.prefs.battery_max_temperature }}&#176;C"
+				 title="BOINC will suspend processing if the battery exceeds this temperature" />
+
+  <keyvalrow key="Maximum CPU usage:" val="{{ vm.prefs.suspend_cpu_usage }}%"
+				 title="BOINC will suspend processing if CPU usage exceeds this threshold"/>
+
   <keyvalrow key="Maximum % of RAM to use when in use" val="{{ vm.prefs.ram_max_used_busy_pct }}%" />
-  <keyvalrow key="Suspend when Battery Charge Drops Below:" val="{{ vm.prefs.battery_charge_min_pct }}%" />
+
+  <keyvalrow key="Minimum battery charge:" val="{{ vm.prefs.battery_charge_min_pct }}%"
+				 title="BOINC will suspend processing if battery charge drops below this threshold" />
+
   <keyvalrow key="Confirm Before Making an Internet Connection:" val="{{ vm.prefs.confirm_before_connecting }}" />
+
   <keyvalrow key="CPU Scheduling Period:" val="{{ vm.prefs.cpu_scheduling_period_minutes }} minutes" />
-  <keyvalrow key="Suspend if CPU Usage Exceeds:" val="{{ vm.prefs.cpu_usage_limit }}%" />
+  
+  <keyvalrow key="CPU usage limit:" val="{{ vm.prefs.cpu_usage_limit }}%"
+				 title="BOINC will not use more than this amount of CPU resource" />
 
   <div class="text-danger">
     <keyvalrow key="daily_xfer_period_days:" val="{{ vm.prefs.daily_xfer_period_days }}" />

@@ -78,6 +78,9 @@ angular.module('zoetrope', [
         controller: 'detachProjectCtrl',
         controllerAs: 'vm'
       }).
+		when('/about', {
+		  templateUrl: '/static/views/about.html'
+		}).
       otherwise({
         redirectTo: '/'
       });
