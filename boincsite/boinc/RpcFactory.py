@@ -18,6 +18,7 @@ import boincsite.boinc.GetStatistics as gs
 import boincsite.boinc.GetTask as gt
 import boincsite.boinc.GetTasks as gts
 import boincsite.boinc.HostInfo as hi
+import boincsite.boinc.NoMoreWork as nmw
 import boincsite.boinc.ResumeTask as rt
 import boincsite.boinc.SuspendTask as st
 import boincsite.boinc.UpdateProject as up
@@ -44,6 +45,7 @@ class RpcFactory(object):
             'GetTasks': gts.GetTasks,
             'GetStatistics': gs.GetStatistics,
             'HostInfo': hi.HostInfo,
+            'NoMoreWork': nmw.NoMoreWork,
             'ResumeTask': rt.ResumeTask,
             'SuspendTask': st.SuspendTask,
             'UpdateProject': up.UpdateProject            

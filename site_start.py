@@ -178,8 +178,14 @@ class WebServer(object):
         return '{{"platform": "{platform}"}}'.format(platform=platform)
 
     @cherrypy.expose
+    def no_more_work(self, **kwargs):
+        project_url = kwargs.get('projectUrl', '')
+        command = self.rpc_factory.create('NoMoreWork')
+        command.execute(project_url)
+
+    @cherrypy.expose
     def experimental_task(self, **kwargs):
-        command = self.__rpc_factory.create('GetPlatform')
+        command = self.__rpc_factory.create('ExperimentalTask')
         command.execute()
     
 

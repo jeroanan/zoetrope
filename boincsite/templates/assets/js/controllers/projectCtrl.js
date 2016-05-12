@@ -12,9 +12,7 @@ function ProjectController(projectSvc, updateProjectSvc, statisicsSvc) {
 
   var vm = this;
   vm.ready = false;
-  vm.title = 'Project Summary';
-  vm.updateProject = updateProjectClick;
-  vm.detachClicked = detachClicked;
+  vm.title = 'Project Summary';  
   vm.projectFound = false;
   vm.project = {};
   vm.projectStats = [];
@@ -24,6 +22,10 @@ function ProjectController(projectSvc, updateProjectSvc, statisicsSvc) {
   vm.upArrow = upArrow;
   vm.downArrow = downArrow;
   vm.load = load;
+
+  vm.updateProject = updateProjectClick;
+  vm.detachClicked = detachClicked;
+  vm.noMoreWorkClicked = noMoreWorkClicked;
 
   document.title = vm.title;
 
@@ -79,5 +81,10 @@ function ProjectController(projectSvc, updateProjectSvc, statisicsSvc) {
   
   function detachClicked() {
 	 $('#detachModal').modal('show');
-  }  
+  }
+
+  function noMoreWorkClicked() {
+	 console.log('Ok. No more work for this project, boss!');
+	 console.log(vm.project.master_url);
+  }
 }

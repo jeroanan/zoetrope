@@ -95,11 +95,16 @@
 	 
 	 <div class="row">
       <div class="col-xs-3"></div>
-      <div class="col-xs-3">
+      <div class="col-xs-2">
 		  <button class="btn btn-warning" ng-click="vm.detachClicked()">Detach Project</button>
 		  <detach-dialog projectname="{{vm.project.name}}" projecturl="{{vm.project.master_url}}" />
 		</div>
-      <div class="col-xs-3"><button class="btn btn-primary" ng-click="vm.updateProject()">Update Project</button></div>
+      <div class="col-xs-2">
+		  <button class="btn btn-primary" ng-click="vm.updateProject()">Update Project</button>
+		</div>
+		<div class="col-xs-2">
+		  <button class="btn btn-primary" ng-click="vm.noMoreWorkClicked()">No More Work</button>
+		</div>
       <div class="col-xs-3"></div>
     </div>
 	 
@@ -111,9 +116,7 @@
         <input type="checkbox" ng-model="vm.showRawData">Show raw data</input>
       </div>
     </div>      	 
-  </div>
-  
-  
+  </div>  
   <div class="row home-row text-center">
     <a href="/projects">Projects</a></div>
 </div>

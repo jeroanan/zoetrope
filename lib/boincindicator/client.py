@@ -592,9 +592,19 @@ class BoincClient(object):
         xml = '<project_update><project_url>{project_url}</project_url></project_update>'.format(
             project_url=project_url)
 
+        self.rpc.call(xml)
+
+    def project_no_more_work(self, project_url):
+        xml = '<project_nomorework><project_url>{project_url}</project_url></project_nomorework>'.format(
+            project_url=project_url)
         result = self.rpc.call(xml)
         print(ElementTree.tostring(result))
-        
+
+    def project_resume(self, project_url):
+        xml = '<project_resume><project_url>{project_url}</project_url></project_resume>'.format(
+            project_url=project_url)
+        result = self.rpc.call(xml)
+        print(ElementTree.tostring(result))
 
 def read_gui_rpc_password():
     ''' Read password string from GUI_RPC_PASSWD_FILE file, trim the last CR

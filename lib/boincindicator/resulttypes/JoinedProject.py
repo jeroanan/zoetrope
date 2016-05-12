@@ -59,3 +59,4 @@ class JoinedProject(struct.Struct):
         self.dont_use_dcf = ''
         self.project_dir = ''
         self.master_url_fetch_pending = ''
+        self.dont_request_more_work = ''
