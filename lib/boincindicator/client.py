@@ -284,6 +284,9 @@ class BoincClient(object):
         ''' Get the status of currently-attached projects.
 
         See See doc/samplexml/get_project_status.xml for an example of what the RPC call returns to this method.
+        
+        Special note: The presence of the element dont_request_more_work indicates that the project is not going
+        to request any more work. Its absence indicates that more work will be requested.
         '''
         xml = '<get_project_status />'
         results = self.rpc.call(xml)
@@ -559,10 +562,11 @@ class BoincClient(object):
 
     def get_state(self):
         ''' Gets a whole load of information about the overall state of the BOINC process, its tasks and projects.
+
+        See doc/samplexml/get_state.xml for an example of what the RPC call returns to this method.        
         '''
         xml = '<get_state/>'
         result = self.rpc.call(xml)
-        print(ElementTree.tostring(result))
 
     def get_statistics(self):
         ''' Gets a whole load of statistics
@@ -596,6 +600,12 @@ class BoincClient(object):
 
     def project_no_more_work(self, project_url):
         xml = '<project_nomorework><project_url>{project_url}</project_url></project_nomorework>'.format(
+            project_url=project_url)
+        result = self.rpc.call(xml)
+        print(ElementTree.tostring(result))
+
+    def project_allow_more_work(self, project_url):
+        xml = '<project_allowmorework><project_url>{project_url}</project_url></project_allowmorework>'.format(
             project_url=project_url)
         result = self.rpc.call(xml)
         print(ElementTree.tostring(result))

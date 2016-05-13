@@ -45,10 +45,10 @@ class Project(object):
         self.master_fetch_pending = False
         self.scheduler_rpc_pending = project.sched_rpc_pending
         self.trickle_upload_pending = False
-        self.__attached_via_account_manager = project.attached_via_acct_mgr
+        self.attached_via_account_manager = project.attached_via_acct_mgr
         self.ended = False
         self.suspended_via_gui = False
-        self.dont_request_more_work = False
+        self.dont_request_more_work = project.dont_request_more_work
         self.disk_usage = ''
         self.last_rpc = project.last_rpc_time
         self.project_files_downloaded = project.project_files_downloaded_time

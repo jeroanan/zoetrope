@@ -6,13 +6,13 @@
 angular.module('zoetropeControllers')
   .controller('ProjectCtrl', ProjectController);
 
-ProjectController.$inject = ['projectSvc', 'updateProjectSvc', 'statisicsSvc'];
+ProjectController.$inject = ['projectSvc', 'updateProjectSvc', 'statisicsSvc', 'noMoreWorkSvc', 'allowMoreWorkSvc'];
 
-function ProjectController(projectSvc, updateProjectSvc, statisicsSvc) {
+function ProjectController(projectSvc, updateProjectSvc, statisicsSvc, noMoreWorkSvc, allowMoreWorkSvc) {
 
   var vm = this;
   vm.ready = false;
-  vm.title = 'Project Summary';  
+  vm.title = '';  
   vm.projectFound = false;
   vm.project = {};
   vm.projectStats = [];
@@ -26,6 +26,7 @@ function ProjectController(projectSvc, updateProjectSvc, statisicsSvc) {
   vm.updateProject = updateProjectClick;
   vm.detachClicked = detachClicked;
   vm.noMoreWorkClicked = noMoreWorkClicked;
+  vm.resumeClicked = resumeClicked;
 
   document.title = vm.title;
 
@@ -38,6 +39,7 @@ function ProjectController(projectSvc, updateProjectSvc, statisicsSvc) {
 
   function gotProject(project) {
 	 vm.project = project;
+	 setTitle('Project Summary -- ' + project.name);
 	 statisicsSvc.get(project.master_url)().query().$promise.then(gotStats, serviceError);		
   }
 
@@ -84,7 +86,19 @@ function ProjectController(projectSvc, updateProjectSvc, statisicsSvc) {
   }
 
   function noMoreWorkClicked() {
-	 console.log('Ok. No more work for this project, boss!');
-	 console.log(vm.project.master_url);
+	 noMoreWorkSvc.query(vm.project.master_url)().query().$promise.then(function() {
+		vm.project.dont_request_more_work = true;
+	 });
+  }
+
+  function resumeClicked() {
+	 allowMoreWorkSvc.query(vm.project.master_url)().query().$promise.then(function() {
+		vm.project.dont_request_more_work = false;
+	 });
+  }
+
+  function setTitle(title) {
+	 vm.title = title;
+	 document.title = vm.title;
   }
 }

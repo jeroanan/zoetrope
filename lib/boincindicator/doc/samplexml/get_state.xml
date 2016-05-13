@@ -1,0 +1,1188 @@
+<client_state>
+<host_info>
+    <timezone>0</timezone>
+    <domain_name>pi2</domain_name>
+    <ip_addr>192.168.1.154</ip_addr>
+    <host_cpid>db27cfd445a42a27af9da44bc1844864</host_cpid>
+    <p_ncpus>4</p_ncpus>
+    <p_vendor>ARM</p_vendor>
+    <p_model />
+    <p_features>half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt vfpd32 lpae evtstrm</p_features>
+    <p_fpops>436405922.247215</p_fpops>
+    <p_iops>1743168979.405316</p_iops>
+    <p_membw>1000000000.000000</p_membw>
+    <p_calculated>1462055784.695105</p_calculated>
+    <p_vm_extensions_disabled>0</p_vm_extensions_disabled>
+    <m_nbytes>970768384.000000</m_nbytes>
+    <m_cache>-1.000000</m_cache>
+    <m_swap>104853504.000000</m_swap>
+    <d_total>15186149376.000000</d_total>
+    <d_free>9600819200.000000</d_free>
+    <os_name>Linux</os_name>
+    <os_version>4.1.19-v7+</os_version>
+    <coprocs>
+    </coprocs>
+</host_info>
+<net_stats>
+    <bwup>43373.604500</bwup>
+    <avg_up>36250527.401840</avg_up>
+    <avg_time_up>1463173663.820524</avg_time_up>
+    <bwdown>701260.473264</bwdown>
+    <avg_down>63995870.809084</avg_down>
+    <avg_time_down>1463173075.465123</avg_time_down>
+</net_stats>
+<time_stats>
+    <on_frac>0.951736</on_frac>
+    <connected_frac>-1.000000</connected_frac>
+    <cpu_and_network_available_frac>0.999988</cpu_and_network_available_frac>
+    <active_frac>0.999988</active_frac>
+    <gpu_active_frac>0.999988</gpu_active_frac>
+    <client_start_time>1463123826.008748</client_start_time>
+    <total_start_time>1458338778.259778</total_start_time>
+    <total_duration>2863420.540294</total_duration>
+    <total_active_duration>2862828.462014</total_active_duration>
+    <total_gpu_active_duration>2862828.462014</total_gpu_active_duration>
+    <now>1463174857.892161</now>
+    <previous_uptime>604859.966524</previous_uptime>
+    <session_active_duration>7882.331012</session_active_duration>
+    <session_gpu_active_duration>7882.331012</session_gpu_active_duration>
+</time_stats>
+<project>
+    <master_url>http://lhcathomeclassic.cern.ch/sixtrack/</master_url>
+    <project_name>LHC@home 1.0</project_name>
+    <symstore />
+    <user_name>David R Wilson</user_name>
+    <team_name>BOINC Synergy</team_name>
+    <host_venue>home</host_venue>
+    <email_hash>fc8485430b9d4d55b83d8a9e594a624d</email_hash>
+    <cross_project_id>191a92faedc971e7fb096eaef1137ad6</cross_project_id>
+    <external_cpid>94f8fd684ea61340fabb32010a84ce22</external_cpid>
+    <cpid_time>1098711062.000000</cpid_time>
+    <user_total_credit>26066.036512</user_total_credit>
+    <user_expavg_credit>0.096484</user_expavg_credit>
+    <user_create_time>1098711062.000000</user_create_time>
+    <rpc_seqno>1272</rpc_seqno>
+    <userid>5723</userid>
+    <teamid>97</teamid>
+    <hostid>10388751</hostid>
+    <host_total_credit>0.000000</host_total_credit>
+    <host_expavg_credit>0.000000</host_expavg_credit>
+    <host_create_time>1458339785.000000</host_create_time>
+    <nrpc_failures>0</nrpc_failures>
+    <master_fetch_failures>0</master_fetch_failures>
+    <min_rpc_time>1463210250.400105</min_rpc_time>
+    <next_rpc_time>1463141850.400105</next_rpc_time>
+    <rec>0.000000</rec>
+    <rec_time>1463174815.679725</rec_time>
+    <resource_share>100.000000</resource_share>
+    <desired_disk_usage>0.000000</desired_disk_usage>
+    <duration_correction_factor>1.000000</duration_correction_factor>
+    <sched_rpc_pending>7</sched_rpc_pending>
+    <send_time_stats_log>0</send_time_stats_log>
+    <send_job_log>0</send_job_log>
+    <njobs_success>0</njobs_success>
+    <njobs_error>0</njobs_error>
+    <elapsed_time>0.000000</elapsed_time>
+    <send_full_workload />
+    <dont_use_dcf />
+    <attached_via_acct_mgr />
+    <rsc_backoff_time>
+        <name>CPU</name>
+        <value>0.000000</value>
+    </rsc_backoff_time>
+    <rsc_backoff_interval>
+        <name>CPU</name>
+        <value>0.000000</value>
+    </rsc_backoff_interval>
+    <sched_priority>-0.000000</sched_priority>
+    <last_rpc_time>1463123850.400105</last_rpc_time>
+    <project_files_downloaded_time>0.000000</project_files_downloaded_time>
+    <venue>home</venue>
+    <project_dir>/var/lib/boinc-client/projects/lhcathomeclassic.cern.ch_sixtrack</project_dir>
+</project>
+<project>
+    <master_url>http://www.worldcommunitygrid.org/</master_url>
+    <project_name />
+    <symstore />
+    <user_name />
+    <team_name />
+    <host_venue />
+    <email_hash />
+    <cross_project_id />
+    <external_cpid />
+    <cpid_time>0.000000</cpid_time>
+    <user_total_credit>0.000000</user_total_credit>
+    <user_expavg_credit>0.000000</user_expavg_credit>
+    <user_create_time>0.000000</user_create_time>
+    <rpc_seqno>1</rpc_seqno>
+    <userid>0</userid>
+    <teamid>0</teamid>
+    <hostid>0</hostid>
+    <host_total_credit>0.000000</host_total_credit>
+    <host_expavg_credit>0.000000</host_expavg_credit>
+    <host_create_time>0.000000</host_create_time>
+    <nrpc_failures>7</nrpc_failures>
+    <master_fetch_failures>0</master_fetch_failures>
+    <min_rpc_time>1463177836.513881</min_rpc_time>
+    <next_rpc_time>0.000000</next_rpc_time>
+    <rec>0.000000</rec>
+    <rec_time>1463174815.679725</rec_time>
+    <resource_share>100.000000</resource_share>
+    <desired_disk_usage>0.000000</desired_disk_usage>
+    <duration_correction_factor>1.000000</duration_correction_factor>
+    <sched_rpc_pending>6</sched_rpc_pending>
+    <send_time_stats_log>0</send_time_stats_log>
+    <send_job_log>0</send_job_log>
+    <njobs_success>0</njobs_success>
+    <njobs_error>0</njobs_error>
+    <elapsed_time>0.000000</elapsed_time>
+    <attached_via_acct_mgr />
+    <rsc_backoff_time>
+        <name>CPU</name>
+        <value>0.000000</value>
+    </rsc_backoff_time>
+    <rsc_backoff_interval>
+        <name>CPU</name>
+        <value>0.000000</value>
+    </rsc_backoff_interval>
+    <sched_priority>-0.000000</sched_priority>
+    <last_rpc_time>0.000000</last_rpc_time>
+    <project_files_downloaded_time>0.000000</project_files_downloaded_time>
+    <project_dir>/var/lib/boinc-client/projects/www.worldcommunitygrid.org</project_dir>
+</project>
+<project>
+    <master_url>http://www.rnaworld.de/rnaworld/</master_url>
+    <project_name>RNA World</project_name>
+    <symstore />
+    <user_name>DavidWil</user_name>
+    <team_name>BOINC Synergy</team_name>
+    <host_venue />
+    <email_hash>fc8485430b9d4d55b83d8a9e594a624d</email_hash>
+    <cross_project_id>191a92faedc971e7fb096eaef1137ad6</cross_project_id>
+    <external_cpid />
+    <cpid_time>1280610879.000000</cpid_time>
+    <user_total_credit>2502.179491</user_total_credit>
+    <user_expavg_credit>0.076449</user_expavg_credit>
+    <user_create_time>1280610879.000000</user_create_time>
+    <rpc_seqno>598</rpc_seqno>
+    <userid>2450</userid>
+    <teamid>9</teamid>
+    <hostid>44984</hostid>
+    <host_total_credit>0.000000</host_total_credit>
+    <host_expavg_credit>0.000000</host_expavg_credit>
+    <host_create_time>1458339850.000000</host_create_time>
+    <nrpc_failures>0</nrpc_failures>
+    <master_fetch_failures>0</master_fetch_failures>
+    <min_rpc_time>0.000000</min_rpc_time>
+    <next_rpc_time>1463103296.649310</next_rpc_time>
+    <rec>0.000000</rec>
+    <rec_time>1463174815.679725</rec_time>
+    <resource_share>100.000000</resource_share>
+    <desired_disk_usage>0.000000</desired_disk_usage>
+    <duration_correction_factor>1.000000</duration_correction_factor>
+    <sched_rpc_pending>0</sched_rpc_pending>
+    <send_time_stats_log>0</send_time_stats_log>
+    <send_job_log>0</send_job_log>
+    <njobs_success>0</njobs_success>
+    <njobs_error>0</njobs_error>
+    <elapsed_time>0.000000</elapsed_time>
+    <dont_use_dcf />
+    <verify_files_on_app_start />
+    <dont_request_more_work />
+    <attached_via_acct_mgr />
+    <rsc_backoff_time>
+        <name>CPU</name>
+        <value>0.000000</value>
+    </rsc_backoff_time>
+    <rsc_backoff_interval>
+        <name>CPU</name>
+        <value>0.000000</value>
+    </rsc_backoff_interval>
+<gui_urls>
+
+
+    <gui_url>
+        <name>My account</name>
+        <description>View your account information and credit totals</description>
+        <url>http://www.rnaworld.de/rnaworld/home.php</url>
+    </gui_url>
+    <ifteam>
+        <gui_url>
+            <name>My team</name>
+            <description>Info about BOINC Synergy</description>
+            <url>http://www.rnaworld.de/rnaworld/team_display.php?teamid=9</url>
+        </gui_url>
+    </ifteam>
+    <gui_url>
+        <name>Forum</name>
+        <description>Get help about RNA World</description>
+        <url>http://www.rechenkraft.net/phpBB/viewforum.php?f=74</url>
+    </gui_url>
+    <gui_url>
+        <name>Chat</name>
+        <description>Chat with other user about distributed computing</description>
+        <url>http://www.rechenkraft.net/wiki/index.php?title=Rechenkraft:Chat</url>
+    </gui_url>
+    <gui_url>
+        <name>Rechenkraft.net</name>
+        <description>Mehr Projekte</description>
+        <url>http://www.rechenkraft.net</url>
+    </gui_url>
+    <gui_url>
+        <name>- Donation -</name>
+        <description>Make a donation for the running costs</description>
+        <url>http://www.rnaworld.de/rnaworld/donations.php</url>
+    </gui_url>
+</gui_urls>
+    <sched_priority>-0.000000</sched_priority>
+    <last_rpc_time>0.000000</last_rpc_time>
+    <project_files_downloaded_time>0.000000</project_files_downloaded_time>
+    <project_dir>/var/lib/boinc-client/projects/www.rnaworld.de_rnaworld</project_dir>
+</project>
+<project>
+    <master_url>http://einstein.phys.uwm.edu/</master_url>
+    <project_name />
+    <symstore />
+    <user_name />
+    <team_name />
+    <host_venue />
+    <email_hash />
+    <cross_project_id />
+    <external_cpid />
+    <cpid_time>0.000000</cpid_time>
+    <user_total_credit>0.000000</user_total_credit>
+    <user_expavg_credit>0.000000</user_expavg_credit>
+    <user_create_time>0.000000</user_create_time>
+    <rpc_seqno>0</rpc_seqno>
+    <userid>0</userid>
+    <teamid>0</teamid>
+    <hostid>0</hostid>
+    <host_total_credit>0.000000</host_total_credit>
+    <host_expavg_credit>0.000000</host_expavg_credit>
+    <host_create_time>0.000000</host_create_time>
+    <nrpc_failures>2</nrpc_failures>
+    <master_fetch_failures>36</master_fetch_failures>
+    <min_rpc_time>1463210242.227263</min_rpc_time>
+    <next_rpc_time>0.000000</next_rpc_time>
+    <rec>0.000000</rec>
+    <rec_time>1463174815.679725</rec_time>
+    <resource_share>100.000000</resource_share>
+    <desired_disk_usage>0.000000</desired_disk_usage>
+    <duration_correction_factor>1.000000</duration_correction_factor>
+    <sched_rpc_pending>6</sched_rpc_pending>
+    <send_time_stats_log>0</send_time_stats_log>
+    <send_job_log>0</send_job_log>
+    <njobs_success>0</njobs_success>
+    <njobs_error>0</njobs_error>
+    <elapsed_time>0.000000</elapsed_time>
+    <master_url_fetch_pending />
+    <attached_via_acct_mgr />
+    <rsc_backoff_time>
+        <name>CPU</name>
+        <value>0.000000</value>
+    </rsc_backoff_time>
+    <rsc_backoff_interval>
+        <name>CPU</name>
+        <value>0.000000</value>
+    </rsc_backoff_interval>
+    <sched_priority>-0.000000</sched_priority>
+    <last_rpc_time>0.000000</last_rpc_time>
+    <project_files_downloaded_time>0.000000</project_files_downloaded_time>
+    <project_dir>/var/lib/boinc-client/projects/einstein.phys.uwm.edu</project_dir>
+</project>
+<project>
+    <master_url>http://setiathome.berkeley.edu/</master_url>
+    <project_name>SETI@home</project_name>
+    <symstore />
+    <user_name>David R Wilson</user_name>
+    <team_name>BOINC Synergy</team_name>
+    <host_venue>home</host_venue>
+    <email_hash>fc8485430b9d4d55b83d8a9e594a624d</email_hash>
+    <cross_project_id>191a92faedc971e7fb096eaef1137ad6</cross_project_id>
+    <external_cpid>94f8fd684ea61340fabb32010a84ce22</external_cpid>
+    <cpid_time>1054557588.000000</cpid_time>
+    <user_total_credit>42451.562209</user_total_credit>
+    <user_expavg_credit>22.720996</user_expavg_credit>
+    <user_create_time>1054557588.000000</user_create_time>
+    <rpc_seqno>734</rpc_seqno>
+    <userid>987460</userid>
+    <teamid>30230</teamid>
+    <hostid>7959213</hostid>
+    <host_total_credit>590.418429</host_total_credit>
+    <host_expavg_credit>22.671462</host_expavg_credit>
+    <host_create_time>1458339771.000000</host_create_time>
+    <nrpc_failures>0</nrpc_failures>
+    <master_fetch_failures>0</master_fetch_failures>
+    <min_rpc_time>0.000000</min_rpc_time>
+    <next_rpc_time>0.000000</next_rpc_time>
+    <rec>38.406968</rec>
+    <rec_time>1463174815.679725</rec_time>
+    <resource_share>25.000000</resource_share>
+    <desired_disk_usage>0.000000</desired_disk_usage>
+    <duration_correction_factor>1.000000</duration_correction_factor>
+    <sched_rpc_pending>0</sched_rpc_pending>
+    <send_time_stats_log>0</send_time_stats_log>
+    <send_job_log>0</send_job_log>
+    <njobs_success>11</njobs_success>
+    <njobs_error>0</njobs_error>
+    <elapsed_time>1300931.745721</elapsed_time>
+    <dont_use_dcf />
+    <attached_via_acct_mgr />
+    <rsc_backoff_time>
+        <name>CPU</name>
+        <value>0.000000</value>
+    </rsc_backoff_time>
+    <rsc_backoff_interval>
+        <name>CPU</name>
+        <value>0.000000</value>
+    </rsc_backoff_interval>
+<gui_urls>
+
+
+    <gui_url>
+        <name>Message boards</name>
+        <description>Correspond with other users on the SETI@home message boards</description>
+        <url>http://setiathome.berkeley.edu/forum_index.php</url>
+    </gui_url>
+    <gui_url>
+        <name>Help</name>
+        <description>Ask questions and report problems</description>
+        <url>http://setiathome.berkeley.edu/forum_help_desk.php</url>
+    </gui_url>
+    <gui_url>
+        <name>Account</name>
+        <description>View your account information</description>
+        <url>http://setiathome.berkeley.edu/home.php</url>
+    </gui_url>
+    <gui_url>
+        <name>Preferences</name>
+        <description>View and modify your computing preferences</description>
+        <url>http://setiathome.berkeley.edu/prefs.php?subset=global</url>
+    </gui_url>
+    <gui_url>
+        <name>Tasks</name>
+        <description>View your recent tasks</description>
+        <url>http://setiathome.berkeley.edu/results.php?userid=987460</url>
+    </gui_url>
+    <gui_url>
+        <name>Computers</name>
+        <description>View a list of the computers on which you are running SETI@Home</description>
+        <url>http://setiathome.berkeley.edu/hosts_user.php?userid=987460</url>
+    </gui_url>
+    <ifteam>
+        <gui_url>
+            <name>Team</name>
+            <description>View information about your team: BOINC Synergy</description>
+            <url>http://setiathome.berkeley.edu/team_display.php?teamid=30230</url>
+        </gui_url>
+    </ifteam>
+    <gui_url>
+        <name>Donate</name>
+        <description>Donate to SETI@home</description>
+        <url>http://setiathome.berkeley.edu/sah_donate.php</url>
+    </gui_url>
+</gui_urls>
+    <sched_priority>-1.081543</sched_priority>
+    <last_rpc_time>0.000000</last_rpc_time>
+    <project_files_downloaded_time>0.000000</project_files_downloaded_time>
+    <venue>home</venue>
+    <project_dir>/var/lib/boinc-client/projects/setiathome.berkeley.edu</project_dir>
+</project>
+<app>
+    <name>setiathome_v8</name>
+    <user_friendly_name>SETI@home v8</user_friendly_name>
+    <non_cpu_intensive>0</non_cpu_intensive>
+</app>
+<app_version>
+    <app_name>setiathome_v8</app_name>
+    <version_num>802</version_num>
+    <platform>arm-unknown-linux-gnueabihf</platform>
+    <avg_ncpus>1.000000</avg_ncpus>
+    <max_ncpus>1.000000</max_ncpus>
+    <flops>1156406810.171345</flops>
+    <api_version>7.7.0</api_version>
+    <file_ref>
+        <file_name>setiathome_8.02_arm-unknown-linux-gnueabihf</file_name>
+        <main_program />
+    </file_ref>
+    <file_ref>
+        <file_name>setiathome-8.02_AUTHORS</file_name>
+        <open_name>setiathome-8.02_AUTHORS</open_name>
+    </file_ref>
+    <file_ref>
+        <file_name>setiathome-8.02_COPYING</file_name>
+        <open_name>setiathome-8.02_COPYING</open_name>
+    </file_ref>
+    <file_ref>
+        <file_name>setiathome-8.02_COPYRIGHT</file_name>
+        <open_name>setiathome-8.02_COPYRIGHT</open_name>
+    </file_ref>
+    <file_ref>
+        <file_name>setiathome-8.02_README</file_name>
+        <open_name>setiathome-8.02_README</open_name>
+    </file_ref>
+</app_version>
+<workunit>
+    <name>15ap10aa.15338.20210.13.40.54</name>
+    <app_name>setiathome_v8</app_name>
+    <version_num>802</version_num>
+    <rsc_fpops_est>183688426312508.000000</rsc_fpops_est>
+    <rsc_fpops_bound>3673768526250160.000000</rsc_fpops_bound>
+    <rsc_memory_bound>33554432.000000</rsc_memory_bound>
+    <rsc_disk_bound>33554432.000000</rsc_disk_bound>
+    <file_ref>
+        <file_name>15ap10aa.15338.20210.13.40.54</file_name>
+        <open_name>work_unit.sah</open_name>
+    </file_ref>
+</workunit>
+<result>
+    <name>15ap10aa.15338.20210.13.40.54_2</name>
+    <wu_name>15ap10aa.15338.20210.13.40.54</wu_name>
+    <version_num>802</version_num>
+    <plan_class />
+    <project_url>http://setiathome.berkeley.edu/</project_url>
+    <final_cpu_time>62224.870000</final_cpu_time>
+    <final_elapsed_time>62748.622637</final_elapsed_time>
+    <exit_status>0</exit_status>
+    <state>2</state>
+    <report_deadline>1467580085.000000</report_deadline>
+    <received_time>1462987876.229380</received_time>
+    <estimated_cpu_time_remaining>82140.250108</estimated_cpu_time_remaining>
+<active_task>
+    <active_task_state>1</active_task_state>
+    <app_version_num>802</app_version_num>
+    <slot>1</slot>
+    <pid>715</pid>
+    <scheduler_state>2</scheduler_state>
+    <checkpoint_cpu_time>103861.000000</checkpoint_cpu_time>
+    <fraction_done>0.482888</fraction_done>
+    <current_cpu_time>103907.400000</current_cpu_time>
+    <elapsed_time>105220.500112</elapsed_time>
+    <swap_size>73134080.000000</swap_size>
+    <working_set_size>71401472.000000</working_set_size>
+    <working_set_size_smoothed>71401472.000000</working_set_size_smoothed>
+    <page_fault_rate>0.000000</page_fault_rate>
+    <bytes_sent>0.000000</bytes_sent>
+    <bytes_received>0.000000</bytes_received>
+</active_task>
+</result>
+<project>
+    <master_url>http://www.enigmaathome.net/</master_url>
+    <project_name>Enigma@Home</project_name>
+    <symstore />
+    <user_name>David</user_name>
+    <team_name>BOINC Synergy</team_name>
+    <host_venue />
+    <email_hash>fc8485430b9d4d55b83d8a9e594a624d</email_hash>
+    <cross_project_id>191a92faedc971e7fb096eaef1137ad6</cross_project_id>
+    <external_cpid />
+    <cpid_time>1424521251.000000</cpid_time>
+    <user_total_credit>200215.000000</user_total_credit>
+    <user_expavg_credit>388.988096</user_expavg_credit>
+    <user_create_time>1424521251.000000</user_create_time>
+    <rpc_seqno>791</rpc_seqno>
+    <userid>73967</userid>
+    <teamid>12</teamid>
+    <hostid>183182</hostid>
+    <host_total_credit>19101.000000</host_total_credit>
+    <host_expavg_credit>378.937372</host_expavg_credit>
+    <host_create_time>1458339837.000000</host_create_time>
+    <nrpc_failures>0</nrpc_failures>
+    <master_fetch_failures>0</master_fetch_failures>
+    <min_rpc_time>0.000000</min_rpc_time>
+    <next_rpc_time>0.000000</next_rpc_time>
+    <rec>148.132541</rec>
+    <rec_time>1463174815.679725</rec_time>
+    <resource_share>100.000000</resource_share>
+    <desired_disk_usage>0.000000</desired_disk_usage>
+    <duration_correction_factor>1.000000</duration_correction_factor>
+    <sched_rpc_pending>0</sched_rpc_pending>
+    <send_time_stats_log>0</send_time_stats_log>
+    <send_job_log>0</send_job_log>
+    <njobs_success>466</njobs_success>
+    <njobs_error>3</njobs_error>
+    <elapsed_time>9529844.315121</elapsed_time>
+    <dont_use_dcf />
+    <attached_via_acct_mgr />
+    <rsc_backoff_time>
+        <name>CPU</name>
+        <value>0.000000</value>
+    </rsc_backoff_time>
+    <rsc_backoff_interval>
+        <name>CPU</name>
+        <value>0.000000</value>
+    </rsc_backoff_interval>
+<gui_urls>
+
+
+<gui_url>
+<name>Your account</name>
+<description>View your account information and credit totals</description>
+<url>http://www.enigmaathome.net/home.php</url>
+</gui_url>
+<gui_url>
+<name>Forum</name>
+<description>Message boards</description>
+<url>http://www.enigmaathome.net/forum_index.php</url>
+</gui_url>
+<ifteam>
+<gui_url>
+<name>Team</name>
+<description>Info about BOINC Synergy</description>
+<url>http://www.enigmaathome.net/team_display.php?teamid=12</url>
+</gui_url>
+</ifteam>
+<gui_url>
+<name>Server status</name>
+<description>Server status, statistics</description>
+<url>http://www.enigmaathome.net/server_status.php</url>
+</gui_url>
+</gui_urls>
+    <sched_priority>-1.031698</sched_priority>
+    <last_rpc_time>0.000000</last_rpc_time>
+    <project_files_downloaded_time>0.000000</project_files_downloaded_time>
+    <project_dir>/var/lib/boinc-client/projects/www.enigmaathome.net</project_dir>
+</project>
+<app>
+    <name>enigma_m4_2</name>
+    <user_friendly_name>Enigma 0.76b</user_friendly_name>
+    <non_cpu_intensive>0</non_cpu_intensive>
+</app>
+<app_version>
+    <app_name>enigma_m4_2</app_name>
+    <version_num>533</version_num>
+    <platform>arm-unknown-linux-gnueabihf</platform>
+    <avg_ncpus>1.000000</avg_ncpus>
+    <max_ncpus>1.000000</max_ncpus>
+    <flops>830275001.546696</flops>
+    <api_version>7.1.0</api_version>
+    <file_ref>
+        <file_name>wrapper_5.33_arm-unknown-linux-gnueabihf</file_name>
+        <open_name>enigma_wrapper</open_name>
+        <main_program />
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>enigma_5.33_arm-unknown-linux-gnueabihf</file_name>
+        <open_name>enigma_0.76</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>job_1.44.xml</file_name>
+        <open_name>job.xml</open_name>
+        <copy_file />
+    </file_ref>
+</app_version>
+<workunit>
+    <name>m4-vroln72-4_0_14008554_833</name>
+    <app_name>enigma_m4_2</app_name>
+    <version_num>533</version_num>
+    <rsc_fpops_est>11566912500000.000000</rsc_fpops_est>
+    <rsc_fpops_bound>4000000000000000.000000</rsc_fpops_bound>
+    <rsc_memory_bound>16388608.000000</rsc_memory_bound>
+    <rsc_disk_bound>16388608.000000</rsc_disk_bound>
+    <file_ref>
+        <file_name>wx_m4_b_g542_bn_bz_1_2_0</file_name>
+        <open_name>00hc.resume</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>m4_vroln72_4</file_name>
+        <open_name>00ciphertext</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00trigr.r1u534</file_name>
+        <open_name>00trigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00bigr.r1u534</file_name>
+        <open_name>00bigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+</workunit>
+<workunit>
+    <name>m4-vroln72-4_0_14008554_834</name>
+    <app_name>enigma_m4_2</app_name>
+    <version_num>533</version_num>
+    <rsc_fpops_est>11566912500000.000000</rsc_fpops_est>
+    <rsc_fpops_bound>4000000000000000.000000</rsc_fpops_bound>
+    <rsc_memory_bound>16388608.000000</rsc_memory_bound>
+    <rsc_disk_bound>16388608.000000</rsc_disk_bound>
+    <file_ref>
+        <file_name>wx_m4_b_g542_bn_bz_1_2_0</file_name>
+        <open_name>00hc.resume</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>m4_vroln72_4</file_name>
+        <open_name>00ciphertext</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00trigr.r1u534</file_name>
+        <open_name>00trigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00bigr.r1u534</file_name>
+        <open_name>00bigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+</workunit>
+<workunit>
+    <name>m4-vroln72-4_0_14008554_835</name>
+    <app_name>enigma_m4_2</app_name>
+    <version_num>533</version_num>
+    <rsc_fpops_est>11566912500000.000000</rsc_fpops_est>
+    <rsc_fpops_bound>4000000000000000.000000</rsc_fpops_bound>
+    <rsc_memory_bound>16388608.000000</rsc_memory_bound>
+    <rsc_disk_bound>16388608.000000</rsc_disk_bound>
+    <file_ref>
+        <file_name>wx_m4_b_g542_bn_bz_1_2_0</file_name>
+        <open_name>00hc.resume</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>m4_vroln72_4</file_name>
+        <open_name>00ciphertext</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00trigr.r1u534</file_name>
+        <open_name>00trigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00bigr.r1u534</file_name>
+        <open_name>00bigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+</workunit>
+<workunit>
+    <name>m4-vroln72-1_0_13817503_695</name>
+    <app_name>enigma_m4_2</app_name>
+    <version_num>533</version_num>
+    <rsc_fpops_est>11566912500000.000000</rsc_fpops_est>
+    <rsc_fpops_bound>4000000000000000.000000</rsc_fpops_bound>
+    <rsc_memory_bound>16388608.000000</rsc_memory_bound>
+    <rsc_disk_bound>16388608.000000</rsc_disk_bound>
+    <file_ref>
+        <file_name>wx_m4_b_b751_mn_mz_1_2_0</file_name>
+        <open_name>00hc.resume</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>m4_vroln72_1</file_name>
+        <open_name>00ciphertext</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00trigr.naval</file_name>
+        <open_name>00trigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00bigr.naval</file_name>
+        <open_name>00bigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+</workunit>
+<workunit>
+    <name>m4-vroln72-1_0_13817503_696</name>
+    <app_name>enigma_m4_2</app_name>
+    <version_num>533</version_num>
+    <rsc_fpops_est>11566912500000.000000</rsc_fpops_est>
+    <rsc_fpops_bound>4000000000000000.000000</rsc_fpops_bound>
+    <rsc_memory_bound>16388608.000000</rsc_memory_bound>
+    <rsc_disk_bound>16388608.000000</rsc_disk_bound>
+    <file_ref>
+        <file_name>wx_m4_b_b751_mn_mz_1_2_0</file_name>
+        <open_name>00hc.resume</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>m4_vroln72_1</file_name>
+        <open_name>00ciphertext</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00trigr.naval</file_name>
+        <open_name>00trigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00bigr.naval</file_name>
+        <open_name>00bigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+</workunit>
+<workunit>
+    <name>m4-vroln72-1_0_13817503_697</name>
+    <app_name>enigma_m4_2</app_name>
+    <version_num>533</version_num>
+    <rsc_fpops_est>11566912500000.000000</rsc_fpops_est>
+    <rsc_fpops_bound>4000000000000000.000000</rsc_fpops_bound>
+    <rsc_memory_bound>16388608.000000</rsc_memory_bound>
+    <rsc_disk_bound>16388608.000000</rsc_disk_bound>
+    <file_ref>
+        <file_name>wx_m4_b_b751_mn_mz_1_2_0</file_name>
+        <open_name>00hc.resume</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>m4_vroln72_1</file_name>
+        <open_name>00ciphertext</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00trigr.naval</file_name>
+        <open_name>00trigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00bigr.naval</file_name>
+        <open_name>00bigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+</workunit>
+<workunit>
+    <name>m4-vroln72-1_0_13817503_698</name>
+    <app_name>enigma_m4_2</app_name>
+    <version_num>533</version_num>
+    <rsc_fpops_est>11566912500000.000000</rsc_fpops_est>
+    <rsc_fpops_bound>4000000000000000.000000</rsc_fpops_bound>
+    <rsc_memory_bound>16388608.000000</rsc_memory_bound>
+    <rsc_disk_bound>16388608.000000</rsc_disk_bound>
+    <file_ref>
+        <file_name>wx_m4_b_b751_mn_mz_1_2_0</file_name>
+        <open_name>00hc.resume</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>m4_vroln72_1</file_name>
+        <open_name>00ciphertext</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00trigr.naval</file_name>
+        <open_name>00trigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00bigr.naval</file_name>
+        <open_name>00bigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+</workunit>
+<workunit>
+    <name>m4-vroln72-1_0_13817529_706</name>
+    <app_name>enigma_m4_2</app_name>
+    <version_num>533</version_num>
+    <rsc_fpops_est>11566912500000.000000</rsc_fpops_est>
+    <rsc_fpops_bound>4000000000000000.000000</rsc_fpops_bound>
+    <rsc_memory_bound>16388608.000000</rsc_memory_bound>
+    <rsc_disk_bound>16388608.000000</rsc_disk_bound>
+    <file_ref>
+        <file_name>wx_m4_b_b751_zn_zz_1_2_0</file_name>
+        <open_name>00hc.resume</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>m4_vroln72_1</file_name>
+        <open_name>00ciphertext</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00trigr.naval</file_name>
+        <open_name>00trigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00bigr.naval</file_name>
+        <open_name>00bigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+</workunit>
+<workunit>
+    <name>m4-vroln72-1_0_13817529_707</name>
+    <app_name>enigma_m4_2</app_name>
+    <version_num>533</version_num>
+    <rsc_fpops_est>11566912500000.000000</rsc_fpops_est>
+    <rsc_fpops_bound>4000000000000000.000000</rsc_fpops_bound>
+    <rsc_memory_bound>16388608.000000</rsc_memory_bound>
+    <rsc_disk_bound>16388608.000000</rsc_disk_bound>
+    <file_ref>
+        <file_name>wx_m4_b_b751_zn_zz_1_2_0</file_name>
+        <open_name>00hc.resume</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>m4_vroln72_1</file_name>
+        <open_name>00ciphertext</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00trigr.naval</file_name>
+        <open_name>00trigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00bigr.naval</file_name>
+        <open_name>00bigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+</workunit>
+<workunit>
+    <name>m4-vroln72-4_2_14010625_826</name>
+    <app_name>enigma_m4_2</app_name>
+    <version_num>533</version_num>
+    <rsc_fpops_est>23554440000000.000000</rsc_fpops_est>
+    <rsc_fpops_bound>4000000000000000.000000</rsc_fpops_bound>
+    <rsc_memory_bound>16388608.000000</rsc_memory_bound>
+    <rsc_disk_bound>16388608.000000</rsc_disk_bound>
+    <file_ref>
+        <file_name>wx_m4_b_g683_dn_dz_1_2_0</file_name>
+        <open_name>00hc.resume</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>m4_vroln72_4</file_name>
+        <open_name>00ciphertext</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00trigr.r1u534</file_name>
+        <open_name>00trigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00bigr.r1u534</file_name>
+        <open_name>00bigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+</workunit>
+<workunit>
+    <name>m4-vroln72-4_2_14010625_827</name>
+    <app_name>enigma_m4_2</app_name>
+    <version_num>533</version_num>
+    <rsc_fpops_est>23554440000000.000000</rsc_fpops_est>
+    <rsc_fpops_bound>4000000000000000.000000</rsc_fpops_bound>
+    <rsc_memory_bound>16388608.000000</rsc_memory_bound>
+    <rsc_disk_bound>16388608.000000</rsc_disk_bound>
+    <file_ref>
+        <file_name>wx_m4_b_g683_dn_dz_1_2_0</file_name>
+        <open_name>00hc.resume</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>m4_vroln72_4</file_name>
+        <open_name>00ciphertext</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00trigr.r1u534</file_name>
+        <open_name>00trigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00bigr.r1u534</file_name>
+        <open_name>00bigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+</workunit>
+<workunit>
+    <name>m4-vroln72-4_2_14010625_828</name>
+    <app_name>enigma_m4_2</app_name>
+    <version_num>533</version_num>
+    <rsc_fpops_est>23554440000000.000000</rsc_fpops_est>
+    <rsc_fpops_bound>4000000000000000.000000</rsc_fpops_bound>
+    <rsc_memory_bound>16388608.000000</rsc_memory_bound>
+    <rsc_disk_bound>16388608.000000</rsc_disk_bound>
+    <file_ref>
+        <file_name>wx_m4_b_g683_dn_dz_1_2_0</file_name>
+        <open_name>00hc.resume</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>m4_vroln72_4</file_name>
+        <open_name>00ciphertext</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00trigr.r1u534</file_name>
+        <open_name>00trigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+    <file_ref>
+        <file_name>00bigr.r1u534</file_name>
+        <open_name>00bigr.cur</open_name>
+        <copy_file />
+    </file_ref>
+</workunit>
+<result>
+    <name>m4-vroln72-4_0_14008554_835_0</name>
+    <wu_name>m4-vroln72-4_0_14008554_835</wu_name>
+    <version_num>533</version_num>
+    <plan_class />
+    <project_url>http://www.enigmaathome.net/</project_url>
+    <final_cpu_time>0.000000</final_cpu_time>
+    <final_elapsed_time>0.000000</final_elapsed_time>
+    <exit_status>0</exit_status>
+    <state>2</state>
+    <report_deadline>1463933794.000000</report_deadline>
+    <received_time>1463069794.889395</received_time>
+    <estimated_cpu_time_remaining>494.607321</estimated_cpu_time_remaining>
+<active_task>
+    <active_task_state>1</active_task_state>
+    <app_version_num>533</app_version_num>
+    <slot>3</slot>
+    <pid>716</pid>
+    <scheduler_state>2</scheduler_state>
+    <checkpoint_cpu_time>0.000000</checkpoint_cpu_time>
+    <fraction_done>0.964497</fraction_done>
+    <current_cpu_time>0.000000</current_cpu_time>
+    <elapsed_time>7784.388430</elapsed_time>
+    <swap_size>3268608.000000</swap_size>
+    <working_set_size>2039808.000000</working_set_size>
+    <working_set_size_smoothed>2039808.000000</working_set_size_smoothed>
+    <page_fault_rate>0.000000</page_fault_rate>
+    <bytes_sent>0.000000</bytes_sent>
+    <bytes_received>0.000000</bytes_received>
+</active_task>
+</result>
+<result>
+    <name>m4-vroln72-4_0_14008554_834_0</name>
+    <wu_name>m4-vroln72-4_0_14008554_834</wu_name>
+    <version_num>533</version_num>
+    <plan_class />
+    <project_url>http://www.enigmaathome.net/</project_url>
+    <final_cpu_time>0.000000</final_cpu_time>
+    <final_elapsed_time>0.000000</final_elapsed_time>
+    <exit_status>0</exit_status>
+    <state>2</state>
+    <report_deadline>1463933794.000000</report_deadline>
+    <received_time>1463069794.889395</received_time>
+    <estimated_cpu_time_remaining>2060.861517</estimated_cpu_time_remaining>
+<active_task>
+    <active_task_state>1</active_task_state>
+    <app_version_num>533</app_version_num>
+    <slot>2</slot>
+    <pid>717</pid>
+    <scheduler_state>2</scheduler_state>
+    <checkpoint_cpu_time>0.000000</checkpoint_cpu_time>
+    <fraction_done>0.852071</fraction_done>
+    <current_cpu_time>0.000000</current_cpu_time>
+    <elapsed_time>7784.388430</elapsed_time>
+    <swap_size>3268608.000000</swap_size>
+    <working_set_size>2060288.000000</working_set_size>
+    <working_set_size_smoothed>2060288.000000</working_set_size_smoothed>
+    <page_fault_rate>0.000000</page_fault_rate>
+    <bytes_sent>0.000000</bytes_sent>
+    <bytes_received>0.000000</bytes_received>
+</active_task>
+</result>
+<result>
+    <name>m4-vroln72-4_0_14008554_833_0</name>
+    <wu_name>m4-vroln72-4_0_14008554_833</wu_name>
+    <version_num>533</version_num>
+    <plan_class />
+    <project_url>http://www.enigmaathome.net/</project_url>
+    <final_cpu_time>0.000000</final_cpu_time>
+    <final_elapsed_time>0.000000</final_elapsed_time>
+    <exit_status>0</exit_status>
+    <state>2</state>
+    <report_deadline>1463933794.000000</report_deadline>
+    <received_time>1463069794.889395</received_time>
+    <estimated_cpu_time_remaining>2019.644008</estimated_cpu_time_remaining>
+<active_task>
+    <active_task_state>1</active_task_state>
+    <app_version_num>533</app_version_num>
+    <slot>0</slot>
+    <pid>718</pid>
+    <scheduler_state>2</scheduler_state>
+    <checkpoint_cpu_time>0.000000</checkpoint_cpu_time>
+    <fraction_done>0.855030</fraction_done>
+    <current_cpu_time>0.000000</current_cpu_time>
+    <elapsed_time>7784.388430</elapsed_time>
+    <swap_size>3268608.000000</swap_size>
+    <working_set_size>2113536.000000</working_set_size>
+    <working_set_size_smoothed>2113536.000000</working_set_size_smoothed>
+    <page_fault_rate>0.000000</page_fault_rate>
+    <bytes_sent>0.000000</bytes_sent>
+    <bytes_received>0.000000</bytes_received>
+</active_task>
+</result>
+<result>
+    <name>m4-vroln72-1_0_13817503_695_0</name>
+    <wu_name>m4-vroln72-1_0_13817503_695</wu_name>
+    <version_num>533</version_num>
+    <plan_class />
+    <project_url>http://www.enigmaathome.net/</project_url>
+    <final_cpu_time>0.000000</final_cpu_time>
+    <final_elapsed_time>0.000000</final_elapsed_time>
+    <exit_status>0</exit_status>
+    <state>2</state>
+    <report_deadline>1463957232.000000</report_deadline>
+    <received_time>1463093232.909409</received_time>
+    <estimated_cpu_time_remaining>13931.423298</estimated_cpu_time_remaining>
+</result>
+<result>
+    <name>m4-vroln72-1_0_13817503_696_0</name>
+    <wu_name>m4-vroln72-1_0_13817503_696</wu_name>
+    <version_num>533</version_num>
+    <plan_class />
+    <project_url>http://www.enigmaathome.net/</project_url>
+    <final_cpu_time>0.000000</final_cpu_time>
+    <final_elapsed_time>0.000000</final_elapsed_time>
+    <exit_status>0</exit_status>
+    <state>2</state>
+    <report_deadline>1463957232.000000</report_deadline>
+    <received_time>1463093232.909409</received_time>
+    <estimated_cpu_time_remaining>13931.423298</estimated_cpu_time_remaining>
+</result>
+<result>
+    <name>m4-vroln72-1_0_13817529_706_0</name>
+    <wu_name>m4-vroln72-1_0_13817529_706</wu_name>
+    <version_num>533</version_num>
+    <plan_class />
+    <project_url>http://www.enigmaathome.net/</project_url>
+    <final_cpu_time>0.000000</final_cpu_time>
+    <final_elapsed_time>0.000000</final_elapsed_time>
+    <exit_status>0</exit_status>
+    <state>2</state>
+    <report_deadline>1463957232.000000</report_deadline>
+    <received_time>1463093232.909409</received_time>
+    <estimated_cpu_time_remaining>13931.423298</estimated_cpu_time_remaining>
+</result>
+<result>
+    <name>m4-vroln72-1_0_13817529_707_0</name>
+    <wu_name>m4-vroln72-1_0_13817529_707</wu_name>
+    <version_num>533</version_num>
+    <plan_class />
+    <project_url>http://www.enigmaathome.net/</project_url>
+    <final_cpu_time>0.000000</final_cpu_time>
+    <final_elapsed_time>0.000000</final_elapsed_time>
+    <exit_status>0</exit_status>
+    <state>2</state>
+    <report_deadline>1463957232.000000</report_deadline>
+    <received_time>1463093232.909409</received_time>
+    <estimated_cpu_time_remaining>13931.423298</estimated_cpu_time_remaining>
+</result>
+<result>
+    <name>m4-vroln72-1_0_13817503_698_0</name>
+    <wu_name>m4-vroln72-1_0_13817503_698</wu_name>
+    <version_num>533</version_num>
+    <plan_class />
+    <project_url>http://www.enigmaathome.net/</project_url>
+    <final_cpu_time>0.000000</final_cpu_time>
+    <final_elapsed_time>0.000000</final_elapsed_time>
+    <exit_status>0</exit_status>
+    <state>2</state>
+    <report_deadline>1463957232.000000</report_deadline>
+    <received_time>1463093232.909409</received_time>
+    <estimated_cpu_time_remaining>13931.423298</estimated_cpu_time_remaining>
+</result>
+<result>
+    <name>m4-vroln72-1_0_13817503_697_0</name>
+    <wu_name>m4-vroln72-1_0_13817503_697</wu_name>
+    <version_num>533</version_num>
+    <plan_class />
+    <project_url>http://www.enigmaathome.net/</project_url>
+    <final_cpu_time>0.000000</final_cpu_time>
+    <final_elapsed_time>0.000000</final_elapsed_time>
+    <exit_status>0</exit_status>
+    <state>2</state>
+    <report_deadline>1463957232.000000</report_deadline>
+    <received_time>1463093232.909409</received_time>
+    <estimated_cpu_time_remaining>13931.423298</estimated_cpu_time_remaining>
+</result>
+<result>
+    <name>m4-vroln72-4_2_14010625_827_0</name>
+    <wu_name>m4-vroln72-4_2_14010625_827</wu_name>
+    <version_num>533</version_num>
+    <plan_class />
+    <project_url>http://www.enigmaathome.net/</project_url>
+    <final_cpu_time>0.000000</final_cpu_time>
+    <final_elapsed_time>0.000000</final_elapsed_time>
+    <exit_status>0</exit_status>
+    <state>2</state>
+    <report_deadline>1463986388.000000</report_deadline>
+    <received_time>1463122389.389412</received_time>
+    <estimated_cpu_time_remaining>28369.443806</estimated_cpu_time_remaining>
+</result>
+<result>
+    <name>m4-vroln72-4_2_14010625_828_0</name>
+    <wu_name>m4-vroln72-4_2_14010625_828</wu_name>
+    <version_num>533</version_num>
+    <plan_class />
+    <project_url>http://www.enigmaathome.net/</project_url>
+    <final_cpu_time>0.000000</final_cpu_time>
+    <final_elapsed_time>0.000000</final_elapsed_time>
+    <exit_status>0</exit_status>
+    <state>2</state>
+    <report_deadline>1463986388.000000</report_deadline>
+    <received_time>1463122389.389412</received_time>
+    <estimated_cpu_time_remaining>28369.443806</estimated_cpu_time_remaining>
+</result>
+<result>
+    <name>m4-vroln72-4_2_14010625_826_0</name>
+    <wu_name>m4-vroln72-4_2_14010625_826</wu_name>
+    <version_num>533</version_num>
+    <plan_class />
+    <project_url>http://www.enigmaathome.net/</project_url>
+    <final_cpu_time>0.000000</final_cpu_time>
+    <final_elapsed_time>0.000000</final_elapsed_time>
+    <exit_status>0</exit_status>
+    <state>2</state>
+    <report_deadline>1463986388.000000</report_deadline>
+    <received_time>1463122389.389412</received_time>
+    <estimated_cpu_time_remaining>28369.443806</estimated_cpu_time_remaining>
+</result>
+<platform_name>arm-unknown-linux-gnueabihf</platform_name>
+<core_client_major_version>7</core_client_major_version>
+<core_client_minor_version>4</core_client_minor_version>
+<core_client_release>23</core_client_release>
+<executing_as_daemon>0</executing_as_daemon>
+<platform>arm-unknown-linux-gnueabihf</platform>
+<global_preferences>
+   <source_project>http://www.worldcommunitygrid.org/</source_project>
+   <mod_time>1324117824.000000</mod_time>
+   <battery_charge_min_pct>90.000000</battery_charge_min_pct>
+   <battery_max_temperature>40.000000</battery_max_temperature>
+   <run_on_batteries>0</run_on_batteries>
+   <run_if_user_active>1</run_if_user_active>
+   <run_gpu_if_user_active>0</run_gpu_if_user_active>
+   <suspend_if_no_recent_input>0.000000</suspend_if_no_recent_input>
+   <suspend_cpu_usage>25.000000</suspend_cpu_usage>
+   <start_hour>0.000000</start_hour>
+   <end_hour>0.000000</end_hour>
+   <net_start_hour>0.000000</net_start_hour>
+   <net_end_hour>0.000000</net_end_hour>
+   <leave_apps_in_memory>0</leave_apps_in_memory>
+   <confirm_before_connecting>0</confirm_before_connecting>
+   <hangup_if_dialed>0</hangup_if_dialed>
+   <dont_verify_images>0</dont_verify_images>
+   <work_buf_min_days>0.300000</work_buf_min_days>
+   <work_buf_additional_days>0.500000</work_buf_additional_days>
+   <max_ncpus_pct>0.000000</max_ncpus_pct>
+   <cpu_scheduling_period_minutes>120.000000</cpu_scheduling_period_minutes>
+   <disk_interval>60.000000</disk_interval>
+   <disk_max_used_gb>2.000000</disk_max_used_gb>
+   <disk_max_used_pct>75.000000</disk_max_used_pct>
+   <disk_min_free_gb>0.100000</disk_min_free_gb>
+   <vm_max_used_pct>80.000000</vm_max_used_pct>
+   <ram_max_used_busy_pct>50.000000</ram_max_used_busy_pct>
+   <ram_max_used_idle_pct>90.000000</ram_max_used_idle_pct>
+   <idle_time_to_run>3.000000</idle_time_to_run>
+   <max_bytes_sec_up>0.000000</max_bytes_sec_up>
+   <max_bytes_sec_down>0.000000</max_bytes_sec_down>
+   <cpu_usage_limit>100.000000</cpu_usage_limit>
+   <daily_xfer_limit_mb>0.000000</daily_xfer_limit_mb>
+   <daily_xfer_period_days>0</daily_xfer_period_days>
+   <override_file_present>1</override_file_present>
+   <network_wifi_only>1</network_wifi_only>
+   <max_cpus>4</max_cpus>
+</global_preferences>
+</client_state>

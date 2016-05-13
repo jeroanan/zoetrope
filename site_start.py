@@ -180,7 +180,19 @@ class WebServer(object):
     @cherrypy.expose
     def no_more_work(self, **kwargs):
         project_url = kwargs.get('projectUrl', '')
-        command = self.rpc_factory.create('NoMoreWork')
+        command = self.__rpc_factory.create('NoMoreWork')
+        command.execute(project_url)
+
+    @cherrypy.expose
+    def allow_more_work(self, **kwargs):
+        project_url = kwargs.get('projectUrl', '')
+        command = self.__rpc_factory.create('AllowMoreWork')
+        command.execute(project_url)
+
+    @cherrypy.expose
+    def resume_project(self, **kwargs):
+        project_url = kwargs.get('projectUrl', '')
+        command = self.__rpc_factory.create('ResumeProject')
         command.execute(project_url)
 
     @cherrypy.expose

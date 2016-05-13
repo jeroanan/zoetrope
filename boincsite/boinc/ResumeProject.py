@@ -5,8 +5,8 @@
 import lib.boincindicator.client as client
 
 
-class NoMoreWork(object):
+class ResumeProject(object):
 
     def execute(self, project_url):
-        client.BoincClient().project_no_more_work(project_url)
+        client.BoincClient().project_resume(project_url)
 

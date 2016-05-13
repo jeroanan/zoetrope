@@ -20,4 +20,4 @@ class ExperimentalTask(object):
         with client.BoincClient(passwd=password) as c:
             c.authorize(password)
             
-            c.project_resume('http://www.rnaworld.de/rnaworld/')
+            c.get_state()

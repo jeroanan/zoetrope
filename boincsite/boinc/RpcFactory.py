@@ -3,6 +3,7 @@
 # Licensed under the GPL version 3
 
 import boincsite.boinc.AbortTask as at
+import boincsite.boinc.AllowMoreWork as amw
 import boincsite.boinc.AttachProject as ap
 import boincsite.boinc.DailyTransferHistory as dth
 import boincsite.boinc.DetachProject as dp
@@ -19,6 +20,7 @@ import boincsite.boinc.GetTask as gt
 import boincsite.boinc.GetTasks as gts
 import boincsite.boinc.HostInfo as hi
 import boincsite.boinc.NoMoreWork as nmw
+import boincsite.boinc.ResumeProject as rp
 import boincsite.boinc.ResumeTask as rt
 import boincsite.boinc.SuspendTask as st
 import boincsite.boinc.UpdateProject as up
@@ -30,6 +32,7 @@ class RpcFactory(object):
     def create(command_type):
         mappings = {
             'AbortTask': at.AbortTask,
+            'AllowMoreWork': amw.AllowMoreWork,
             'AttachProject': ap.AttachProject,
             'DailyTransferHistory': dth.DailyTransferHistory,
             'DetachProject': dp.DetachProject,
@@ -46,6 +49,7 @@ class RpcFactory(object):
             'GetStatistics': gs.GetStatistics,
             'HostInfo': hi.HostInfo,
             'NoMoreWork': nmw.NoMoreWork,
+            'ResumeProject': rp.ResumeProject,
             'ResumeTask': rt.ResumeTask,
             'SuspendTask': st.SuspendTask,
             'UpdateProject': up.UpdateProject            

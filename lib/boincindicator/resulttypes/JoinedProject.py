@@ -6,6 +6,8 @@
 
 import lib.boincindicator.basetypes.Struct as struct
 
+from xml.etree import ElementTree
+
 
 class JoinedProject(struct.Struct):
 
@@ -60,3 +62,13 @@ class JoinedProject(struct.Struct):
         self.project_dir = ''
         self.master_url_fetch_pending = ''
         self.dont_request_more_work = ''
+
+    @classmethod
+    def parse(cls, xml):
+        joined_project = super(JoinedProject, cls).parse(xml)
+
+        for c in xml:
+            if c.tag=='dont_request_more_work':
+                joined_project.dont_request_more_work = True
+
+        return joined_project
