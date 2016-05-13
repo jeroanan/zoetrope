@@ -290,6 +290,7 @@ class BoincClient(object):
         '''
         xml = '<get_project_status />'
         results = self.rpc.call(xml)
+        self.write_xml_to_file('get_project_status.xml', ElementTree.tostring(results))
         return map(lambda x: joinedproject.JoinedProject.parse(x), results)
 
     def get_disk_usage(self):

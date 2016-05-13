@@ -28,7 +28,8 @@ class Project(object):
                        'project_files_downloaded',
                        'gui_urls',
                        'master_url',
-                       'scheduler_rpc_pending'
+                       'scheduler_rpc_pending',
+                       'attached_via_account_manager'
                        ]
 
         self.name = project.project_name

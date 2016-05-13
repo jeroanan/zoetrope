@@ -70,5 +70,13 @@ class JoinedProject(struct.Struct):
         for c in xml:
             if c.tag=='dont_request_more_work':
                 joined_project.dont_request_more_work = True
+            elif c.tag == 'attached_via_acct_mgr':
+                joined_project.attached_via_acct_mgr = True
 
+        if joined_project.attached_via_acct_mgr != True:
+            joined_project.attached_via_acct_mgr = False
+
+        if joined_project.dont_request_more_work != True:
+            joined_project.dont_request_more_work = False
+                
         return joined_project
