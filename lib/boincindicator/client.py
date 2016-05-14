@@ -290,7 +290,6 @@ class BoincClient(object):
         '''
         xml = '<get_project_status />'
         results = self.rpc.call(xml)
-        self.write_xml_to_file('get_project_status.xml', ElementTree.tostring(results))
         return map(lambda x: joinedproject.JoinedProject.parse(x), results)
 
     def get_disk_usage(self):
@@ -494,55 +493,6 @@ class BoincClient(object):
 
         return ElementTree.tostring(results) # If all else fails, just return a string containing what we did get.
 
-    def project_attach(self, project_url, authenticator):
-        '''Attach to a project.
-
-        authenticator is a string that is used to indicate to the project which account you are. It is obtained by
-        calling lookup_account with the correct details and then calling lookup_account_poll until the authenticator
-        property has been set (assuming no other problem has arisen).
-
-        When the project has been successfully attached to the following xml is returned:
-
-        <success />
-        '''
-        xml = '<project_attach><use_config_file>false</use_config_file><project_url>{project_url}</project_url><authenticator>{authenticator}</authenticator><project_name>{project_url}</project_name></project_attach>'.format(
-                project_url=project_url, authenticator=authenticator)
-
-        result = self.rpc.call(xml)
-        print(ElementTree.tostring(result))
-
-    def project_detach(self, project_url):
-        '''Detach from a project.
-
-        The project_detach RPC call can return the following things:
-
-        If the project being detached from is not recognised by BOINC:
-
-            <error>No such project</error>
-
-        If the project has been attached via an account manager:
-
-            <boinc_gui_rpc_reply><error>must detach using account manager</error></boinc_gui_rpc_reply>
-
-        Successful detachment:
-
-            <success />
-        '''
-        xml = '<project_detach><project_url>{project_url}</project_url></project_detach>'.format(
-            project_url=project_url)
-        result = self.rpc.call(xml)
-        out = successerror.SuccessError()
-
-        
-        for i in list(result):
-            out.success = i.tag == 'success'
-
-            if not out.success:
-                out.error_message = i.text.strip()
-
-        print(out)
-        return out
-
     def get_screensaver_tasks(self):
         '''Gives me a wealth of information, presumably on tasks that can run as a screensaver.
         
@@ -579,6 +529,61 @@ class BoincClient(object):
         out = statistics.Statistics.parse(result)
         return out
 
+    def project_attach(self, project_url, authenticator):
+        '''Attach to a project.
+
+        authenticator is a string that is used to indicate to the project which account you are. It is obtained by
+        calling lookup_account with the correct details and then calling lookup_account_poll until the authenticator
+        property has been set (assuming no other problem has arisen).
+
+        When the project has been successfully attached to the following xml is returned:
+
+        <success />
+        '''
+        xml = '<project_attach><use_config_file>false</use_config_file><project_url>{project_url}</project_url><authenticator>{authenticator}</authenticator><project_name>{project_url}</project_name></project_attach>'.format(
+                project_url=project_url, authenticator=authenticator)
+
+        result = self.rpc.call(xml)
+        print(ElementTree.tostring(result))
+
+
+    # We have a number of operations whose xml is just:
+    # <operation_name><project_url>{project_url}</project_url></operation_name>
+    #
+    # ... Where operation_name is the BOINC function to be initiated. Then the xml
+    # gets passed to rpc.call and the result is processed (or not) before being
+    # returned.
+    #
+    # So I might as well boil down the build-up XML and call RPC bit into a common
+    # method.
+    def project_detach(self, project_url):
+        '''Detach from a project.
+
+        The project_detach RPC call can return the following things:
+
+        If the project being detached from is not recognised by BOINC:
+
+            <error>No such project</error>
+
+        If the project has been attached via an account manager:
+
+            <boinc_gui_rpc_reply><error>must detach using account manager</error></boinc_gui_rpc_reply>
+
+        Successful detachment:
+
+            <success />
+        '''
+        result = self.simple_project_operation('project_detach', project_url)
+        out = successerror.SuccessError()
+        
+        for i in list(result):
+            out.success = i.tag == 'success'
+
+            if not out.success:
+                out.error_message = i.text.strip()
+
+        return out
+
     def project_update(self, project_url):
         ''' Update a project with the project server.
         
@@ -594,28 +599,26 @@ class BoincClient(object):
 
         <error>Missing project URL</error>
         '''
-        xml = '<project_update><project_url>{project_url}</project_url></project_update>'.format(
-            project_url=project_url)
-
-        self.rpc.call(xml)
+        self.simple_project_operation('project_update', project_url)
 
     def project_no_more_work(self, project_url):
-        xml = '<project_nomorework><project_url>{project_url}</project_url></project_nomorework>'.format(
-            project_url=project_url)
-        result = self.rpc.call(xml)
-        print(ElementTree.tostring(result))
+        #TODO: investigate the return value of this one so we can give
+        # feedback if needed        
+        self.simple_project_operation('project_nomorework', project_url)
 
     def project_allow_more_work(self, project_url):
-        xml = '<project_allowmorework><project_url>{project_url}</project_url></project_allowmorework>'.format(
-            project_url=project_url)
-        result = self.rpc.call(xml)
-        print(ElementTree.tostring(result))
-
+        self.simple_project_operation('project_allowmorework', project_url)
+        
+    def project_suspend(self, project_url):
+        self.simple_project_operation('project_suspend', project_url)
+            
     def project_resume(self, project_url):
-        xml = '<project_resume><project_url>{project_url}</project_url></project_resume>'.format(
-            project_url=project_url)
-        result = self.rpc.call(xml)
-        print(ElementTree.tostring(result))
+        return simple_project_operation('project_resume', project_url)
+
+    def simple_project_operation(self, operation_name, project_url):
+        xml = '<{operation_name}><project_url>{project_url}</project_url></{operation_name}>'.format(
+            operation_name=operation_name, project_url=project_url)
+        return self.rpc.call(xml)
 
 def read_gui_rpc_password():
     ''' Read password string from GUI_RPC_PASSWD_FILE file, trim the last CR

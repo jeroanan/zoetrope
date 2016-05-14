@@ -10,11 +10,10 @@ ProjectsService.$inject = ['jsonSvc'];
 
 function ProjectsService(jsonSvc) {
   var svc = {
-      get: function() {
-        return jsonSvc.get('/static/json/projects.json', '/projects_json', true);
-      }
+    get: function() {
+      return jsonSvc.get('/static/json/projects.json', '/projects_json', true);
+    }
   };
-
-  return svc;
-
+  
+  return svc;  
 }

@@ -11,6 +11,8 @@ from xml.etree import ElementTree
 
 class JoinedProject(struct.Struct):
 
+    # TODO: I would have rather called this AttachedProject
+
     def __init__(self):
         self.master_url = ''
         self.project_name = ''

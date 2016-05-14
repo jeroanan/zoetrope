@@ -6,7 +6,10 @@
 class Project(object):
 
     def __init__(self, project):
-        # can't do master_fetch_pending, trickle_upload_pending, ended, suspended_via_gui, dont_request_more_work,
+
+        print(project)
+
+        # can't do master_fetch_pending, trickle_upload_pending, ended, suspended_via_gui
         #   disk_usage
         self.fields = ['name',
                        'user_name',
@@ -31,7 +34,7 @@ class Project(object):
                        'scheduler_rpc_pending',
                        'attached_via_account_manager'
                        ]
-
+        
         self.name = project.project_name
         self.master_url = project.master_url
         self.user_name = project.user_name
