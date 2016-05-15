@@ -6,21 +6,13 @@
 angular.module('zoetropeControllers')
   .controller('ProjectCtrl', ProjectController);
 
-ProjectController.$inject = ['projectSvc',
-									  'updateProjectSvc',
-									  'statisicsSvc',
-									  'noMoreWorkSvc',
-									  'allowMoreWorkSvc',
-									  'resumeProjectSvc',
-									  'suspendProjectSvc'];
+ProjectController.$inject = ['$routeParams',
+									  'projectSvc',
+									  'statisicsSvc'];
 
-function ProjectController(projectSvc,
-									updateProjectSvc,
-									statisicsSvc,
-									noMoreWorkSvc,
-									allowMoreWorkSvc,
-									resumeProjectSvc,
-									suspendProjectSvc) {
+function ProjectController($routeParams,
+									projectSvc,
+									statisicsSvc) {
 
   var vm = this;
   vm.ready = false;
@@ -48,7 +40,7 @@ function ProjectController(projectSvc,
   
   function load() {
 	 vm.ready = false;
-	 projectSvc().query().$promise.then(gotProject, serviceError);
+	 projectSvc.getProject($routeParams.project)().query().$promise.then(gotProject, serviceError);
   }
 
   function gotProject(project) {
@@ -91,8 +83,7 @@ function ProjectController(projectSvc,
     if (vm.ready!==true) {
       return;
     }
-
-    updateProjectSvc.query(vm.project.master_url)().query();
+	 projectSvc.updateProject(vm.project.master_url)().query();
   }
   
   function detachClicked() {
@@ -100,25 +91,25 @@ function ProjectController(projectSvc,
   }
 
   function noMoreWorkClicked() {
-	 noMoreWorkSvc.query(vm.project.master_url)().query().$promise.then(function() {
+	 projectSvc.noMoreWork(vm.project.master_url)().query().$promise.then(function() {
 		vm.project.dont_request_more_work = true;
 	 });
   }
 
   function allowMoreWorkClicked() {
-	 allowMoreWorkSvc.query(vm.project.master_url)().query().$promise.then(function() {
+	 projectSvc.allowMoreWork(vm.project.master_url)().query().$promise.then(function() {
 		vm.project.dont_request_more_work = false;
 	 });
   }
 
   function suspendClicked() {
-	 suspendProjectSvc.query(vm.project.master_url)().query().$promise.then(function() {
+	 projectSvc.suspendProject(vm.project.master_url)().query().$promise.then(function() {
 		vm.project.suspended_via_gui = true;
 	 });
   }
 
   function resumeClicked() {
-	 resumeProjectSvc.query(vm.project.master_url)().query().$promise.then(function() {
+	 projectSvc.resumeProject(vm.project.master_url)().query().$promise.then(function() {
 		vm.project.suspended_via_gui = false;
 	 });
   }

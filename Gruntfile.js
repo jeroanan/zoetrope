@@ -36,15 +36,9 @@ module.exports = function(grunt) {
     'boincsite/templates/assets/js/services/allProjectListSvc.js',
     'boincsite/templates/assets/js/services/attachProjectSvc.js',
     'boincsite/templates/assets/js/services/detachProjectSvc.js',
-    'boincsite/templates/assets/js/services/updateProjectSvc.js',
     'boincsite/templates/assets/js/services/md5Svc.js',
 	 'boincsite/templates/assets/js/services/statisticsSvc.js',
-	 'boincsite/templates/assets/js/services/getPlatformSvc.js',
-	 'boincsite/templates/assets/js/services/noMoreWorkSvc.js',
-	 'boincsite/templates/assets/js/services/resumeProjectSvc.js',
-	 'boincsite/templates/assets/js/services/allowMoreWorkSvc.js',
-	 'boincsite/templates/assets/js/services/suspendProjectSvc.js',
-	 'boincsite/templates/assets/js/services/resumeProjectSvc.js'
+	 'boincsite/templates/assets/js/services/getPlatformSvc.js'	 
   ];  
   
   grunt.initConfig({
