@@ -9,8 +9,7 @@ class Project(object):
 
         print(project)
 
-        # can't do master_fetch_pending, trickle_upload_pending, ended, suspended_via_gui
-        #   disk_usage
+        # can't do master_fetch_pending, trickle_upload_pending, ended, disk_usage
         self.fields = ['name',
                        'user_name',
                        'team_name',
@@ -51,7 +50,7 @@ class Project(object):
         self.trickle_upload_pending = False
         self.attached_via_account_manager = project.attached_via_acct_mgr
         self.ended = False
-        self.suspended_via_gui = False
+        self.suspended_via_gui = project.suspended_via_gui
         self.dont_request_more_work = project.dont_request_more_work
         self.disk_usage = ''
         self.last_rpc = project.last_rpc_time

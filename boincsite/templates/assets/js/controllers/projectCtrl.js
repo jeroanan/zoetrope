@@ -6,9 +6,21 @@
 angular.module('zoetropeControllers')
   .controller('ProjectCtrl', ProjectController);
 
-ProjectController.$inject = ['projectSvc', 'updateProjectSvc', 'statisicsSvc', 'noMoreWorkSvc', 'allowMoreWorkSvc'];
+ProjectController.$inject = ['projectSvc',
+									  'updateProjectSvc',
+									  'statisicsSvc',
+									  'noMoreWorkSvc',
+									  'allowMoreWorkSvc',
+									  'resumeProjectSvc',
+									  'suspendProjectSvc'];
 
-function ProjectController(projectSvc, updateProjectSvc, statisicsSvc, noMoreWorkSvc, allowMoreWorkSvc) {
+function ProjectController(projectSvc,
+									updateProjectSvc,
+									statisicsSvc,
+									noMoreWorkSvc,
+									allowMoreWorkSvc,
+									resumeProjectSvc,
+									suspendProjectSvc) {
 
   var vm = this;
   vm.ready = false;
@@ -26,6 +38,8 @@ function ProjectController(projectSvc, updateProjectSvc, statisicsSvc, noMoreWor
   vm.updateProject = updateProjectClick;
   vm.detachClicked = detachClicked;
   vm.noMoreWorkClicked = noMoreWorkClicked;
+  vm.allowMoreWorkClicked = allowMoreWorkClicked;
+  vm.suspendClicked = suspendClicked;
   vm.resumeClicked = resumeClicked;
 
   document.title = vm.title;
@@ -91,9 +105,21 @@ function ProjectController(projectSvc, updateProjectSvc, statisicsSvc, noMoreWor
 	 });
   }
 
-  function resumeClicked() {
+  function allowMoreWorkClicked() {
 	 allowMoreWorkSvc.query(vm.project.master_url)().query().$promise.then(function() {
 		vm.project.dont_request_more_work = false;
+	 });
+  }
+
+  function suspendClicked() {
+	 suspendProjectSvc.query(vm.project.master_url)().query().$promise.then(function() {
+		vm.project.suspended_via_gui = true;
+	 });
+  }
+
+  function resumeClicked() {
+	 resumeProjectSvc.query(vm.project.master_url)().query().$promise.then(function() {
+		vm.project.suspended_via_gui = false;
 	 });
   }
 

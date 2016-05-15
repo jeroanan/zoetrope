@@ -190,6 +190,12 @@ class WebServer(object):
         command.execute(project_url)
 
     @cherrypy.expose
+    def suspend_project(self, **kwargs):
+        project_url = kwargs.get('projectUrl', '')
+        command = self.__rpc_factory.create('SuspendProject')
+        command.execute(project_url)
+
+    @cherrypy.expose
     def resume_project(self, **kwargs):
         project_url = kwargs.get('projectUrl', '')
         command = self.__rpc_factory.create('ResumeProject')

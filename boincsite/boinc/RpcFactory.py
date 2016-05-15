@@ -22,6 +22,7 @@ import boincsite.boinc.HostInfo as hi
 import boincsite.boinc.NoMoreWork as nmw
 import boincsite.boinc.ResumeProject as rp
 import boincsite.boinc.ResumeTask as rt
+import boincsite.boinc.SuspendProject as sp
 import boincsite.boinc.SuspendTask as st
 import boincsite.boinc.UpdateProject as up
 
@@ -51,6 +52,7 @@ class RpcFactory(object):
             'NoMoreWork': nmw.NoMoreWork,
             'ResumeProject': rp.ResumeProject,
             'ResumeTask': rt.ResumeTask,
+            'SuspendProject': sp.SuspendProject,
             'SuspendTask': st.SuspendTask,
             'UpdateProject': up.UpdateProject            
         }

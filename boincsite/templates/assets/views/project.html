@@ -16,7 +16,7 @@
 	 <h2>Project Operations</h2>
 
 	 <div class="row">
-      <div class="col-xs-3"></div>
+      <div class="col-xs-2"></div>
       <div class="col-xs-2">
 		  <button class="btn btn-warning" ng-click="vm.detachClicked()">Detach Project</button>
 		  <detach-dialog projectname="{{vm.project.name}}" projecturl="{{vm.project.master_url}}" />
@@ -25,10 +25,22 @@
 		  <button class="btn btn-primary" ng-click="vm.updateProject()">Update Project</button>
 		</div>
 		<div class="col-xs-2">
-		  <button class="btn btn-primary" ng-click="vm.noMoreWorkClicked()" ng-show="!vm.project.dont_request_more_work">No More Work</button>
-		  <button class="btn btn-primary" ng-click="vm.resumeClicked()" ng-show="vm.project.dont_request_more_work">Allow More Work</button>
+		  <button class="btn btn-primary" ng-click="vm.noMoreWorkClicked()" ng-show="!vm.project.dont_request_more_work">
+			 No More Work
+		  </button>
+		  <button class="btn btn-primary" ng-click="vm.allowMoreWorkClicked()" ng-show="vm.project.dont_request_more_work">
+			 Allow More Work
+		  </button>
 		</div>
-      <div class="col-xs-3"></div>
+		<div class="col-xs-2">
+		  <button class="btn btn-primary" ng-click="vm.suspendClicked()" ng-show="!vm.project.suspended_via_gui">
+			 Suspend Project
+		  </button>
+		  <button class="btn btn-primary" ng-click="vm.resumeClicked()" ng-show="vm.project.suspended_via_gui">
+			 Resume Project
+		  </button>
+		</div>
+      <div class="col-xs-2"></div>
     </div>
 	 
     <h2>Current Status</h2>

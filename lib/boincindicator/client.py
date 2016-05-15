@@ -613,7 +613,7 @@ class BoincClient(object):
         self.simple_project_operation('project_suspend', project_url)
             
     def project_resume(self, project_url):
-        return simple_project_operation('project_resume', project_url)
+        return self.simple_project_operation('project_resume', project_url)
 
     def simple_project_operation(self, operation_name, project_url):
         xml = '<{operation_name}><project_url>{project_url}</project_url></{operation_name}>'.format(

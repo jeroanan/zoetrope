@@ -44,7 +44,7 @@ class JoinedProject(struct.Struct):
         self.sched_rpc_pending = ''
         self.send_time_stats_log = ''
         self.send_job_log = ''
-        self.attached_via_acct_mgr = ''
+        self.attached_via_acct_mgr = False
         self.rsc_backoff_time = ''
         self.rsc_backoff_interval = ''
         self.gui_urls = ''
@@ -63,7 +63,8 @@ class JoinedProject(struct.Struct):
         self.dont_use_dcf = ''
         self.project_dir = ''
         self.master_url_fetch_pending = ''
-        self.dont_request_more_work = ''
+        self.dont_request_more_work = False
+        self.suspended_via_gui = False
 
     @classmethod
     def parse(cls, xml):
@@ -74,11 +75,7 @@ class JoinedProject(struct.Struct):
                 joined_project.dont_request_more_work = True
             elif c.tag == 'attached_via_acct_mgr':
                 joined_project.attached_via_acct_mgr = True
+            elif c.tag == 'suspended_via_gui':
+                joined_project.suspend_via_gui = True
 
-        if joined_project.attached_via_acct_mgr != True:
-            joined_project.attached_via_acct_mgr = False
-
-        if joined_project.dont_request_more_work != True:
-            joined_project.dont_request_more_work = False
-                
         return joined_project
