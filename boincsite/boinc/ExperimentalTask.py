@@ -19,5 +19,23 @@ class ExperimentalTask(object):
 
         with client.BoincClient(passwd=password) as c:
             c.authorize(password)
-            
-            c.get_state()
+
+            #password + email
+            password_hash = '32bd8081c1ac7e5c61e941f22af2a026'
+
+            c.create_account('http://atlasathome.cern.ch/', 'davidwil@posteo.de', password_hash,'jeroanan')
+
+            time.sleep(2)
+
+            c.create_account_poll()
+
+            time.sleep(2)
+
+            c.create_account_poll()
+
+            time.sleep(2)
+
+            c.create_account_poll()
+
+
+

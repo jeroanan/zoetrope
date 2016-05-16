@@ -165,6 +165,16 @@ class WebServer(object):
         return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
 
     @cherrypy.expose
+    def create_account(self, **kwargs):
+        project_url = kwargs.get('projectUrl', '')
+        email_address = kwargs.get('email', '')
+        password_hash = kwargs.get('password', '')
+        username = kwargs.get('username', '')
+        
+        command = self.__rpc_factory.create('CreateAccount')
+        command.execute(project_url, email_address, password_hash, username)
+
+    @cherrypy.expose
     def update_project(self, **kwargs):
         project_url = kwargs.get('projectUrl', '')
         

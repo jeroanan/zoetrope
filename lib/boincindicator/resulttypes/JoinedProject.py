@@ -65,6 +65,7 @@ class JoinedProject(struct.Struct):
         self.master_url_fetch_pending = ''
         self.dont_request_more_work = False
         self.suspended_via_gui = False
+        self.scheduler_rpc_in_progress = False # This seems to be present when it is.
 
     @classmethod
     def parse(cls, xml):

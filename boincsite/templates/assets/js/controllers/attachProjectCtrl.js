@@ -46,7 +46,8 @@ function AttachProjectController(attachProjectSvc, allProjectListSvc, md5Svc) {
 	 var password_hash = md5Svc.query(hash_in)();
 	 vm.loading = true;
 	 
-    attachProjectSvc.query(vm.selectedProject, vm.emailaddress, password_hash)().query().$promise.then(projectAttached);
+    attachProjectSvc.query(vm.selectedProject, vm.emailaddress, password_hash, '', false)().query().$promise
+		.then(projectAttached);
   }
 
   function projectAttached(d) {

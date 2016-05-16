@@ -5,6 +5,7 @@
 import boincsite.boinc.AbortTask as at
 import boincsite.boinc.AllowMoreWork as amw
 import boincsite.boinc.AttachProject as ap
+import boincsite.boinc.CreateAccount as ca
 import boincsite.boinc.DailyTransferHistory as dth
 import boincsite.boinc.DetachProject as dp
 import boincsite.boinc.ExperimentalTask as et
@@ -35,6 +36,7 @@ class RpcFactory(object):
             'AbortTask': at.AbortTask,
             'AllowMoreWork': amw.AllowMoreWork,
             'AttachProject': ap.AttachProject,
+            'CreateAccount': ca.CreateAccount,
             'DailyTransferHistory': dth.DailyTransferHistory,
             'DetachProject': dp.DetachProject,
             'DiskUsage': gdu.GetDiskUsage,

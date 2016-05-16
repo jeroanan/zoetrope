@@ -6,9 +6,9 @@
 angular.module('zoetropeControllers')
   .controller('ProjectsCtrl', ProjectsController);
 
-ProjectsController.$inject = ['projectsSvc', 'updateProjectSvc'];
+ProjectsController.$inject = ['projectsSvc', 'projectSvc'];
 
-function ProjectsController(projectsSvc, updateProjectSvc) {
+function ProjectsController(projectsSvc, projectSvc) {
 
   var vm = this;
   vm.orderProp = 'name';
@@ -55,6 +55,6 @@ function ProjectsController(projectsSvc, updateProjectSvc) {
   }
 
   function updateClicked() {
-	 updateProjectSvc.query(vm.project.master_url)().query();
+	 projectSvc.updateProject.query(vm.project.master_url)().query();
   }  
 }

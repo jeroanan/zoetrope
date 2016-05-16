@@ -1,12 +1,12 @@
 <div id="attachModal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
-
+		
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title">Attach Project</h4>
       </div>
-
+		
       <div class="modal-body">
 		  <div class="alert-danger alert" ng-show="errorText!==''">
 			 <span ng-bind="errorText"></span>
@@ -14,6 +14,16 @@
 		  <div class="alert alert-success" ng-show="success==true">
 			 <span>Attached successfully.</span>
 		  </div>
+
+		  <ul class="nav nav-pills">
+			 <li role="presentation" class="active" id="existingAccountPill" ng-click="existingAccountPillClicked();">
+				<a href="">Existing Account</a>
+			 </li>
+			 <li role="presentation" id="newAccountPill" ng-click="newAccountPillClicked();">
+				<a href="">Sign Up</a>
+			 </li>
+		  </ul>
+		  
 		  <div>
 			 <div>
 				<form class="row-horizontal">
@@ -51,6 +61,16 @@
 					 <div class="col-xs-2"></div>
 					 <div class="col-xs-8">
 						<div class="form-group">
+						  <label for="emailaddress">Username</label>
+						  <input type="text" class="form-control" name="username" ng-model="username" ng-disabled="!newAccountActive"> 
+						</div>
+					 </div>
+					 <div class="col-xs-2"></div>
+				  </div>
+				  <div class="row">
+					 <div class="col-xs-2"></div>
+					 <div class="col-xs-8">
+						<div class="form-group">
 						  <label for="password">Password</label>
 						  <input type="password" class="form-control" name="password" ng-model="password">
 						</div>
@@ -59,7 +79,6 @@
 				  </div>
 				</form>
 			 </div>
-			 
         </div>
 		  
         <div class="modal-footer">

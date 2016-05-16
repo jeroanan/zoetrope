@@ -10,10 +10,6 @@ When the current time is within a (configurable?) period of a task's deadline, i
 
 The thing that most suggests itself here is when we're within the "warning" period, apply Bootstrap's text-warning class. When the deadline is exceeded then apply text-danger.
 
-**Support creation of new accounts when attaching to new projects**
-
-Currently only attaching to an existing account is supported.
-
 **Add further details to the Host Info page**
 
 1. Current CPU temperature

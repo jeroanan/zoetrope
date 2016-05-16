@@ -7,8 +7,6 @@ class Project(object):
 
     def __init__(self, project):
 
-        print(project)
-
         # can't do master_fetch_pending, trickle_upload_pending, ended, disk_usage
         self.fields = ['name',
                        'user_name',

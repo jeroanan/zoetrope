@@ -424,6 +424,32 @@ class BoincClient(object):
         results = self.rpc.call(xml)        
         print(ElementTree.tostring(results))
 
+    def create_account(self, url, email_address, password_hash, username):
+        xml = '<create_account><url>{url}</url><email_addr>{email_address}</email_addr><passwd_hash>{password_hash}</passwd_hash><ldap_auth>0</ldap_auth><user_name>{user_name}</user_name></create_account>'.format(
+            url=url, email_address=email_address, password_hash=password_hash, user_name=username)
+        print(xml)
+        results = self.rpc.call(xml)        
+        print(ElementTree.tostring(results))
+
+    def create_account_poll(self):
+        # Xml in:  <create_account><url>http://atlasathome.cern.ch/</url><email_addr>davidwil@posteo.de</email_addr><passwd_hash>32bd8081c1ac7e5c61e941f22af2a026</passwd_hash><ldap_auth>0</ldap_auth><user_name>jeroanan</user_name></create_account>
+        # output from create_account: b'<success />'
+        # output from create_account_poll: Still waiting!  b'<account_out>\n    <error_num>-204</error_num>\n</account_out>'
+        # output from create_account poll: Done, here is your authenticator string b'<account_out>\n   <authenticator>b787e1945e92261c829797605cb58af2</authenticator>\n</account_out>'
+        # I could then use the authenticator string to attach to a project
+        xml = '<create_account_poll />'
+        results = self.rpc.call(xml)
+
+        results_str = ElementTree.tostring(results)
+
+        result_is_account_out = results_str.startswith('<account_out>'.encode())
+        result_is_error = results_str.startswith('<error>'.encode())
+
+        if result_is_account_out or result_is_error:
+            return lookupaccountpoll.AccountOut.parse(results)
+
+        return ElementTree.tostring(results) # If all else fails, just return a string containing what we did get.
+
     def lookup_account(self, project_url, email_address, password, already_hashed=False):
         ''' Look up an existing account on a BOINC project
         If the lookup_account RPC call is received successfully by the server, a very simple XML element is returned:
@@ -602,20 +628,72 @@ class BoincClient(object):
         self.simple_project_operation('project_update', project_url)
 
     def project_no_more_work(self, project_url):
+        '''
+        Request that no more work is requested for the given project
+	
+        Workunits for the project that are in progress or waiting to be processed
+        will be completed even when the project is set to request no more work.
+        
+        The RPC call will return <success /> or <error>Error message</error> depending on whether or not the request is
+        successful.
+
+        Params:
+        @project_url: The url of the project to perform the request on
+        '''
         #TODO: investigate the return value of this one so we can give
         # feedback if needed        
         self.simple_project_operation('project_nomorework', project_url)
 
     def project_allow_more_work(self, project_url):
+        '''
+        Request that work is requested for the given project
+	
+        To be called for projects that are currently set not to request more work.
+	
+        The RPC call will return <success /> or <error>Error message</error> depending on whether or not the request is
+        successful.
+
+        Params:
+        @project_url: The url of the project to perform the request on
+        '''
         self.simple_project_operation('project_allowmorework', project_url)
         
     def project_suspend(self, project_url):
+        '''
+        Request that work is suspended for the given project
+	
+        Workunits for the project that are currently in progress or waiting to processed will be paused.
+	
+        The RPC call will return <success /> or <error>Error message</error> depending on whether or not the request is
+        successful.
+
+        Params:
+        @project_url: The url of the project to perform the request on
+        '''
         self.simple_project_operation('project_suspend', project_url)
             
     def project_resume(self, project_url):
+        '''
+        Request that work is resumed for the given project
+	
+        Existing workunits for the project will be resumed.
+	
+        The RPC call will return <success /> or <error>Error message</error> depending on whether or not the request is
+        successful.
+
+        Params:
+        @project_url: The url of the project to perform the request on
+        '''
         return self.simple_project_operation('project_resume', project_url)
 
     def simple_project_operation(self, operation_name, project_url):
+        '''
+        Do a generic operation on a project where that operation only requires the project's url
+		
+        Params:
+        @operation_name: The command name to use in the RPC call
+        @project_url: The url of the project to perform the request on
+        '''
         xml = '<{operation_name}><project_url>{project_url}</project_url></{operation_name}>'.format(
             operation_name=operation_name, project_url=project_url)
         return self.rpc.call(xml)
