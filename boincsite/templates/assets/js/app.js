@@ -1,3 +1,7 @@
+angular.module('zoetropeServices', ['ngRoute', 'ngResource']);
+angular.module('zoetropeDirectives', ['zoetropeServices']);
+angular.module('zoetropeControllers', ['ngRoute', 'ngSanitize', 'zoetropeDirectives', 'zoetropeServices']);
+
 angular.module('zoetrope', [
   'ngRoute',
   'ngResource',
@@ -85,3 +89,6 @@ angular.module('zoetrope', [
         redirectTo: '/'
       });
   }]);
+
+
+

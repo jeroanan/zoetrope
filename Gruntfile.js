@@ -39,7 +39,11 @@ module.exports = function(grunt) {
     'boincsite/templates/assets/js/services/md5Svc.js',
 	 'boincsite/templates/assets/js/services/statisticsSvc.js',
 	 'boincsite/templates/assets/js/services/getPlatformSvc.js'	 
-  ];  
+  ];
+
+  var directives = [
+	 'boincsite/templates/assets/js/directives/*.js'
+  ];
   
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -70,7 +74,16 @@ module.exports = function(grunt) {
         files: {
           'boincsite/templates/assets/js/services/services.min.js': services
         }
-      }
+      },
+		directives: {
+		  options: {
+          sourceMap: true,
+          sourceMapName: 'boincsite/templates/assets/js/directives.js.map'
+        },
+        files: {
+          'boincsite/templates/assets/js/directives.min.js': directives
+        }
+		}
     },
     watch: {
       config: {
@@ -87,11 +100,16 @@ module.exports = function(grunt) {
       services: {
         files: services,
         tasks: ['jshint:services', 'uglify:services']
-      }
+      },
+		directives: {
+		  files: directives,
+		  tasks: ['jshint:directives', 'uglify:directives']
+		}
     },
 	 jshint: {
 		controllers: controllers,
 		services: services,
+		directives: directives,
 		app: app
 	 }
   });
