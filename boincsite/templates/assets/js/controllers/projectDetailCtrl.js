@@ -6,9 +6,9 @@
 angular.module('zoetropeControllers')
   .controller('projectDetailCrl', ProjectDetailController);
 
-ProjectDetailController.$inject = ['$routeParams', 'allProjectListSvc', 'projectsSvc'];
+ProjectDetailController.$inject = ['$routeParams', 'projectSvc'];
 
-function ProjectDetailController($routeParams, allProjectListSvc, projectsSvc) {
+function ProjectDetailController($routeParams, projectSvc) {
   var vm = this;
 
   vm.ready = false;
@@ -26,7 +26,7 @@ function ProjectDetailController($routeParams, allProjectListSvc, projectsSvc) {
   function load() {
 	 vm.ready = false;
 	 vm.error = false;
-	 allProjectListSvc.get()().query().$promise.then(gotAllProjects, serviceError);
+	 projectSvc.getAvailableProjects()().query().$promise.then(gotAllProjects, serviceError);
   }
 
   function gotAllProjects(projects) {
@@ -38,7 +38,7 @@ function ProjectDetailController($routeParams, allProjectListSvc, projectsSvc) {
 		return;
 	 }
 
-	 projectsSvc.get()().query().$promise.then(gotAttachedProjects, serviceError);
+	 projectSvc.getAttachedProjects()().query().$promise.then(gotAttachedProjects, serviceError);
 
     setTitle('Project Details -- ' + vm.project.name);
 	 vm.projectFound = true;

@@ -6,9 +6,9 @@
 angular.module('zoetropeControllers')
   .controller('TaskCtrl', TaskController);
 
-TaskController.$inject = ['$http', '$routeParams', 'taskSvc', 'projectsSvc'];
+TaskController.$inject = ['$http', '$routeParams', 'taskSvc', 'projectSvc'];
 
-function TaskController($http, $routeParams, taskSvc, projectsSvc) {
+function TaskController($http, $routeParams, taskSvc, projectSvc) {
 
   var vm = this;
   vm.ready = false;
@@ -40,7 +40,7 @@ function TaskController($http, $routeParams, taskSvc, projectsSvc) {
 
   function gotTask(task) {
 	 vm.task = task;	 
-	 projectsSvc.get()().query().$promise.then(gotProjects, onError);
+	 projectSvc.getAttachedProjects()().query().$promise.then(gotProjects, onError);
   }
 
   function gotProjects(projects) {

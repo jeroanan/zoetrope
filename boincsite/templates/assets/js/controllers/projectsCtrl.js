@@ -6,9 +6,9 @@
 angular.module('zoetropeControllers')
   .controller('ProjectsCtrl', ProjectsController);
 
-ProjectsController.$inject = ['projectsSvc', 'projectSvc'];
+ProjectsController.$inject = ['projectSvc'];
 
-function ProjectsController(projectsSvc, projectSvc) {
+function ProjectsController(projectSvc) {
 
   var vm = this;
   vm.orderProp = 'name';
@@ -32,7 +32,7 @@ function ProjectsController(projectsSvc, projectSvc) {
   function load() {
 	 vm.ready = false;
 	 vm.error = false;
-	 projectsSvc.get()().query().$promise.then(gotProjects, serviceError);
+	 projectSvc.getAttachedProjects()().query().$promise.then(gotProjects, serviceError);
   }
 
   function gotProjects(projects) {

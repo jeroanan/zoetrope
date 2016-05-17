@@ -7,9 +7,9 @@
 angular.module('zoetropeControllers')
  .controller('detachProjectCtrl', DetachProjectController);
 
-DetachProjectController.$inject = ['projectsSvc', 'projectSvc'];
+DetachProjectController.$inject = ['projectSvc'];
 
-function DetachProjectController(projectsSvc, projectSvc) {
+function DetachProjectController(projectSvc) {
 
   var vm = this;
   vm.attachedProjects = null;
@@ -24,7 +24,7 @@ function DetachProjectController(projectsSvc, projectSvc) {
   vm.detachErrorMessage = '';
   vm.selectedProjectChanged = selectedProjectChanged;
 
-  projectsSvc.get()().query().$promise.then(gotProjects);
+  projectSvc.getAttachedProjects()().query().$promise.then(gotProjects);
   
   document.title = vm.title;
 

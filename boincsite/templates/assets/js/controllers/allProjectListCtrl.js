@@ -6,9 +6,9 @@
 angular.module('zoetropeControllers')
   .controller('allProjectListCtrl', AllProjectListController);
 
-AllProjectListController.$inject = ['allProjectListSvc', 'projectsSvc', 'getPlatformSvc'];
+AllProjectListController.$inject = ['projectSvc', 'getPlatformSvc'];
 
-function AllProjectListController(allProjectListSvc, projectsSvc, getPlatformSvc) {
+function AllProjectListController(projectSvc, getPlatformSvc) {
 
   var vm = this;
 
@@ -30,12 +30,12 @@ function AllProjectListController(allProjectListSvc, projectsSvc, getPlatformSvc
   function load() {
 	 vm.ready = false;
 	 vm.error = false;
-	 allProjectListSvc.get()().query().$promise.then(gotAllProjects, serviceError);
+	 projectSvc.getAvailableProjects()().query().$promise.then(gotAllProjects, serviceError);
   }
 
   function gotAllProjects(projects) {
 	 vm.allProjects = projects;
-	 projectsSvc.get()().query().$promise.then(gotAttachedProjects, serviceError);
+	 projectSvc.getAttachedProjects()().query().$promise.then(gotAttachedProjects, serviceError);
 	 getPlatformSvc.get()().query().$promise.then(gotPlatform, serviceError);
   }
 

@@ -18,7 +18,9 @@ function ProjectSvc($resource, jsonSvc) {
 	 resumeProject: resumeProject,
 	 updateProject: updateProject,
 	 attachProject: attachProject,
-	 detachProject: detachProject
+	 detachProject: detachProject,
+	 getAvailableProjects: getAvailableProjects,
+	 getAttachedProjects: getAttachedProjects
   };
 
   /**
@@ -137,6 +139,17 @@ function ProjectSvc($resource, jsonSvc) {
   }
 
   /**
+	* Get a list of all public projects
+	*/
+  function getAvailableProjects() {
+	 return jsonSvc.get('/static/json/allprojectslist.json', '/get_all_projects_list_json', true);
+  }
+
+  function getAttachedProjects() {
+	 return jsonSvc.get('/static/json/projects.json', '/projects_json', true);
+  }
+
+  /**
 	* Do a generic operation on a project where that operation only requires the project's url
 	*
 	* This method is internal to this service and isn't exposed by default.
@@ -155,6 +168,8 @@ function ProjectSvc($resource, jsonSvc) {
 
   /**
 	* Post the given data to the given endpoint
+	*
+	* This method is internal to this service and isn't exposed by default.
 	*
 	* Params:
 	* @endpoint: The endpoint on the webserver to send the data to
