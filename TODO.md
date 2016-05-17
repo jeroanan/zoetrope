@@ -27,5 +27,4 @@ In particular we have a boatload of services to do basic oeprations on projects,
 
 **Make the statistics section of the project page into a directive**
 
-**Split directives out from controller.js into their own directory/files**
 

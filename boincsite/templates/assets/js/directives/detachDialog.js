@@ -7,7 +7,7 @@ angular.module('zoetropeDirectives').directive('detachDialog', function() {
   return {
     restrict: 'E',
     templateUrl: '/static/directives/detachDialog.html',
-	 controller: ['$scope', 'detachProjectSvc', function($scope, detachProjectSvc) {
+	 controller: ['$scope', 'projectSvc', function($scope, projectSvc) {
 		
 		$scope.submitClicked = submitClicked;
 		$scope.errorText = '';
@@ -17,8 +17,8 @@ angular.module('zoetropeDirectives').directive('detachDialog', function() {
 		function submitClicked() {
 		  
 		  $scope.errorText = '';
-		  
-		  detachProjectSvc.query($scope.projecturl)().query().$promise.then(function(d) {
+
+		  projectSvc.detachProject($scope.projecturl)().query().$promise.then(function(d) {
 			 if (d.error_message) {
 				$scope.errorText = d.error_message;
 			 } else {

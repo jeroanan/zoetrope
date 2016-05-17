@@ -6,7 +6,7 @@
 angular.module('zoetropeServices')
   .factory('endpointSvc', EndpointService);
 
-EndpointService.$inject = ['$resource']
+EndpointService.$inject = ['$resource'];
 
 function EndpointService($resource) {
 
@@ -22,7 +22,7 @@ function EndpointService($resource) {
 		endpoint = 'http://' + endpoint;
 	 }
 
-	 endpoint = endpoint.replace(/\/+$/, '')
+	 endpoint = endpoint.replace(/\/+$/, '');
 
 	 return endpoint;
   }

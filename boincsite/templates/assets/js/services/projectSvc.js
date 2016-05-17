@@ -1,5 +1,5 @@
 /**
- * Service to get the main contents of the Project Detail screen.
+ * Service to handle project operastions
  *
  * (c) David Wilson 2016, licensed under GPL V3.
  */
@@ -16,7 +16,9 @@ function ProjectSvc($resource, jsonSvc) {
 	 allowMoreWork: allowMoreWork,
 	 suspendProject: suspendProject,
 	 resumeProject: resumeProject,
-	 updateProject: updateProject
+	 updateProject: updateProject,
+	 attachProject: attachProject,
+	 detachProject: detachProject
   };
 
   /**
@@ -91,6 +93,50 @@ function ProjectSvc($resource, jsonSvc) {
   }
 
   /**
+	* Request to attach to a project
+	*
+	* Params:
+	* @projectUrl: The url of the proejct to attach to
+	* @email: The email address to use to sign into the project account
+	* @password: The MD5-hash of password + email address
+	* @username: If signing up for a new account, the username of the acount
+	* @newAccount: If true, sign up for a new account before attaching. 
+	*              Otherwise sign into an existing account to attach.
+	*/
+  function attachProject(projectUrl, email, password, username, newAcccount) {
+	 var endpoint = '/attach_project';
+	 
+    data = {
+      'projectUrl': projectUrl,
+      'email': email,
+      'password': password
+    };
+	 
+	 if (newAcccount) {
+		endpoint = '/create_account';
+		data.username = username;
+	 }
+
+	 return sendProjectData(endpoint, data);
+  }
+
+  /**
+	* Request to detach from a project
+	*
+	* Detaching causes any queued or in-progress workunits for that project to be aborted.
+	*
+	* Params:
+	* @projectUrl: The url of the project to detach from
+	*/
+  function detachProject(projectUrl) {
+	 data = {
+      'projectUrl': projectUrl
+    };
+
+	 return sendProjectData('/detach_project', data);
+  }
+
+  /**
 	* Do a generic operation on a project where that operation only requires the project's url
 	*
 	* This method is internal to this service and isn't exposed by default.
@@ -103,8 +149,22 @@ function ProjectSvc($resource, jsonSvc) {
 	 var data = {
       'projectUrl': projectUrl
     };
-	 
-    return function() {
+
+	 return sendProjectData(endpoint, data);
+  }
+
+  /**
+	* Post the given data to the given endpoint
+	*
+	* Params:
+	* @endpoint: The endpoint on the webserver to send the data to
+	* @data: The data to send to the endpoint
+	*
+	* Returns: 
+	* A $resource that will promise the server's response
+	*/
+  function sendProjectData(endpoint, data) {
+	 return function() {
       var res = $resource(endpoint, data, {
         query: {method: 'POST'}
       });

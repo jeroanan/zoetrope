@@ -7,9 +7,9 @@
 angular.module('zoetropeControllers')
  .controller('detachProjectCtrl', DetachProjectController);
 
-DetachProjectController.$inject = ['projectsSvc', 'detachProjectSvc'];
+DetachProjectController.$inject = ['projectsSvc', 'projectSvc'];
 
-function DetachProjectController(projectsSvc, detachProjectSvc) {
+function DetachProjectController(projectsSvc, projectSvc) {
 
   var vm = this;
   vm.attachedProjects = null;
@@ -51,8 +51,8 @@ function DetachProjectController(projectsSvc, detachProjectSvc) {
   // hyperlinks to confirm that they really want to deatch
   // from the project.
   function detachLinkClicked() {
-    vm.detachClicked = true;    
-    detachProjectSvc.query(vm.selectedProject)().query().$promise.then(projectDetached);
+    vm.detachClicked = true;
+    projectSvc.detachProject(vm.selectedProject)().query().$promise.then(projectDetached);
   }
 
   function projectDetached(d) {	 

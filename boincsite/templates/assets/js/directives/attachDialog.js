@@ -12,7 +12,7 @@ angular.module('zoetropeDirectives').directive('attachDialog', function() {
 		projectname: '@'
     },
     templateUrl: '/static/directives/attachDialog.html',
-	 controller: ['$scope', 'attachProjectSvc', 'md5Svc', function($scope, attachProjectSvc, md5Svc) {
+	 controller: ['$scope', 'projectSvc', 'md5Svc', function($scope, projectSvc, md5Svc) {
 
 		$scope.emailaddress = '';
 		$scope.password = '';
@@ -39,9 +39,9 @@ angular.module('zoetropeDirectives').directive('attachDialog', function() {
 		  var password_hash = md5Svc.query(hash_in)();
 
 		  $scope.loading = true;
-		  
-		  attachProjectSvc
-			 .query($scope.projecturl, $scope.emailaddress, password_hash, $scope.username, $scope.newAccountActive)()
+
+		  projectSvc
+			 .attachProject($scope.projecturl, $scope.emailaddress, password_hash, $scope.username, $scope.newAccountActive)()
 			 .query()
 			 .$promise
 			 .then(projectAttached);
