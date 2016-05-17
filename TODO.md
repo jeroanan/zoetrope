@@ -23,5 +23,4 @@ The thing that most suggests itself here is when we're within the "warning" peri
 
 **Make the statistics section of the project page into a directive**
 
-**Aborting a task uses a full-page postback to do its work**
-Make angular services to handle that. Then consolidate task-related services into one.
+**On the task page, add success/error feedback when projects are resumed, suspended or aborted**
