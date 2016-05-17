@@ -1,7 +1,18 @@
 # Copyright (c) David Wilson 2015, 2016
-#
-# Licensed under the GPL version 3
-
+# This file is part of Zoetrope.
+# 
+# Zoetrope is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# Zoetrope is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with Zoetrope.  If not, see <http://www.gnu.org/licenses/>.
 
 from io import StringIO
 import json
@@ -129,30 +140,31 @@ class WebServer(object):
         return self.__renderer.render(page, **kwargs)
 
     @cherrypy.expose
-    def suspend_resume(self, **kwargs):
+    def suspend_task(self, **kwargs):
+        self.suspend_resume_task('SuspendTask', kwargs)
 
-        task_name = kwargs.get('task_name', '')
-        return_url = kwargs.get('return_url', '/')
-
-        if task_name!='':
-            task_command = self.__rpc_factory.create('GetTask')
-            task = task_command.execute(task_name)
-
-            factory_string = 'ResumeTask' if task.suspended_via_gui else 'SuspendTask'
-            command = self.__rpc_factory.create(factory_string)
-            command.execute(task_name)
-
-        raise cherrypy.HTTPRedirect(return_url)
+    @cherrypy.expose
+    def resume_task(self, **kwargs):
+        self.suspend_resume_task('ResumeTask', kwargs)
 
     @cherrypy.expose
     def abort_task(self, **kwargs):
         task_name = kwargs.get('task_name', '')
 
-        if task_name!='':
-            abort_task_command = self.__rpc_factory.create('AbortTask')
-            abort_task_command.execute(task_name)
+        if task_name=='':
+            return
+        
+        command = self.__rpc_factory.create('AbortTask')
+        command.execute(task_name)
 
-        raise cherrypy.HTTPRedirect('/')
+    def suspend_resume_task(self, operation, kwargs):
+        task_name = kwargs.get('task_name', '')
+
+        if task_name=='':
+            return
+
+        command = self.__rpc_factory.create(operation)
+        command.execute(task_name)
 
     @cherrypy.expose
     def attach_project(self, **kwargs):

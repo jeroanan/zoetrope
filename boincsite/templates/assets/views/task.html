@@ -20,10 +20,12 @@
     <div class="row task-controls">
       <div class="col-xs-3"></div>
       <div class="col-xs-3">
-        <a class="btn btn-primary pull-right"
-          ng-href="suspend_resume?task_name={{ vm.task.name }}&return_url=/#/task?task_name={{ vm.task.name }}">
-          <span ng-bind="vm.suspend_button_text" />
-        </a>
+		  <a class="btn btn-primary pull-right" ng-show="!vm.task.suspended_via_gui" ng-click="vm.suspendClicked()">
+			 Suspend Task
+		  </a>
+		  <a class="btn btn-primary pull-right" ng-show="vm.task.suspended_via_gui" ng-click="vm.resumeClicked()">
+			 Resume Task
+		  </a>
       </div>
       <div class="col-xs-3"><a class="btn btn-danger" ng-click="vm.abortButtonClicked()">Abort</a></div>
       <div class="col-xs-3"></div>
@@ -32,7 +34,7 @@
     <div class="row confirm-row" ng-show="vm.showConfirmAbort">
       <div class="col-xs-3"></div>
       <div class="col-xs-3"></div>
-      <div class="col-xs-3">Confirm task abort: <a ng-href="/abort_task?task_name={{ vm.task.name }}">OK</a></div>
+      <div class="col-xs-3">Confirm task abort: <a ng-click="vm.abortTaskLinkClicked()">OK</a></div>
       <div class="col-xs-3"></div>
     </div>
   </div>

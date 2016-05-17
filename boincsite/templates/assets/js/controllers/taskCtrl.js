@@ -19,17 +19,39 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
   vm.showConfirmAbort = false;
   vm.abortButtonClicked = abortButtonClicked;
   vm.load = load;
-  
+
+  vm.suspendClicked = suspendClicked;
+  vm.resumeClicked = resumeClicked;
+  vm.abortTaskLinkClicked = abortTaskLinkClicked;
+
   document.title = vm.title;
 
   load();
   
   function load() {
-	 taskSvc.get()().query().$promise.then(gotTask, onError);
+	 taskSvc.getTask($routeParams.task_name)().query().$promise.then(gotTask, onError);
   }
 
   function abortButtonClicked() {
 	 vm.showConfirmAbort = !vm.showConfirmAbort;
+  }
+
+  function suspendClicked() {
+	 taskSvc.suspendTask(vm.task.name)().query().$promise.then(function(d) {
+		vm.task.suspended_via_gui = true;
+	 });
+  }
+
+  function resumeClicked() {
+	 taskSvc.resumeTask(vm.task.name)().query().$promise.then(function(d) {
+		vm.task.suspended_via_gui = false;
+	 });
+  }
+
+  function abortTaskLinkClicked() {
+	 taskSvc.abortTask(vm.task.name)().query().$promise.then(function(d) {
+		window.location.href = '/';
+	 });
   }
 
   function onError() {

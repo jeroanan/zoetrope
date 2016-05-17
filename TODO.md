@@ -21,10 +21,7 @@ The thing that most suggests itself here is when we're within the "warning" peri
 
 **What happens when various requests throw exceptions?**
 
-** Too many angular service files **
-
-In particular we have a boatload of services to do basic oeprations on projects, and they are all basically identical except for their names and the endpoints that they call. So the way to go would seem to be to make them all methods of a unified projectSvc.js.
-
 **Make the statistics section of the project page into a directive**
 
-
+**Aborting a task uses a full-page postback to do its work**
+Make angular services to handle that. Then consolidate task-related services into one.

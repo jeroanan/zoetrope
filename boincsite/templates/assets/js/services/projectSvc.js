@@ -119,7 +119,7 @@ function ProjectSvc($resource, jsonSvc) {
 		data.username = username;
 	 }
 
-	 return sendProjectData(endpoint, data);
+	 return sendServiceData(endpoint, data);
   }
 
   /**
@@ -135,7 +135,7 @@ function ProjectSvc($resource, jsonSvc) {
       'projectUrl': projectUrl
     };
 
-	 return sendProjectData('/detach_project', data);
+	 return sendServiceData('/detach_project', data);
   }
 
   /**
@@ -145,6 +145,9 @@ function ProjectSvc($resource, jsonSvc) {
 	 return jsonSvc.get('/static/json/allprojectslist.json', '/get_all_projects_list_json', true);
   }
 
+  /**
+	* Get a list of currently-attached projects
+	*/
   function getAttachedProjects() {
 	 return jsonSvc.get('/static/json/projects.json', '/projects_json', true);
   }
@@ -163,7 +166,7 @@ function ProjectSvc($resource, jsonSvc) {
       'projectUrl': projectUrl
     };
 
-	 return sendProjectData(endpoint, data);
+	 return sendServiceData(endpoint, data);
   }
 
   /**
@@ -178,7 +181,7 @@ function ProjectSvc($resource, jsonSvc) {
 	* Returns: 
 	* A $resource that will promise the server's response
 	*/
-  function sendProjectData(endpoint, data) {
+  function sendServiceData(endpoint, data) {
 	 return function() {
       var res = $resource(endpoint, data, {
         query: {method: 'POST'}
