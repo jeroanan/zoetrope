@@ -8,7 +8,6 @@ import json
 import lib.boincindicator.client as client
 
 import config as conf
-import boincsite.boinc.AuthTask as at
 import boincsite.status.GlobalPreferences as gp
 
 
