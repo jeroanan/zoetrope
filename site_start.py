@@ -141,23 +141,17 @@ class WebServer(object):
 
     @cherrypy.expose
     def suspend_task(self, **kwargs):
-        self.suspend_resume_task('SuspendTask', kwargs)
+        self.task_name_operation('SuspendTask', kwargs)
 
     @cherrypy.expose
     def resume_task(self, **kwargs):
-        self.suspend_resume_task('ResumeTask', kwargs)
+        self.task_name_operation('ResumeTask', kwargs)
 
     @cherrypy.expose
     def abort_task(self, **kwargs):
-        task_name = kwargs.get('task_name', '')
+        self.task_name_operation('AbortTask', kwargs)
 
-        if task_name=='':
-            return
-        
-        command = self.__rpc_factory.create('AbortTask')
-        command.execute(task_name)
-
-    def suspend_resume_task(self, operation, kwargs):
+    def task_name_operation(self, operation, kwargs):
         task_name = kwargs.get('task_name', '')
 
         if task_name=='':
