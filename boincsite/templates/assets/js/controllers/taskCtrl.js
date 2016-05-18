@@ -25,6 +25,11 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
 
   document.title = vm.title;
 
+  vm.col1XsWidth = '1';
+  vm.col2XsWidth = '5';
+  vm.col3XsWidth = '5';
+  vm.col4XsWidth = '1';
+
   load();
   
   function load() {
