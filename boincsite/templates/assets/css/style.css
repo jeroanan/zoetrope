@@ -30,3 +30,12 @@ img.button-loading {
 div.main-container {
 	 padding-top: 75px;
 }
+
+div.sidebar-button-row {
+	 padding-bottom: 10px;
+	 text-align: center;
+}
+
+button.sidebar-button {
+	 width: 130px;
+}
