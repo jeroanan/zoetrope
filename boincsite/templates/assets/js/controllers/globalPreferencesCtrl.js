@@ -6,9 +6,9 @@
 angular.module('zoetropeControllers')
   .controller('globalPreferencesCtrl', GlobalPreferencesCtrl);
 
-GlobalPreferencesCtrl.$inject = ['globalPreferencesSvc'];
+GlobalPreferencesCtrl.$inject = ['systemInfoSvc'];
 
-function GlobalPreferencesCtrl(globalPreferencesSvc) {
+function GlobalPreferencesCtrl(systemInfoSvc) {
   var vm = this;
   vm.ready = false;
   vm.title = 'Global Preferences';
@@ -28,7 +28,7 @@ function GlobalPreferencesCtrl(globalPreferencesSvc) {
   function load() {
 	 vm.ready = false;
 	 vm.error = false;
-	 globalPreferencesSvc.get()().query().$promise.then(gotGlobalPreferences, serviceError);
+	 systemInfoSvc.getGlobalPreferences()().query().$promise.then(gotGlobalPreferences, serviceError);
   }
 
   function gotGlobalPreferences(preferences) {

@@ -6,9 +6,9 @@
 angular.module('zoetropeControllers')
   .controller('DailyTransferCtrl', DailyTransferController);
 
-DailyTransferController.$inject = ['dailyTransferHistorySvc'];
+DailyTransferController.$inject = ['systemInfoSvc'];
 
-function DailyTransferController(dailyTransferHistorySvc) {
+function DailyTransferController(systemInfoSvc) {
 
   var vm = this;
   vm.daily_transfers = {};
@@ -31,7 +31,7 @@ function DailyTransferController(dailyTransferHistorySvc) {
   function load() {
 	 vm.ready = false;
 	 vm.error = false;
-	 dailyTransferHistorySvc.get()().query().$promise.then(gotDailyTransfers, serviceError);
+	 systemInfoSvc.getDailyTransferHistory()().query().$promise.then(gotDailyTransfers, serviceError);
   }
 
   function gotDailyTransfers(dailyTransfers) {

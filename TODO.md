@@ -24,3 +24,7 @@ The thing that most suggests itself here is when we're within the "warning" peri
 **Make the statistics section of the project page into a directive**
 
 **On the task page, add success/error feedback when projects are resumed, suspended or aborted**
+
+**Get rid of the "offline" mode for a lot of the pages**
+
+A few months ago I introduced functionality that caused Zoetrope to serve static json files instead of real data when accessed using the url "http://localhost". This was kind of useful while I was getting the main screens established but I no longer think it's necessary and is prone to breaking unless actively maintained. So I will be getting rid of this; accessing using localhost will just cause boinc to be queried as normal.

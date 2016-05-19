@@ -6,9 +6,9 @@
 angular.module('zoetropeControllers')
   .controller('HostInfoCtrl', HostInfoController);
 
-HostInfoController.$inject = ['hostInfoSvc'];
+HostInfoController.$inject = ['systemInfoSvc'];
 
-function HostInfoController(hostInfoSvc) {
+function HostInfoController(systemInfoSvc) {
 
   vm = this;
   vm.ready = false;
@@ -24,7 +24,7 @@ function HostInfoController(hostInfoSvc) {
   function load() {
 	 vm.ready = false;
 	 vm.error = false;
-	 hostInfoSvc.get()().query().$promise.then(gotHostInfo, serviceError);
+	 systemInfoSvc.getHostInfo()().query().$promise.then(gotHostInfo, serviceError);
   }
 
   function gotHostInfo(hostInfo) {

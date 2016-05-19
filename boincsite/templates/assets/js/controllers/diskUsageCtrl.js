@@ -6,9 +6,9 @@
 angular.module('zoetropeControllers')
   .controller('DiskUsageCtrl', DiskUsageController);
 
-DiskUsageController.$inject = ['diskUsageSvc'];
+DiskUsageController.$inject = ['systemInfoSvc'];
 
-function DiskUsageController(diskUsageSvc) {
+function DiskUsageController(systemInfoSvc) {
 
   var vm = this;
   vm.orderProp = 'master_url';
@@ -29,7 +29,7 @@ function DiskUsageController(diskUsageSvc) {
   function load() {
 	 vm.ready = false;
 	 vm.error = false;
-	 diskUsageSvc.get()().query().$promise.then(gotDiskUsages, serviceError);
+	 systemInfoSvc.getDiskUsage()().query().$promise.then(gotDiskUsages, serviceError);
   }
 
   function gotDiskUsages(diskUsages) {
