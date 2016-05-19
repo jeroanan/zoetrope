@@ -6,13 +6,9 @@
 angular.module('zoetropeControllers')
   .controller('ProjectCtrl', ProjectController);
 
-ProjectController.$inject = ['$routeParams',
-									  'projectSvc',
-									  'statisicsSvc'];
+ProjectController.$inject = ['$routeParams', 'projectSvc'];
 
-function ProjectController($routeParams,
-									projectSvc,
-									statisicsSvc) {
+function ProjectController($routeParams, projectSvc) {
 
   var vm = this;
   vm.ready = false;
@@ -46,7 +42,7 @@ function ProjectController($routeParams,
   function gotProject(project) {
 	 vm.project = project;
 	 setTitle('Project Summary -- ' + project.name);
-	 statisicsSvc.get(project.master_url)().query().$promise.then(gotStats, serviceError);		
+	 projectSvc.getProjectStatistics(project.master_url)().query().$promise.then(gotStats, serviceError);		
   }
 
   function gotStats(stats) {

@@ -34,7 +34,8 @@ function ProjectSvc($resource, jsonSvc) {
 	 attachProject: attachProject,
 	 detachProject: detachProject,
 	 getAvailableProjects: getAvailableProjects,
-	 getAttachedProjects: getAttachedProjects
+	 getAttachedProjects: getAttachedProjects,
+	 getProjectStatistics: getProjectStatistics
   };
 
   /**
@@ -164,6 +165,21 @@ function ProjectSvc($resource, jsonSvc) {
 	*/
   function getAttachedProjects() {
 	 return jsonSvc.getJson('/projects_json', true);
+  }
+
+  /**
+	* Get daily statistics for the given project.
+	*
+	* Params:
+	* @projectUrl: The url of the project to get statistics for.
+	*/ 
+  function getProjectStatistics(projectUrl) {
+	 
+	 var data = {
+      'projectUrl': projectUrl
+    };
+	 
+	 return jsonSvc.getJson('/get_statistics_json', true, data);
   }
 
   /**
