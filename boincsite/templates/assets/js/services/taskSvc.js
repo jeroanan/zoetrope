@@ -12,6 +12,7 @@ function TaskService($resource, jsonSvc) {
 
   var svc = {
 	 getTask: getTask,
+	 getAllTasks: getAllTasks,
 	 suspendTask: suspendTask,
 	 resumeTask: resumeTask,
 	 abortTask: abortTask
@@ -25,6 +26,16 @@ function TaskService($resource, jsonSvc) {
 	*/
   function getTask(taskName) {
 	 return jsonSvc.get('/static/json/task.json', '/task_json?task_name=' + taskName);
+  }
+
+  /**
+	* Get all tasks:
+	*
+	* This includes running tasks, tasks waiting to run or that are suspended,
+	* and tasks that have been completed or aborted but haven't been uploaded yet.
+	*/
+  function getAllTasks() {
+	 return jsonSvc.get('/static/json/tasks.json', '/tasks_json', true);
   }
 
   /**

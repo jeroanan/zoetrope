@@ -5,9 +5,9 @@
  */
 angular.module('zoetropeControllers').controller('IndexCtrl', IndexController);
 
-IndexController.$inject = ['tasksSvc', 'projectSvc'];
+IndexController.$inject = ['taskSvc', 'projectSvc'];
 
-function IndexController(tasksSvc, projectSvc) {
+function IndexController(taskSvc, projectSvc) {
 
   var vm = this;
   vm.tasks = {};
@@ -26,7 +26,7 @@ function IndexController(tasksSvc, projectSvc) {
   function load() {
 	 vm.ready = false;
 	 vm.error = false;
-	 tasksSvc.get()().query().$promise.then(gotTasks, serviceError);
+	 taskSvc.getAllTasks()().query().$promise.then(gotTasks, serviceError);
   }
 
   function gotTasks(tasks) {
