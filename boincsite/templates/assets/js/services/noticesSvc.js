@@ -13,7 +13,7 @@ function NoticesSvc(jsonSvc) {
 
  var svc = {
    get: function() {
-     return jsonSvc.get('', '/notices_json', true);
+     return jsonSvc.getJson('/notices_json', true);
    }
  };
 

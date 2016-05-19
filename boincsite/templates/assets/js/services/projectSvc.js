@@ -1,8 +1,22 @@
 /**
- * Service to handle project operastions
- *
- * (c) David Wilson 2016, licensed under GPL V3.
- */
+* Service to handle project operastions
+*
+* Copyright (c) David Wilson 2016
+* This file is part of Zoetrope.
+* 
+* Zoetrope is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+* 
+* Zoetrope is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* 
+* You should have received a copy of the GNU General Public License
+* along with Zoetrope.  If not, see <http://www.gnu.org/licenses/>.
+*/
 angular.module('zoetropeServices')
   .factory('projectSvc', ProjectSvc);
 
@@ -30,7 +44,7 @@ function ProjectSvc($resource, jsonSvc) {
   * @projectName: The name of the project, e.g. asteroids@home
   */
   function getProject(projectName) {
-	 return jsonSvc.get('/static/json/project.json', '/project_json?project=' + projectName);
+	 return jsonSvc.getJson('/project_json?project=' + projectName, false);
   }
 
   /**
@@ -119,7 +133,7 @@ function ProjectSvc($resource, jsonSvc) {
 		data.username = username;
 	 }
 
-	 return sendServiceData(endpoint, data);
+	 return jsonSvc.sendJson(endpoint, data);
   }
 
   /**
@@ -135,21 +149,21 @@ function ProjectSvc($resource, jsonSvc) {
       'projectUrl': projectUrl
     };
 
-	 return sendServiceData('/detach_project', data);
+	 return jsonSvc.sendJson('/detach_project', data);
   }
 
   /**
 	* Get a list of all public projects
 	*/
   function getAvailableProjects() {
-	 return jsonSvc.get('/static/json/allprojectslist.json', '/get_all_projects_list_json', true);
+	 return jsonSvc.getJson('/get_all_projects_list_json', true);
   }
 
   /**
 	* Get a list of currently-attached projects
 	*/
   function getAttachedProjects() {
-	 return jsonSvc.get('/static/json/projects.json', '/projects_json', true);
+	 return jsonSvc.getJson('/projects_json', true);
   }
 
   /**
@@ -166,31 +180,9 @@ function ProjectSvc($resource, jsonSvc) {
       'projectUrl': projectUrl
     };
 
-	 return sendServiceData(endpoint, data);
+	 return jsonSvc.sendJson(endpoint, data);
   }
 
-  /**
-	* Post the given data to the given endpoint
-	*
-	* This method is internal to this service and isn't exposed by default.
-	*
-	* Params:
-	* @endpoint: The endpoint on the webserver to send the data to
-	* @data: The data to send to the endpoint
-	*
-	* Returns: 
-	* A $resource that will promise the server's response
-	*/
-  function sendServiceData(endpoint, data) {
-	 return function() {
-      var res = $resource(endpoint, data, {
-        query: {method: 'POST'}
-      });
-		
-      return res;
-    };
-  }
-  
   return svc;
 }
 

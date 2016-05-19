@@ -12,7 +12,7 @@ function GetPlatformService(jsonSvc) {
 
   function getPlatform(projectUrl) {
 
-	 return jsonSvc.get('', '/get_platform_json', false);
+	 return jsonSvc.getJson('/get_platform_json', false);
   }
   
   var svc = {	 

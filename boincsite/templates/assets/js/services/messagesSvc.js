@@ -12,7 +12,7 @@ function MessagesSvc(jsonSvc) {
 
   var svc = {
     get: function() {
-      return jsonSvc.get('/static/json/messages.json', '/messages_json', true);
+      return jsonSvc.getJson('/messages_json', true);
     }
   };
 

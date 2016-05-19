@@ -23,28 +23,28 @@ function SystemInfoService(jsonSvc) {
 	* Get project-by-project disk usage and disk size/disk free details.
 	*/
   function getDiskUsage() {
-	 return jsonSvc.get('/static/json/disk_usage.json', '/disk_usage_json');
+	 return jsonSvc.getJson('/disk_usage_json', false);
   }
 
   /**
 	* Get upload/download figures for each day as well as total upload/download.
 	*/
   function getDailyTransferHistory() {
-	 return jsonSvc.get('/static/json/daily_transfer_history.json', '/daily_transfer_history_json', true);
+	 return jsonSvc.getJson('/daily_transfer_history_json', true);
   }
 
   /**
 	* Get BOINC global preferences.
 	*/
   function getGlobalPreferences() {
-	 return jsonSvc.get('', '/get_global_preferences_json', false);
+	 return jsonSvc.getJson('/get_global_preferences_json', false);
   }
 
   /**
 	* Get information about the BOINC client and the computer it is running on.
 	*/
   function getHostInfo() {
-	 return jsonSvc.get('/static/json/host_info.json', '/host_info_json');
+	 return jsonSvc.getJson('/host_info_json');
   }
 
   return svc;

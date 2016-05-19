@@ -10,17 +10,18 @@ StatisticsService.$inject = ['jsonSvc'];
 
 function StatisticsService(jsonSvc) {
 
+  var svc = {	 
+	 get: getStatistics
+  };
+
   function getStatistics(projectUrl) {
 
 	 var data = {
 		projectUrl: projectUrl
 	 };
-	 return jsonSvc.get('', '/get_statistics_json', true, data);
-  }
-  
-  var svc = {	 
-	 get: getStatistics
-  };
+
+	 return jsonSvc.getJson('/get_statistics_json', true, data);
+  }  
 
   return svc;
 }

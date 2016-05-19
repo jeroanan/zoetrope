@@ -25,7 +25,7 @@ function TaskService($resource, jsonSvc) {
 	* @taskName: The name of the task to get details for
 	*/
   function getTask(taskName) {
-	 return jsonSvc.get('/static/json/task.json', '/task_json?task_name=' + taskName);
+	 return jsonSvc.getJson('/task_json?task_name=' + taskName, false);
   }
 
   /**
@@ -35,7 +35,7 @@ function TaskService($resource, jsonSvc) {
 	* and tasks that have been completed or aborted but haven't been uploaded yet.
 	*/
   function getAllTasks() {
-	 return jsonSvc.get('/static/json/tasks.json', '/tasks_json', true);
+	 return jsonSvc.getJson('/tasks_json', true);
   }
 
   /**
@@ -82,29 +82,7 @@ function TaskService($resource, jsonSvc) {
 		task_name: taskName
 	 };
 
-	 return sendServiceData(endpoint, data);
-  }
-
-  /**
-	* Post the given data to the given endpoint
-	*
-	* This method is internal to this service and isn't exposed by default.
-	*
-	* Params:
-	* @endpoint: The endpoint on the webserver to send the data to
-	* @data: The data to send to the endpoint
-	*
-	* Returns: 
-	* A $resource that will promise the server's response
-	*/
-  function sendServiceData(endpoint, data) {
-	 return function() {
-      var res = $resource(endpoint, data, {
-        query: {method: 'POST'}
-      });
-		
-      return res;
-    };
+	 return jsonSvc.sendJson(endpoint, data);
   }
 
   return svc;

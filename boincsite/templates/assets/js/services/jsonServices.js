@@ -1,13 +1,5 @@
 /**
- * Get JSON data.
- *
- * When getting the JSON data, two paths are supplied: one to a JSON file stored
- * locally to the website and another that is a webservice endpoint. If the website
- * is running in "offline" mode (i.e. the user is accessing it via localhost) then
- * the locally-held JSON file is returned. Otherwise, it's the webservice endpoint.
- *
- * The rationale behind this is to allow for rapid development on a local development
- * environment without having to run boinc on it.
+ * Services to do with getting and sending JSON data in and out of Zoetrope
  *
  * (c) David Wilson 2016, licensed under GPL V3.
  */
@@ -19,34 +11,54 @@ JsonService.$inject = ['$resource'];
 function JsonService($resource) {
 
   var svc = {
-    get: function(offlinePath, onlinePath, isArray, data) {
-
-      function getPath(offlinePath, onlinePath) {
-        var offlineMode = window.location.hostname === 'localhost';
-
-        var path = '';
-        if (offlineMode===true) {
-          return offlinePath;
-        } else {
-          return onlinePath;
-        }
-      }
-
-      path = getPath(offlinePath, onlinePath);
-
-		if (!data) {
-		  data = {};
-		}
-
-      return function() {
-        var res = $resource(path, data, {
-          query: {method: 'GET', isArray: isArray}
-        });
-
-        return res;
-      };
-    }
+	 getJson: getJson,
+	 sendJson: sendJson
   };
+
+  /**
+	* Get json from the given endpoint.
+	* 
+	* Params:
+	* @endpoint: The path on the webserver to be called to retrieve the json
+	* @isArray: If true, expect a list of objects to be returned by the call.
+	*           Otherwise, it will just be a single object.
+	* @data: If supplied, a json object to send as a parameter to the endpoint.
+	*        If it isn't supplied then an empty json object is sent.
+	*/
+  function getJson(endpoint, isArray, data) {
+
+	 if (!data) {
+		data = {};
+	 }
+		
+	 return function() {
+      var res = $resource(endpoint, data, {
+        query: {method: 'GET', isArray: isArray}
+      });
+
+      return res;
+    };	 
+  }
+
+  /**
+	* Post the given data to the given endpoint
+	*
+	* Params:
+	* @endpoint: The endpoint on the webserver to send the data to
+	* @data: The data to send to the endpoint
+	*
+	* Returns: 
+	* A $resource that will promise the server's response
+	*/
+  function sendJson(endpoint, data) {
+	 return function() {
+      var res = $resource(endpoint, data, {
+        query: {method: 'POST'}
+      });
+		
+      return res;
+    };
+  }
 
   return svc;
 }
