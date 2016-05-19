@@ -6,9 +6,9 @@
 angular.module('zoetropeControllers')
   .controller('attachProjectCtrl', AttachProjectController);
 
-AttachProjectController.$inject = ['projectSvc', 'allProjectListSvc', 'md5Svc'];
+AttachProjectController.$inject = ['projectSvc', 'md5Svc'];
 
-function AttachProjectController(projectSvc, allProjectListSvc, md5Svc) {
+function AttachProjectController(projectSvc, md5Svc) {
 
   var vm = this;
   vm.selectedProject = '';
@@ -22,7 +22,7 @@ function AttachProjectController(projectSvc, allProjectListSvc, md5Svc) {
   vm.loading = false;
   vm.selectedProjectChanged = selectedProjectChanged;
   
-  allProjectListSvc.get()().query().$promise.then(gotProjects);  
+  projectSvc.getAvailableProjects()().query().$promise.then(gotProjects);  
 
   document.title = vm.title;
 
