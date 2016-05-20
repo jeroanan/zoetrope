@@ -44,12 +44,7 @@ class ProjectTasks(object):
         self.__client.project_resume(project_url)
 
     def update_project(self, project_url):
-        client.GUI_RPC_PASSWD_FILE = conf.gui_rpc_file_location
-        password = client.read_gui_rpc_password()
-
-        with client.BoincClient(passwd=password) as c:
-            c.authorize(password)
-            c.project_update(project_url)
+        self.do_authorized_task(lambda c: c.project_update(project_url))
 
     def attach_project(self, project_url, email_address, password_hash):
         """
@@ -70,56 +65,24 @@ class ProjectTasks(object):
           Otherwise it will be false and the error_message field will contain details of
           what went wrong.
         """
-        client.GUI_RPC_PASSWD_FILE = conf.gui_rpc_file_location
-        password = client.read_gui_rpc_password()
+        lookup_function = lambda c: c.lookup_account(project_url, email_address, password_hash, already_hashed=True)
+        poll_function = lambda c: c.lookup_account_poll()
+        return self.attach_new_or_existing_account(project_url, lookup_function, poll_function)
 
-        with client.BoincClient(passwd=password) as c:
-            c.authorize(password)
-
-            c.lookup_account(project_url, email_address, password_hash, already_hashed=True)
-
-            lookup_result = c.lookup_account_poll()
-            success_error = se.SuccessError()
-            
-            try:
-                still_waiting = '-204'
-
-                while lookup_result.error_num == still_waiting:
-
-                    lookup_result = c.lookup_account_poll()
-                    time.sleep(2)
-                
-                    if lookup_result.authenticator != '':
-                        attach_result = c.project_attach(project_url, lookup_result.authenticator)
-                    elif lookup_result.error_msg != '':
-                        success_error.success = False
-                        success_error.error_message = lookup_result.error_msg
-                        
-            except AttributeError as e:
-                success_error.success = False
-                success_error.error_message = str(e)
-            finally:
-                return success_error
-    
     def detach_project(self, project_url):
-        client.GUI_RPC_PASSWD_FILE = conf.gui_rpc_file_location
-        password = client.read_gui_rpc_password()
-
-        with client.BoincClient(passwd=password) as c:
-            c.authorize(password)
-
-            return c.project_detach(project_url)
+        return self.do_authorized_task(lambda c: c.project_detach(project_url))
 
     def create_account_and_attach_to_project(self, project_url, email_address, password_hash, username):
-        client.GUI_RPC_PASSWD_FILE = conf.gui_rpc_file_location
-        password = client.read_gui_rpc_password()
+        lookup_function = lambda c: c.create_account(project_url, email_address, password_hash, username)
+        poll_function = lambda c: c.create_account_poll()
+        return self.attach_new_or_existing_account(project_url, lookup_function, poll_function)
 
-        with client.BoincClient(passwd=password) as c:
-            c.authorize(password)
+    def attach_new_or_existing_account(self, project_url, lookup_or_create_function, poll_function):
 
-            c.create_account(project_url, email_address, password_hash, username)
+        def work_function(c):
+            lookup_or_create_function(c)
 
-            lookup_result = c.create_account_poll()
+            lookup_result = poll_function(c)
             success_error = se.SuccessError()
 
             try:
@@ -127,20 +90,31 @@ class ProjectTasks(object):
 
                 while lookup_result.error_num == still_waiting:
 
-                    lookup_result = c.create_account_poll()
+                    lookup_result = poll_function(c)
                     time.sleep(2)
                 
                     if lookup_result.authenticator != '':
+                        print('Attaching. project_url: ' + project_url + ' Authenticator: ' + lookup_result.authenticator)
                         attach_result = c.project_attach(project_url, lookup_result.authenticator)
                     elif lookup_result.error_msg != '':
                         success_error.success = False
                         success_error.error_message = lookup_result.error_msg
-                        
+
             except AttributeError as e:
                 success_error.success = False
                 success_error.error_message = str(e)
             finally:
                 return success_error
+
+        return self.do_authorized_task(lambda c: work_function(c))
+
+    def do_authorized_task(self, work_function):
+        client.GUI_RPC_PASSWD_FILE = conf.gui_rpc_file_location
+        password = client.read_gui_rpc_password()
+
+        with client.BoincClient(passwd=password) as c:
+            c.authorize(password)
+            return work_function(c)
 
     def get_project_statistics(self, project_url):
 
