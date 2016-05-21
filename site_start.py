@@ -24,8 +24,6 @@ import boincsite.boinc.ProjectTasks as pt
 import boincsite.boinc.TaskTasks as tt
 import boincsite.boinc.SystemInfoTasks as sit
 
-import boincsite.boinc.RpcFactory as rf
-
 import boincsite.status.AvailableProject as ap
 import boincsite.status.DailyTransfer as dt
 import boincsite.status.DiskUsage as duj
@@ -42,8 +40,6 @@ WorkingDirectory = os.path.dirname(os.path.abspath(__file__))
 class WebServer(object):
 
     def __init__(self):
-        self.__rpc_factory = rf.RpcFactory
-
         self.__project_tasks = pt.ProjectTasks()
         self.__task_tasks = tt.TaskTasks()
         self.__system_info_tasks = sit.SystemInfoTasks()
@@ -91,7 +87,8 @@ class WebServer(object):
 
     @cherrypy.expose
     def messages_json(self, **kwargs):
-        return self.__straight_json_dump('GetMessages', jsae, lambda x: list(x))
+        result = list(self.__system_info_tasks.get_messages())
+        return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
 
     @cherrypy.expose
     def tasks_json(self, **kwargs):
@@ -115,7 +112,8 @@ class WebServer(object):
 
     @cherrypy.expose
     def notices_json(self, **kwargs):
-        return self.__straight_json_dump('GetNotices', notice, lambda x: list(x))
+        result = list(self.__system_info_tasks.get_notices())
+        return json.dumps(result, self.__io, cls=notice.JSONEncoder)
 
     @cherrypy.expose
     def get_global_preferences_json(self, **kwargs):
@@ -131,15 +129,6 @@ class WebServer(object):
     def detach_project(self, **kwargs):
         result = self.project_operation(kwargs, self.__project_tasks.detach_project)
         return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
-
-    def __straight_json_dump(self, command_type, result_type, post_process=None):
-        command = self.__rpc_factory.create(command_type)
-        result = command.execute()
-
-        if post_process is not None:
-            result = post_process(result)
-
-        return json.dumps(result, self.__io, cls=result_type.JSONEncoder)
 
     def __render(self, page, **kwargs):
         return self.__renderer.render(page, **kwargs)
@@ -213,8 +202,7 @@ class WebServer(object):
 
     @cherrypy.expose
     def experimental_task(self, **kwargs):
-        command = self.__rpc_factory.create('ExperimentalTask')
-        command.execute()
+        pass
     
 
 if __name__=='__main__':
