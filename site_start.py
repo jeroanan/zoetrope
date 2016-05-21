@@ -22,10 +22,12 @@ import cherrypy
 
 import boincsite.boinc.ProjectTasks as pt
 import boincsite.boinc.TaskTasks as tt
+import boincsite.boinc.SystemInfoTasks as sit
 
 import boincsite.boinc.RpcFactory as rf
 
 import boincsite.status.AvailableProject as ap
+import boincsite.status.DailyTransfer as dt
 import boincsite.status.DiskUsage as duj
 import boincsite.status.GlobalPreferences as ggp
 import boincsite.status.Notice as notice
@@ -44,6 +46,7 @@ class WebServer(object):
 
         self.__project_tasks = pt.ProjectTasks()
         self.__task_tasks = tt.TaskTasks()
+        self.__system_info_tasks = sit.SystemInfoTasks()
 
         self.__renderer = tr.TemplateRenderer()
         self.__io = StringIO()
@@ -97,15 +100,19 @@ class WebServer(object):
 
     @cherrypy.expose
     def disk_usage_json(self, **kwargs):
-        return self.__straight_json_dump('DiskUsage', duj)
+        result = self.__system_info_tasks.get_disk_usage()
+        return json.dumps(result, self.__io, cls=duj.JSONEncoder)
 
     @cherrypy.expose
     def host_info_json(self, **kwargs):
-        return self.__straight_json_dump('HostInfo', jsae)
+        result = self.__system_info_tasks.get_host_info()
+        return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
+#        return self.__straight_json_dump('HostInfo', jsae)
 
     @cherrypy.expose
     def daily_transfer_history_json(self, **kwargs):
-        return self.__straight_json_dump('DailyTransferHistory', dt, lambda x: list(x))
+        result = list(self.__system_info_tasks.get_daily_transfer_history())
+        return json.dumps(result, self.__io, cls=dt.JSONEncoder)
 
     @cherrypy.expose
     def notices_json(self, **kwargs):
@@ -113,7 +120,8 @@ class WebServer(object):
 
     @cherrypy.expose
     def get_global_preferences_json(self, **kwargs):
-        return self.__straight_json_dump('GetGlobalPreferences', ggp)
+        result = self.__system_info_tasks.get_global_preferences()
+        return json.dumps(result, self.__io, cls=ggp.JSONEncoder)
 
     @cherrypy.expose
     def get_all_projects_list_json(self, **kwargs):
@@ -177,8 +185,7 @@ class WebServer(object):
 
     @cherrypy.expose
     def get_platform_json(self, **kwargs):
-        command = self.__rpc_factory.create('GetPlatform')
-        platform = command.execute()
+        platform = self.__system_info_tasks.get_platform()
         return '{{"platform": "{platform}"}}'.format(platform=platform)
 
     @cherrypy.expose

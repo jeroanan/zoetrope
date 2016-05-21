@@ -12,8 +12,17 @@ import boincsite.status.Task as t
 
 
 class TaskTasks(object):
+    """
+    Handles tasks that perform Task operations
+    """
 
     def get_tasks(self):
+        """
+        Get all tasks
+
+	This includes running tasks, tasks waiting to run or that are suspended,
+	and tasks that have been completed or aborted but haven't been uploaded yet.
+        """
         try:
             results = client.BoincClient().get_results(False)
             return map(lambda r: t.Task(r), results)
@@ -22,6 +31,12 @@ class TaskTasks(object):
             return []
 
     def get_task(self, task_name):
+        """
+        Get details of a specific task
+	
+	Params:
+	  taskName: The name of the task to get details for
+        """
         all_tasks = self.get_tasks()
 
         ts = [t for t in all_tasks if t.name==task_name]
@@ -32,13 +47,31 @@ class TaskTasks(object):
         return ts.pop()
 
     def suspend_task(self, task_name):
+        """
+        Suspend processing of the given task
+	
+	Params:
+	  taskName: The name of the task to suspend
+        """
         task = self.get_task(task_name)
         at.do_authorized_task(lambda cl: cl.suspend_result(task.name, task.project_url))
 
     def resume_task(self, task_name):
+        """
+        Resume processing of the given task
+        
+	Params:
+	  taskName: The name of the task to resume
+        """
         task = self.get_task(task_name)
         at.do_authorized_task(lambda cl: cl.resume_result(task.name, task.project_url))
 
     def abort_task(self, task_name):
+        """
+        Abort processing of the given task
+	
+	Params:
+	  taskName: The name of the task to abort
+        """
         task = self.get_task(task_name)
         at.do_authorized_task(lambda cl: cl.abort_result(task.name, task.project_url))
