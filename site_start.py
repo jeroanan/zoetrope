@@ -107,7 +107,6 @@ class WebServer(object):
     def host_info_json(self, **kwargs):
         result = self.__system_info_tasks.get_host_info()
         return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
-#        return self.__straight_json_dump('HostInfo', jsae)
 
     @cherrypy.expose
     def daily_transfer_history_json(self, **kwargs):
