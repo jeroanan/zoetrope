@@ -21,6 +21,8 @@ import os
 import cherrypy
 
 import boincsite.boinc.ProjectTasks as pt
+import boincsite.boinc.TaskTasks as tt
+
 import boincsite.boinc.RpcFactory as rf
 
 import boincsite.status.AvailableProject as ap
@@ -41,6 +43,7 @@ class WebServer(object):
         self.__rpc_factory = rf.RpcFactory
 
         self.__project_tasks = pt.ProjectTasks()
+        self.__task_tasks = tt.TaskTasks()
 
         self.__renderer = tr.TemplateRenderer()
         self.__io = StringIO()
@@ -50,8 +53,7 @@ class WebServer(object):
 
     @cherrypy.expose
     def index(self, **kwargs):
-        tasks_command = self.__rpc_factory.create('GetTasks')
-        boinc_tasks = list(tasks_command.execute())
+        boinc_tasks = self.__task_tasks.get_tasks()
 
         projects = self.__get_projects()
 
@@ -64,8 +66,7 @@ class WebServer(object):
     @cherrypy.expose
     def task_json(self, **kwargs):
         task_name = kwargs.get('task_name', '')
-        task_command = self.__rpc_factory.create('GetTask')
-        task = task_command.execute(task_name)
+        task = self.__task_tasks.get_task(task_name)
         return json.dumps(task, self.__io, cls=jsae.JSONEncoder)
 
     @cherrypy.expose
@@ -91,7 +92,8 @@ class WebServer(object):
 
     @cherrypy.expose
     def tasks_json(self, **kwargs):
-        return self.__straight_json_dump('GetTasks', jsae, lambda x: list(x))
+        result = list(self.__task_tasks.get_tasks())
+        return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
 
     @cherrypy.expose
     def disk_usage_json(self, **kwargs):
@@ -137,15 +139,30 @@ class WebServer(object):
 
     @cherrypy.expose
     def suspend_task(self, **kwargs):
-        self.task_name_operation('SuspendTask', kwargs)
+        task_name = kwargs.get('task_name', '')
+
+        if task_name=='':
+            return
+
+        self.__task_tasks.suspend_task(task_name)
 
     @cherrypy.expose
     def resume_task(self, **kwargs):
-        self.task_name_operation('ResumeTask', kwargs)
+        task_name = kwargs.get('task_name', '')
+
+        if task_name=='':
+            return
+
+        self.__task_tasks.resume_task(task_name)
 
     @cherrypy.expose
     def abort_task(self, **kwargs):
-        self.task_name_operation('AbortTask', kwargs)
+        task_name = kwargs.get('task_name', '')
+
+        if task_name=='':
+            return
+
+        self.__task_tasks.abort_task(task_name)
 
     def task_name_operation(self, operation, kwargs):
         task_name = kwargs.get('task_name', '')

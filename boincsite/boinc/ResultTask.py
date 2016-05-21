@@ -3,7 +3,7 @@
 # Licensed under the GPL version 3
 
 import config as c
-import boincsite.boinc.GetTask as gt
+import boincsite.boinc.TaskTasks as tt
 
 import lib.boincindicator.client as client
 
@@ -11,7 +11,7 @@ import lib.boincindicator.client as client
 class ResultTask(object):
 
     def __init__(self, task_name):
-        self.__task = gt.GetTask().execute(task_name)
+        self.__task = tt.TaskTasks().get_task(task_name)
 
         client.GUI_RPC_PASSWD_FILE = c.gui_rpc_file_location
         self.__password = client.read_gui_rpc_password()

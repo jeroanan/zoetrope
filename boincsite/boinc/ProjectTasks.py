@@ -19,6 +19,7 @@ import time
 import lib.boincindicator.client as client
 import lib.boincindicator.resulttypes.SuccessError as se
 
+import boincsite.boinc.AuthorizedTask as at
 import boincsite.status.Project as p
 import boincsite.util.DateTimeUtil as dt
 
@@ -103,7 +104,7 @@ class ProjectTasks(object):
         Params:
           project_url: The url of the project to perform the request on
         """          
-        self.do_authorized_task(lambda c: c.project_update(project_url))
+        at.do_authorized_task(lambda c: c.project_update(project_url))
 
     def attach_project(self, project_url, email_address, password_hash):
         """
@@ -127,7 +128,7 @@ class ProjectTasks(object):
 	Params:
 	  projectUrl: The url of the project to detach from
         """
-        return self.do_authorized_task(lambda c: c.project_detach(project_url))
+        return at.do_authorized_task(lambda c: c.project_detach(project_url))
 
     def create_account_and_attach_to_project(self, project_url, email_address, password_hash, username):
         """
@@ -196,24 +197,7 @@ class ProjectTasks(object):
             finally:
                 return success_error
 
-        return self.do_authorized_task(lambda c: work_function(c))
-
-    def do_authorized_task(self, work_function):
-        """
-        Generic function to perform a BOINC task with an authorized client
-
-        Params:
-          work_function: What should be done once authorization has taken place.
-
-        Returns:
-          Whatever is returned by work_function
-        """
-        client.GUI_RPC_PASSWD_FILE = conf.gui_rpc_file_location
-        password = client.read_gui_rpc_password()
-
-        with client.BoincClient(passwd=password) as c:
-            c.authorize(password)
-            return work_function(c)
+        return at.do_authorized_task(lambda c: work_function(c))
 
     def get_project_statistics(self, project_url):
         """
