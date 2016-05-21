@@ -74,8 +74,7 @@ class WebServer(object):
 
     @cherrypy.expose
     def get_statistics_json(self, **kwargs):
-        project_url = kwargs.get('projectUrl', '')
-        statistics = self.__project_tasks.get_project_statistics(project_url)
+        statistics = self.project_operation(kwargs, self.__project_tasks.get_project_statistics)
         return json.dumps(statistics, self.__io, cls=jsae.JSONEncoder)
 
     @cherrypy.expose
@@ -121,8 +120,7 @@ class WebServer(object):
 
     @cherrypy.expose
     def detach_project(self, **kwargs):
-        project_url = kwargs.get('projectUrl', '')
-        result = self.__project_tasks.detach_project(project_url)
+        result = self.project_operation(kwargs, self.__project_tasks.detach_project)
         return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
 
     def __straight_json_dump(self, command_type, result_type, post_process=None):
@@ -184,28 +182,27 @@ class WebServer(object):
 
     @cherrypy.expose
     def no_more_work(self, **kwargs):
-        project_url = kwargs.get('projectUrl', '')
-        self.__project_tasks.no_more_work_for_project(project_url)
+        return self.project_operation(kwargs, self.__project_tasks.no_more_work_for_project)
 
     @cherrypy.expose
     def allow_more_work(self, **kwargs):
-        project_url = kwargs.get('projectUrl', '')
-        self.__project_tasks.allow_more_work_for_project(project_url)
+        return self.project_operation(kwargs, self.__project_tasks.allow_more_work_for_project)
 
     @cherrypy.expose
     def suspend_project(self, **kwargs):
-        project_url = kwargs.get('projectUrl', '')
-        self.__project_tasks.suspend_project(project_url)
+        return self.project_operation(kwargs, self.__project_tasks.suspend_project)
 
     @cherrypy.expose
     def resume_project(self, **kwargs):
-        project_url = kwargs.get('projectUrl', '')
-        self.__project_tasks.resume_project(project_url)
+        return self.project_operation(kwargs, self.__project_tasks.resume_project)
 
     @cherrypy.expose
     def update_project(self, **kwargs):
+        return self.project_operation(kwargs, self.__project_tasks.update_project)
+
+    def project_operation(self, kwargs, operation_function):
         project_url = kwargs.get('projectUrl', '')
-        self.__project_tasks.update_project(project_url)
+        return operation_function(project_url)
 
     @cherrypy.expose
     def experimental_task(self, **kwargs):
