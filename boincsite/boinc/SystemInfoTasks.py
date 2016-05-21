@@ -81,5 +81,3 @@ class SystemInfoTasks(object):
         Get notices sent by attached projects.
         """
         return map(lambda x: n.Notice(x), self.__client.get_notices())
-
-    
