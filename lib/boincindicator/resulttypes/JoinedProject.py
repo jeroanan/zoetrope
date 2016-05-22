@@ -65,11 +65,14 @@ class JoinedProject(struct.Struct):
         self.master_url_fetch_pending = ''
         self.dont_request_more_work = False
         self.suspended_via_gui = False
-        self.scheduler_rpc_in_progress = False # This seems to be present when it is.
+        self.scheduler_rpc_in_progress = False
+        self.detach_when_done = False
 
     @classmethod
     def parse(cls, xml):
         joined_project = super(JoinedProject, cls).parse(xml)
+
+        print(ElementTree.tostring(xml))
 
         for c in xml:
             if c.tag=='dont_request_more_work':
@@ -78,5 +81,7 @@ class JoinedProject(struct.Struct):
                 joined_project.attached_via_acct_mgr = True
             elif c.tag == 'suspended_via_gui':
                 joined_project.suspend_via_gui = True
+            elif c.tag == 'detach_when_done':
+                joined_project.detach_when_done = True
 
         return joined_project

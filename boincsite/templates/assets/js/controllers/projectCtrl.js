@@ -29,6 +29,8 @@ function ProjectController($routeParams, projectSvc) {
   vm.allowMoreWorkClicked = allowMoreWorkClicked;
   vm.suspendClicked = suspendClicked;
   vm.resumeClicked = resumeClicked;
+  vm.detachWhenDoneClicked = detachWhenDoneClicked;
+  vm.dontDetachWhenDoneClicked = dontDetachWhenDoneClicked;
 
   document.title = vm.title;
 
@@ -108,6 +110,14 @@ function ProjectController($routeParams, projectSvc) {
 	 projectSvc.resumeProject(vm.project.master_url)().query().$promise.then(function() {
 		vm.project.suspended_via_gui = false;
 	 });
+  }
+
+  function detachWhenDoneClicked() {
+	 projectSvc.detachWhenDone(vm.project.master_url)().query();
+  }
+
+  function dontDetachWhenDoneClicked() {
+	 projectSvc.dontDetachWhenDone(vm.project.master_url)().query();
   }
 
   function setTitle(title) {

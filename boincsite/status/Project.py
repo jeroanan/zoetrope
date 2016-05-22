@@ -29,7 +29,8 @@ class Project(object):
                        'gui_urls',
                        'master_url',
                        'scheduler_rpc_pending',
-                       'attached_via_account_manager'
+                       'attached_via_account_manager',
+                       'detach_when_done'
                        ]
         
         self.name = project.project_name
@@ -54,6 +55,7 @@ class Project(object):
         self.last_rpc = project.last_rpc_time
         self.project_files_downloaded = project.project_files_downloaded_time
         self.gui_urls = []
+        self.detach_when_done = project.detach_when_done
 
 
 class GuiUrl(object):

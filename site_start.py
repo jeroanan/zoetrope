@@ -130,6 +130,14 @@ class WebServer(object):
         result = self.project_operation(kwargs, self.__project_tasks.detach_project)
         return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
 
+    @cherrypy.expose
+    def detach_project_when_done(self, **kwargs):
+        result = self.project_operation(kwargs, self.__project_tasks.detach_project_when_done)
+
+    @cherrypy.expose
+    def dont_detach_project_when_done(self, **kwargs):
+        result = self.project_operation(kwargs, self.__project_tasks.dont_detach_project_when_done)
+
     def __render(self, page, **kwargs):
         return self.__renderer.render(page, **kwargs)
 

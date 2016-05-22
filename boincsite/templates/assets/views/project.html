@@ -24,6 +24,7 @@
 		  <keyvalrow key="Ended" val="{{ vm.project.ended }}" />
 		  <keyvalrow key="Suspended via GUI?" val="{{ vm.project.suspended_via_gui }}" />
 		  <keyvalrow key="Don't request more work" val="{{ vm.project.dont_request_more_work }}" />
+		  <keyvalrow key="Detach project when all workunits done" val="{{ vm.project.detach_when_done }}" />
 		  <keyvalrow key="Disk usage" val="{{ vm.project.disk_usage }}" />
 		  <keyvalrow key="Resource share" val="{{ vm.project.resource_share }}" />
 		  
@@ -110,6 +111,14 @@
 		  <div class="row sidebar-button-row">
 			 <button class="btn btn-warning sidebar-button" ng-click="vm.detachClicked()">Detach Project</button>
 			 <detach-dialog projectname="{{vm.project.name}}" projecturl="{{vm.project.master_url}}" />
+		  </div>
+		  <div class="row sidebar-button-row">
+			 <button class="btn btn-warning sidebar-button" ng-click="vm.detachWhenDoneClicked()" ng-show="!vm.project.detach_when_done">
+				Detach When Done
+			 </button>
+			 <button class="btn btn-primary sidebar-button" ng-click="vm.dontDetachWhenDoneClicked()" ng-show="vm.project.detach_when_done">
+				Don't Detach When Done
+			 </button>
 		  </div>
 		  <div class="row sidebar-button-row">
 			 <button class="btn btn-primary sidebar-button" ng-click="vm.updateProject()">Update Project</button>

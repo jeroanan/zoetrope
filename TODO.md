@@ -25,3 +25,6 @@ The thing that most suggests itself here is when we're within the "warning" peri
 
 **On the task page, add success/error feedback when projects are resumed, suspended or aborted**
 
+**When clicking "Don't Detach When Done", I am unable to detect subsequently that the project shouldn't be detached when done**
+
+When I click "Detach When Done", it causes detach\_when\_done to appear in the project's XML. I can use that to determine whether I have requested to detach when done, as that element wasn't present before. However it remains even after I click "Don't Detach When Done". So how can I determine that I've asked to detach when done and then told BOINC not to? Is this a bug in BOINC?

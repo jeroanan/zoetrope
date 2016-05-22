@@ -226,3 +226,9 @@ class ProjectTasks(object):
 
         stats = self.__client.get_statistics()
         return [get_stats(s) for s in stats.project_statistics if do_filter(project_url, s)]
+
+    def detach_project_when_done(self, project_url):
+        at.do_authorized_task(lambda c: c.project_detach_when_done(project_url))
+
+    def dont_detach_project_when_done(self, project_url):
+        at.do_authorized_task(lambda c: c.project_dont_detach_when_done(project_url))

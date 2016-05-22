@@ -35,7 +35,9 @@ function ProjectSvc($resource, jsonSvc) {
 	 detachProject: detachProject,
 	 getAvailableProjects: getAvailableProjects,
 	 getAttachedProjects: getAttachedProjects,
-	 getProjectStatistics: getProjectStatistics
+	 getProjectStatistics: getProjectStatistics,
+	 detachWhenDone: detachWhenDone,
+	 dontDetachWhenDone: dontDetachWhenDone
   };
 
   /**
@@ -180,6 +182,14 @@ function ProjectSvc($resource, jsonSvc) {
     };
 	 
 	 return jsonSvc.getJson('/get_statistics_json', true, data);
+  }
+
+  function detachWhenDone(projectUrl) {
+	 return projectOperation('/detach_project_when_done', projectUrl);
+  }
+
+  function dontDetachWhenDone(projectUrl) {
+	 return projectOperation('/dont_detach_project_when_done', projectUrl);
   }
 
   /**
