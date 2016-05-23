@@ -2,6 +2,8 @@
 #
 # Licensed under the GPL version 3
 
+import boincsite.util.DateTimeUtil as dt
+
 
 class Project(object):
 
@@ -30,7 +32,8 @@ class Project(object):
                        'master_url',
                        'scheduler_rpc_pending',
                        'attached_via_account_manager',
-                       'detach_when_done'
+                       'detach_when_done',
+                       'upload_backoff'
                        ]
         
         self.name = project.project_name
@@ -56,6 +59,11 @@ class Project(object):
         self.project_files_downloaded = project.project_files_downloaded_time
         self.gui_urls = []
         self.detach_when_done = project.detach_when_done
+
+        self.upload_backoff = None
+
+        if project.upload_backoff is not None:
+            self.upload_backoff = str(dt.get_difference_with_epoch(project.upload_backoff)).split('.')[0]
 
 
 class GuiUrl(object):

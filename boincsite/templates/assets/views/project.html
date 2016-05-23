@@ -27,6 +27,15 @@
 		  <keyvalrow key="Detach project when all workunits done" val="{{ vm.project.detach_when_done }}" />
 		  <keyvalrow key="Disk usage" val="{{ vm.project.disk_usage }}" />
 		  <keyvalrow key="Resource share" val="{{ vm.project.resource_share }}" />
+
+		  <div class="row task-row" ng-hide="vm.project.upload_backoff===null">
+			 <div class="col-lg-2" />
+			 <div class="col-xs-3 col-lg-4"><span><strong>Upload Backoff</strong></span></div>
+			 <div class="col-xs-3 col-lg-4">
+				<span ng-bind="vm.project.upload_backoff"></span>
+			 </div>
+			 <div class="col-xs-6 col-lg-2" />
+		  </div>
 		  
 		  <h2>Credit</h2>
 		  

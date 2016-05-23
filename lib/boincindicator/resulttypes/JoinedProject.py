@@ -67,12 +67,15 @@ class JoinedProject(struct.Struct):
         self.suspended_via_gui = False
         self.scheduler_rpc_in_progress = False
         self.detach_when_done = False
+        self.upload_backoff = None # I think this means that an upload has been attempted, it's failed for
+                                   # some reason, so the BOINC client is waiting for a period of time before
+                                   # trying again. Its text value represents a timestamp since epoch. The
+                                   # difference between epoch and that timestamp is how long remains until
+                                   # the upload is retried. e.g. 15933.489031
 
     @classmethod
     def parse(cls, xml):
-        joined_project = super(JoinedProject, cls).parse(xml)
-
-        print(ElementTree.tostring(xml))
+        joined_project = super(JoinedProject, cls).parse(xml)        
 
         for c in xml:
             if c.tag=='dont_request_more_work':
@@ -83,5 +86,7 @@ class JoinedProject(struct.Struct):
                 joined_project.suspend_via_gui = True
             elif c.tag == 'detach_when_done':
                 joined_project.detach_when_done = True
+            elif c.tag == 'upload_backoff':
+                joined_project.upload_backoff = c.text
 
         return joined_project
