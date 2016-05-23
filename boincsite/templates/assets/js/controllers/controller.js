@@ -55,7 +55,6 @@ var get_state_string = function(task) {
   case 3:
     return 'Computation error';
   case 4:
-	 console.log(task);
 	 return 'Uploading';
   case 5:
     return 'Ready to report';
