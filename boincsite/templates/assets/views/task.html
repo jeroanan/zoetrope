@@ -7,78 +7,24 @@
 	 An error occurred while loading the task. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>    
   </div>
   <div ng-show="vm.ready && !vm.error">
-	 <div class="row task-row">
-		<div class="col-xs-{{vm.col1XsWidth}} col-lg-2" />
-		<div class="col-xs-{{vm.col2XsWidth}} col-lg-4"><span><strong>Project name</strong></span></div>
-		<div class="col-xs-{{vm.col3XsWidth}} col-lg-4"><a ng-href="{{vm.task.project_url}}">{{vm.task.project_name}}</a>
-		</div>
-		<div class="col-xs-{{vm.col4XsWidth}} col-lg-2"></div>
-	 </div>
-	 
 
-    <div class="row task-row">
-		<div class="col-xs-{{vm.col1XsWidth}} col-lg-2" />
-		<div class="col-xs-{{vm.col2XsWidth}} col-lg-4"><span><strong>Percent done</strong></span></div>
-		<div class="col-xs-{{vm.col3XsWidth}} col-lg-4"><span ng-bind="vm.task.fraction_done + '%'" />
-		</div>
-		<div class="col-xs-{{vm.col4XsWidth}} col-lg-2"></div>
-	 </div>
+	 <keyvalrow key="Project name" val="{{vm.task.project_name}}" />
+
+	 <keyvalrow key="Percent done" val="{{vm.task.fraction_done}}%" />
+
+	 <keyvalrow key="Time elapsed" val="{{vm.task.time_so_far}}" />
+
+	 <keyvalrow key="Time Remaining" val="{{vm.task.estimated_cpu_time_remaining}}" />
+
+	 <keyvalrow key="Report Deadline" val="{{vm.task.report_deadline}}" />
+
+	 <keyvalrow key="Ready to report?" val="{{vm.task.ready_to_report}}" />
+
+	 <keyvalrow key="State" val="{{vm.task.state}}" />
 	 
-    <div class="row task-row">
-		<div class="col-xs-{{vm.col1XsWidth}} col-lg-2" />
-		<div class="col-xs-{{vm.col2XsWidth}} col-lg-4"><span><strong>Time Elapsed</strong></span></div>
-		<div class="col-xs-{{vm.col3XsWidth}} col-lg-4"><span ng-bind="vm.task.time_so_far" />
-		</div>
-		<div class="col-xs-{{vm.col4XsWidth}} col-lg-2"></div>
-	 </div>
-	 
-    <div class="row task-row">
-		<div class="col-xs-{{vm.col1XsWidth}} col-lg-2" />
-		<div class="col-xs-{{vm.col2XsWidth}} col-lg-4"><span><strong>Time Remaining</strong></span></div>
-		<div class="col-xs-{{vm.col3XsWidth}} col-lg-4"><span ng-bind="vm.task.estimated_cpu_time_remaining" />
-		</div>
-		<div class="col-xs-{{vm.col4XsWidth}} col-lg-2"></div>
-	 </div>
-	 
-    <div class="row task-row">
-		<div class="col-xs-{{vm.col1XsWidth}} col-lg-2" />
-		<div class="col-xs-{{vm.col2XsWidth}} col-lg-4"><span><strong>Report Deadline</strong></span></div>
-		<div class="col-xs-{{vm.col3XsWidth}} col-lg-4"><span ng-bind="vm.task.report_deadline" />
-		</div>
-		<div class="col-xs-{{vm.col4XsWidth}} col-lg-2"></div>
-	 </div>
-	 
-    <div class="row task-row">
-		<div class="col-xs-{{vm.col1XsWidth}} col-lg-2" />
-		<div class="col-xs-{{vm.col2XsWidth}} col-lg-4"><span><strong>Ready to report?</strong></span></div>
-		<div class="col-xs-{{vm.col3XsWidth}} col-lg-4"><span ng-bind="vm.task.ready_to_report" />
-		</div>
-		<div class="col-xs-{{vm.col4XsWidth}} col-lg-2"></div>
-	 </div>
-	 
-    <div class="row task-row">
-		<div class="col-xs-{{vm.col1XsWidth}} col-lg-2" />
-		<div class="col-xs-{{vm.col2XsWidth}} col-lg-4"><span><strong>State</strong></span></div>
-		<div class="col-xs-{{vm.col3XsWidth}} col-lg-4"><span ng-bind="vm.task.state" />
-		</div>
-		<div class="col-xs-{{vm.col4XsWidth}} col-lg-2"></div>
-	 </div>
-	 
-    <div class="row task-row">
-		<div class="col-xs-{{vm.col1XsWidth}} col-lg-2" />
-		<div class="col-xs-{{vm.col2XsWidth}} col-lg-4"><span><strong>Suspended via gui?</strong></span></div>
-		<div class="col-xs-{{vm.col3XsWidth}} col-lg-4"><span ng-bind="vm.task.suspended_via_gui" />
-		</div>
-		<div class="col-xs-{{vm.col4XsWidth}} col-lg-2"></div>
-	 </div>
-	 
-    <div class="row task-row">
-		<div class="col-xs-{{vm.col1XsWidth}} col-lg-2" />
-		<div class="col-xs-{{vm.col2XsWidth}} col-lg-4"><span><strong>Active task state</strong></span></div>
-		<div class="col-xs-{{vm.col3XsWidth}} col-lg-4"><span ng-bind="vm.task.active_task_state" />
-		</div>
-		<div class="col-xs-{{vm.col4XsWidth}} col-lg-2"></div>
-	 </div>
+	 <keyvalrow key="Suspended via gui?" val="{{vm.task.suspended_via_gui}}" />
+
+	 <keyvalrow key="Active task state" val="{{vm.task.active_task_state}}" />
 	 
     <div class="row task-controls">
       <div class="col-xs-3"></div>

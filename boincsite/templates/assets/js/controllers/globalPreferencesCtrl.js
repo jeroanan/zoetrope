@@ -15,11 +15,6 @@ function GlobalPreferencesCtrl(systemInfoSvc) {
   vm.prefs = {};
   vm.error = false;
   vm.load = load;
-
-  vm.col1XsWidth = '1';
-  vm.col2XsWidth = '5';
-  vm.col3XsWidth = '5';
-  vm.col4XsWidth = '1';
   
   document.title = vm.title;
 

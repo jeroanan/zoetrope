@@ -16,7 +16,7 @@ function HostInfoController(systemInfoSvc) {
   vm.host_info = {};
   vm.error = false;
   vm.load = load;
-  
+
   document.title = vm.title;
 
   load();
