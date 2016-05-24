@@ -52,15 +52,7 @@ class WebServer(object):
 
     @cherrypy.expose
     def index(self, **kwargs):
-        boinc_tasks = self.__task_tasks.get_tasks()
-
-        projects = self.__get_projects()
-
-        for t in boinc_tasks:
-            pns = [p.name for p in projects if p.master_url==t.project_url]
-            t.project_name = pns.pop()
-
-        return self.__render('index.html', tasks=boinc_tasks, title='Boinc Tasks')
+        return self.__render('index.html')
 
     @cherrypy.expose
     def task_json(self, **kwargs):

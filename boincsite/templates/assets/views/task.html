@@ -8,6 +8,8 @@
   </div>
   <div ng-show="vm.ready && !vm.error">
 
+	 <keyvalrow key="Workunit name" val="{{vm.task.name}}" />
+
 	 <keyvalrow key="Project name" val="{{vm.task.project_name}}" />
 
 	 <keyvalrow key="Percent done" val="{{vm.task.fraction_done}}%" />

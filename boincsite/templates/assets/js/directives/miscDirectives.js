@@ -27,7 +27,6 @@ angular.module('zoetropeDirectives').directive('keyvalrow', function() {
 		}
 
 		if (!$scope.col1XsWidth) {
-		  //$scope.col1XsWidth = '0';
 		  $scope.col1XsWidth = '1';
 		}
 
@@ -36,7 +35,6 @@ angular.module('zoetropeDirectives').directive('keyvalrow', function() {
 		}
 
 		if (!$scope.col2XsWidth) {
-		  // $scope.col2XsWidth = '3';
 		  $scope.col2XsWidth = '5';
 		}
 
@@ -45,7 +43,6 @@ angular.module('zoetropeDirectives').directive('keyvalrow', function() {
 		}
 
 		if (!$scope.col3XsWidth) {
-		  // $scope.col3XsWidth = '3';
 		  $scope.col3XsWidth = '5';
 		}
 
@@ -54,7 +51,6 @@ angular.module('zoetropeDirectives').directive('keyvalrow', function() {
 		}
 
 		if (!$scope.col4XsWidth) {
-		  // $scope.col4XsWidth = '6';
 		  $scope.col4XsWidth = '1'
 		}
 	 }],
