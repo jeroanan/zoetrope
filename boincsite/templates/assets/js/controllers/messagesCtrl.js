@@ -6,9 +6,9 @@
 angular.module('zoetropeControllers')
   .controller('MessagesCtrl', MessagesController);
 
-MessagesController.$inject = ['messagesSvc'];
+MessagesController.$inject = ['systemInfoSvc'];
 
-function MessagesController(messagesSvc) {
+function MessagesController(systemInfoSvc) {
 
   var vm = this;
   vm.orderProp = 'message_number';
@@ -32,7 +32,7 @@ function MessagesController(messagesSvc) {
   function load() {
 	 vm.ready = false;
 	 vm.error = false;
-	 messagesSvc.get()().query().$promise.then(gotMessages, serviceError);
+	 systemInfoSvc.getMessages()().query().$promise.then(gotMessages, serviceError);
   }
 
   function gotMessages(messages) {

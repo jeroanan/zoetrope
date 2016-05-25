@@ -6,9 +6,9 @@
 angular.module('zoetropeControllers')
   .controller('NoticesCtrl', NoticesController);
 
-NoticesController.$inject = ['noticesSvc'];
+NoticesController.$inject = ['systemInfoSvc'];
 
-function NoticesController(noticesSvc) {
+function NoticesController(systemInfoSvc) {
 
   var vm = this;
   vm.notices = [];
@@ -23,7 +23,7 @@ function NoticesController(noticesSvc) {
   function load() {
 	 vm.ready = false;
 	 vm.error = false;
-	 noticesSvc.get()().query().$promise.then(gotNotices, serviceError);
+	 systemInfoSvc.getNotices()().query().$promise.then(gotNotices, serviceError);
   }
 
   function gotNotices(notices) {
