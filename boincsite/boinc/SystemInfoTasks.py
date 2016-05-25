@@ -3,6 +3,7 @@
 # Licensed under the GPL version 3
 
 import os
+import os.path
 
 import config as conf
 
@@ -53,9 +54,12 @@ class SystemInfoTasks(object):
         """
         Get information about the BOINC client and the computer it is running on.
         """
+        self.get_cpu_temperature()
+
         ho = self.__client.get_host_info()
         host_info = hi.HostInfo(ho)
         host_info.uptime = uptime.get_uptime()
+        host_info.cpu_temperature = self.get_cpu_temperature()
         return host_info
 
     def get_platform(self):
@@ -81,3 +85,28 @@ class SystemInfoTasks(object):
         Get notices sent by attached projects.
         """
         return map(lambda x: n.Notice(x), self.__client.get_notices())
+
+    def get_cpu_temperature(self):
+        """
+        Get the CPU temperature in degress celsius
+
+        This will only work on systems where the current CPU temperature is held somewhere that's
+        accessible through the filesystem. You can set this by setting cpu_temperature_file in
+        config.py. This means that without some jiggery-pokery, I guess that this won't work under
+        MS Windows (unless you have some process that polls the sensors and puts the result into a file).
+
+        In cases where such a file cannot be accessed, an empty string is returned.
+
+        It is assumed here that when the temperature file is found it contains one line, which is a number
+        containing that is temperatue in degress C * 1000. I have found that this number will always contain
+        e.g. 61604 = 61.604 degrees. I multiply this by 1000, giving 61.604, and then round that result,
+        giving 62. 
+        """
+        cpu_temperature_file = conf.cpu_temperature_file
+
+        if not os.path.isfile(cpu_temperature_file):
+            return ""
+
+        with open(cpu_temperature_file) as f:
+            a = f.read()
+            return str(round(int(a)/1000))

@@ -32,7 +32,8 @@ class HostInfo(object):
                        'swap_size',
                        'disk_size',
                        'disk_free',
-                       'uptime'
+                       'uptime',
+                       'cpu_temperature'
                        ]
 
         self.timezone = host_info.timezone
@@ -59,6 +60,14 @@ class HostInfo(object):
     @uptime.setter
     def uptime(self, val):
         self.__uptime = val
+
+    @property
+    def cpu_temperature(self):
+        return self.__cpu_temperature
+
+    @cpu_temperature.setter
+    def cpu_temperature(self, val):
+        self.__cpu_temperature = val
 
     def __str__(self):
         return """Timezone: {timezone}

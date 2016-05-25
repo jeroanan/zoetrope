@@ -9,6 +9,8 @@
   <div ng-show="vm.ready && !vm.error">
     <keyvalrow key="System uptime" val="{{ vm.host_info.uptime }}" />
 
+	 <keyvalrow key="CPU temperature" val="{{ vm.host_info.cpu_temperature }}&#176;C" />
+
     <keyvalrow key="Timezone" val="{{ vm.host_info.timezone  }}" />
 
     <keyvalrow key="Domain name" val="{{ vm.host_info.domain_name }}" />
