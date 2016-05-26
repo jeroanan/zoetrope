@@ -16,10 +16,12 @@
 
 from io import StringIO
 import json
+import logging
 import os
 
 import cherrypy
 
+import config as conf
 import boincsite.boinc.ProjectTasks as pt
 import boincsite.boinc.TaskTasks as tt
 import boincsite.boinc.SystemInfoTasks as sit
@@ -40,6 +42,8 @@ WorkingDirectory = os.path.dirname(os.path.abspath(__file__))
 class WebServer(object):
 
     def __init__(self):
+        logging.basicConfig(filename=conf.log_file_name, level=conf.log_level, format=conf.log_message_format)
+
         self.__project_tasks = pt.ProjectTasks()
         self.__task_tasks = tt.TaskTasks()
         self.__system_info_tasks = sit.SystemInfoTasks()
@@ -47,7 +51,7 @@ class WebServer(object):
         self.__renderer = tr.TemplateRenderer()
         self.__io = StringIO()
 
-    def start(self):        
+    def start(self):
         cherrypy.quickstart(WebServer(), '/', 'server.conf')
 
     @cherrypy.expose
@@ -206,5 +210,9 @@ class WebServer(object):
     
 
 if __name__=='__main__':
+    from cherrypy.process.plugins import Daemonizer
+    d = Daemonizer(cherrypy.engine)
+    d.subscribe()
+
     ws = WebServer()
     ws.start() 
