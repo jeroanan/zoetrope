@@ -83,3 +83,15 @@ Pages:
 ** TODO Project
 ** TODO Host Info
 ** TODO Global Preferences
+* TODO Add thousands separators to numbers [0/4] 						  :General:
+Pages:
+** TODO Project
+** TODO (project statistics)
+** TODO Projects
+** TODO Host Info
+
+* TODO Strip the midnight time from the date column :Statistics:
+
+* TODO Footer link is incorect 												  :Project:
+
+* TODO Put some sort of nice footer at the bottom of the page :General:
