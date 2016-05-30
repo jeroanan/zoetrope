@@ -2,37 +2,37 @@
   <thead>
 	 <th>
 		<a ng-click="sort('day');">Day</a>
-		<span ng-show="sortField==='day' && reverseSort===false" ng-bind-html="upArrow" />
-		<span ng-show="sortField==='day' && reverseSort===true" ng-bind-html="downArrow" />
+		<span ng-show="sortField==='day' && !reverseSort" ng-bind-html="upArrow" />
+		<span ng-show="sortField==='day' && reverseSort" ng-bind-html="downArrow" />
 	 </th>
 	 <th>
 		<a ng-click="sort('user_total_credit');">User Total Credit</a>
-		<span ng-show="sortField==='user_total_credit' && reverseSort===false" ng-bind-html="upArrow" />
-		<span ng-show="sortField==='user_total_credit' && reverseSort===true" ng-bind-html="downArrow" />
+		<span ng-show="sortField==='user_total_credit' && !reverseSort" ng-bind-html="upArrow" />
+		<span ng-show="sortField==='user_total_credit' && reverseSort" ng-bind-html="downArrow" />
 	 </th>
 	 <th>
 		<a ng-click="sort('user_expavg_credit');">User Recent Average Credit</a>
-		<span ng-show="sortField==='user_expavg_credit' && reverseSort===false" ng-bind-html="upArrow" />
-		<span ng-show="sortField==='user_expavg_credit' && reverseSort===true" ng-bind-html="downArrow" />
+		<span ng-show="sortField==='user_expavg_credit' && !reverseSort" ng-bind-html="upArrow" />
+		<span ng-show="sortField==='user_expavg_credit' && reverseSort" ng-bind-html="downArrow" />
 	 </th>
 	 <th>
 		<a ng-click="sort('host_total_credit');">Host Total Credit</a>
-		<span ng-show="sortField==='host_total_credit' && reverseSort===false" ng-bind-html="upArrow" />
-		<span ng-show="sortField==='host_total_credit' && reverseSort===true" ng-bind-html="downArrow" />
+		<span ng-show="sortField==='host_total_credit' && !reverseSort" ng-bind-html="upArrow" />
+		<span ng-show="sortField==='host_total_credit' && reverseSort" ng-bind-html="downArrow" />
 	 </th>
 	 <th>
 		<a ng-click="sort('host_expavg_credit');">Host Recent Average Credit</a>
-		<span ng-show="sortField==='host_expavg_credit' && reverseSort===false" ng-bind-html="upArrow" />
-		<span ng-show="sortField==='host_expavg_credit' && reverseSort===true" ng-bind-html="downArrow" />
+		<span ng-show="sortField==='host_expavg_credit' && !reverseSort" ng-bind-html="upArrow" />
+		<span ng-show="sortField==='host_expavg_credit' && reverseSort" ng-bind-html="downArrow" />
 	 </th>
   </thead>
   <tbody>
 	 <tr ng-repeat="stat in projectStats | orderBy:sortField:reverseSort">
 		<td><span ng-bind="stat.day"/></td>
-		<td><span ng-bind="stat.user_total_credit"/></td>
-		<td><span ng-bind="stat.user_expavg_credit"/></td>
-		<td><span ng-bind="stat.host_total_credit"/></td>
-		<td><span ng-bind="stat.host_expavg_credit"/></td>
+		<td><span ng-bind="stat.user_total_credit | number"/></td>
+		<td><span ng-bind="stat.user_expavg_credit | number"/></td>
+		<td><span ng-bind="stat.host_total_credit | number"/></td>
+		<td><span ng-bind="stat.host_expavg_credit | number"/></td>
 	 </tr>
   </tbody>
 </table>

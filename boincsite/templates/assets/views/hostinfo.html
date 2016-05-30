@@ -23,11 +23,11 @@
 	 
     <keyvalrow key="CPU Model" val="{{ vm.host_info.cpu_model }}" />
 
-    <keyvalrow key="CPU floating point operations/second" val="{{ vm.host_info.cpu_fps_ops }}" />
+    <keyvalrow key="CPU floating point operations/second" val="{{ vm.host_info.cpu_fps_ops | number }}" />
 
-    <keyvalrow key="CPU integer operations/second" val="{{ vm.host_info.cpu_int_ops }}"  />
+    <keyvalrow key="CPU integer operations/second" val="{{ vm.host_info.cpu_int_ops | number }}"  />
 
-    <keyvalrow key="CPU memory bandwidth" val="{{ vm.host_info.cpu_mem_bw }}" />
+    <keyvalrow key="CPU memory bandwidth" val="{{ vm.host_info.cpu_mem_bw | number }}" />
 
     <keyvalrow key="Operating system name" val="{{ vm.host_info.os_name }}" />
 

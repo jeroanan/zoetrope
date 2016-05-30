@@ -41,7 +41,6 @@ function ProjectController($routeParams, $compile, $scope, projectSvc) {
 	 vm.project = project;
 	 setTitle('Project Summary -- ' + project.name);
 
-	 console.log(vm);
 	 $('#statsRow').append($compile('<project-statistics project-url="' + project.master_url + '" />')($scope));
 
 	 vm.projectFound = true;

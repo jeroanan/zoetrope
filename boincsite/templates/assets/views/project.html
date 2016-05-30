@@ -39,10 +39,10 @@
 		  
 		  <h2>Credit</h2>
 		  
-		  <keyvalrow key="User total credit" val="{{ vm.project.user_total_credit }}" />
-		  <keyvalrow key="User recent average credit" val="{{ vm.project.user_expavg_credit }}" />
-		  <keyvalrow key="Total credit for this host" val="{{ vm.project.host_total_credit }}" />
-		  <keyvalrow key="Recent average credit for this host" val="{{ vm.project.host_expavg_credit }}" />
+		  <keyvalrow key="User total credit" val="{{ vm.project.user_total_credit | number }}" />
+		  <keyvalrow key="User recent average credit" val="{{ vm.project.user_expavg_credit | number }}" />
+		  <keyvalrow key="Total credit for this host" val="{{ vm.project.host_total_credit | number }}" />
+		  <keyvalrow key="Recent average credit for this host" val="{{ vm.project.host_expavg_credit | number }}" />
 		  
 		  <h2>Additional</h2>
 		  

@@ -67,7 +67,7 @@ i.e., make into a directive
 * TODO Make sorting by status a bit smarter :Tasks:
 e.g. Make ascending order give tasks ready to report, then aborted, then running, then waiting, then suspended
 
-* TODO Round system uptime to nearest second :HostInfo:
+* DONE Round system uptime to nearest second 							 :HostInfo:
 
 * TODO Manage Account Managers [0/3] 									  :NewFeature:
 At the moment I have to do all this via boinccmd or boincmgr
@@ -83,15 +83,43 @@ Pages:
 ** TODO Project
 ** TODO Host Info
 ** TODO Global Preferences
-* TODO Add thousands separators to numbers [0/4] 						  :General:
+* DONE Add thousands separators to numbers [4/4] 						  :General:
 Pages:
-** TODO Project
-** TODO (project statistics)
-** TODO Projects
-** TODO Host Info
+** DONE Project
+** DONE (project statistics)
+** DONE Projects
+** DONE Host Info
 
-* TODO Strip the midnight time from the date column :Statistics:
+* DONE Strip the midnight time from the date column 				  :Statistics:
 
 * TODO Footer link is incorect 												  :Project:
 
 * TODO Put some sort of nice footer at the bottom of the page :General:
+
+* DONE Redundant true/false comparisons for sorting arrow display :Statistics:
+
+* DONE Last Rpc should be parsed from epoch time into proper date/time :Project:
+
+* TODO Add user authentication :NewFeature: [0/6]
+** TODO Add facility for adding user accounts, just containing userid and password to begin with
+** TODO Add Login page
+** TODO Add logout page
+** TODO User admin page for all users
+** TODO "My account" type page [0/2]
+*** TODO Change password
+*** TODO Delete account
+** TODO Secure appropriate pages/web service endpoints so u
+
+* TODO Get rid of querystrings and convert parameters to routeparams :General: [0/2]
+pages:
+** TODO Project
+** TODO Task
+
+* TODO Add actions to actions menu :Projects: [0/5]
+** TODO Detach When Done
+** TODO Don't Detach When Done
+** TODO No More Work
+** TODO Allow More Work
+** TODO Suspend Project
+* DONE Get rid of redundant sort arrow truth comparisons 			 :Projects:
+* TODO Make timezone into a string rather than just a number :HostInfo:

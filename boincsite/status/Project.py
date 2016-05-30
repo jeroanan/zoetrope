@@ -55,7 +55,7 @@ class Project(object):
         self.suspended_via_gui = project.suspended_via_gui
         self.dont_request_more_work = project.dont_request_more_work
         self.disk_usage = ''
-        self.last_rpc = project.last_rpc_time
+        self.last_rpc = str(dt.get_date_from_epoch_seconds(float(project.last_rpc_time)).split('.')[0])
         self.project_files_downloaded = project.project_files_downloaded_time
         self.gui_urls = []
         self.detach_when_done = project.detach_when_done

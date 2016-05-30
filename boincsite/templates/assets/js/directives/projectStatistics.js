@@ -28,6 +28,7 @@ angular.module('zoetropeDirectives').directive('projectStatistics', function() {
 			 
 			 var o = stats[0][p];
 			 if (o.day) {
+				o.day = o.day.split(' ')[0];
 				ps.push(o);
 			 }		  
 		  }

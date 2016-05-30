@@ -11,25 +11,25 @@
       <thead>
         <th>
 			 <a ng-click="vm.sort('name');">Project Name</a>
-			 <span ng-show="vm.orderProp==='name' && vm.reverseSort===false" ng-bind-html="vm.upArrow" />
-			 <span ng-show="vm.orderProp==='name' && vm.reverseSort===true" ng-bind-html="vm.downArrow" />
+			 <span ng-show="vm.orderProp==='name' && !vm.reverseSort" ng-bind-html="vm.upArrow" />
+			 <span ng-show="vm.orderProp==='name' && vm.reverseSort" ng-bind-html="vm.downArrow" />
 		  </th>
         <th>
 			 <a ng-click="vm.sort('user_total_credit');">Total Credit</a>
-			 <span ng-show="vm.orderProp==='user_total_credit' && vm.reverseSort===false" ng-bind-html="vm.upArrow" />
-			 <span ng-show="vm.orderProp==='user_total_credit' && vm.reverseSort===true" ng-bind-html="vm.downArrow" />
+			 <span ng-show="vm.orderProp==='user_total_credit' && !vm.reverseSort" ng-bind-html="vm.upArrow" />
+			 <span ng-show="vm.orderProp==='user_total_credit' && vm.reverseSort" ng-bind-html="vm.downArrow" />
 		  </th>
         <th>
 			 <a ng-click="vm.sort('user_expavg_credit');">Recent Average Credit</a>
-			 <span ng-show="vm.orderProp==='user_expavg_credit' && vm.reverseSort===false" ng-bind-html="vm.upArrow" />
-			 <span ng-show="vm.orderProp==='user_expavg_credit' && vm.reverseSort===true" ng-bind-html="vm.downArrow" />
+			 <span ng-show="vm.orderProp==='user_expavg_credit' && !vm.reverseSort" ng-bind-html="vm.upArrow" />
+			 <span ng-show="vm.orderProp==='user_expavg_credit' && vm.reverseSort" ng-bind-html="vm.downArrow" />
 		  </th>
 		  <th>Actions</th>
       </thead>
       <tr ng-repeat="p in vm.projects | orderBy:vm.orderProp:vm.reverseSort">
         <td><a href="#/project?project={{ p.name }}"><span ng-bind="p.name" /></a></td>
-        <td><span ng-bind="p.user_total_credit" /></td>
-        <td><span ng-bind="p.user_expavg_credit" /></td>
+        <td><span ng-bind="p.user_total_credit | number" /></td>
+        <td><span ng-bind="p.user_expavg_credit | number" /></td>
 		  <td ng-show="true">
 			 <div class="dropdown">
 				<button class="btn btn-default dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
