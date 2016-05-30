@@ -15,10 +15,6 @@ function ProjectController($routeParams, $compile, $scope, projectSvc) {
   vm.title = '';  
   vm.projectFound = false;
   vm.project = {};
-  vm.projectStats = [];
-  vm.statsSortField = 'day';
-  vm.statsReverseSort = true;
-  vm.statsSort = getSortFunc(vm, 'statsSortField', 'statsReverseSort');
   vm.upArrow = upArrow;
   vm.downArrow = downArrow;
   vm.load = load;
@@ -51,30 +47,6 @@ function ProjectController($routeParams, $compile, $scope, projectSvc) {
 	 vm.projectFound = true;
 	 vm.ready = true;
   }
-
-  // function gotStats(stats) {
-
-  // 	 //TODO: probably need to make this stats control into a directive..
-  // 	 var ps = [];
-	 
-  // 	 for (var p in stats[0]) {
-		
-  // 		var o = stats[0][p];
-  // 		if (o.day) {
-  // 		  ps.push(o);
-  // 		}		  
-  // 	 }
-	 
-  // 	 vm.projectStats = ps.map(function(x) {
-  // 		x.user_total_credit = parseFloat(x.user_total_credit);
-  // 		x.user_expavg_credit = parseFloat(x.user_expavg_credit);
-  // 		x.host_total_credit = parseFloat(x.host_total_credit);
-  // 		x.host_expavg_credit = parseFloat(x.host_expavg_credit);
-  // 		return x;		
-  // 	 });
-
-	 
-  // }
 
   function serviceError() {
 	 vm.ready = true;

@@ -15,6 +15,8 @@ angular.module('zoetropeDirectives').directive('projectStatistics', function() {
 		$scope.reverseSort = true;
 		$scope.sort = getSortFunc($scope, 'sortField', 'reverseSort');
 		$scope.stats = {};
+		$scope.upArrow = upArrow;
+		$scope.downArrow = downArrow;
 
 		projectSvc.getProjectStatistics($scope.projectUrl)().query().$promise.then(gotStats);
 		
