@@ -8,7 +8,7 @@ that is currently made.
 * TODO Make tasks' deadline times indicate when deadline is near/exceeded :Tasks:
 
 * TODO Add further details :HostInfo: [1/3]
-** DONE Current CPU temperature
+
 ** TODO Load averages
 ** TODO I guess if I really want to, make these columns specific to unix-like OSes only.
 
@@ -19,8 +19,6 @@ that is currently made.
 * TODO What happens when various requests throw exceptions? :General: 
 Need to review all requests in order to check. I've alreay dealt with many but doubtless there are more to do.
 
-
-* DONE Make the statistics section of the project page into a directive :Project:
 
 * TODO On the task page, add success/error feedback when tasks are resumed, suspended or aborted :Task:
 
@@ -67,8 +65,6 @@ i.e., make into a directive
 * TODO Make sorting by status a bit smarter :Tasks:
 e.g. Make ascending order give tasks ready to report, then aborted, then running, then waiting, then suspended
 
-* DONE Round system uptime to nearest second 							 :HostInfo:
-
 * TODO Manage Account Managers [0/3] 									  :NewFeature:
 At the moment I have to do all this via boinccmd or boincmgr
 ** TODO Attach to an account manager
@@ -83,22 +79,10 @@ Pages:
 ** TODO Project
 ** TODO Host Info
 ** TODO Global Preferences
-* DONE Add thousands separators to numbers [4/4] 						  :General:
-Pages:
-** DONE Project
-** DONE (project statistics)
-** DONE Projects
-** DONE Host Info
-
-* DONE Strip the midnight time from the date column 				  :Statistics:
 
 * TODO Footer link is incorect 												  :Project:
 
 * TODO Put some sort of nice footer at the bottom of the page :General:
-
-* DONE Redundant true/false comparisons for sorting arrow display :Statistics:
-
-* DONE Last Rpc should be parsed from epoch time into proper date/time :Project:
 
 * TODO Add user authentication :NewFeature: [0/6]
 ** TODO Add facility for adding user accounts, just containing userid and password to begin with
@@ -121,5 +105,4 @@ pages:
 ** TODO No More Work
 ** TODO Allow More Work
 ** TODO Suspend Project
-* DONE Get rid of redundant sort arrow truth comparisons 			 :Projects:
 * TODO Make timezone into a string rather than just a number :HostInfo:
