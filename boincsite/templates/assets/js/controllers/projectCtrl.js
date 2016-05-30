@@ -6,9 +6,9 @@
 angular.module('zoetropeControllers')
   .controller('ProjectCtrl', ProjectController);
 
-ProjectController.$inject = ['$routeParams', 'projectSvc'];
+ProjectController.$inject = ['$routeParams', '$compile', '$scope', 'projectSvc'];
 
-function ProjectController($routeParams, projectSvc) {
+function ProjectController($routeParams, $compile, $scope, projectSvc) {
 
   var vm = this;
   vm.ready = false;
@@ -44,33 +44,37 @@ function ProjectController($routeParams, projectSvc) {
   function gotProject(project) {
 	 vm.project = project;
 	 setTitle('Project Summary -- ' + project.name);
-	 projectSvc.getProjectStatistics(project.master_url)().query().$promise.then(gotStats, serviceError);		
-  }
 
-  function gotStats(stats) {
-
-	 //TODO: probably need to make this stats control into a directive..
-	 var ps = [];
-	 
-	 for (var p in stats[0]) {
-		
-		var o = stats[0][p];
-		if (o.day) {
-		  ps.push(o);
-		}		  
-	 }
-	 
-	 vm.projectStats = ps.map(function(x) {
-		x.user_total_credit = parseFloat(x.user_total_credit);
-		x.user_expavg_credit = parseFloat(x.user_expavg_credit);
-		x.host_total_credit = parseFloat(x.host_total_credit);
-		x.host_expavg_credit = parseFloat(x.host_expavg_credit);
-		return x;		
-	 });
+	 console.log(vm);
+	 $('#statsRow').append($compile('<project-statistics project-url="' + project.master_url + '" />')($scope));
 
 	 vm.projectFound = true;
 	 vm.ready = true;
   }
+
+  // function gotStats(stats) {
+
+  // 	 //TODO: probably need to make this stats control into a directive..
+  // 	 var ps = [];
+	 
+  // 	 for (var p in stats[0]) {
+		
+  // 		var o = stats[0][p];
+  // 		if (o.day) {
+  // 		  ps.push(o);
+  // 		}		  
+  // 	 }
+	 
+  // 	 vm.projectStats = ps.map(function(x) {
+  // 		x.user_total_credit = parseFloat(x.user_total_credit);
+  // 		x.user_expavg_credit = parseFloat(x.user_expavg_credit);
+  // 		x.host_total_credit = parseFloat(x.host_total_credit);
+  // 		x.host_expavg_credit = parseFloat(x.host_expavg_credit);
+  // 		return x;		
+  // 	 });
+
+	 
+  // }
 
   function serviceError() {
 	 vm.ready = true;

@@ -20,7 +20,7 @@ that is currently made.
 Need to review all requests in order to check. I've alreay dealt with many but doubtless there are more to do.
 
 
-* TODO Make the statistics section of the project page into a directive :Project:
+* DONE Make the statistics section of the project page into a directive :Project:
 
 * TODO On the task page, add success/error feedback when tasks are resumed, suspended or aborted :Task:
 

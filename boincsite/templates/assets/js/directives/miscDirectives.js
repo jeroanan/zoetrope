@@ -51,7 +51,7 @@ angular.module('zoetropeDirectives').directive('keyvalrow', function() {
 		}
 
 		if (!$scope.col4XsWidth) {
-		  $scope.col4XsWidth = '1'
+		  $scope.col4XsWidth = '1';
 		}
 	 }],
 	 link: function(scope, elem, attrs) {
