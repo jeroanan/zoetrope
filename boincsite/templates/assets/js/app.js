@@ -37,7 +37,7 @@ angular.module('zoetrope', [
 		  controller: 'MessagesCtrl',
 		  controllerAs: 'vm'
       }).
-      when('/project', {
+      when('/project/:project', {
 			 templateUrl: '/static/views/project.html',
 			 controller: 'ProjectCtrl',
 			 controllerAs: 'vm'

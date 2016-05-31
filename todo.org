@@ -94,9 +94,9 @@ Pages:
 *** TODO Delete account
 ** TODO Secure appropriate pages/web service endpoints so u
 
-* TODO Get rid of querystrings and convert parameters to routeparams :General: [0/2]
+* TODO Get rid of querystrings and convert parameters to routeparams :General: [1/2]
 pages:
-** TODO Project
+** DONE Project
 ** TODO Task
 
 * TODO Add actions to actions menu :Projects: [0/5]
@@ -106,3 +106,6 @@ pages:
 ** TODO Allow More Work
 ** TODO Suspend Project
 * TODO Make timezone into a string rather than just a number :HostInfo:
+* TODO Get rid of redundant truth comparisons for sort arrows :Tasks:
+* TODO Make project name link to project page :Task:
+
