@@ -105,6 +105,8 @@ pages:
 ** TODO Allow More Work
 ** TODO Suspend Project
 * TODO Make timezone into a string rather than just a number :HostInfo:
-* TODO Get rid of redundant truth comparisons for sort arrows :Tasks:
-* TODO Make project name link to project page :Task:
+* DONE Get rid of redundant truth comparisons for sort arrows 			 :Tasks:
+* TODO Make project name link to project page :Task:BLOCKED:
+To be done once keyvalrowlinkrow has had the same treatment that keyvalrow has already had (i.e., made responsive)
+
 
