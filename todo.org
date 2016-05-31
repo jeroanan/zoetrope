@@ -49,7 +49,7 @@ It's always either empty or "1". So seems like no need to have that column
 
 * TODO The link to task detail doesn't present a very big target on xs view :Tasks:
 
-* TODO Highlight the fact that an unattached project supports the current platform :ProjectDetail:
+* DONE Highlight the fact that an unattached project supports the current platform :ProjectDetail:
 1. Put a piece of text near the attach button saying so
 2. In the list of platforms, either highlight the current platform or de-emphasize the others
 
@@ -110,3 +110,6 @@ pages:
 To be done once keyvalrowlinkrow has had the same treatment that keyvalrow has already had (i.e., made responsive)
 
 
+* TODO Merge getPlatformSvc into systemInfoSvc
+* TODO Get rid of redundant truth comparisons for sort arrows :AllProjectList:
+* TODO Swap meanings of tick and star marks :AllProjectList:

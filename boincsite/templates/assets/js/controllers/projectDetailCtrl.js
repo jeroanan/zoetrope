@@ -6,9 +6,9 @@
 angular.module('zoetropeControllers')
   .controller('projectDetailCrl', ProjectDetailController);
 
-ProjectDetailController.$inject = ['$routeParams', 'projectSvc'];
+ProjectDetailController.$inject = ['$routeParams', 'projectSvc', 'getPlatformSvc'];
 
-function ProjectDetailController($routeParams, projectSvc) {
+function ProjectDetailController($routeParams, projectSvc, getPlatformSvc) {
   var vm = this;
 
   vm.ready = false;
@@ -18,6 +18,7 @@ function ProjectDetailController($routeParams, projectSvc) {
   vm.projectFound = false;
   vm.error = false;
   vm.load = load;
+  vm.gotPlatform = false;
   
   setTitle('Project Details');
 
@@ -39,6 +40,7 @@ function ProjectDetailController($routeParams, projectSvc) {
 	 }
 
 	 projectSvc.getAttachedProjects()().query().$promise.then(gotAttachedProjects, serviceError);
+	 getPlatformSvc.get()().query().$promise.then(gotPlatform, serviceError);
 
     setTitle('Project Details -- ' + vm.project.name);
 	 vm.projectFound = true;
@@ -64,7 +66,24 @@ function ProjectDetailController($routeParams, projectSvc) {
   }  
 
   function gotAttachedProjects(projects) {
-	 var attachedProject = projects.filter(function(x) { return x.name==vm.project.name; });
+	 var attachedProject = projects.filter(function(x) { return x.name===vm.project.name; });
 	 vm.project.attached = attachedProject.length > 0;
-  }  
+  }
+
+  function gotPlatform(platform) {
+	 var supportedPlatform = vm.project.platforms.filter(function(x) {
+		return x.name===platform.platform;
+	 });
+
+	 vm.project.platformSupported = supportedPlatform.length>0;
+	 vm.gotPlatform = true;
+
+	 var supportedPlatformListItems = $('#supportedPlatforms').children('li:contains(' + platform.platform + ')');
+
+	 for (var i=0;i<supportedPlatformListItems.length;i++) {
+		var platformItem = $(supportedPlatformListItems[i]);
+		platformItem.addClass('text-success');
+		platformItem.text(platformItem.text() + ' ✔');
+	 }
+  }
 }

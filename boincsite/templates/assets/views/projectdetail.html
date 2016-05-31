@@ -13,6 +13,11 @@
   <p class="text-center">
     <img ng-src="{{vm.project.image}}" alt="{{vm.name}}" />
   </p>
+
+  <p ng-show="vm.gotPlatform">
+	 <span ng-show="vm.project.platformSupported">&#10004; This project is supported by the current platform</span>
+	 <span ng-show="!vm.project.platformSupported" class="text-danger">&#x2717; This project is unsupported by the current platform</span>
+  </p>
   <p ng-show="vm.project.attached">
 	 <span>This client is already attached to the project.</span>
 	 <a ng-href="/#/project/{{ vm.project.name }}">More information</a>
@@ -35,7 +40,7 @@
     <a ng-href="{{vm.project.url}}">Project homepage</a>
   </p>
   <h2>Supported Platforms</h2>
-  <ul>
+  <ul id="supportedPlatforms">
     <li ng-repeat="p in vm.project.platforms" ng-bind="p.name" />
   </ul>  
 </div>
