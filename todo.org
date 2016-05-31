@@ -33,7 +33,7 @@ Is this a bug in BOINC?
 ** TODO There is a filter for "(no project)" but nothing to reset the filter to display all messages
 ** TODO When I select "(no project)", I still seem to get a few messages that have a project filled in against them
 
-* TODO The Message Type column seems to be usesless :Messages:
+* DONE The Message Type column seems to be usesless 					 :Messages:
 It's always either empty or "1". So seems like no need to have that column
 * TODO Make the Project column a hyperlink to the row's project detail page :Messages:
 
@@ -113,3 +113,4 @@ To be done once keyvalrowlinkrow has had the same treatment that keyvalrow has a
 * TODO Merge getPlatformSvc into systemInfoSvc
 * DONE Get rid of redundant truth comparisons for sort arrows :AllProjectList:
 * DONE Swap meanings of tick and star marks 						 :AllProjectList:
+* TODO Get rid of  redundant truth comparisons for sort arrows :Messages:

@@ -32,11 +32,6 @@
 			 <span ng-show="vm.orderProp==='date_time' && vm.reverseSort===true" ng-bind-html="vm.downArrow" />
 		  </th>
         <th>
-			 <a ng-click="vm.sort('message_type');">Message Type</a>
-			 <span ng-show="vm.orderProp==='message_type' && vm.reverseSort===false" ng-bind-html="vm.upArrow" />
-			 <span ng-show="vm.orderProp==='message_type' && vm.reverseSort===true" ng-bind-html="vm.downArrow" />
-		  </th>
-        <th>
 			 <a ng-click="vm.sort('project_name');">Project</a>
 			 <span ng-show="vm.orderProp==='project_name' && vm.reverseSort===false" ng-bind-html="vm.upArrow" />
 			 <span ng-show="vm.orderProp==='project_name' && vm.reverseSort===true" ng-bind-html="vm.downArrow" />
@@ -50,7 +45,6 @@
       <tr ng-repeat="m in vm.messages | orderBy:vm.orderProp:vm.reverseSort | filter:vm.filterProp">
         <td><span ng-bind="m.message_number" /></td>
         <td><span ng-bind="m.date_time" /></td>
-        <td><span ng-bind="m.message_type" /></td>
         <td><span ng-bind="m.project_name" /></td>
         <td><span ng-bind="m.message_text" /></td>
       </tr>
