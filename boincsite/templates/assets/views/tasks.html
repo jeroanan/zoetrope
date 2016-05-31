@@ -49,7 +49,7 @@
       <tbody>
         <tr ng-repeat="task in vm.tasks | orderBy:vm.sortProp:vm.reverseSort">
 
-          <td><a ng-href="#/task?task_name={{ task.name }}"><span ng-bind="task.idx" /></a></td>
+          <td><a ng-href="#/task/{{ task.name }}"><span ng-bind="task.idx" /></a></td>
 
           <td><a ng-href="#/project/{{ task.project_name }}"><span ng-bind="task.project_name" /></a></td>
 

@@ -94,11 +94,10 @@ Pages:
 *** TODO Delete account
 ** TODO Secure appropriate pages/web service endpoints so u
 
-* TODO Get rid of querystrings and convert parameters to routeparams :General: [1/2]
+* DONE Get rid of querystrings and convert parameters to routeparams :General: [2/2]
 pages:
 ** DONE Project
-** TODO Task
-
+** DONE Task
 * TODO Add actions to actions menu :Projects: [0/5]
 ** TODO Detach When Done
 ** TODO Don't Detach When Done

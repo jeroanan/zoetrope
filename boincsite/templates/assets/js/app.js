@@ -47,7 +47,7 @@ angular.module('zoetrope', [
 		  controller: 'ProjectsCtrl',
 		  controllerAs: 'vm'		  
       }).
-      when('/task', {
+      when('/task/:task_name', {
         templateUrl: '/static/views/task.html',
 		  controller: 'TaskCtrl',
 		  controllerAs: 'vm'
