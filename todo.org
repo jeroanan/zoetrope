@@ -80,7 +80,7 @@ Pages:
 ** TODO Host Info
 ** TODO Global Preferences
 
-* TODO Footer link is incorect 												  :Project:
+* DONE Footer link is incorect 												  :Project:
 
 * TODO Put some sort of nice footer at the bottom of the page :General:
 
