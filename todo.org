@@ -33,8 +33,6 @@ Is this a bug in BOINC?
 ** TODO There is a filter for "(no project)" but nothing to reset the filter to display all messages
 ** TODO When I select "(no project)", I still seem to get a few messages that have a project filled in against them
 
-* DONE The Message Type column seems to be usesless 					 :Messages:
-It's always either empty or "1". So seems like no need to have that column
 * TODO Make the Project column a hyperlink to the row's project detail page :Messages:
 
 * TODO I have various rows here that I don't know the meaning of [0/8] :Preferences:
@@ -48,10 +46,6 @@ It's always either empty or "1". So seems like no need to have that column
 ** TODO vm_max_used_pct
 
 * TODO The link to task detail doesn't present a very big target on xs view :Tasks:
-
-* DONE Highlight the fact that an unattached project supports the current platform :ProjectDetail:
-1. Put a piece of text near the attach button saying so
-2. In the list of platforms, either highlight the current platform or de-emphasize the others
 
 * TODO Collapse the list of supported platforms, make them expandable :ProjectDetail:
 
@@ -80,7 +74,6 @@ Pages:
 ** TODO Host Info
 ** TODO Global Preferences
 
-* DONE Footer link is incorect 												  :Project:
 
 * TODO Put some sort of nice footer at the bottom of the page :General:
 
@@ -94,10 +87,6 @@ Pages:
 *** TODO Delete account
 ** TODO Secure appropriate pages/web service endpoints so u
 
-* DONE Get rid of querystrings and convert parameters to routeparams :General: [2/2]
-pages:
-** DONE Project
-** DONE Task
 * TODO Add actions to actions menu :Projects: [0/5]
 ** TODO Detach When Done
 ** TODO Don't Detach When Done
@@ -105,12 +94,8 @@ pages:
 ** TODO Allow More Work
 ** TODO Suspend Project
 * TODO Make timezone into a string rather than just a number :HostInfo:
-* DONE Get rid of redundant truth comparisons for sort arrows 			 :Tasks:
 * TODO Make project name link to project page :Task:BLOCKED:
 To be done once keyvalrowlinkrow has had the same treatment that keyvalrow has already had (i.e., made responsive)
 
 
 * TODO Merge getPlatformSvc into systemInfoSvc
-* DONE Get rid of redundant truth comparisons for sort arrows :AllProjectList:
-* DONE Swap meanings of tick and star marks 						 :AllProjectList:
-* DONE Get rid of  redundant truth comparisons for sort arrows 	 :Messages:
