@@ -13,25 +13,25 @@
     <tr>
       <th>
         <a href="" ng-click="vm.doSort('name');">Project Name</a>
-		  <span ng-show="vm.sortProp==='name' && vm.reverseSort===false" ng-bind-html="vm.upArrow" />
-		  <span ng-show="vm.sortProp==='name' && vm.reverseSort===true" ng-bind-html="vm.downArrow" />
+		  <span ng-show="vm.sortProp==='name' && !vm.reverseSort" ng-bind-html="vm.upArrow" />
+		  <span ng-show="vm.sortProp==='name' && vm.reverseSort" ng-bind-html="vm.downArrow" />
       </th>
       <th>
         <a href="" ng-click="vm.doSort('general_area');">Research Area</a>
-		  <span ng-show="vm.sortProp==='general_area' && vm.reverseSort===false" ng-bind-html="vm.upArrow" />
-		  <span ng-show="vm.sortProp==='general_area' && vm.reverseSort===true" ng-bind-html="vm.downArrow" />
+		  <span ng-show="vm.sortProp==='general_area' && !vm.reverseSort" ng-bind-html="vm.upArrow" />
+		  <span ng-show="vm.sortProp==='general_area' && vm.reverseSort" ng-bind-html="vm.downArrow" />
       </th>
       <th>
         <a href="" ng-click="vm.doSort('summary');">Summary</a>
-		  <span ng-show="vm.sortProp==='summary' && vm.reverseSort===false" ng-bind-html="vm.upArrow" />
-		  <span ng-show="vm.sortProp==='summary' && vm.reverseSort===true" ng-bind-html="vm.downArrow" />
+		  <span ng-show="vm.sortProp==='summary' && !vm.reverseSort" ng-bind-html="vm.upArrow" />
+		  <span ng-show="vm.sortProp==='summary' && vm.reverseSort" ng-bind-html="vm.downArrow" />
       </th>
     </tr>
     <tr ng-repeat="ap in vm.availableProjects | orderBy:vm.sortProp:vm.reverseSort | filter:vm.filterProp">
       <td>
 		  <a ng-href="/#/projectdetail/{{ap.name}}"><span ng-bind="ap.name" /></a>
-		  <span title="This client is attached to this project." ng-show="ap.attached">&#10004;</span>
-		  <span title="This project is supported by the current platform." ng-show="ap.supported">&#9733;</span>
+		  <span title="This client is attached to this project." ng-show="ap.attached">&#9733;</span>
+		  <span title="This project is supported by the current platform." ng-show="ap.supported">&#10004;</span>
 		</td>
       <td>
         <span ng-bind="ap.general_area" />

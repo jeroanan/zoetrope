@@ -111,5 +111,5 @@ To be done once keyvalrowlinkrow has had the same treatment that keyvalrow has a
 
 
 * TODO Merge getPlatformSvc into systemInfoSvc
-* TODO Get rid of redundant truth comparisons for sort arrows :AllProjectList:
-* TODO Swap meanings of tick and star marks :AllProjectList:
+* DONE Get rid of redundant truth comparisons for sort arrows :AllProjectList:
+* DONE Swap meanings of tick and star marks 						 :AllProjectList:
