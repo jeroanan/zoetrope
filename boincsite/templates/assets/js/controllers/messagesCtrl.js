@@ -15,10 +15,8 @@ function MessagesController(systemInfoSvc) {
   vm.reverseSort = true;
   vm.filterProp = '';
   vm.ready = false;
-  vm.title = "Messages";
-  document.title = vm.title;
+  vm.title = "Messages";  
   vm.messages = {};
-  vm.unique_project_names = [];
   vm.project_name_counts = [];
   vm.get_project_name = getProjectName;
   vm.sort = getSortFunc(vm, 'orderProp', 'reverseSort');
@@ -26,7 +24,8 @@ function MessagesController(systemInfoSvc) {
   vm.downArrow = downArrow;
   vm.error = false;
   vm.load = load;
-  
+
+  document.title = vm.title;
   load();
 
   function load() {
@@ -40,7 +39,7 @@ function MessagesController(systemInfoSvc) {
 
     var project_names = messages.map(function(x) { return x.project_name; });
 
-    vm.unique_project_names = project_names.filter(function(el,i,a) {
+    var uniqueProjectNames = project_names.filter(function(el,i,a) {
       return i==a.indexOf(el);
     });
 
@@ -50,9 +49,8 @@ function MessagesController(systemInfoSvc) {
     }
 
     var tmp_name_counts = {};
-
-    for (var upn in vm.unique_project_names) {
-      var pn = vm.unique_project_names[upn];
+    for (var upn in uniqueProjectNames) {
+      var pn = uniqueProjectNames[upn];
       tmp_name_counts[pn] = count_project_name(pn);
     }
 
@@ -66,6 +64,6 @@ function MessagesController(systemInfoSvc) {
   }  
 
   function getProjectName(pn) {
-    return pn === '' ? '(no project)' : pn;
+    return pn === '' ? '(No project)' : pn;
   }
 }

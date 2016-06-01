@@ -1,101 +1,82 @@
-* TODO Fix the "Time So Far" information  :Tasks: 
+* TODO Zoetrope TODO List [1/25]
+** TODO Fix the "Time So Far" information										 :Tasks:
 For the project that I am mostly crunching for while developing this, Enigma@Home, the Time So Far is always empty. 
 However, upon further investigation of what BOINC's XML-RPC functionality provides, the functions that return tonnes of data, 
 e.g. simple_gui_info, contains a populated elapsed_time field. For some reason this isn't provided by the get_results call 
 that is currently made. 
 
+** TODO Make tasks' deadline times indicate when deadline is near/exceeded :Tasks:
+** TODO Add further details [0/2]											 :HostInfo:
 
-* TODO Make tasks' deadline times indicate when deadline is near/exceeded :Tasks:
-
-* TODO Add further details :HostInfo: [1/3]
-
-** TODO Load averages
-** TODO I guess if I really want to, make these columns specific to unix-like OSes only.
-
-* TODO Add the ability to be able to change global preferences :Preferences:
-
-* TODO What happens if BOINC isn't running? :General:
-
-* TODO What happens when various requests throw exceptions? :General: 
+*** TODO Load averages
+*** TODO I guess if I really want to, make these columns specific to unix-like OSes only.
+** TODO Add the ability to be able to change global preferences :Preferences:
+** TODO What happens if BOINC isn't running?								  :General:
+** TODO What happens when various requests throw exceptions?		  :General:
 Need to review all requests in order to check. I've alreay dealt with many but doubtless there are more to do.
 
-
-* TODO On the task page, add success/error feedback when tasks are resumed, suspended or aborted :Task:
-
-* TODO When clicking "Don't Detach When Done", I am unable to subsequently detect that the project shouldn't be detached when done :Project: 
+** TODO Add success/error feedback when tasks are resumed, suspended or aborted :Task:
+** TODO When clicking "Don't Detach When Done", I am unable to subsequently detect that the project shouldn't be detached when done :Project:
 When I click "Detach When Done", it causes detach_when_done to appear in the project's XML. I can use that to determine whether 
 I have requested to detach when done, as that element wasn't present before. However it remains even after I click 
 "Don't Detach When Done". So how can I determine that I've asked to detach when done and then told BOINC not to? 
 Is this a bug in BOINC?
 
-
-* TODO Review filter drop-down  [0/2] 										 :Messages:
-** TODO There is a filter for "(no project)" but nothing to reset the filter to display all messages
-** TODO When I select "(no project)", I still seem to get a few messages that have a project filled in against them
-
-* TODO Make the Project column a hyperlink to the row's project detail page :Messages:
-
-* TODO I have various rows here that I don't know the meaning of [0/8] :Preferences:
-** TODO max_ncpus_pct
-** TODO daily_xfer_period_days
-** TODO disk_interval
-** TODO Don't verify images
-** TODO mod_time
-** TODO Override file present -- what does the value mean?
-** TODO suspend_if_no_recent_input
-** TODO vm_max_used_pct
-
-* TODO The link to task detail doesn't present a very big target on xs view :Tasks:
-
-* TODO Collapse the list of supported platforms, make them expandable :ProjectDetail:
-
-* TODO Make the attach project dialog and attach project pages use common markup :Attach:Detach: 
+** TODO Review filter drop-down  [0/1] 									 :Messages:
+*** TODO When I select "(no project)", I get all messages. So no filter for messages without a project at the moment.
+** TODO Make the Project column a hyperlink to the row's project page :Messages:
+** TODO I have various rows here that I don't know the meaning of [0/8] :Preferences:
+*** TODO max_ncpus_pct
+*** TODO daily_xfer_period_days
+*** TODO disk_interval
+*** TODO Don't verify images
+*** TODO mod_time
+*** TODO Override file present -- what does the value mean?
+*** TODO suspend_if_no_recent_input
+*** TODO vm_max_used_pct
+** TODO The link to task detail doesn't present a very big target on xs view :Tasks:
+** TODO Collapse the list of supported platforms, make them expandable :ProjectDetail:
+** TODO Make the attach project dialog and attach project pages use common markup :Attach:Detach:
 i.e., make into a directive
 
-* TODO Make the detach project dialog and detach project pages use common markup :Attach:Detach: 
+** TODO Make the detach project dialog and detach project pages use common markup :Attach:Detach:
 i.e., make into a directive
-* TODO When I try to attach to a project that doesn't support my platform, ask for confirmation :Attach:
-
-* TODO Make sorting by status a bit smarter :Tasks:
+** TODO When I try to attach to a project that doesn't support my platform, ask for confirmation :Attach:
+** TODO Make sorting by status a bit smarter									 :Tasks:
 e.g. Make ascending order give tasks ready to report, then aborted, then running, then waiting, then suspended
-
-* TODO Manage Account Managers [0/3] 									  :NewFeature:
+** TODO Manage Account Managers [0/3]									  :NewFeature:
 At the moment I have to do all this via boinccmd or boincmgr
-** TODO Attach to an account manager
-** TODO Detach from an account manager
-** TODO Force communication/update with account manager
+*** TODO Attach to an account manager
+*** TODO Detach from an account manager
+*** TODO Force communication/update with account manager
 Currently it seems to do this on BOINC client start/schedule only
-
-* TODO Band/otherwise distinguish rows on details screens [0/4] 	  :General:
+** TODO Band/otherwise distinguish rows on details screens [0/4]	  :General:
 Pages:
 
-** TODO Task 
-** TODO Project
-** TODO Host Info
-** TODO Global Preferences
+*** TODO Task 
+*** TODO Project
+*** TODO Host Info
+*** TODO Global Preferences
+** TODO Put some sort of nice footer at the bottom of the page		  :General:
+** TODO Add user authentication [0/6]									  :NewFeature:
+*** TODO Add facility for adding user accounts, just containing userid and password to begin with
+*** TODO Add Login page
+*** TODO Add logout page
+*** TODO User admin page for all users
+*** TODO "My account" type page [0/2]
+**** TODO Change password
+**** TODO Delete account
+*** TODO Secure appropriate pages/web service endpoints so u
 
-
-* TODO Put some sort of nice footer at the bottom of the page :General:
-
-* TODO Add user authentication :NewFeature: [0/6]
-** TODO Add facility for adding user accounts, just containing userid and password to begin with
-** TODO Add Login page
-** TODO Add logout page
-** TODO User admin page for all users
-** TODO "My account" type page [0/2]
-*** TODO Change password
-*** TODO Delete account
-** TODO Secure appropriate pages/web service endpoints so u
-
-* TODO Add actions to actions menu :Projects: [0/5]
-** TODO Detach When Done
-** TODO Don't Detach When Done
-** TODO No More Work
-** TODO Allow More Work
-** TODO Suspend Project
-* TODO Make timezone into a string rather than just a number :HostInfo:
-* TODO Make project name link to project page :Task:BLOCKED:
+** TODO Add actions to actions menu [0/5]									 :Projects:
+*** TODO Detach When Done
+*** TODO Don't Detach When Done
+*** TODO No More Work
+*** TODO Allow More Work
+*** TODO Suspend Project
+** TODO Make timezone into a string rather than just a number		 :HostInfo:
+** TODO Make project name link to project page						:Task:BLOCKED:
 To be done once keyvalrowlinkrow has had the same treatment that keyvalrow has already had (i.e., made responsive)
 
+** DONE Merge getPlatformSvc into systemInfoSvc							  :General:
 
-* TODO Merge getPlatformSvc into systemInfoSvc

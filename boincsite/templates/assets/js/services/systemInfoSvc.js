@@ -18,7 +18,8 @@ function SystemInfoService(jsonSvc) {
 	 getGlobalPreferences: getGlobalPreferences,
 	 getHostInfo: getHostInfo,
 	 getMessages: getMessages,
-	 getNotices: getNotices
+	 getNotices: getNotices,
+	 getPlatform: getPlatform
   };
 
   /**
@@ -61,6 +62,13 @@ function SystemInfoService(jsonSvc) {
 	*/
   function getNotices() {
 	 return jsonSvc.getJson('/notices_json', true);
+  }
+
+  /**
+	* Get the name of the platform that the client is running on.
+	*/
+  function getPlatform() {
+	 return jsonSvc.getJson('/get_platform_json', false);
   }
 
   return svc;

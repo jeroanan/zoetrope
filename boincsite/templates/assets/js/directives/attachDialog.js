@@ -22,6 +22,7 @@ angular.module('zoetropeDirectives').directive('attachDialog', function() {
 		$scope.success = false;
 		$scope.loading = false;
 		$scope.newAccountActive = false;
+		$scope.popupMode = null;
 		
 		$scope.submitClicked = submitClicked;
 		$scope.existingAccountPillClicked = existingAccountPillClicked;
@@ -94,6 +95,20 @@ angular.module('zoetropeDirectives').directive('attachDialog', function() {
 	 }],
 	 link: function(scope, element, attrs, ctrl) {
 
+		attrs.$observe('projecturl', function(val) {
+		  disableFields();
+		});
+
+		attrs.$observe('projectname', function(val) {
+		  disableFields();
+		});
+
+		function disableFields() {
+		  if (scope.projecturl==='' && scope.projectname==='') {
+			 scope.popupMode = false;
+		  }
+		  scope.popupMode = true;
+		}
 	 }
   };
 });
