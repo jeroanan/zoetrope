@@ -90,9 +90,21 @@ module.exports = function(grunt) {
 		  files: ['boincsite/m4/templates/assets/views/projects.m4'],
 		  tasks: ['m4:projects', 'prettify:projects']
 		},
+		m4_project: {
+		  files: ['boincsite/m4/templates/assets/views/project.m4'],
+		  tasks: ['m4:project', 'prettify:project']
+		},
+		m4_allprojectlist: {
+		  files: ['boincsite/m4/templates/assets/views/allprojectlist.m4'],
+		  tasks: ['m4:allprojectlist', 'prettify:allprojectlist']
+		},
+		m4_projectdetail: {
+		  files: ['boincsite/m4/templates/assets/views/projectdetail.m4'],
+		  tasks: ['m4:projectdetail', 'prettify:projectdetail']
+		},
 		m4_views_common: {
 		  files: ['boincsite/m4/templates/assets/views/views_common.m4'],
-		  tasks: ['m4:tasks', 'm4:projects', 'm4:task']
+		  tasks: ['m4:tasks', 'm4:projects', 'm4:task', 'm4:project', 'm4:allprojectlist']
 		}
     },
 	 jshint: {
@@ -120,6 +132,18 @@ module.exports = function(grunt) {
 		projects: {
 		  src: 'boincsite/m4/templates/assets/views/projects.m4',
 		  dest: 'boincsite/templates/assets/views/projects.html'
+		},
+		project: {
+		  src: 'boincsite/m4/templates/assets/views/project.m4',
+		  dest: 'boincsite/templates/assets/views/project.html'
+		},
+		allprojectlist: {
+		  src: 'boincsite/m4/templates/assets/views/allprojectlist.m4',
+		  dest: 'boincsite/templates/assets/views/allprojectlist.html'
+		},
+		projectdetail: {
+		  src: 'boincsite/m4/templates/assets/views/projectdetail.m4',
+		  dest: 'boincsite/templates/assets/views/projectdetail.html'
 		}
 	 },
 	 prettify: {
@@ -134,14 +158,27 @@ module.exports = function(grunt) {
 		  src: 'boincsite/templates/assets/views/tasks.html',
 		  dest: 'boincsite/templates/assets/views/tasks.html'		  
 		},
+		task: {
+		  src: 'boincsite/templates/assets/views/task.html',
+		  dest: 'boincsite/templates/assets/views/task.html'		  
+		},
 		projects: {
 		  src: 'boincsite/templates/assets/views/projects.html',
 		  dest: 'boincsite/templates/assets/views/projects.html'		  
 		},
-		task: {
-		  src: 'boincsite/templates/assets/views/task.html',
-		  dest: 'boincsite/templates/assets/views/task.html'		  
-		}
+		project: {
+		  src: 'boincsite/templates/assets/views/project.html',
+		  dest: 'boincsite/templates/assets/views/project.html'		  
+		},
+		allprojectlist: {
+		  src: 'boincsite/templates/assets/views/allprojectlist.html',
+		  dest: 'boincsite/templates/assets/views/allprojectlist.html'		  
+		},
+		projectdetail: {
+		  src: 'boincsite/templates/assets/views/projectdetail.html',
+		  dest: 'boincsite/templates/assets/views/projectdetail.html'		  
+		}		
+		
 	 }
   });
 
