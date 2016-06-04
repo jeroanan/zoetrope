@@ -10,7 +10,7 @@ define(zoe_loading_panel,`dnl
   </div>')
 
 define(zoe_error_panel,dnl
-<div ng-show="vm.ready && vm.error===true">
+<div ng-show="vm.ready && vm.error">
   An error occurred while loading the $1. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>
 </div>)
 

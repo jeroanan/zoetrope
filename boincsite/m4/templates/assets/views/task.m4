@@ -1,11 +1,13 @@
+divert(-1)
+changecom(@@)
+
+include(boincsite/m4/templates/assets/views/views_common.m4)
+  
+divert(0)dnl
 <div>
   <h1 ng-bind="vm.title" />
-  <div ng-show="!vm.ready" class="text-center">
-    <img src="/static/img/loading.gif" />
-  </div>
-  <div ng-show="vm.ready && vm.error">
-  An error occurred while loading the task. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>
-</div>
+  zoe_loading_panel
+  zoe_error_panel(task)
   <div ng-show="vm.ready && !vm.error">
 
 	 <keyvalrow key="Workunit name" val="{{vm.task.name}}" />

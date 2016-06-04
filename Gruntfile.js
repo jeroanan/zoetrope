@@ -76,19 +76,23 @@ module.exports = function(grunt) {
 		},
 		m4_index: {
 		  files: ['boincsite/m4/templates/index.m4', 'boincsite/m4/templates/navbar.m4'],
-		  tasks: ['m4:index']
+		  tasks: ['m4:index', 'prettify:index']
 		},
 		m4_tasks: {
 		  files: ['boincsite/m4/templates/assets/views/tasks.m4'],
-		  tasks: ['m4:tasks']
+		  tasks: ['m4:tasks', 'prettify:tasks']
+		},
+		m4_task: {
+		  files: ['boincsite/m4/templates/assets/views/task.m4'],
+		  tasks: ['m4:task', 'prettify:task']
 		},
 		m4_projects: {
 		  files: ['boincsite/m4/templates/assets/views/projects.m4'],
-		  tasks: ['m4:projects']
+		  tasks: ['m4:projects', 'prettify:projects']
 		},
 		m4_views_common: {
 		  files: ['boincsite/m4/templates/assets/views/views_common.m4'],
-		  tasks: ['m4:tasks', 'm4:projects']
+		  tasks: ['m4:tasks', 'm4:projects', 'm4:task']
 		}
     },
 	 jshint: {
@@ -109,9 +113,34 @@ module.exports = function(grunt) {
 		  src: 'boincsite/m4/templates/assets/views/tasks.m4',
 		  dest: 'boincsite/templates/assets/views/tasks.html'
 		},
+		task: {
+		  src: 'boincsite/m4/templates/assets/views/task.m4',
+		  dest: 'boincsite/templates/assets/views/task.html'
+		},
 		projects: {
 		  src: 'boincsite/m4/templates/assets/views/projects.m4',
 		  dest: 'boincsite/templates/assets/views/projects.html'
+		}
+	 },
+	 prettify: {
+		options: {
+		  condense: false,
+		},
+		index: {
+		  src: 'boincsite/templates/index.html',
+		  dest: 'boincsite/templates/index.html'
+		},
+		tasks: {
+		  src: 'boincsite/templates/assets/views/tasks.html',
+		  dest: 'boincsite/templates/assets/views/tasks.html'		  
+		},
+		projects: {
+		  src: 'boincsite/templates/assets/views/projects.html',
+		  dest: 'boincsite/templates/assets/views/projects.html'		  
+		},
+		task: {
+		  src: 'boincsite/templates/assets/views/task.html',
+		  dest: 'boincsite/templates/assets/views/task.html'		  
 		}
 	 }
   });
@@ -120,6 +149,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-m4');
+  grunt.loadNpmTasks('grunt-prettify');
 
   grunt.registerTask('default', ['watch']);
 
