@@ -102,10 +102,14 @@ module.exports = function(grunt) {
 		  files: ['boincsite/m4/templates/assets/views/projectdetail.m4'],
 		  tasks: ['m4:projectdetail', 'prettify:projectdetail']
 		},
+		m4_messages: {
+		  files: ['boincsite/m4/templates/assets/views/messages.m4'],
+		  tasks: ['m4:messages', 'prettify:messages']
+		},
 		m4_views_common: {
 		  files: ['boincsite/m4/templates/assets/views/views_common.m4'],
 		  tasks: ['m4:tasks', 'm4:projects', 'm4:task', 'm4:project', 'm4:allprojectlist']
-		}
+		}		
     },
 	 jshint: {
 		controllers: controllers,
@@ -144,6 +148,10 @@ module.exports = function(grunt) {
 		projectdetail: {
 		  src: 'boincsite/m4/templates/assets/views/projectdetail.m4',
 		  dest: 'boincsite/templates/assets/views/projectdetail.html'
+		},
+		messages: {
+		  src: 'boincsite/m4/templates/assets/views/messages.m4',
+		  dest: 'boincsite/templates/assets/views/messages.html'
 		}
 	 },
 	 prettify: {
@@ -177,8 +185,11 @@ module.exports = function(grunt) {
 		projectdetail: {
 		  src: 'boincsite/templates/assets/views/projectdetail.html',
 		  dest: 'boincsite/templates/assets/views/projectdetail.html'		  
-		}		
-		
+		},
+		messages: {
+		  src: 'boincsite/templates/assets/views/messages.html',
+		  dest: 'boincsite/templates/assets/views/messages.html'		  
+		}				
 	 }
   });
 

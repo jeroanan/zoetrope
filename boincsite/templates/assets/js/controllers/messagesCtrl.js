@@ -11,7 +11,7 @@ MessagesController.$inject = ['systemInfoSvc'];
 function MessagesController(systemInfoSvc) {
 
   var vm = this;
-  vm.orderProp = 'message_number';
+  vm.sortProp = 'message_number';
   vm.reverseSort = true;
   vm.filterProp = '';
   vm.ready = false;
@@ -19,7 +19,7 @@ function MessagesController(systemInfoSvc) {
   vm.messages = {};
   vm.project_name_counts = [];
   vm.get_project_name = getProjectName;
-  vm.sort = getSortFunc(vm, 'orderProp', 'reverseSort');
+  vm.sort = getSortFunc(vm, 'sortProp', 'reverseSort');
   vm.upArrow = upArrow;
   vm.downArrow = downArrow;
   vm.error = false;
