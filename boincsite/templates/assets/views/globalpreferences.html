@@ -19,7 +19,7 @@
 
   <keyvalrow key="End Hour" val="{{ vm.prefs.run_if_user_active }}" />
 
-  <keyvalrow key="max_ncpus_pct" val="{{ vm.prefs.max_ncpus_pct }}%" />
+  <keyvalrow key="Percentage of the CPUs to use" val="{{ vm.prefs.max_ncpus_pct }}%" />
 
   <keyvalrow key="Maximum battery temperature" val="{{ vm.prefs.battery_max_temperature }}&#176;C" />
 
@@ -37,9 +37,7 @@
 
   <keyvalrow key="daily_xfer_period_days" val="{{ vm.prefs.daily_xfer_period_days }}" />
 
-  <keyvalrow key="disk_interval" val="{{ vm.prefs.disk_interval }}" col1-xs-width="{{vm.col1XsWidth}}"
-					col2-xs-width="{{vm.col2XsWidth}}" col3-xs-width="{{vm.col3XsWidth}}"
-					col4-xs-width="{{vm.col4XsWidth}}" />
+  <keyvalrow key="Make tasks checkpoint to disk every " val="{{ vm.prefs.disk_interval }} seconds" />
 
   <keyvalrow key="Maximum disk space to use" val="{{ vm.prefs.disk_max_used_gb }}GB" />
 

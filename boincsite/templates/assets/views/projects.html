@@ -3,31 +3,31 @@
   <div ng-show="!vm.ready" class="text-center">
     <img src="/static/img/loading.gif" />
   </div>
-  <div ng-show="vm.ready && vm.error">
-	 An error occurred while loading the project. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>
-  </div>
+  <div ng-show="vm.ready && vm.error===true">
+  An error occurred while loading the project. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>
+</div>
   <div ng-show="vm.ready && !vm.error">
     <table class="table table-striped">
       <thead>
-        <th>
-			 <a ng-click="vm.sort('name');">Project Name</a>
-			 <span ng-show="vm.orderProp==='name' && !vm.reverseSort" ng-bind-html="vm.upArrow" />
-			 <span ng-show="vm.orderProp==='name' && vm.reverseSort" ng-bind-html="vm.downArrow" />
-		  </th>
-        <th>
-			 <a ng-click="vm.sort('user_total_credit');">Total Credit</a>
-			 <span ng-show="vm.orderProp==='user_total_credit' && !vm.reverseSort" ng-bind-html="vm.upArrow" />
-			 <span ng-show="vm.orderProp==='user_total_credit' && vm.reverseSort" ng-bind-html="vm.downArrow" />
-		  </th>
-        <th>
-			 <a ng-click="vm.sort('user_expavg_credit');">Recent Average Credit</a>
-			 <span ng-show="vm.orderProp==='user_expavg_credit' && !vm.reverseSort" ng-bind-html="vm.upArrow" />
-			 <span ng-show="vm.orderProp==='user_expavg_credit' && vm.reverseSort" ng-bind-html="vm.downArrow" />
-		  </th>
+		  <th>
+  <a ng-click="vm.sort('name');">Project Name</a>
+  <span ng-show="vm.sortProp==='name' && !vm.reverseSort" ng-bind-html="vm.upArrow" />
+  <span ng-show="vm.sortProp==='name' && vm.reverseSort" ng-bind-html="vm.downArrow" />
+</th>
+		  <th>
+  <a ng-click="vm.sort('user_total_credit');">Total Credit</a>
+  <span ng-show="vm.sortProp==='user_total_credit' && !vm.reverseSort" ng-bind-html="vm.upArrow" />
+  <span ng-show="vm.sortProp==='user_total_credit' && vm.reverseSort" ng-bind-html="vm.downArrow" />
+</th>
+		  <th>
+  <a ng-click="vm.sort('user_expavg_credit');">Recent Average Credit</a>
+  <span ng-show="vm.sortProp==='user_expavg_credit' && !vm.reverseSort" ng-bind-html="vm.upArrow" />
+  <span ng-show="vm.sortProp==='user_expavg_credit' && vm.reverseSort" ng-bind-html="vm.downArrow" />
+</th>
 		  <th>Actions</th>
       </thead>
-      <tr ng-repeat="p in vm.projects | orderBy:vm.orderProp:vm.reverseSort">
-        <td><a href="#/project?project={{ p.name }}"><span ng-bind="p.name" /></a></td>
+      <tr ng-repeat="p in vm.projects | orderBy:vm.sortProp:vm.reverseSort">
+        <td><a href="#/project/{{ p.name }}"><span ng-bind="p.name" /></a></td>
         <td><span ng-bind="p.user_total_credit | number" /></td>
         <td><span ng-bind="p.user_expavg_credit | number" /></td>
 		  <td ng-show="true">
@@ -44,17 +44,18 @@
 		  </td>
       </tr>		
     </table>
+
     <div class="row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3">
-        <input type="checkbox" ng-model="vm.showRawData">Show raw data</input>
-      </div>
-    </div>
-    <div class="row" ng-show="vm.showRawData">
-      {{ vm.projects }}
-    </div>
-	 <detach-dialog id="dDialog" projecturl="{{vm.detachUrl}}" projectname="{{vm.detachName}}"></detach-dialog>
+  <div class="col-xs-3"></div>
+  <div class="col-xs-3"></div>
+  <div class="col-xs-3"></div>
+  <div class="col-xs-3">
+    <input type="checkbox" ng-model="vm.showRawData">Show raw data</input>
   </div>
+  </div>
+  <div class="row" ng-show="vm.showRawData">
+    {{ vm.projects }}
+  </div>
+</div>
+  <detach-dialog id="dDialog" projecturl="{{vm.detachUrl}}" projectname="{{vm.detachName}}"></detach-dialog>
 </div>

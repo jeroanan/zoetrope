@@ -25,11 +25,11 @@ Is this a bug in BOINC?
 ** TODO Review filter drop-down  [0/1] 									 :Messages:
 *** TODO When I select "(no project)", I get all messages. So no filter for messages without a project at the moment.
 ** TODO Make the Project column a hyperlink to the row's project page :Messages:
-** TODO I have various rows here that I don't know the meaning of [0/8] :Preferences:
-*** TODO max_ncpus_pct
+** TODO I have various rows here that I don't know the meaning of [3/8] :Preferences:
+*** DONE max_ncpus_pct (Percentage of the processors to use)
 *** TODO daily_xfer_period_days
-*** TODO disk_interval
-*** TODO Don't verify images
+*** DONE disk_interval (Make tasks checkpoint to disk every X seconds)
+*** DONE Don't verify images (Don't verify image files) (i.e. ISP modifies image files (like, pictures?))
 *** TODO mod_time
 *** TODO Override file present -- what does the value mean?
 *** TODO suspend_if_no_recent_input

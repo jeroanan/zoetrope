@@ -11,7 +11,7 @@ ProjectsController.$inject = ['projectSvc'];
 function ProjectsController(projectSvc) {
 
   var vm = this;
-  vm.orderProp = 'name';
+  vm.sortProp = 'name';
   vm.reverseSort = false;
   vm.ready = false;
   vm.showRawData = false;
@@ -20,7 +20,7 @@ function ProjectsController(projectSvc) {
   vm.updateClicked = updateClicked;
   vm.detachUrl = '';
   vm.detachName = '';
-  vm.sort = getSortFunc(vm, 'orderProp', 'reverseSort');
+  vm.sort = getSortFunc(vm, 'sortProp', 'reverseSort');
   vm.upArrow = upArrow;
   vm.downArrow = downArrow;
   vm.error = false;
