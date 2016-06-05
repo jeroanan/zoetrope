@@ -21,7 +21,7 @@ divert(0)dnl
 
     <h2>Messages</h2>
 
-    <table class="table table-striped">
+    zoe_begin_table
       <thead>
 		  zoe_sorting_table_header(message_number, #)
 		  zoe_sorting_table_header(date_time, Message Date)
