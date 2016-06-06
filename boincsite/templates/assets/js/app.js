@@ -25,7 +25,7 @@ angular.module('zoetrope', [
       when('/disk_usage', {
         templateUrl: '/static/views/diskusage.html',
         controller: 'DiskUsageCtrl',
-        controllerAs: 'duvm'
+        controllerAs: 'vm'
       }).
       when('/host_info', {
         templateUrl: '/static/views/hostinfo.html',

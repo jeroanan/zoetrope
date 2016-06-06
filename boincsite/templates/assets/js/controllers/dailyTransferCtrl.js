@@ -16,9 +16,9 @@ function DailyTransferController(systemInfoSvc) {
   vm.totalDownloaded = '';
   vm.ready = false;
   vm.title = 'Daily Transfer History';
-  vm.orderProp = 'date';
+  vm.sortProp = 'date';
   vm.reverseSort = true;
-  vm.sort = getSortFunc(vm, 'orderProp', 'reverseSort');
+  vm.sort = getSortFunc(vm, 'sortProp', 'reverseSort');
   vm.upArrow = upArrow;
   vm.downArrow = downArrow;
   vm.error = false;

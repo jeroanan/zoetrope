@@ -1,15 +1,14 @@
+divert(-1)
+include(boincsite/m4/templates/assets/views/views_common.m4)
+divert(0)dnl
 <div>
-  <h1 ng-bind="vm.title" />
-  <div ng-show="!vm.ready" class="text-center">
-    <img src="/static/img/loading.gif" />
-  </div>
-  <div ng-show="vm.ready && vm.error">
-    An error occurred while loading the host info. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>
-  </div>
+  zoe_page_title(vm.title)
+  zoe_loading_panel
+  zoe_error_panel(host info)
   <div ng-show="vm.ready && !vm.error">
     <keyvalrow key="System uptime" val="{{ vm.host_info.uptime }}" />
 
-    <keyvalrow key="CPU temperature" val="{{ vm.host_info.cpu_temperature }}&#176;C" />
+	 <keyvalrow key="CPU temperature" val="{{ vm.host_info.cpu_temperature }}&#176;C" />
 
     <keyvalrow key="Timezone" val="{{ vm.host_info.timezone  }}" />
 
@@ -20,12 +19,12 @@
     <keyvalrow key="Number of CPUs" val="{{ vm.host_info.number_of_cpus }}" />
 
     <keyvalrow key="CPU vendor" val="{{ vm.host_info.cpu_vendor }}" />
-
+	 
     <keyvalrow key="CPU Model" val="{{ vm.host_info.cpu_model }}" />
 
     <keyvalrow key="CPU floating point operations/second" val="{{ vm.host_info.cpu_fps_ops | number }}" />
 
-    <keyvalrow key="CPU integer operations/second" val="{{ vm.host_info.cpu_int_ops | number }}" />
+    <keyvalrow key="CPU integer operations/second" val="{{ vm.host_info.cpu_int_ops | number }}"  />
 
     <keyvalrow key="CPU memory bandwidth" val="{{ vm.host_info.cpu_mem_bw | number }}" />
 
@@ -39,20 +38,9 @@
 
     <keyvalrow key="Swap size" val="{{ vm.host_info.swap_size }}" />
 
-    <keyvalrow key="Disk size" val="{{ vm.host_info.disk_size }}" />
-
+    <keyvalrow key="Disk size" val="{{ vm.host_info.disk_size }}"  />
+	 
     <keyvalrow key="Disk free" val="{{ vm.host_info.disk_free }}" />
   </div>
-  <div class="row">
-    <div class="col-xs-3"></div>
-    <div class="col-xs-3"></div>
-    <div class="col-xs-3"></div>
-    <div class="col-xs-3">
-      <input type="checkbox" ng-model="vm.showRawData">Show raw data</input>
-    </div>
-  </div>
-  <div class="row" ng-show="vm.showRawData">
-    {{ vm.host_info }}
-  </div>
-</div>
+  zoe_show_raw_data(vm.host_info)
 </div>

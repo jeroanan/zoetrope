@@ -87,6 +87,11 @@ module.exports = function(grunt) {
 		zoe_watch_m4_task(allprojectlist),
 		zoe_watch_m4_task(projectdetail),
 		zoe_watch_m4_task(messages),
+		zoe_watch_m4_task(notices),
+		zoe_watch_m4_task(diskusage),
+		zoe_watch_m4_task(hostinfo),
+		zoe_watch_m4_task(dailytransferhistory),
+		zoe_watch_m4_task(globalpreferences),
 		m4_views_common: {
 		  files: ['zoe_m4_views_dir/views_common.m4'],
 		  tasks: ['m4:tasks',
@@ -117,6 +122,11 @@ module.exports = function(grunt) {
 		zoe_m4_html(allprojectlist),
 		zoe_m4_html(projectdetail),
 		zoe_m4_html(messages),
+		zoe_m4_html(notices),
+		zoe_m4_html(diskusage),
+		zoe_m4_html(hostinfo),
+		zoe_m4_html(dailytransferhistory),
+		zoe_m4_html(globalpreferences)
 	 },
 	 prettify: {
 		options: {
@@ -133,6 +143,11 @@ module.exports = function(grunt) {
 		zoe_prettify_html(allprojectlist),
 		zoe_prettify_html(projectdetail),
 		zoe_prettify_html(messages),
+		zoe_prettify_html(notices),
+		zoe_prettify_html(diskusage),
+		zoe_prettify_html(hostinfo),
+		zoe_prettify_html(dailytransferhistory),
+		zoe_prettify_html(globalpreferences)
 	 }
   });
 

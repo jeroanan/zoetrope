@@ -1,11 +1,10 @@
-<h1 ng-bind="vm.title" />
-<div ng-show="!vm.ready" class="text-center">
-  <img src="/static/img/loading.gif" />
-</div>
-<div ng-show="vm.ready && vm.error">
-  An error occurred while loading the notices. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>
-</div>
-<div ng-show="vm.ready && !vm.error">
+divert(-1)
+include(boincsite/m4/templates/assets/views/views_common.m4)
+divert(0)dnl
+zoe_page_title(vm.title)
+zoe_loading_panel
+zoe_error_panel(notices)
+<div ng-show="vm.ready && !vm.error">  
   <div ng-repeat="notice in vm.notices | orderBy:seqNo">
     <h2 ng-bind="notice.title" />
     <p>

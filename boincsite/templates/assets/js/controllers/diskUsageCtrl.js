@@ -11,12 +11,12 @@ DiskUsageController.$inject = ['systemInfoSvc'];
 function DiskUsageController(systemInfoSvc) {
 
   var vm = this;
-  vm.orderProp = 'master_url';
+  vm.sortProp = 'master_url';
   vm.reverseSort = false;
   vm.ready = false;
   vm.title = 'Disk Usage';
   vm.disk_usages = {};
-  vm.sort = getSortFunc(vm, 'orderProp', 'reverseSort');
+  vm.sort = getSortFunc(vm, 'sortProp', 'reverseSort');
   vm.upArrow = upArrow;
   vm.downArrow = downArrow;
   vm.error = false;

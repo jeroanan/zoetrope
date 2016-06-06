@@ -111,6 +111,26 @@ module.exports = function(grunt) {
         files: ['boincsite/m4/templates/assets/views/messages.m4'],
 		  tasks: ['m4:messages', 'prettify:messages']
       },
+		m4_notices: {
+        files: ['boincsite/m4/templates/assets/views/notices.m4'],
+		  tasks: ['m4:notices', 'prettify:notices']
+      },
+		m4_diskusage: {
+        files: ['boincsite/m4/templates/assets/views/diskusage.m4'],
+		  tasks: ['m4:diskusage', 'prettify:diskusage']
+      },
+		m4_hostinfo: {
+        files: ['boincsite/m4/templates/assets/views/hostinfo.m4'],
+		  tasks: ['m4:hostinfo', 'prettify:hostinfo']
+      },
+		m4_dailytransferhistory: {
+        files: ['boincsite/m4/templates/assets/views/dailytransferhistory.m4'],
+		  tasks: ['m4:dailytransferhistory', 'prettify:dailytransferhistory']
+      },
+		m4_globalpreferences: {
+        files: ['boincsite/m4/templates/assets/views/globalpreferences.m4'],
+		  tasks: ['m4:globalpreferences', 'prettify:globalpreferences']
+      },
 		m4_views_common: {
 		  files: ['boincsite/m4/templates/assets/views/views_common.m4'],
 		  tasks: ['m4:tasks',
@@ -168,6 +188,26 @@ module.exports = function(grunt) {
 		  src: 'boincsite/m4/templates/assets/views/messages.m4',
 		  dest: 'boincsite/templates/assets/views/messages.html'
 		},
+		notices: {
+		  src: 'boincsite/m4/templates/assets/views/notices.m4',
+		  dest: 'boincsite/templates/assets/views/notices.html'
+		},
+		diskusage: {
+		  src: 'boincsite/m4/templates/assets/views/diskusage.m4',
+		  dest: 'boincsite/templates/assets/views/diskusage.html'
+		},
+		hostinfo: {
+		  src: 'boincsite/m4/templates/assets/views/hostinfo.m4',
+		  dest: 'boincsite/templates/assets/views/hostinfo.html'
+		},
+		dailytransferhistory: {
+		  src: 'boincsite/m4/templates/assets/views/dailytransferhistory.m4',
+		  dest: 'boincsite/templates/assets/views/dailytransferhistory.html'
+		},
+		globalpreferences: {
+		  src: 'boincsite/m4/templates/assets/views/globalpreferences.m4',
+		  dest: 'boincsite/templates/assets/views/globalpreferences.html'
+		}
 	 },
 	 prettify: {
 		options: {
@@ -205,6 +245,26 @@ module.exports = function(grunt) {
 		  src: 'boincsite/templates/assets/views/messages.html',
 		  dest: 'boincsite/templates/assets/views/messages.html'
 		},
+		notices: {
+		  src: 'boincsite/templates/assets/views/notices.html',
+		  dest: 'boincsite/templates/assets/views/notices.html'
+		},
+		diskusage: {
+		  src: 'boincsite/templates/assets/views/diskusage.html',
+		  dest: 'boincsite/templates/assets/views/diskusage.html'
+		},
+		hostinfo: {
+		  src: 'boincsite/templates/assets/views/hostinfo.html',
+		  dest: 'boincsite/templates/assets/views/hostinfo.html'
+		},
+		dailytransferhistory: {
+		  src: 'boincsite/templates/assets/views/dailytransferhistory.html',
+		  dest: 'boincsite/templates/assets/views/dailytransferhistory.html'
+		},
+		globalpreferences: {
+		  src: 'boincsite/templates/assets/views/globalpreferences.html',
+		  dest: 'boincsite/templates/assets/views/globalpreferences.html'
+		}
 	 }
   });
 

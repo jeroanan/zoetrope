@@ -1,32 +1,34 @@
 <div>
-  <h1 ng-bind="duvm.title" />
-  <div ng-show="!duvm.ready" class="text-center">
+  <h1 ng-bind="vm.title" />
+  <div ng-show="!vm.ready" class="text-center">
     <img src="/static/img/loading.gif" />
   </div>
-  <div ng-show="duvm.ready && duvm.error">
-	 An error occurred while loading the disk usages. <a title="Retry" href="javascript:" ng-click="duvm.load();">Retry</a>
+  <div ng-show="vm.ready && vm.error">
+    An error occurred while loading the disk usages. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>
   </div>
-  <div ng-show="duvm.ready && !duvm.error">
-    <keyvalrow key="Total Disk Space" val="{{ duvm.disk_usages.total_disk_space }}" />
-    <keyvalrow key="Free Disk Space" val="{{ duvm.disk_usages.free_disk_space }}" />
+  <div ng-show="vm.ready && !vm.error">
+    <keyvalrow key="Total Disk Space" val="{{ vm.disk_usages.total_disk_space }}" />
+    <keyvalrow key="Free Disk Space" val="{{ vm.disk_usages.free_disk_space }}" />
 
     <h2>By project</h2>
 
-    <table class="table table-striped" >
+    <table class="table table-striped">
       <thead>
         <th>
-			 <a ng-click="duvm.sort('master_url');">Project Url</a>
-			 <span ng-show="duvm.orderProp==='master_url' && duvm.reverseSort===false" ng-bind-html="duvm.upArrow" />
-			 <span ng-show="duvm.orderProp==='master_url' && duvm.reverseSort===true" ng-bind-html="duvm.downArrow" />
-		  </th>
-        <th >
-			 <a ng-click="duvm.sort('disk_usage');">Disk Usage</a>
-			 <span ng-show="duvm.orderProp==='disk_usage' && duvm.reverseSort===false" ng-bind-html="duvm.upArrow" />
-			 <span ng-show="duvm.orderProp==='disk_usage' && duvm.reverseSort===true" ng-bind-html="duvm.downArrow" />
-		  </th>
+          <a ng-click="vm.sort('master_url');">Project Url</a>
+          <span ng-show="vm.sortProp==='master_url' && !vm.reverseSort" ng-bind-html="vm.upArrow" />
+          <span ng-show="vm.sortProp==='master_url' && vm.reverseSort" ng-bind-html="vm.downArrow" />
+        </th>
+        <th>
+          <a ng-click="vm.sort('disk_usage');">Disk Usage</a>
+          <span ng-show="vm.sortProp==='disk_usage' && !vm.reverseSort" ng-bind-html="vm.upArrow" />
+          <span ng-show="vm.sortProp==='disk_usage' && vm.reverseSort" ng-bind-html="vm.downArrow" />
+        </th>
       </thead>
-      <tr ng-repeat="pdu in duvm.disk_usages.project_disk_usages | orderBy:duvm.orderProp:duvm.reverseSort">
-        <td><a ng-href="{{pdu.master_url}}"><span ng-bind="pdu.master_url" /></a></td>
+      <tr ng-repeat="pdu in vm.disk_usages.project_disk_usages | orderBy:vm.sortProp:vm.reverseSort">
+        <td>
+          <a ng-href="{{pdu.master_url}}"><span ng-bind="pdu.master_url" /></a>
+        </td>
         <td><span ng-bind="pdu.disk_usage + 'MB'" /></td>
       </tr>
     </table>
