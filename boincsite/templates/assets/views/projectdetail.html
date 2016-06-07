@@ -1,7 +1,7 @@
 <h1 ng-bind="vm.title" />
 <div ng-show="!vm.ready" class="text-center">
-    <img src="/static/img/loading.gif" />
-  </div>
+  <img src="/static/img/loading.gif" />
+</div>
 <div ng-show="vm.ready && !vm.projectFound">
   <h2>Project not found</h2>
   <a href="/#/getallprojectlist">All Boinc Projects</a>
@@ -15,20 +15,20 @@
   </p>
 
   <p ng-show="vm.gotPlatform">
-	 <span ng-show="vm.project.platformSupported">&#10004; This project is supported by the current platform</span>
-	 <span ng-show="!vm.project.platformSupported" class="text-danger">&#x2717; This project is unsupported by the current platform</span>
+    <span ng-show="vm.project.platformSupported">&#10004; This project is supported by the current platform</span>
+    <span ng-show="!vm.project.platformSupported" class="text-danger">&#x2717; This project is unsupported by the current platform</span>
   </p>
   <p ng-show="vm.project.attached">
-	 <span>This client is already attached to the project.</span>
-	 <a ng-href="/#/project/{{ vm.project.name }}">More information</a>
-	 <br />
-	 <button class="btn btn-warning" ng-click="vm.detachClicked()">Detach</button>
-	 <detach-dialog projectname="{{vm.project.name}}" projecturl="{{vm.project.url}}" />	 
+    <span>This client is already attached to the project.</span>
+    <a ng-href="/#/project/{{ vm.project.name }}">More information</a>
+    <br />
+    <button class="btn btn-warning" ng-click="vm.detachClicked()">Detach</button>
+    <detach-dialog projectname="{{vm.project.name}}" projecturl="{{vm.project.url}}" />
   </p>
 
   <p ng-show="!vm.project.attached">
-	 <button class="btn btn-primary" ng-click="vm.attachClicked()">Attach</button>
-	 <attach-dialog projectname="{{vm.project.name}}" projecturl="{{vm.project.url}}" />
+    <button class="btn btn-primary" ng-click="vm.attachClicked()">Attach</button>
+    <attach-dialog projectname="{{vm.project.name}}" projecturl="{{vm.project.url}}" />
   </p>
   <p>
     Computing for
@@ -39,9 +39,12 @@
   <p>
     <a ng-href="{{vm.project.url}}">Project homepage</a>
   </p>
-  <h2>Supported Platforms</h2>
-  <ul id="supportedPlatforms">
-    <li ng-repeat="p in vm.project.platforms" ng-bind="p.name" />
-  </ul>  
-</div>
+  <h2><a href="javascript:" data-target="#supportedPlatformsCollapse" data-toggle="collapse">Supported Platforms</a></h2>
+  <div id="supportedPlatformsCollapse" class="collapse">
 
+    <ul id="supportedPlatforms">
+      <li ng-repeat="p in vm.project.platforms" ng-bind="p.name" />
+    </ul>
+  </div>
+
+</div>

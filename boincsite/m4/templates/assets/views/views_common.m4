@@ -36,3 +36,12 @@ define(zoe_show_raw_data,dnl
     {{ $1 }}
   </div>
 </div>)dnl
+
+define(zoe_collapse_begin, `dnl
+<h2><a href="javascript:" data-target="#$1" data-toggle="collapse">$2</a></h2>
+		  <div id="$1" class="collapse">
+')
+
+define(zoe_collapse_end, `dnl
+</div>
+')

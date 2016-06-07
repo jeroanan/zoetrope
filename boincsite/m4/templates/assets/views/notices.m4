@@ -5,15 +5,16 @@ zoe_page_title(vm.title)
 zoe_loading_panel
 zoe_error_panel(notices)
 <div ng-show="vm.ready && !vm.error">  
-  <div ng-repeat="notice in vm.notices | orderBy:seqNo">
-    <h2 ng-bind="notice.title" />
-    <p>
-      <small>
-        From <span ng-bind="notice.project_name" />.
-        Published <span ng-bind="notice.create_time" />
-        and received <span ng-bind="notice.arrival_time" />
-      </small>
-    </p>
-    <p ng-bind-html="notice.description" />
+  <div ng-repeat="(i, notice) in vm.notices | orderBy:seqNo">
+	 zoe_collapse_begin(noticeCollapse-{{i}}, {{notice.title}})
+      <p>
+        <small>
+          From <span ng-bind="notice.project_name" />.
+          Published <span ng-bind="notice.create_time" />
+          and received <span ng-bind="notice.arrival_time" />
+        </small>
+      </p>
+      <p ng-bind-html="notice.description" />
+	 zoe_collapse_end
   </div>
 </div>

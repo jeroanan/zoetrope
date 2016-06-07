@@ -71,7 +71,5 @@ function IndexController(taskSvc, projectSvc) {
     vm.showRawData = false;
     vm.title = 'BOINC Tasks';
     document.title = vm.title;
-  }
-  
-  
+  }  
 }

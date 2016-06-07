@@ -1,4 +1,4 @@
-* TODO Zoetrope TODO List [1/25]
+* TODO Zoetrope TODO List [2/25]
 ** TODO Fix the "Time So Far" information										 :Tasks:
 For the project that I am mostly crunching for while developing this, Enigma@Home, the Time So Far is always empty. 
 However, upon further investigation of what BOINC's XML-RPC functionality provides, the functions that return tonnes of data, 

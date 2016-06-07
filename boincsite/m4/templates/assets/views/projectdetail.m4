@@ -41,9 +41,10 @@ zoe_error_panel(project details)
   <p>
     <a ng-href="{{vm.project.url}}">Project homepage</a>
   </p>
-  <h2>Supported Platforms</h2>
-  <ul id="supportedPlatforms">
-    <li ng-repeat="p in vm.project.platforms" ng-bind="p.name" />
-  </ul>  
+  zoe_collapse_begin(supportedPlatformsCollapse, Supported Platforms)
+    <ul id="supportedPlatforms">
+      <li ng-repeat="p in vm.project.platforms" ng-bind="p.name" />
+    </ul>
+  zoe_collapse_end
 </div>
 
