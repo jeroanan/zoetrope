@@ -76,14 +76,22 @@ divert(0)dnl
 		  zoe_collapse_begin(statsRow, Statistics)		  
 		  zoe_collapse_end
 		  
-		  <div class="row">
-			 <div class="col-xs-3"></div>
-			 <div class="col-xs-3"></div>
-			 <div class="col-xs-3"></div>
-		  </div>
+		  zoe_collapse_begin(xsProjectOperations, Project Operations, hidden-lg)
+		  	 <div class="row sidebar-button-row">
+			 	<button class="btn btn-warning sidebar-button" ng-click="vm.detachClicked()">Deatch Project</button>
+			   zoe_sidebar_button_show(vm.detachWhenDoneClicked(), Deatch When Done, !vm.project.detach_when_done, btn-warning)
+			   zoe_sidebar_button_show(vm.dontDetachWhenDoneClicked(), Don't Detach When Done, vm.project.detach_when_done)
+          </div>
+			 <div class="row sidebar-button-row">
+			   zoe_sidebar_button_show(vm.noMoreWorkClicked(), No More Work, !vm.project.dont_request_more_work, btn-primary)
+			   zoe_sidebar_button_show(vm.allowMoreWorkClicked(), Allow More Work, vm.project.dont_request_more_work, btn-primary)
+			   zoe_sidebar_button_show(vm.suspendClicked(), Suspend Project, !vm.project.suspended_via_gui, btn-primary)
+			   zoe_sidebar_button_show(vm.resumeClicked(), Resume Project, vm.project.suspended_via_gui, btn-primary)
+		   </div>
+		  zoe_collapse_end		  
 		</div> <!-- col-xs-9 -->
 
-		<div class="col-xs-3 col-lg-1">
+		<div class="hidden-xs col-lg-1">
 		  <div class="row sidebar-button-row">
 			 <h4>Project Operations</h4>
 		  </div>
@@ -102,6 +110,8 @@ divert(0)dnl
 			 zoe_sidebar_button_show(vm.resumeClicked(), Resume Project, vm.project.suspended_via_gui, btn-primary)
 		  </div>
 		</div>
+
+		
     </div> <!-- container -->
 	 
   </div>  

@@ -38,8 +38,8 @@ define(zoe_show_raw_data,dnl
 </div>)dnl
 
 define(zoe_collapse_begin, `dnl
-<h2><a href="javascript:" data-target="#$1" data-toggle="collapse">$2</a></h2>
-		  <div id="$1" class="collapse">
+<h2 class="$3"><a href="javascript:" data-target="#$1" data-toggle="collapse">$2</a></h2>
+		  <div id="$1" class="collapse $3">
 ')
 
 define(zoe_collapse_end, `dnl
