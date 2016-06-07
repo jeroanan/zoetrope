@@ -1,4 +1,4 @@
-* TODO Zoetrope TODO List [2/25]
+* TODO Zoetrope TODO List [3/25]
 ** TODO Fix the "Time So Far" information										 :Tasks:
 For the project that I am mostly crunching for while developing this, Enigma@Home, the Time So Far is always empty. 
 However, upon further investigation of what BOINC's XML-RPC functionality provides, the functions that return tonnes of data, 
@@ -35,7 +35,7 @@ Is this a bug in BOINC?
 *** TODO suspend_if_no_recent_input
 *** TODO vm_max_used_pct
 ** TODO The link to task detail doesn't present a very big target on xs view :Tasks:
-** TODO Collapse the list of supported platforms, make them expandable :ProjectDetail:
+** DONE Collapse the list of supported platforms, make them expandable :ProjectDetail:
 ** TODO Make the attach project dialog and attach project pages use common markup :Attach:Detach:
 i.e., make into a directive
 
