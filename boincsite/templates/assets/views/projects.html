@@ -11,18 +11,18 @@
       <thead>
 		  <th>
   <a ng-click="vm.sort('name');">Project Name</a>
-  <span ng-show="vm.sortProp==='name' && !vm.reverseSort" ng-bind-html="vm.upArrow" />
-  <span ng-show="vm.sortProp==='name' && vm.reverseSort" ng-bind-html="vm.downArrow" />
+  <span ng-show="vm.sortProp==='name' && !vm.reverseSort">&#x25B2;</span>
+  <span ng-show="vm.sortProp==='name' && vm.reverseSort">&#x25BC;</span>
 </th>
 		  <th>
   <a ng-click="vm.sort('user_total_credit');">Total Credit</a>
-  <span ng-show="vm.sortProp==='user_total_credit' && !vm.reverseSort" ng-bind-html="vm.upArrow" />
-  <span ng-show="vm.sortProp==='user_total_credit' && vm.reverseSort" ng-bind-html="vm.downArrow" />
+  <span ng-show="vm.sortProp==='user_total_credit' && !vm.reverseSort">&#x25B2;</span>
+  <span ng-show="vm.sortProp==='user_total_credit' && vm.reverseSort">&#x25BC;</span>
 </th>
 		  <th>
   <a ng-click="vm.sort('user_expavg_credit');">Recent Average Credit</a>
-  <span ng-show="vm.sortProp==='user_expavg_credit' && !vm.reverseSort" ng-bind-html="vm.upArrow" />
-  <span ng-show="vm.sortProp==='user_expavg_credit' && vm.reverseSort" ng-bind-html="vm.downArrow" />
+  <span ng-show="vm.sortProp==='user_expavg_credit' && !vm.reverseSort">&#x25B2;</span>
+  <span ng-show="vm.sortProp==='user_expavg_credit' && vm.reverseSort">&#x25BC;</span>
 </th>
 		  <th>Actions</th>
       </thead>

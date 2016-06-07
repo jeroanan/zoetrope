@@ -75,7 +75,7 @@ Pages:
 *** TODO Allow More Work
 *** TODO Suspend Project
 ** TODO Make timezone into a string rather than just a number		 :HostInfo:
-** TODO Make project name link to project page						:Task:BLOCKED:
+** DONE Make project name link to project page 						:Task:
 To be done once keyvalrowlinkrow has had the same treatment that keyvalrow has already had (i.e., made responsive)
 
 ** DONE Merge getPlatformSvc into systemInfoSvc							  :General:

@@ -20,8 +20,6 @@ function MessagesController(systemInfoSvc) {
   vm.project_name_counts = [];
   vm.get_project_name = getProjectName;
   vm.sort = getSortFunc(vm, 'sortProp', 'reverseSort');
-  vm.upArrow = upArrow;
-  vm.downArrow = downArrow;
   vm.error = false;
   vm.load = load;
 

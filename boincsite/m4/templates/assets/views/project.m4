@@ -2,7 +2,17 @@ divert(-1)
 changecom(@@)
 
 include(boincsite/m4/templates/assets/views/views_common.m4)
-  
+
+define(sidebar_button, `dnl
+<div class="row sidebar-button-row">
+  <button class="btn $3 sidebar-button" ng-click="$1">$2</button>
+</div>')
+
+define(sidebar_button_show, `dnl
+<button class="btn $4 sidebar-button" ng-click="$1" ng-show="$3">
+  $2
+</button>
+')
 divert(0)dnl
 <div>
   zoe_page_title(vm.title)
@@ -77,36 +87,19 @@ divert(0)dnl
 		  <div class="row sidebar-button-row">
 			 <h4>Project Operations</h4>
 		  </div>
+		  sidebar_button(vm.detachClicked(), Detach Project, btn-warning)
 		  <div class="row sidebar-button-row">
-			 <button class="btn btn-warning sidebar-button" ng-click="vm.detachClicked()">Detach Project</button>
-			 <detach-dialog projectname="{{vm.project.name}}" projecturl="{{vm.project.master_url}}" />
+		  	 sidebar_button_show(vm.detachWhenDoneClicked(), Deatch When Done, !vm.project.detach_when_done, btn-warning)
+			 sidebar_button_show(vm.dontDetachWhenDoneClicked(), Don't Detach When Done, vm.project.detach_when_done)
+		  </div>
+		  sidebar_button(vm.updateProject(), Update Project, btn-primary)
+		  <div class="row sidebar-button-row">
+		    sidebar_button_show(vm.noMoreWorkClicked(), No More Work, !vm.project.dont_request_more_work, btn-primary)
+			 sidebar_button_show(vm.allowMoreWorkClicked(), Allow More Work, vm.project.dont_request_more_work, btn-primary)
 		  </div>
 		  <div class="row sidebar-button-row">
-			 <button class="btn btn-warning sidebar-button" ng-click="vm.detachWhenDoneClicked()" ng-show="!vm.project.detach_when_done">
-				Detach When Done
-			 </button>
-			 <button class="btn btn-primary sidebar-button" ng-click="vm.dontDetachWhenDoneClicked()" ng-show="vm.project.detach_when_done">
-				Don't Detach When Done
-			 </button>
-		  </div>
-		  <div class="row sidebar-button-row">
-			 <button class="btn btn-primary sidebar-button" ng-click="vm.updateProject()">Update Project</button>
-		  </div>
-		  <div class="row sidebar-button-row">
-			 <button class="btn btn-primary sidebar-button" ng-click="vm.noMoreWorkClicked()" ng-show="!vm.project.dont_request_more_work">
-				No More Work
-			 </button>
-			 <button class="btn btn-primary sidebar-button" ng-click="vm.allowMoreWorkClicked()" ng-show="vm.project.dont_request_more_work">
-				Allow More Work
-			 </button>
-		  </div>
-		  <div class="row sidebar-button-row">
-			 <button class="btn btn-primary sidebar-button" ng-click="vm.suspendClicked()" ng-show="!vm.project.suspended_via_gui">
-				Suspend Project
-			 </button>
-			 <button class="btn btn-primary sidebar-button" ng-click="vm.resumeClicked()" ng-show="vm.project.suspended_via_gui">
-				Resume Project
-			 </button>
+		    sidebar_button_show(vm.suspendClicked(), Suspend Project, !vm.project.suspended_via_gui, btn-primary)
+			 sidebar_button_show(vm.resumeClicked(), Resume Project, vm.project.suspended_via_gui, btn-primary)
 		  </div>
 		</div>
     </div> <!-- container -->
@@ -115,5 +108,6 @@ divert(0)dnl
   <div class="row home-row text-center">
     <a href="/#/projects">Projects</a>
   </div>
+  <detach-dialog projectname="{{vm.project.name}}" projecturl="{{vm.project.master_url}}" />
 </div>
 </div>

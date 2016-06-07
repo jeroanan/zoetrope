@@ -21,8 +21,6 @@ function ProjectsController(projectSvc) {
   vm.detachUrl = '';
   vm.detachName = '';
   vm.sort = getSortFunc(vm, 'sortProp', 'reverseSort');
-  vm.upArrow = upArrow;
-  vm.downArrow = downArrow;
   vm.error = false;
   vm.load = load;
   

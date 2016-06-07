@@ -5,14 +5,14 @@ include(boincsite/m4/templates/assets/views/views_common.m4)
   
 divert(0)dnl
 <div>
-  <h1 ng-bind="vm.title" />
+  zoe_page_title(vm.title)
   zoe_loading_panel
   zoe_error_panel(task)
   <div ng-show="vm.ready && !vm.error">
 
 	 <keyvalrow key="Workunit name" val="{{vm.task.name}}" />
 
-	 <keyvalrow key="Project name" val="{{vm.task.project_name}}" />
+	 <keyvallinkrow key="Project name" text="{{vm.task.project_name}}" link="/#/project/{{ vm.task.project_name }}" />
 
 	 <keyvalrow key="Percent done" val="{{vm.task.fraction_done}}%" />
 
@@ -40,7 +40,7 @@ divert(0)dnl
 			 Resume Task
 		  </a>
       </div>
-      <div class="col-xs-3"><a class="btn btn-danger" ng-click="vm.abortButtonClicked()">Abort</a></div>
+      <div class="col-xs-3"><a class="btn btn-warning ng-click="vm.abortButtonClicked()">Abort</a></div>
       <div class="col-xs-3"></div>
     </div>
 

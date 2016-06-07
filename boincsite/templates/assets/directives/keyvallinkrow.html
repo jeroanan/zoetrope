@@ -1,9 +1,9 @@
-<div class="row task-row">
-  <div class="col-lg-2" />
-  <div class="col-xs-3 col-lg-4"><span><strong ng-bind="key"></strong></span></div>
-  <div class="col-xs-3 col-lg-4">
+<div class="row task-row">  
+  <div class="col-xs-{{col1XsWidth}} col-lg-{{col1LgWidth}}" />
+  <div class="col-xs-{{col2XsWidth}} col-lg-{{col2LgWidth}} keyvalrowcol"><span><strong ng-bind="key"></strong></span></div>
+  <div class="col-xs-{{col3XsWidth}} col-lg-{{col3LgWidth}} keyvalrowcol">
     <a ng-show="link!=''" ng-href="{{link}}"><span ng-bind="text"/></a>
     <span ng-show="link==''">(no data)</span>
   </div>
-  <div class="col-xs-6 col-lg-2"></div>
+  <div class="col-xs-6 col-lg-{{col4LgWidth}}"></div>
 </div>

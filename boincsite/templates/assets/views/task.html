@@ -10,7 +10,7 @@
 
 	 <keyvalrow key="Workunit name" val="{{vm.task.name}}" />
 
-	 <keyvalrow key="Project name" val="{{vm.task.project_name}}" />
+	 <keyvallinkrow key="Project name" text="{{vm.task.project_name}}" link="/#/project/{{ vm.task.project_name }}" />
 
 	 <keyvalrow key="Percent done" val="{{vm.task.fraction_done}}%" />
 
@@ -38,7 +38,7 @@
 			 Resume Task
 		  </a>
       </div>
-      <div class="col-xs-3"><a class="btn btn-danger" ng-click="vm.abortButtonClicked()">Abort</a></div>
+      <div class="col-xs-3"><a class="btn btn-warning ng-click="vm.abortButtonClicked()">Abort</a></div>
       <div class="col-xs-3"></div>
     </div>
 

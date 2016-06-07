@@ -16,8 +16,6 @@ function IndexController(taskSvc, projectSvc) {
   vm.reverseSort = false;
   vm.ready = false;
   vm.sort = getSortFunc(vm, 'sortProp', 'reverseSort');
-  vm.upArrow = upArrow;
-  vm.downArrow = downArrow;
   vm.error = false;
   vm.load = load;
 

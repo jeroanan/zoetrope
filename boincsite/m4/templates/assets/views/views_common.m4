@@ -18,8 +18,8 @@ changequote(||)
 define(zoe_sorting_table_header,dnl
 <th>
   <a ng-click="vm.sort('$1');">$2</a>
-  <span ng-show="vm.sortProp==='$1' && !vm.reverseSort" ng-bind-html="vm.upArrow" />
-  <span ng-show="vm.sortProp==='$1' && vm.reverseSort" ng-bind-html="vm.downArrow" />
+  <span ng-show="vm.sortProp==='$1' && !vm.reverseSort">&#x25B2;</span>
+  <span ng-show="vm.sortProp==='$1' && vm.reverseSort">&#x25BC;</span>
 </th>)
 changequote
 

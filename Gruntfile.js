@@ -127,10 +127,6 @@ module.exports = function(grunt) {
         files: ['boincsite/m4/templates/assets/views/dailytransferhistory.m4'],
 		  tasks: ['m4:dailytransferhistory', 'prettify:dailytransferhistory']
       },
-		m4_globalpreferences: {
-        files: ['boincsite/m4/templates/assets/views/globalpreferences.m4'],
-		  tasks: ['m4:globalpreferences', 'prettify:globalpreferences']
-      },
 		m4_views_common: {
 		  files: ['boincsite/m4/templates/assets/views/views_common.m4'],
 		  tasks: ['m4:tasks',
@@ -139,7 +135,11 @@ module.exports = function(grunt) {
 					 'm4:project',
 					 'm4:allprojectlist',
 					 'm4:projectdetail',
-					 'm4:messsages']
+					 'm4:messages',
+					 'm4:notices',
+					 'm4:diskusage',
+					 'm4:hostinfo',
+					 'm4:dailytransferhistory']
 		}		
     },
 	 jshint: {
@@ -203,10 +203,6 @@ module.exports = function(grunt) {
 		dailytransferhistory: {
 		  src: 'boincsite/m4/templates/assets/views/dailytransferhistory.m4',
 		  dest: 'boincsite/templates/assets/views/dailytransferhistory.html'
-		},
-		globalpreferences: {
-		  src: 'boincsite/m4/templates/assets/views/globalpreferences.m4',
-		  dest: 'boincsite/templates/assets/views/globalpreferences.html'
 		}
 	 },
 	 prettify: {
@@ -260,10 +256,6 @@ module.exports = function(grunt) {
 		dailytransferhistory: {
 		  src: 'boincsite/templates/assets/views/dailytransferhistory.html',
 		  dest: 'boincsite/templates/assets/views/dailytransferhistory.html'
-		},
-		globalpreferences: {
-		  src: 'boincsite/templates/assets/views/globalpreferences.html',
-		  dest: 'boincsite/templates/assets/views/globalpreferences.html'
 		}
 	 }
   });
