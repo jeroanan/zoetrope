@@ -4,58 +4,67 @@
     <img src="/static/img/loading.gif" />
   </div>
   <div ng-show="vm.ready && vm.error">
-  An error occurred while loading the project. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>
-</div>
+    An error occurred while loading the project. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>
+  </div>
+  <div class="alert alert-success" ng-show="vm.projectOperationSuccess">
+    <span ng-bind="vm.projectOperationSuccessMessage">
+  </div>
   <div ng-show="vm.ready && !vm.error">
     <table class="table table-striped">
       <thead>
 		  <th>
   <a ng-click="vm.sort('name');">Project Name</a>
   <span ng-show="vm.sortProp==='name' && !vm.reverseSort">&#x25B2;</span>
-  <span ng-show="vm.sortProp==='name' && vm.reverseSort">&#x25BC;</span>
-</th>
-		  <th>
-  <a ng-click="vm.sort('user_total_credit');">Total Credit</a>
-  <span ng-show="vm.sortProp==='user_total_credit' && !vm.reverseSort">&#x25B2;</span>
-  <span ng-show="vm.sortProp==='user_total_credit' && vm.reverseSort">&#x25BC;</span>
-</th>
-		  <th>
-  <a ng-click="vm.sort('user_expavg_credit');">Recent Average Credit</a>
-  <span ng-show="vm.sortProp==='user_expavg_credit' && !vm.reverseSort">&#x25B2;</span>
-  <span ng-show="vm.sortProp==='user_expavg_credit' && vm.reverseSort">&#x25BC;</span>
-</th>
-		  <th>Actions</th>
-      </thead>
-      <tr ng-repeat="p in vm.projects | orderBy:vm.sortProp:vm.reverseSort">
-        <td><a href="#/project/{{ p.name }}"><span ng-bind="p.name" /></a></td>
-        <td><span ng-bind="p.user_total_credit | number" /></td>
-        <td><span ng-bind="p.user_expavg_credit | number" /></td>
-		  <td ng-show="true">
-			 <div class="dropdown">
-				<button class="btn btn-default dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-				  Actions
-				  <span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-				  <li><a href="" ng-click="vm.detachClicked(p.name, p.master_url)">Detach</a></li>
-				  <li><a href="" ng-click="vm.updateClicked()">Update</a></li>
-				</ul>
-			 </div>
-		  </td>
-      </tr>		
+    <span ng-show="vm.sortProp==='name' && vm.reverseSort">&#x25BC;</span>
+    </th>
+    <th>
+      <a ng-click="vm.sort('user_total_credit');">Total Credit</a>
+      <span ng-show="vm.sortProp==='user_total_credit' && !vm.reverseSort">&#x25B2;</span>
+      <span ng-show="vm.sortProp==='user_total_credit' && vm.reverseSort">&#x25BC;</span>
+    </th>
+    <th>
+      <a ng-click="vm.sort('user_expavg_credit');">Recent Average Credit</a>
+      <span ng-show="vm.sortProp==='user_expavg_credit' && !vm.reverseSort">&#x25B2;</span>
+      <span ng-show="vm.sortProp==='user_expavg_credit' && vm.reverseSort">&#x25BC;</span>
+    </th>
+    <th>Actions</th>
+    </thead>
+    <tr ng-repeat="p in vm.projects | orderBy:vm.sortProp:vm.reverseSort">
+      <td>
+        <a href="#/project/{{ p.name }}"><span ng-bind="p.name" /></a>
+      </td>
+      <td><span ng-bind="p.user_total_credit | number" /></td>
+      <td><span ng-bind="p.user_expavg_credit | number" /></td>
+      <td ng-show="true">
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Actions
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="javascript:" ng-click="vm.detachClicked(p.name, p.master_url)">Detach</a></li>
+            <li><a href="javascript:" ng-click="vm.updateClicked(p.master_url)">Update</a></li>
+            <li ng-show="!p.dont_request_more_work"><a href="javascript:" ng-click="vm.noMoreWorkClicked(p.master_url)">No More Work</a></li>
+            <li ng-show="p.dont_request_more_work"><a href="javascript:" ng-click="vm.allowMoreWorkClicked(p.master_url)">Allow More Work</a></li>
+            <li ng-show="!p.suspended_via_gui"><a href="javascript:" ng-click="vm.suspendProjectClicked(p.master_url)">Suspend Project</a></li>
+            <li ng-show="p.suspended_via_gui"><a href="javascript:" ng-click="vm.resumeProjectClicked(p.master_url)">Resume Project</a></li>
+          </ul>
+        </div>
+      </td>
+    </tr>
     </table>
 
     <div class="row">
-  <div class="col-xs-3"></div>
-  <div class="col-xs-3"></div>
-  <div class="col-xs-3"></div>
-  <div class="col-xs-3">
-    <input type="checkbox" ng-model="vm.showRawData">Show raw data</input>
+      <div class="col-xs-3"></div>
+      <div class="col-xs-3"></div>
+      <div class="col-xs-3"></div>
+      <div class="col-xs-3">
+        <input type="checkbox" ng-model="vm.showRawData">Show raw data</input>
+      </div>
+    </div>
+    <div class="row" ng-show="vm.showRawData">
+      {{ vm.projects }}
+    </div>
   </div>
-  </div>
-  <div class="row" ng-show="vm.showRawData">
-    {{ vm.projects }}
-  </div>
-</div>
   <detach-dialog id="dDialog" projecturl="{{vm.detachUrl}}" projectname="{{vm.detachName}}"></detach-dialog>
 </div>

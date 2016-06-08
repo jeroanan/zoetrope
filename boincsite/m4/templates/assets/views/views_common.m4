@@ -4,6 +4,9 @@ define(zoe_page_title,`dnl
 define(zoe_begin_table,`dnl
 <table class="table table-striped">')
 
+define(zoe_end_table,`dnl
+</table>')
+
 define(zoe_loading_panel,`dnl
 <div ng-show="!vm.ready" class="text-center">
     <img src="/static/img/loading.gif" />

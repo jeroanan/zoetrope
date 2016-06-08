@@ -26,8 +26,6 @@ divert(0)dnl
 		  <a ng-href="/#/projectdetail/{{vm.project.name}}">Project Details</a> 
 
 		  zoe_collapse_begin(currentStatusCollapse, Current Status)
-		  <!--<h2><a href="javascript:" data-target="#currentStatusCollapse" data-toggle="collapse">Current Status</a></h2>
-		  <div id="currentStatusCollapse" class="collapse">-->
 		    <keyvallinkrow key="URL" link="{{vm.project.master_url}}" text="{{vm.project.master_url}}" />
 		    <keyvalrow key="Username" val="{{ vm.project.user_name }}" />
 		    <keyvalrow key="Team name" val="{{ vm.project.team_name }}" />

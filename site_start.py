@@ -133,9 +133,6 @@ class WebServer(object):
     def dont_detach_project_when_done(self, **kwargs):
         result = self.project_operation(kwargs, self.__project_tasks.dont_detach_project_when_done)
 
-    def __render(self, page, **kwargs):
-        return self.__renderer.render(page, **kwargs)
-
     @cherrypy.expose
     def suspend_task(self, **kwargs):
         return self.task_name_operation(kwargs, self.__task_tasks.suspend_task)
