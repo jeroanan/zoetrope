@@ -32,8 +32,6 @@ import boincsite.status.DiskUsage as duj
 import boincsite.status.GlobalPreferences as ggp
 import boincsite.status.Notice as notice
 
-import boincsite.templates.TemplateRenderer as tr
-
 import boincsite.util.JSONAttrEncoder as jsae
 
 WorkingDirectory = os.path.dirname(os.path.abspath(__file__))
@@ -47,16 +45,17 @@ class WebServer(object):
         self.__project_tasks = pt.ProjectTasks()
         self.__task_tasks = tt.TaskTasks()
         self.__system_info_tasks = sit.SystemInfoTasks()
-
-        self.__renderer = tr.TemplateRenderer()
         self.__io = StringIO()
+        self.__cwd = ''
 
-    def start(self):
-        cherrypy.quickstart(WebServer(), '/', 'server.conf')
+    def start(self, cwd):
+        self.__cwd = cwd
+        cherrypy.quickstart(self, '/', 'server.conf')
 
     @cherrypy.expose
     def index(self, **kwargs):
-        return self.__render('index.html')
+        with open(self.__cwd + '/boincsite/templates/index.html') as f:
+            return f.read()
 
     @cherrypy.expose
     def task_json(self, **kwargs):
@@ -210,9 +209,10 @@ class WebServer(object):
     
 
 if __name__=='__main__':
+    cwd = os.getcwd()
     from cherrypy.process.plugins import Daemonizer
     d = Daemonizer(cherrypy.engine)
     d.subscribe()
 
     ws = WebServer()
-    ws.start() 
+    ws.start(cwd) 

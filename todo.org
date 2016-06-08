@@ -74,5 +74,5 @@ Pages:
 *** TODO Allow More Work
 *** TODO Suspend Project
 ** TODO Make timezone into a string rather than just a number		 :HostInfo:
-** TODO It seems we don't need the dependency on jinja2 anymore. Remove it. :General:
+** DONE It seems we don't need the dependency on jinja2 anymore. Remove it. :General:
 ** DONE Make sidebar invisible on mobile. Make it another section   :Project:
