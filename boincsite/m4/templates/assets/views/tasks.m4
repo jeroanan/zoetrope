@@ -36,7 +36,7 @@ divert(0)dnl
           <td><span ng-bind="task.state" /></td>
           <td><span ng-bind="task.time_so_far" /></td>
           <td><span ng-bind="task.estimated_cpu_time_remaining" /></td>
-          <td><span ng-bind="task.report_deadline"></span></td>
+          <td><span ng-bind="task.report_deadline" ng-class="vm.getDeadlineClass(task)"></span></td>
         </tr>
       </tbody>
     </table>

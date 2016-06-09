@@ -1,11 +1,11 @@
-* TODO Zoetrope TODO List [3/24]
+* TODO Zoetrope TODO List [1/21]
 ** TODO Fix the "Time So Far" information										 :Tasks:
 For the project that I am mostly crunching for while developing this, Enigma@Home, the Time So Far is always empty. 
 However, upon further investigation of what BOINC's XML-RPC functionality provides, the functions that return tonnes of data, 
 e.g. simple_gui_info, contains a populated elapsed_time field. For some reason this isn't provided by the get_results call 
 that is currently made. 
 
-** TODO Make tasks' deadline times indicate when deadline is near/exceeded :Tasks:
+** DONE Make tasks' deadline times indicate when deadline is near/exceeded :Tasks:
 ** TODO Add further details [0/2]											 :HostInfo:
 
 *** TODO Load averages
@@ -67,11 +67,4 @@ Pages:
 **** TODO Delete account
 *** TODO Secure appropriate pages/web service endpoints so u
 
-** DONE Add actions to actions menu [4/4]									 :Projects:
-*** DONE No More Work
-*** DONE Allow More Work
-*** DONE Suspend Project
-*** DONE Resume Project
 ** TODO Make timezone into a string rather than just a number		 :HostInfo:
-** DONE It seems we don't need the dependency on jinja2 anymore. Remove it. :General:
-** DONE Make sidebar invisible on mobile. Make it another section   :Project:

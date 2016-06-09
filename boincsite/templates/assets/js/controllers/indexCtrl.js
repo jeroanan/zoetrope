@@ -17,7 +17,9 @@ function IndexController(taskSvc, projectSvc) {
   vm.ready = false;
   vm.sort = getSortFunc(vm, 'sortProp', 'reverseSort');
   vm.error = false;
+
   vm.load = load;
+  vm.getDeadlineClass = getDeadlineClass;
 
   load();
   
@@ -59,11 +61,35 @@ function IndexController(taskSvc, projectSvc) {
 	 var idx = 0;
 	 vm.tasks = vm.tasks.map(function(x) {
 		idx++;
+
 		x.idx = idx;
 		x.project_name = get_project_name(x, vm.projects);
 		x.state = get_state_string(x);
 		x.estimated_cpu_time_remaining = padTime(x.estimated_cpu_time_remaining);
 		x.time_so_far = padTime(get_time_so_far(x));
+		
+		var overdue = false;
+		var deadlineApproaching = false;
+		
+		// Assume the date is something like 2016-06-09 21:08:00
+		var deadlineSplit = x.report_deadline.split(' ')[0].split('-');
+		
+		if (deadlineSplit.length===3) {
+		  var deadlineDate = new Date(deadlineSplit[0], deadlineSplit[1]-1, deadlineSplit[2]);
+		  var now = new Date();
+
+		  if (now>deadlineDate) {			 
+			 overdue = true;
+		  } else {
+			 var oneDay = 86400000; // milliseconds/day
+			 var numDays = 2;
+			 var dateDiff = deadlineDate - now;
+			 deadlineApproaching = dateDiff < (oneDay * numDays);
+		  }
+		}
+		
+		x.overdue = overdue;
+		x.deadlineApproaching = deadlineApproaching;
 		return x;
 	 });
 	 
@@ -71,5 +97,10 @@ function IndexController(taskSvc, projectSvc) {
     vm.showRawData = false;
     vm.title = 'BOINC Tasks';
     document.title = vm.title;
-  }  
+  }
+
+  function getDeadlineClass(task) {
+	 if (task.overdue) return 'text-danger';
+	 if (task.deadlineApproaching) return 'text-warning';	 
+  }
 }
