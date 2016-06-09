@@ -1,4 +1,4 @@
-* TODO Zoetrope TODO List [4/25]
+* TODO Zoetrope TODO List [5/25]
 ** TODO Fix the "Time So Far" information										 :Tasks:
 For the project that I am mostly crunching for while developing this, Enigma@Home, the Time So Far is always empty. 
 However, upon further investigation of what BOINC's XML-RPC functionality provides, the functions that return tonnes of data, 
@@ -16,7 +16,7 @@ that is currently made.
 ** TODO What happens when various requests throw exceptions?		  :General:
 Need to review all requests in order to check. I've alreay dealt with many but doubtless there are more to do.
 
-** TODO Add success/error feedback when tasks are resumed, suspended or aborted :Task:
+** DONE Add success/error feedback when tasks are resumed, suspended or aborted :Task:
 ** TODO When clicking "Don't Detach When Done", I am unable to subsequently detect that the project shouldn't be detached when done :Project:
 When I click "Detach When Done", it causes detach_when_done to appear in the project's XML. I can use that to determine whether 
 I have requested to detach when done, as that element wasn't present before. However it remains even after I click 

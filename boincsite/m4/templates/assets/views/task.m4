@@ -8,6 +8,7 @@ divert(0)dnl
   zoe_page_title(vm.title)
   zoe_loading_panel
   zoe_error_panel(task)
+  zoe_success_panel
   <div ng-show="vm.ready && !vm.error">
 
 	 <keyvalrow key="Workunit name" val="{{vm.task.truncatedName}}" tooltip="{{vm.task.name}}" />
@@ -49,7 +50,7 @@ divert(0)dnl
 			 Resume Task
 		  </a>
       </div>
-      <div class="col-xs-3"><a class="btn btn-warning ng-click="vm.abortButtonClicked()">Abort</a></div>
+      <div class="col-xs-3"><a class="btn btn-warning" ng-click="vm.abortButtonClicked()">Abort</a></div>
       <div class="col-xs-3"></div>
     </div>
 

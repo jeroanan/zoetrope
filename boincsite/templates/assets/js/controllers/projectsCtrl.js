@@ -21,8 +21,8 @@ function ProjectsController(projectSvc) {
   vm.sort = getSortFunc(vm, 'sortProp', 'reverseSort');
   vm.error = false;
   vm.load = load;
-  vm.projectOperationSuccess = false;
-  vm.projectOperationSuccessMessage = '';
+  vm.operationSuccess = false;
+  vm.operationSuccessMessage = '';
   
   vm.detachClicked = detachClicked;
   vm.updateClicked = getProjectOperation('updateProject', 'Project updated successfully');
@@ -61,10 +61,9 @@ function ProjectsController(projectSvc) {
   
   function getProjectOperation(operationFunc, successMessage, propToChange, propValue) {
 	 return function(projectUrl) {
-		console.log(operationFunc);
 		resetProjectOperationSuccess();
 		projectSvc[operationFunc](projectUrl)().query().$promise.then(function() {
-		  projectOperationSuccess(successMessage);
+		  operationSuccess(successMessage);
 
 		  if (propToChange && propToChange) {
 			 setProjectProperty(projectUrl, propToChange, propValue);
@@ -84,13 +83,13 @@ function ProjectsController(projectSvc) {
   }
 
   function resetProjectOperationSuccess() {
-	 vm.projectOperationSuccess = false;
-	 vm.projectOperationSuccessMessage = '';
+	 vm.operationSuccess = false;
+	 vm.operationSuccessMessage = '';
   }
 
-  function projectOperationSuccess(message) {
-	 vm.projectOperationSuccess = true;
-	 vm.projectOperationSuccessMessage = message;
+  function operationSuccess(message) {
+	 vm.operationSuccess = true;
+	 vm.operationSuccessMessage = message;
   }
 
   function setProjectProperty(projectUrl, propertyName, propertyValue) {

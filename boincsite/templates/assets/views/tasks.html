@@ -4,58 +4,55 @@
     <img src="/static/img/loading.gif" />
   </div>
   <div ng-show="vm.ready && vm.error">
-    An error occurred while loading the tasks. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>
-  </div>
+  An error occurred while loading the tasks. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>
+</div>
   <div ng-show="vm.ready && vm.error===false">
     <table class="table table-striped">
       <thead>
-        <th>
-          <a ng-click="vm.sort('idx');">#</a>
-          <span ng-show="vm.sortProp==='idx' && !vm.reverseSort">&#x25B2;</span>
-          <span ng-show="vm.sortProp==='idx' && vm.reverseSort">&#x25BC;</span>
-        </th>
-        <th>
-          <a ng-click="vm.sort('project_name');">Project Name</a>
-          <span ng-show="vm.sortProp==='project_name' && !vm.reverseSort">&#x25B2;</span>
-          <span ng-show="vm.sortProp==='project_name' && vm.reverseSort">&#x25BC;</span>
-        </th>
-        <th>
-          <a ng-click="vm.sort('fraction_done');">Progress</a>
-          <span ng-show="vm.sortProp==='fraction_done' && !vm.reverseSort">&#x25B2;</span>
-          <span ng-show="vm.sortProp==='fraction_done' && vm.reverseSort">&#x25BC;</span>
-        </th>
-        <th>
-          <a ng-click="vm.sort('state');">State</a>
-          <span ng-show="vm.sortProp==='state' && !vm.reverseSort">&#x25B2;</span>
-          <span ng-show="vm.sortProp==='state' && vm.reverseSort">&#x25BC;</span>
-        </th>
-        <th>
-          <a ng-click="vm.sort('time_so_far');">Time So Far</a>
-          <span ng-show="vm.sortProp==='time_so_far' && !vm.reverseSort">&#x25B2;</span>
-          <span ng-show="vm.sortProp==='time_so_far' && vm.reverseSort">&#x25BC;</span>
-        </th>
-        <th>
-          <a ng-click="vm.sort('estimated_cpu_time_remaining');">Est. Time Remaining</a>
-          <span ng-show="vm.sortProp==='estimated_cpu_time_remaining' && !vm.reverseSort">&#x25B2;</span>
-          <span ng-show="vm.sortProp==='estimated_cpu_time_remaining' && vm.reverseSort">&#x25BC;</span>
-        </th>
-        <th>
-          <a ng-click="vm.sort('report_deadline');">Deadline</a>
-          <span ng-show="vm.sortProp==='report_deadline' && !vm.reverseSort">&#x25B2;</span>
-          <span ng-show="vm.sortProp==='report_deadline' && vm.reverseSort">&#x25BC;</span>
-        </th>
+         <th>
+  <a ng-click="vm.sort('idx');">#</a>
+  <span ng-show="vm.sortProp==='idx' && !vm.reverseSort">&#x25B2;</span>
+  <span ng-show="vm.sortProp==='idx' && vm.reverseSort">&#x25BC;</span>
+</th>
+         <th>
+  <a ng-click="vm.sort('project_name');">Project Name</a>
+  <span ng-show="vm.sortProp==='project_name' && !vm.reverseSort">&#x25B2;</span>
+  <span ng-show="vm.sortProp==='project_name' && vm.reverseSort">&#x25BC;</span>
+</th>
+         <th>
+  <a ng-click="vm.sort('fraction_done');">Progress</a>
+  <span ng-show="vm.sortProp==='fraction_done' && !vm.reverseSort">&#x25B2;</span>
+  <span ng-show="vm.sortProp==='fraction_done' && vm.reverseSort">&#x25BC;</span>
+</th>
+         <th>
+  <a ng-click="vm.sort('state');">State</a>
+  <span ng-show="vm.sortProp==='state' && !vm.reverseSort">&#x25B2;</span>
+  <span ng-show="vm.sortProp==='state' && vm.reverseSort">&#x25BC;</span>
+</th>
+         <th>
+  <a ng-click="vm.sort('time_so_far');">Time So Far</a>
+  <span ng-show="vm.sortProp==='time_so_far' && !vm.reverseSort">&#x25B2;</span>
+  <span ng-show="vm.sortProp==='time_so_far' && vm.reverseSort">&#x25BC;</span>
+</th>
+         <th>
+  <a ng-click="vm.sort('estimated_cpu_time_remaining');">Est. Time Remaining</a>
+  <span ng-show="vm.sortProp==='estimated_cpu_time_remaining' && !vm.reverseSort">&#x25B2;</span>
+  <span ng-show="vm.sortProp==='estimated_cpu_time_remaining' && vm.reverseSort">&#x25BC;</span>
+</th>
+         <th>
+  <a ng-click="vm.sort('report_deadline');">Deadline</a>
+  <span ng-show="vm.sortProp==='report_deadline' && !vm.reverseSort">&#x25B2;</span>
+  <span ng-show="vm.sortProp==='report_deadline' && vm.reverseSort">&#x25BC;</span>
+</th>
       </thead>
       <tbody>
         <tr ng-repeat="task in vm.tasks | orderBy:vm.sortProp:vm.reverseSort">
-          <td>
-            <a ng-href="#/task/{{ task.name }}"><span ng-bind="task.idx" /></a>
-          </td>
-          <td>
-            <a ng-href="#/project/{{ task.project_name }}"><span ng-bind="task.project_name" /></a>
-          </td>
+          <td><a ng-href="#/task/{{ task.name }}"><span ng-bind="task.idx" /></a></td>
+          <td><a ng-href="#/project/{{ task.project_name }}"><span ng-bind="task.project_name" /></a></td>
           <td>
             <div class="progress">
-              <div class="progress-bar" role="progressbar" aria-valuenow="{{task.fraction_done}}" aria-valuemin="0" aria-valuemax="100" style="width: {{task.fraction_done}}%;">
+              <div class="progress-bar" role="progressbar" aria-valuenow="{{task.fraction_done}}" aria-valuemin="0"
+                aria-valuemax="100" style="width: {{task.fraction_done}}%;">
               </div>
             </div>
             <div>
@@ -70,16 +67,17 @@
       </tbody>
     </table>
 
-    <div class="row">
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3"></div>
-      <div class="col-xs-3">
-        <input type="checkbox" ng-model="vm.showRawData">Show raw data</input>
-      </div>
-    </div>
-    <div class="row" ng-show="vm.showRawData">
-      {{ vm.tasks }}
-    </div>
+	 <div class="row">
+  <div class="col-xs-3"></div>
+  <div class="col-xs-3"></div>
+  <div class="col-xs-3"></div>
+  <div class="col-xs-3">
+    <input type="checkbox" ng-model="vm.showRawData">Show raw data</input>
+  </div>
+  </div>
+  <div class="row" ng-show="vm.showRawData">
+    {{ vm.tasks }}
   </div>
 </div>
+</div>
+

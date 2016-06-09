@@ -16,13 +16,15 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
   vm.task = {};
   vm.error = '';
   vm.showConfirmAbort = false;
+  vm.operationSuccess = false;
+  vm.operationSuccessMessage = '';
   
   vm.load = load;
   vm.getDeadlineClass = getDeadlineClass;
 
-  vm.suspendClicked = suspendClicked;
-  vm.resumeClicked = resumeClicked;
-  vm.abortTaskLinkClicked = abortTaskLinkClicked;
+  vm.suspendClicked = getTaskOperation('suspendTask', 'Task suspended', 'suspended_via_gui', true);
+  vm.resumeClicked = getTaskOperation('resumeTask', 'Task resumed', 'suspended_via_gui', false);
+  vm.abortTaskLinkClicked = getTaskOperation('abortTask', 'Task Aborted');
   vm.abortButtonClicked = abortButtonClicked;
 
   document.title = vm.title;
@@ -37,6 +39,29 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
 	 vm.showConfirmAbort = !vm.showConfirmAbort;
   }
 
+  function getTaskOperation(operationFunc, successMessage, propToChange, propValue) {
+	 return function() {
+		resetOperationSuccess();
+		taskSvc[operationFunc](vm.task.name)().query().$promise.then(function() {
+		  operationSuccess(successMessage);
+		  
+		  if (propToChange && propToChange) {
+			 vm.task[propToChange] = propValue;
+		  }
+		});
+	 };
+  }
+
+  function resetOperationSuccess() {
+	 vm.operationSuccess = false;
+	 vm.operationSuccessMessage = '';
+  }
+
+  function operationSuccess(message) {
+	 vm.operationSuccess = true;
+	 vm.operationSuccessMessage = message;
+  }
+  
   function suspendClicked() {
 	 taskSvc.suspendTask(vm.task.name)().query().$promise.then(function(d) {
 		vm.task.suspended_via_gui = true;

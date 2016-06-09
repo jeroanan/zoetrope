@@ -12,6 +12,11 @@ define(zoe_loading_panel,`dnl
     <img src="/static/img/loading.gif" />
   </div>')
 
+define(zoe_success_panel,`dnl
+<div class="alert alert-success" ng-show="vm.operationSuccess">
+  <span ng-bind="vm.operationSuccessMessage">
+</div>')dnl
+
 define(zoe_error_panel,dnl
 <div ng-show="vm.ready && vm.error">
   An error occurred while loading the $1. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>

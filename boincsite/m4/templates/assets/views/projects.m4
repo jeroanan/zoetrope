@@ -25,9 +25,7 @@ divert(0)dnl
   zoe_page_title(vm.title)
   zoe_loading_panel
   zoe_error_panel(project)
-  <div class="alert alert-success" ng-show="vm.projectOperationSuccess">
-   <span ng-bind="vm.projectOperationSuccessMessage">
-  </div>
+  zoe_success_panel
   <div ng-show="vm.ready && !vm.error">
     zoe_begin_table
       <thead>
