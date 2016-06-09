@@ -61,24 +61,6 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
 	 vm.operationSuccess = true;
 	 vm.operationSuccessMessage = message;
   }
-  
-  function suspendClicked() {
-	 taskSvc.suspendTask(vm.task.name)().query().$promise.then(function(d) {
-		vm.task.suspended_via_gui = true;
-	 });
-  }
-
-  function resumeClicked() {
-	 taskSvc.resumeTask(vm.task.name)().query().$promise.then(function(d) {
-		vm.task.suspended_via_gui = false;
-	 });
-  }
-
-  function abortTaskLinkClicked() {
-	 taskSvc.abortTask(vm.task.name)().query().$promise.then(function(d) {
-		window.location.href = '/';
-	 });
-  }
 
   function onError() {
 	 var errorText = 'Task not found';
