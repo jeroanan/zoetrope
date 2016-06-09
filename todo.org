@@ -1,4 +1,4 @@
-* TODO Zoetrope TODO List [3/25]
+* TODO Zoetrope TODO List [4/25]
 ** TODO Fix the "Time So Far" information										 :Tasks:
 For the project that I am mostly crunching for while developing this, Enigma@Home, the Time So Far is always empty. 
 However, upon further investigation of what BOINC's XML-RPC functionality provides, the functions that return tonnes of data, 
@@ -70,8 +70,8 @@ Pages:
 
 ** TODO Make timezone into a string rather than just a number		 :HostInfo:
 ** DONE Truncate workunit name to first say 25 charcters and provide a tooltip for the full name. :Task:
-** TODO On mobile the title tooltip wouldn't work
+** TODO On mobile the title tooltip wouldn't work :Task:
 So in addition we should probably make click/tap on the name toggle it to full name
 and then back to truncated.
-** TODO Make active task state a word rather than just a number :Task:
+** DONE Make active task state a word rather than just a number		  :Task:
 0 = "Not active", 1 = "Active"

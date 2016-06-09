@@ -63,6 +63,7 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
 
   function gotTask(task) {
 	 task.truncatedName = task.name.substr(0, 20);
+	 task.active_task_state = task.active_task_state===0 ? 'Inactive' : 'Active';
 
 	 var overdue = false;
 	 var deadlineApproaching = false;
