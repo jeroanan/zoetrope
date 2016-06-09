@@ -62,7 +62,7 @@ angular.module('zoetropeDirectives').directive('keyvalrow', function() {
 		  scope.val = value;
 		});
 
-		attrs.$observer('tooltip', function(value) {
+		attrs.$observe('tooltip', function(value) {
 		  scope.tooltip = value;
 		});
 	 }

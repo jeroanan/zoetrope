@@ -20,7 +20,16 @@ divert(0)dnl
 
 	 <keyvalrow key="Time Remaining" val="{{vm.task.estimated_cpu_time_remaining}}" />
 
-	 <keyvalrow key="Report Deadline" val="{{vm.task.report_deadline}}" />
+	 <div class="row task-row">
+      <div class="col-xs-1 col-lg-2" />
+      <div class="col-xs-5 col-lg-4 keyvalrowcol">
+		  <span><strong>Report Deadline</strong></span>
+		</div>
+      <div class="col-xs-5 col-lg-4 keyvalrowcol">
+        <span ng-bind="vm.task.report_deadline" ng-class="vm.getDeadlineClass(vm.task)"></span>
+      </div>
+      <div class="col-xs-6 col-lg-2" />
+    </div>
 
 	 <keyvalrow key="Ready to report?" val="{{vm.task.ready_to_report}}" />
 

@@ -16,12 +16,14 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
   vm.task = {};
   vm.error = '';
   vm.showConfirmAbort = false;
-  vm.abortButtonClicked = abortButtonClicked;
+  
   vm.load = load;
+  vm.getDeadlineClass = getDeadlineClass;
 
   vm.suspendClicked = suspendClicked;
   vm.resumeClicked = resumeClicked;
   vm.abortTaskLinkClicked = abortTaskLinkClicked;
+  vm.abortButtonClicked = abortButtonClicked;
 
   document.title = vm.title;
 
@@ -61,6 +63,29 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
 
   function gotTask(task) {
 	 task.truncatedName = task.name.substr(0, 20);
+
+	 var overdue = false;
+	 var deadlineApproaching = false;
+
+	 // Assume the date is something like 2016-06-09 21:08:00
+	 var deadlineSplit = task.report_deadline.split(' ')[0].split('-');
+	 
+	 if (deadlineSplit.length===3) {
+	 	var deadlineDate = new Date(deadlineSplit[0], deadlineSplit[1]-1, deadlineSplit[2]);
+	 	var now = new Date();
+		
+	 	if (now>deadlineDate) {			 
+	 	  overdue = true;
+	 	} else {
+	 	  var oneDay = 86400000; // milliseconds/day
+	 	  var numDays = 2;
+	 	  var dateDiff = deadlineDate - now;
+	 	  deadlineApproaching = dateDiff < (oneDay * numDays);
+	 	}
+	 }
+
+	 task.overdue = overdue;
+	 task.deadlineApproaching = deadlineApproaching;
 	 vm.task = task;	 
 	 projectSvc.getAttachedProjects()().query().$promise.then(gotProjects, onError);
   }
@@ -71,5 +96,10 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
 	 vm.task.time_so_far = get_time_so_far(vm.task);
 	 	 
 	 vm.ready = true;
-  }  
+  }
+
+  function getDeadlineClass(task) {
+	 if (task.overdue) return 'text-danger';
+	 if (task.deadlineApproaching) return 'text-warning';	 
+  }
 }
