@@ -21,6 +21,7 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
   
   vm.load = load;
   vm.getDeadlineClass = getDeadlineClass;
+  vm.taskNameClicked = taskNameClicked;
 
   vm.suspendClicked = getTaskOperation('suspendTask', 'Task suspended', 'suspended_via_gui', true);
   vm.resumeClicked = getTaskOperation('resumeTask', 'Task resumed', 'suspended_via_gui', false);
@@ -70,6 +71,12 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
 
   function gotTask(task) {
 	 task.truncatedName = task.name.substr(0, 20);
+
+	 if (task.name.length>20) {
+		task.truncatedName += '...';
+	 }
+	 
+	 task.displayName = task.truncatedName;
 	 task.active_task_state = task.active_task_state===0 ? 'Inactive' : 'Active';
 
 	 var overdue = false;
@@ -106,8 +113,16 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
 	 vm.ready = true;
   }
 
-  function getDeadlineClass(task) {
-	 if (task.overdue) return 'text-danger';
-	 if (task.deadlineApproaching) return 'text-warning';	 
+  function getDeadlineClass() {
+	 if (vm.task.overdue) return 'text-danger';
+	 if (vm.task.deadlineApproaching) return 'text-warning';	 
+  }
+
+  function taskNameClicked() {
+	 if (vm.task.displayName===vm.task.name) {
+		vm.task.displayName = vm.task.truncatedName;
+		return;
+	 }
+	 vm.task.displayName = vm.task.name;
   }
 }

@@ -11,7 +11,16 @@ divert(0)dnl
   zoe_success_panel
   <div ng-show="vm.ready && !vm.error">
 
-	 <keyvalrow key="Workunit name" val="{{vm.task.truncatedName}}" tooltip="{{vm.task.name}}" />
+  	 <div class="row task-row">
+      <div class="col-xs-1 col-lg-2" />
+      <div class="col-xs-5 col-lg-4 keyvalrowcol">
+		  <span><strong>Workunit name</strong></span>
+		</div>
+      <div class="col-xs-5 col-lg-4 keyvalrowcol">
+        <span ng-bind="vm.task.displayName" ng-click="vm.taskNameClicked()"></span>
+      </div>
+      <div class="col-xs-6 col-lg-2" />
+    </div>
 
 	 <keyvallinkrow key="Project name" text="{{vm.task.project_name}}" link="/#/project/{{ vm.task.project_name }}" />
 
@@ -27,7 +36,7 @@ divert(0)dnl
 		  <span><strong>Report Deadline</strong></span>
 		</div>
       <div class="col-xs-5 col-lg-4 keyvalrowcol">
-        <span ng-bind="vm.task.report_deadline" ng-class="vm.getDeadlineClass(vm.task)"></span>
+        <span ng-bind="vm.task.report_deadline" ng-class="vm.getDeadlineClass()"></span>
       </div>
       <div class="col-xs-6 col-lg-2" />
     </div>
