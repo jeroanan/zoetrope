@@ -60,6 +60,7 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
   }
 
   function gotTask(task) {
+	 task.truncatedName = task.name.substr(0, 20);
 	 vm.task = task;	 
 	 projectSvc.getAttachedProjects()().query().$promise.then(gotProjects, onError);
   }

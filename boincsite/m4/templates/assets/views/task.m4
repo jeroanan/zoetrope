@@ -10,7 +10,7 @@ divert(0)dnl
   zoe_error_panel(task)
   <div ng-show="vm.ready && !vm.error">
 
-	 <keyvalrow key="Workunit name" val="{{vm.task.name}}" />
+	 <keyvalrow key="Workunit name" val="{{vm.task.truncatedName}}" tooltip="{{vm.task.name}}" />
 
 	 <keyvallinkrow key="Project name" text="{{vm.task.project_name}}" link="/#/project/{{ vm.task.project_name }}" />
 

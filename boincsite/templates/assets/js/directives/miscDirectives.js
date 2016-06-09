@@ -16,7 +16,8 @@ angular.module('zoetropeDirectives').directive('keyvalrow', function() {
 	 	col3LgWidth: '@',
 	 	col3XsWidth: '@',
 	 	col4LgWidth: '@',
-	 	col4XsWidth: '@'
+	 	col4XsWidth: '@',
+		tooltip: '@'
     },
 	 replace: true,
     templateUrl: '/static/directives/keyvalrow.html',
@@ -59,6 +60,10 @@ angular.module('zoetropeDirectives').directive('keyvalrow', function() {
 
 		attrs.$observe('val', function(value) {
 		  scope.val = value;
+		});
+
+		attrs.$observer('tooltip', function(value) {
+		  scope.tooltip = value;
 		});
 	 }
   };
@@ -117,10 +122,6 @@ angular.module('zoetropeDirectives').directive('keyvallinkrow', function() {
 	 }],
 	 link: function(scope, elem, attrs) {
 		scope.key = attrs.key;
-
-		attrs.$observe('text', function(value) {
-		  scope.text = value;
-		});
 	 }
   };
 });
