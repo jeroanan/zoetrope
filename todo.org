@@ -66,9 +66,3 @@ Pages:
 *** TODO Secure appropriate pages/web service endpoints so u
 
 ** TODO Make timezone into a string rather than just a number		 :HostInfo:
-** DONE On mobile the title tooltip wouldn't work							  :Task:
-So in addition we should probably make click/tap on the name toggle it to full name
-and then back to truncated.
-** DONE Make buttons into sidebar												  :Task:
-But keep the buttons at bottom for mobile
-** DONE Show GUI URLS															  :Project:
