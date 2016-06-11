@@ -53,3 +53,25 @@ define(zoe_collapse_begin, `dnl
 define(zoe_collapse_end, `dnl
 </div>
 ')
+
+define(zoe_sidebar_button, `dnl
+<div class="row sidebar-button-row">
+  <button class="btn $3 sidebar-button" ng-click="$1">$2</button>
+</div>')
+
+define(zoe_sidebar_button_show, `dnl
+<button class="btn $4 sidebar-button" ng-click="$1" ng-show="$3">
+  $2
+</button>')
+
+define(zoe_sidebar_row_begin, `dnl
+<div class="row sidebar-button-row">')dnl
+
+define(zoe_sidebar_row_end, `dnl
+</div>')
+
+define(zoe_sidebar_heading, `dnl
+zoe_sidebar_row_begin
+  <h4>$1</h4>
+zoe_sidebar_row_end')
+

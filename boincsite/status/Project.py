@@ -57,7 +57,7 @@ class Project(object):
         self.disk_usage = ''
         self.last_rpc = str(dt.get_date_from_epoch_seconds(float(project.last_rpc_time)).split('.')[0])
         self.project_files_downloaded = project.project_files_downloaded_time
-        self.gui_urls = []
+        self.gui_urls = [GuiUrl(x) for x in project.gui_urls]
         self.detach_when_done = project.detach_when_done
 
         self.upload_backoff = None
@@ -68,10 +68,11 @@ class Project(object):
 
 class GuiUrl(object):
 
-    def __init__(self, gui_urls):
-        self.__name = ''
-        self.__description = ''
-        self.__url = ''
+    def __init__(self, gui_url):
+        self.fields = ['name', 'description', 'url']
+        self.__name = gui_url.name
+        self.__description = gui_url.description
+        self.__url = gui_url.url
 
     @property
     def name(self):

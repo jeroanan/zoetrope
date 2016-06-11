@@ -21,6 +21,13 @@
 
 # Based on client/boinc_cmd.cpp
 
+import hashlib
+import logging
+import socket
+import time
+
+from xml.etree import ElementTree
+
 import lib.boincindicator.rpc as rpc
 
 import lib.boincindicator.enums.RunMode as runmode
@@ -41,12 +48,6 @@ import lib.boincindicator.resulttypes.Statistics as statistics
 import lib.boincindicator.resulttypes.VersionInfo as versioninfo
 
 import lib.boincindicator.util.xmlutil as xmlutil
-
-import socket
-import hashlib
-import time
-
-from xml.etree import ElementTree
 
 GUI_RPC_PASSWD_FILE = "/etc/boinc-client/gui_rpc_auth.cfg"
 

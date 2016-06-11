@@ -4,9 +4,11 @@
 #
 # Licensed under the GPL version 3
 
-import lib.boincindicator.basetypes.Struct as struct
+import logging
 
 from xml.etree import ElementTree
+
+import lib.boincindicator.basetypes.Struct as struct
 
 
 class JoinedProject(struct.Struct):
@@ -47,7 +49,7 @@ class JoinedProject(struct.Struct):
         self.attached_via_acct_mgr = False
         self.rsc_backoff_time = ''
         self.rsc_backoff_interval = ''
-        self.gui_urls = ''
+        self.gui_urls = []
         self.sched_priority = ''
         self.last_rpc_time = ''
         self.project_files_downloaded_time = ''
@@ -88,5 +90,32 @@ class JoinedProject(struct.Struct):
                 joined_project.detach_when_done = True
             elif c.tag == 'upload_backoff':
                 joined_project.upload_backoff = c.text
+            elif c.tag == 'gui_urls':
+                joined_project.gui_urls = [GuiUrl.parse(x) for x in c.iter('gui_url')]
 
         return joined_project
+    
+
+class GuiUrl(struct.Struct):
+
+    def __init__(self):
+        self.name = ''
+        self.description = ''
+        self.url = ''
+
+    @classmethod
+    def parse(cls, xml):
+        gui_url = GuiUrl()
+        
+        for c in xml:
+            for d in c.iter():
+
+                if d.tag == 'name':
+                    gui_url.name = d.text                    
+                if d.tag == 'description':
+                    gui_url.description = d.text
+                if d.tag == 'url':
+                    gui_url.url = d.text
+
+        return gui_url
+

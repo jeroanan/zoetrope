@@ -3,17 +3,6 @@ changecom(@@)
 
 include(boincsite/m4/templates/assets/views/views_common.m4)
 
-define(zoe_sidebar_button, `dnl
-<div class="row sidebar-button-row">
-  <button class="btn $3 sidebar-button" ng-click="$1">$2</button>
-</div>')
-
-define(zoe_sidebar_button_show, `dnl
-<button class="btn $4 sidebar-button" ng-click="$1" ng-show="$3">
-  $2
-</button>
-')
-
 divert(0)dnl
 <div>
   zoe_page_title(vm.title)
@@ -86,29 +75,45 @@ divert(0)dnl
 			   zoe_sidebar_button_show(vm.suspendClicked(), Suspend Project, !vm.project.suspended_via_gui, btn-primary)
 			   zoe_sidebar_button_show(vm.resumeClicked(), Resume Project, vm.project.suspended_via_gui, btn-primary)
 		   </div>
-		  zoe_collapse_end		  
+		  zoe_collapse_end
+
+		  zoe_collapse_begin(xsProjectUrls, Project URLs, hidden-lg)
+		    <ul>
+			   <li ng-repeat="gu in vm.project.gui_urls">
+				  <a href="{{gu.url}}" title="{{gu.description}}"><span ng-bind="gu.name" /></a>
+				</li>
+			 </ul>
+		  zoe_collapse_end
 		</div> <!-- col-xs-9 -->
 
 		<div class="hidden-xs col-lg-1">
-		  <div class="row sidebar-button-row">
-			 <h4>Project Operations</h4>
-		  </div>
+		  zoe_sidebar_heading(Project Operations)
+
 		  zoe_sidebar_button(vm.detachClicked(), Detach Project, btn-warning)
-		  <div class="row sidebar-button-row">
+		  		  
+		  zoe_sidebar_row_begin
 		  	 zoe_sidebar_button_show(vm.detachWhenDoneClicked(), Deatch When Done, !vm.project.detach_when_done, btn-warning)
 			 zoe_sidebar_button_show(vm.dontDetachWhenDoneClicked(), Don't Detach When Done, vm.project.detach_when_done)
-		  </div>
+		  zoe_sidebar_row_end
+
 		  zoe_sidebar_button(vm.updateProject(), Update Project, btn-primary)
-		  <div class="row sidebar-button-row">
+		  
+		  zoe_sidebar_row_begin
 		    zoe_sidebar_button_show(vm.noMoreWorkClicked(), No More Work, !vm.project.dont_request_more_work, btn-primary)
 			 zoe_sidebar_button_show(vm.allowMoreWorkClicked(), Allow More Work, vm.project.dont_request_more_work, btn-primary)
-		  </div>
-		  <div class="row sidebar-button-row">
+		  zoe_sidebar_row_end
+		  
+		  zoe_sidebar_row_begin
 		    zoe_sidebar_button_show(vm.suspendClicked(), Suspend Project, !vm.project.suspended_via_gui, btn-primary)
 			 zoe_sidebar_button_show(vm.resumeClicked(), Resume Project, vm.project.suspended_via_gui, btn-primary)
+		  zoe_sidebar_row_end
+
+		  zoe_sidebar_heading(Project URLs)
+
+		  <div class="row sidebar-button-row" ng-repeat="gu in vm.project.gui_urls">
+		     <a href="{{gu.url}}" title="{{gu.description}}"><span ng-bind="gu.name" /></a>
 		  </div>
 		</div>
-
 		
     </div> <!-- container -->
 	 
