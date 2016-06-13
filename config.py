@@ -1,3 +1,5 @@
+import os
+
 import logging
 
 gui_rpc_file_location = '/etc/boinc-client/gui_rpc_auth.cfg'
@@ -9,4 +11,6 @@ log_file_name = 'zoetrope.log'
 log_level = logging.DEBUG
 log_message_format = '%(asctime)s %(message)s'
 
-database_file = 'zoetrope.db'
+WorkingDirectory = os.path.dirname(os.path.abspath(__file__))
+
+database_file = WorkingDirectory + '/zoetrope.db'

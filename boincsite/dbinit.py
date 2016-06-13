@@ -26,4 +26,4 @@ def init_db():
         c.execute(sql)
         
     conn.commit()
-    conn.close()
+    c.close()
