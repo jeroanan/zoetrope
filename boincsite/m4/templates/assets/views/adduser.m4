@@ -8,12 +8,10 @@ zoe_page_title(vm.title)
 zoe_loading_panel
 zoe_error_panel
 <div ng-show="vm.ready">
-  <div class="alert alert-danger" ng-show="vm.success==false && vm.errorText!=''">
+  <div class="alert alert-danger" ng-show="vm.operationSuccess==false && vm.errorText!=''">
     <span ng-bind="vm.errorText" />
   </div>
-  <div class="alert alert-success" ng-show="vm.success===true">
-    User added successfully
-  </div>
+  zoe_success_panel
   <form class="form-horizontal">
 
     <div class="row">
