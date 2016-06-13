@@ -11,6 +11,9 @@ zoe_error_panel
   <div class="alert alert-danger" ng-show="vm.success==false && vm.errorText!=''">
     <span ng-bind="vm.errorText" />
   </div>
+  <div class="alert alert-success" ng-show="vm.success===true">
+    User added successfully
+  </div>
   <form class="form-horizontal">
 
     <div class="row">

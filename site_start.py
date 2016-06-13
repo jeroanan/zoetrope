@@ -209,7 +209,8 @@ class WebServer(object):
     def add_user_json(self, **kwargs):
         user_id = kwargs.get('userId', '')
         password = kwargs.get('password', '')
-        self.__user_tasks.add_user(user_id, password)        
+        result = self.__user_tasks.add_user(user_id, password)
+        return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
 
     @cherrypy.expose
     def experimental_task(self, **kwargs):

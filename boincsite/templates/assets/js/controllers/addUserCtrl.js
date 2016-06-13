@@ -14,7 +14,7 @@ function addUserController(userSvc) {
   vm.title = 'Add User';
   vm.ready = true;
   vm.errorText = '';
-  vm.success = true;
+  vm.success = null;
   
   vm.userId = '';
   vm.password = '';
@@ -23,7 +23,7 @@ function addUserController(userSvc) {
   
   function submitClicked() {
 	 vm.errorText = '';
-	 vm.success = true;
+	 vm.success = null;
 	 
     if (vm.userId==='' || vm.password==='') {
 		vm.success = false;
@@ -31,8 +31,13 @@ function addUserController(userSvc) {
 	 }
 
 	 userSvc.addUser(vm.userId, vm.password)().query().$promise.then(
-		function() {
-
+		function(d) {
+		  if (!d.success && d.error_message) {
+			 vm.success = false;
+			 vm.errorText = d.error_message;
+			 return;
+		  }
+		  vm.success = true;
 		},
 		function(d) {
 		  vm.success = false;
