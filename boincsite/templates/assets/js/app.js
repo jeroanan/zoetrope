@@ -85,6 +85,16 @@ angular.module('zoetrope', [
 		when('/about', {
 		  templateUrl: '/static/views/about.html'
 		}).
+		when('/manageusers', {
+		  templateUrl: '/static/views/manageusers.html',
+		  controller: 'manageUsersCtrl',
+		  controllerAs: 'vm'
+		}).
+		when('/adduser', {
+		  templateUrl: '/static/views/adduser.html',
+		  controller: 'addUserCtrl',
+		  controllerAs: 'vm'
+		}).
       otherwise({
         redirectTo: '/'
       });

@@ -64,6 +64,11 @@ zoe_dropdown_menu_item(#/globalpreferences, Global Preferences)
 zoe_dropdown_menu_separator
 zoe_dropdown_menu_item(#/about, About Zoetrope)
 zoe_end_dropdown_menu
+
+zoe_begin_dropdown_menu(User Management)
+zoe_menu_item(#/adduser, Add User)
+zoe_menu_item(#/manageusers, Manage Users)
+zoe_end_dropdown_menu
 zoe_navbar_end
 changecom dnl
 

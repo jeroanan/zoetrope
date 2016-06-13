@@ -92,6 +92,8 @@ module.exports = function(grunt) {
 		zoe_watch_m4_task(hostinfo),
 		zoe_watch_m4_task(dailytransferhistory),
 		zoe_watch_m4_task(globalpreferences),
+		zoe_watch_m4_task(manageusers),
+		zoe_watch_m4_task(adduser),
 		m4_views_common: {
 		  files: ['zoe_m4_views_dir/views_common.m4'],
 		  tasks: ['m4:tasks',
@@ -112,9 +114,9 @@ module.exports = function(grunt) {
 	 m4: {
 		options: {
 		  prefix_builtins: false
-		},
+		},		
 		zoe_src_dest_task(config, zoe_m4_root/Gruntfile.m4, Gruntfile.js),
-		zoe_m4_html(index),
+		zoe_src_dest_task(index, zoe_m4_root/templates/index.m4, boincsite/templates/index.html),
 		zoe_m4_html(tasks),
 		zoe_m4_html(task),
 		zoe_m4_html(projects),
@@ -126,7 +128,9 @@ module.exports = function(grunt) {
 		zoe_m4_html(diskusage),
 		zoe_m4_html(hostinfo),
 		zoe_m4_html(dailytransferhistory),
-		zoe_m4_html(globalpreferences)
+		zoe_m4_html(globalpreferences),
+		zoe_m4_html(manageusers),
+		zoe_m4_html(adduser)
 	 },
 	 prettify: {
 		options: {
@@ -147,7 +151,9 @@ module.exports = function(grunt) {
 		zoe_prettify_html(diskusage),
 		zoe_prettify_html(hostinfo),
 		zoe_prettify_html(dailytransferhistory),
-		zoe_prettify_html(globalpreferences)
+		zoe_prettify_html(globalpreferences),
+		zoe_prettify_html(manageusers),
+		zoe_prettify_html(adduser)
 	 }
   });
 

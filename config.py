@@ -8,3 +8,5 @@ cpu_temperature_file = '/sys/class/thermal/thermal_zone0/temp'
 log_file_name = 'zoetrope.log'
 log_level = logging.DEBUG
 log_message_format = '%(asctime)s %(message)s'
+
+database_file = 'zoetrope.db'

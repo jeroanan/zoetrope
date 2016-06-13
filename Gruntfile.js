@@ -127,6 +127,18 @@ module.exports = function(grunt) {
         files: ['boincsite/m4/templates/assets/views/dailytransferhistory.m4'],
 		  tasks: ['m4:dailytransferhistory', 'prettify:dailytransferhistory']
       },
+		m4_globalpreferences: {
+        files: ['boincsite/m4/templates/assets/views/globalpreferences.m4'],
+		  tasks: ['m4:globalpreferences', 'prettify:globalpreferences']
+      },		
+		m4_manageusers: {
+        files: ['boincsite/m4/templates/assets/views/manageusers.m4'],
+		  tasks: ['m4:manageusers', 'prettify:manageusers']
+      },
+		m4_adduser: {
+        files: ['boincsite/m4/templates/assets/views/adduser.m4'],
+		  tasks: ['m4:adduser', 'prettify:adduser']
+      },
 		m4_views_common: {
 		  files: ['boincsite/m4/templates/assets/views/views_common.m4'],
 		  tasks: ['m4:tasks',
@@ -135,11 +147,7 @@ module.exports = function(grunt) {
 					 'm4:project',
 					 'm4:allprojectlist',
 					 'm4:projectdetail',
-					 'm4:messages',
-					 'm4:notices',
-					 'm4:diskusage',
-					 'm4:hostinfo',
-					 'm4:dailytransferhistory']
+					 'm4:messsages']
 		}		
     },
 	 jshint: {
@@ -151,14 +159,14 @@ module.exports = function(grunt) {
 	 m4: {
 		options: {
 		  prefix_builtins: false
-		},
+		},		
 		config: {
 		  src: 'boincsite/m4/Gruntfile.m4',
 		  dest: 'Gruntfile.js'
 		},
 		index: {
-		  src: 'boincsite/m4/templates/assets/views/index.m4',
-		  dest: 'boincsite/templates/assets/views/index.html'
+		  src: 'boincsite/m4/templates/index.m4',
+		  dest: 'boincsite/templates/index.html'
 		},
 		tasks: {
 		  src: 'boincsite/m4/templates/assets/views/tasks.m4',
@@ -203,6 +211,18 @@ module.exports = function(grunt) {
 		dailytransferhistory: {
 		  src: 'boincsite/m4/templates/assets/views/dailytransferhistory.m4',
 		  dest: 'boincsite/templates/assets/views/dailytransferhistory.html'
+		},
+		globalpreferences: {
+		  src: 'boincsite/m4/templates/assets/views/globalpreferences.m4',
+		  dest: 'boincsite/templates/assets/views/globalpreferences.html'
+		},
+		manageusers: {
+		  src: 'boincsite/m4/templates/assets/views/manageusers.m4',
+		  dest: 'boincsite/templates/assets/views/manageusers.html'
+		},
+		adduser: {
+		  src: 'boincsite/m4/templates/assets/views/adduser.m4',
+		  dest: 'boincsite/templates/assets/views/adduser.html'
 		}
 	 },
 	 prettify: {
@@ -256,6 +276,18 @@ module.exports = function(grunt) {
 		dailytransferhistory: {
 		  src: 'boincsite/templates/assets/views/dailytransferhistory.html',
 		  dest: 'boincsite/templates/assets/views/dailytransferhistory.html'
+		},
+		globalpreferences: {
+		  src: 'boincsite/templates/assets/views/globalpreferences.html',
+		  dest: 'boincsite/templates/assets/views/globalpreferences.html'
+		},
+		manageusers: {
+		  src: 'boincsite/templates/assets/views/manageusers.html',
+		  dest: 'boincsite/templates/assets/views/manageusers.html'
+		},
+		adduser: {
+		  src: 'boincsite/templates/assets/views/adduser.html',
+		  dest: 'boincsite/templates/assets/views/adduser.html'
 		}
 	 }
   });

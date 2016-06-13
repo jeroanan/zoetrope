@@ -22,9 +22,11 @@ import os
 import cherrypy
 
 import config as conf
+import boincsite.dbinit as dbinit
 import boincsite.boinc.ProjectTasks as pt
 import boincsite.boinc.TaskTasks as tt
 import boincsite.boinc.SystemInfoTasks as sit
+import boincsite.boinc.UserTasks as ut
 
 import boincsite.status.AvailableProject as ap
 import boincsite.status.DailyTransfer as dt
@@ -42,12 +44,15 @@ class WebServer(object):
     def __init__(self):
         logging.basicConfig(filename=conf.log_file_name, level=conf.log_level, format=conf.log_message_format)
 
+        dbinit.init_db()
+
         self.__project_tasks = pt.ProjectTasks()
         self.__task_tasks = tt.TaskTasks()
         self.__system_info_tasks = sit.SystemInfoTasks()
+        self.__user_tasks = ut.UserTasks()
         self.__io = StringIO()
         self.__cwd = ''
-
+        
     def start(self, cwd):
         self.__cwd = cwd
         cherrypy.quickstart(self, '/', 'server.conf')
@@ -199,6 +204,12 @@ class WebServer(object):
     def project_operation(self, kwargs, operation_function):
         project_url = kwargs.get('projectUrl', '')
         return operation_function(project_url)
+
+    @cherrypy.expose
+    def add_user_json(self, **kwargs):
+        user_id = kwargs.get('userId', '')
+        password = kwargs.get('password', '')
+        self.__user_tasks.add_user(user_id, password)        
 
     @cherrypy.expose
     def experimental_task(self, **kwargs):
