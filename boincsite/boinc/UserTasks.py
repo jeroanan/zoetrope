@@ -23,9 +23,14 @@ class UserTasks(object):
 
         ret_val = se.SuccessError()
 
+        if user_id.find('|') > -1:
+            ret_val.success = False
+            ret_val.error_message = 'User names cannot contain the pipe (|) characer'
+            return ret_val
+
         conn, c = self.get_connection()
 
-        sql = "SELECT UserId FROM User WHERE userId=?"
+        sql = 'SELECT UserId FROM User WHERE userId=?'
         results = c.execute(sql, (user_id,))
 
         if not any(results.fetchall()):
@@ -45,7 +50,7 @@ class UserTasks(object):
     def get_users(self):
         conn, cursor = self.get_connection()
 
-        sql = "SELECT RowId, UserId FROM User"
+        sql = 'SELECT RowId, UserId FROM User'
         results = cursor.execute(sql).fetchall()
 
         users = []
@@ -57,6 +62,22 @@ class UserTasks(object):
 
         cursor.close()
         return users
+
+    def delete_user(self, user_id):
+        ret_val = se.SuccessError()
+        
+        conn, cursor = self.get_connection()
+
+        sql = 'DELETE FROM User WHERE RowId=?'
+        cursor.execute(sql, (user_id,))
+
+        ret_val.success = True
+        ret_val.error_message = user_id
+
+        conn.commit()
+        cursor.close()
+
+        return ret_val
 
     def get_connection(self):
         conn = sqlite3.connect(config.database_file)

@@ -12,7 +12,8 @@ function userSvc(jsonSvc) {
 
   var svc = {
 	 addUser: addUser,
-	 getUsers: getUsers
+	 getUsers: getUsers,
+	 deleteUser: deleteUser
   };
 
   function addUser(userId, password) {
@@ -26,6 +27,10 @@ function userSvc(jsonSvc) {
 
   function getUsers() {
 	 return jsonSvc.getJson('/get_users_json', true);
+  }
+
+  function deleteUser(user) {
+	 return jsonSvc.sendJson('/delete_user_json', user);
   }
 
   return svc;

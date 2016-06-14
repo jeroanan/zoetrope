@@ -10,6 +10,10 @@ zoe_loading_panel
 zoe_error_panel(users)
 
 <div ng-show="vm.ready">
+  <div class="alert alert-danger" ng-show="vm.operationSuccess==false && vm.errorText!=''">
+    <span ng-bind="vm.errorText" />
+  </div>
+  zoe_success_panel
   zoe_begin_table
      <thead>
 	    zoe_sorting_table_header(user_id, User Id)
@@ -29,6 +33,9 @@ zoe_error_panel(users)
 		 </tr>		 
 	  </tbody>
   zoe_end_table
+  <div ng-show="vm.users.length===0">
+    <strong>No users exist</strong>
+  </div> 
 
 
   <div id="deleteUserModal" class="modal fade">

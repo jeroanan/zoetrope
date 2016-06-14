@@ -20,6 +20,10 @@ function ManageUsersController(userSvc) {
 
   vm.users = [];
   vm.userToDelete = null;  
+
+  vm.operationSuccess = false;
+  vm.operationSuccessMessage = '';
+  vm.errorText = '';
   
   vm.deleteClicked = deleteClicked;
   vm.doDelete = doDelete;
@@ -42,7 +46,27 @@ function ManageUsersController(userSvc) {
   }
 
   function doDelete() {
-	 console.log('*BANG!*');
-	 $('#deleteUserModal').modal('hide');	 
+	 vm.operationSuccess = false;
+	 vm.operationSuccessMessage = '';
+	 
+	 $('#deleteUserModal').modal('hide');
+	 userSvc.deleteUser(vm.userToDelete)().query().$promise.then(userDeleted);
+  }
+
+  function userDeleted(d) {
+
+	 if (!d.success && d.error_message) {
+		vm.operationSuccess = false;
+		vm.errorText = d.error_message;
+		return;
+	 }
+
+	 var messageSplit = d.error_message.split('|');
+	 var userId = messageSplit[1];
+	 var rowNum = messageSplit[2];
+	 
+	 vm.operationSuccess = true;
+	 vm.operationSuccessMessage = 'User ' + userId + ' deleted successfully';
+	 $('#userRow-' + rowNum).parents('tr').hide();
   }
 }

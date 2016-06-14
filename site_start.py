@@ -218,6 +218,18 @@ class WebServer(object):
         return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
 
     @cherrypy.expose
+    def delete_user_json(self, **kwargs):
+        user_no = kwargs.get('userNo', '')
+        user_id = kwargs.get('userId', '')
+        row_no = kwargs.get('rowNo', '')        
+        result = self.__user_tasks.delete_user(user_no)
+
+        # We add user_id and row_no back in here because I don't
+        # want such front-end concerns in UserTasks.
+        result.error_message += '|{user_id}|{row_no}'.format(user_id=user_id, row_no=row_no)
+        return json.dumps(result, self.__io, cls=jsae.JSONEncoder)        
+
+    @cherrypy.expose
     def experimental_task(self, **kwargs):
         pass
     

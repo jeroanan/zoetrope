@@ -8,14 +8,20 @@
 </div>
 
 <div ng-show="vm.ready">
+  <div class="alert alert-danger" ng-show="vm.operationSuccess==false && vm.errorText!=''">
+    <span ng-bind="vm.errorText" />
+  </div>
+  <div class="alert alert-success" ng-show="vm.operationSuccess">
+    <span ng-bind="vm.operationSuccessMessage">
+</div>
   <table class="table table-striped">
-    <thead>
-      <th>
-        <a ng-click="vm.sort('user_id');">User Id</a>
-        <span ng-show="vm.sortProp==='user_id' && !vm.reverseSort">&#x25B2;</span>
-        <span ng-show="vm.sortProp==='user_id' && vm.reverseSort">&#x25BC;</span>
-      </th>
-      <th>Actions</th>
+     <thead>
+	    <th>
+  <a ng-click="vm.sort('user_id');">User Id</a>
+  <span ng-show="vm.sortProp==='user_id' && !vm.reverseSort">&#x25B2;</span>
+    <span ng-show="vm.sortProp==='user_id' && vm.reverseSort">&#x25BC;</span>
+    </th>
+    <th>Actions</th>
     </thead>
     <tbody>
       <tr ng-repeat="(k, u) in vm.users | orderBy:vm.sortProp:vm.reverseSort">
@@ -36,27 +42,30 @@
         </td>
       </tr>
     </tbody>
-  </table>
+    </table>
+    <div ng-show="vm.users.length===0">
+      <strong>No users exist</strong>
+    </div>
 
 
-  <div id="deleteUserModal" class="modal fade">
-    <div class="modal-dialog">
-      <div class="modal-content">
+    <div id="deleteUserModal" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
 
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Delete User</h4>
-        </div>
-        <div class="modal-body">
-          <span>Are you sure you want to delete </span><span ng-bind="vm.userToDelete.userId" />?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" ng-click="vm.doDelete()" ng-disabled="loading">Delete</button>
-          <img src="/static/img/loading.gif" alt="loading" class="button-loading" ng-show="loading" />
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Delete User</h4>
+          </div>
+          <div class="modal-body">
+            <span>Are you sure you want to delete </span><span ng-bind="vm.userToDelete.userId" />?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" ng-click="vm.doDelete()" ng-disabled="loading">Delete</button>
+            <img src="/static/img/loading.gif" alt="loading" class="button-loading" ng-show="loading" />
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-</div>
+  </div>

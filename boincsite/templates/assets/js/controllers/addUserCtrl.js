@@ -29,6 +29,13 @@ function addUserController(userSvc) {
     if (vm.userId==='' || vm.password==='') {
 		vm.operationSuccess = false;
 		vm.errorText = 'Please enter a username and a password';
+		return;
+	 }
+
+	 if (vm.userId.contains('|')) {
+		vm.operationSuccess = false;
+		vm.errorText = 'User names cannot contain the pipe (|) characer';
+		return;
 	 }
 
 	 userSvc.addUser(vm.userId, vm.password)().query().$promise.then(
