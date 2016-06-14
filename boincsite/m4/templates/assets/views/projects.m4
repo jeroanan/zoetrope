@@ -2,21 +2,6 @@ divert(-1)
 
 include(boincsite/m4/templates/assets/views/views_common.m4)
 
-define(zoe_begin_dropdown, `dnl
-<div class="dropdown">
-  <button class="btn btn-default dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    $1
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu">')dnl
-
-define(zoe_end_dropdown, `dnl
-  </ul>
-</div>')dnl
-
-define(zoe_dropdown_action, `dnl
-<li><a href="javascript:" ng-click="$1">$2</a></li>')dnl
-
 define(zoe_dropdown_action_show, `dnl
 <li ng-show="$3"><a href="javascript:" ng-click="$1">$2</a></li>')dnl
 

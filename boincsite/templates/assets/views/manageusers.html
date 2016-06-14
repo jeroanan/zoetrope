@@ -1,1 +1,62 @@
 <h1 ng-bind="vm.title" />
+
+<div ng-show="!vm.ready" class="text-center">
+  <img src="/static/img/loading.gif" />
+</div>
+<div ng-show="vm.ready && vm.error">
+  An error occurred while loading the users. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>
+</div>
+
+<div ng-show="vm.ready">
+  <table class="table table-striped">
+    <thead>
+      <th>
+        <a ng-click="vm.sort('user_id');">User Id</a>
+        <span ng-show="vm.sortProp==='user_id' && !vm.reverseSort">&#x25B2;</span>
+        <span ng-show="vm.sortProp==='user_id' && vm.reverseSort">&#x25BC;</span>
+      </th>
+      <th>Actions</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="(k, u) in vm.users | orderBy:vm.sortProp:vm.reverseSort">
+        <td>
+          <span ng-bind="u.user_id" />
+          <input type="hidden" id="userRow-{{k}}" value="{{k}}" />
+        </td>
+        <td>
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Actions
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="javascript:" ng-click="vm.deleteClicked(u,k)">Delete User</a></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <div id="deleteUserModal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Delete User</h4>
+        </div>
+        <div class="modal-body">
+          <span>Are you sure you want to delete </span><span ng-bind="vm.userToDelete.userId" />?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" ng-click="vm.doDelete()" ng-disabled="loading">Delete</button>
+          <img src="/static/img/loading.gif" alt="loading" class="button-loading" ng-show="loading" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

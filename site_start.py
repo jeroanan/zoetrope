@@ -213,6 +213,11 @@ class WebServer(object):
         return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
 
     @cherrypy.expose
+    def get_users_json(self, **kwargs):
+        result = list(self.__user_tasks.get_users())
+        return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
+
+    @cherrypy.expose
     def experimental_task(self, **kwargs):
         pass
     

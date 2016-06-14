@@ -11,7 +11,8 @@ userSvc.$inject = ['jsonSvc'];
 function userSvc(jsonSvc) {
 
   var svc = {
-	 addUser: addUser
+	 addUser: addUser,
+	 getUsers: getUsers
   };
 
   function addUser(userId, password) {
@@ -21,6 +22,10 @@ function userSvc(jsonSvc) {
 	 };
 	 
     return jsonSvc.sendJson('/add_user_json', data);
+  }
+
+  function getUsers() {
+	 return jsonSvc.getJson('/get_users_json', true);
   }
 
   return svc;

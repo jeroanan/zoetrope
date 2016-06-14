@@ -75,3 +75,17 @@ zoe_sidebar_row_begin
   <h4>$1</h4>
 zoe_sidebar_row_end')
 
+define(zoe_begin_dropdown, `dnl
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    $1
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">')dnl
+
+define(zoe_end_dropdown, `dnl
+  </ul>
+</div>')dnl
+
+define(zoe_dropdown_action, `dnl
+<li><a href="javascript:" ng-click="$1">$2</a></li>')dnl
