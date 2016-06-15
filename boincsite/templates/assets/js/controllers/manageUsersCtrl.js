@@ -19,7 +19,7 @@ function ManageUsersController(userSvc) {
   vm.sort = getSortFunc(vm, 'sortProp', 'reverseSort');  
 
   vm.users = [];
-  vm.userToDelete = null;  
+  vm.userOperationUser = null;  
 
   vm.operationSuccess = false;
   vm.operationSuccessMessage = '';
@@ -27,6 +27,7 @@ function ManageUsersController(userSvc) {
   
   vm.deleteClicked = deleteClicked;
   vm.addUserClicked = addUserClicked;
+  vm.changePasswordClicked = changePasswordClicked;
 
   vm.doDelete = doDelete;
   vm.load = load;
@@ -44,7 +45,7 @@ function ManageUsersController(userSvc) {
   }
 
   function deleteClicked(user, rownumber) {
-	 vm.userToDelete = {
+	 vm.userOperationUser = {
 		userId: user.user_id,
 		userNo: user.user_no,
 		rowNo: rownumber
@@ -58,7 +59,7 @@ function ManageUsersController(userSvc) {
 	 vm.operationSuccessMessage = '';
 	 
 	 $('#deleteUserModal').modal('hide');
-	 userSvc.deleteUser(vm.userToDelete)().query().$promise.then(userDeleted);
+	 userSvc.deleteUser(vm.userOperationUser)().query().$promise.then(userDeleted);
   }
 
   function userDeleted(d) {
@@ -80,5 +81,15 @@ function ManageUsersController(userSvc) {
 
   function addUserClicked() {
 	 $('#addUserModal').modal('show');
+  }
+
+  function changePasswordClicked(user, rowNumber) {
+	 vm.userOperationUser = {
+		userId: user.user_id,
+		userNo: user.user_no,
+		rowNo: rowNumber
+	 };
+
+	 $('#changePasswordModal').modal('show');	 
   }
 }

@@ -28,6 +28,7 @@ zoe_error_panel(users)
 			 <td>
 			   zoe_begin_dropdown(Actions)
 				zoe_dropdown_action(vm.deleteClicked(u,k), Delete User)
+				zoe_dropdown_action(vm.changePasswordClicked(u), Change Password)
 				zoe_end_dropdown
 			 </td>
 		 </tr>		 
@@ -52,7 +53,7 @@ zoe_error_panel(users)
           <h4 class="modal-title">Delete User</h4>
         </div>		
         <div class="modal-body">
-		  <span>Are you sure you want to delete </span><span ng-bind="vm.userToDelete.userId" />?
+		  <span>Are you sure you want to delete </span><span ng-bind="vm.userOperationUser.userId" />?
 		  </div>
 		  <div class="modal-footer">
 			 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -83,6 +84,10 @@ zoe_error_panel(users)
 			 <div class="form-group">
 			   <label for="password">Password</label>
 				<input type="password" name="password" ng-model="vm.password" class="form-control" />
+			 </div>
+			 <div class="form-group">
+			   <label for="confirmpassword">Confirm Password</label>
+				<input type="password" name="confirmpassword" ng-model="vm.confirmPassword" class="form-control" />
 			 </div>			 
 		  </div>
 		  <div class="modal-footer">
@@ -93,5 +98,5 @@ zoe_error_panel(users)
 		</div>
     </div>
   </div>
-
+  <zoe-change-password-dialog user="{{vm.userOperationUser}}" />  
 </div>

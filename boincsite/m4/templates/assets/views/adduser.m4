@@ -25,7 +25,11 @@ zoe_error_panel
 			 <div class="form-group">
 			   <label for="password">Password</label>
 				<input type="password" name="password" ng-model="vm.password" class="form-control" />
-			 </div>			 
+			 </div>
+			 <div class="form-group">
+			   <label for="confirmpassword">Confirm Password</label>
+				<input type="password" name="confirmpassword" ng-model="vm.confirmPassword" class="form-control" />
+			 </div>
 		  </div>
 		 </div>	 	 
     </div>

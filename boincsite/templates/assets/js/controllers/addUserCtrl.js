@@ -19,6 +19,7 @@ function addUserController(userSvc) {
   
   vm.userId = '';
   vm.password = '';
+  vm.confirmPassword = '';
 
   vm.submitClicked = submitClicked;
 
@@ -37,6 +38,12 @@ function addUserController(userSvc) {
 	 if (vm.userId.contains('|')) {
 		vm.operationSuccess = false;
 		vm.errorText = 'User names cannot contain the pipe (|) characer';
+		return;
+	 }
+
+	 if (vm.password!==vm.confirmPassword) {
+		vm.operationSuccess = false;
+		vm.errorText = 'Password and Confirm Password must match.';
 		return;
 	 }
 
