@@ -26,9 +26,17 @@ function ManageUsersController(userSvc) {
   vm.errorText = '';
   
   vm.deleteClicked = deleteClicked;
-  vm.doDelete = doDelete;
+  vm.addUserClicked = addUserClicked;
 
-  userSvc.getUsers()().query().$promise.then(gotUsers);
+  vm.doDelete = doDelete;
+  vm.load = load;
+  
+  document.title = vm.title;
+  load();
+  
+  function load() {
+	 userSvc.getUsers()().query().$promise.then(gotUsers);
+  }
 
   function gotUsers(users) {
 	 vm.users = users;
@@ -68,5 +76,9 @@ function ManageUsersController(userSvc) {
 	 vm.operationSuccess = true;
 	 vm.operationSuccessMessage = 'User ' + userId + ' deleted successfully';
 	 $('#userRow-' + rowNum).parents('tr').hide();
+  }
+
+  function addUserClicked() {
+	 $('#addUserModal').modal('show');
   }
 }

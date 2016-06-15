@@ -35,8 +35,13 @@ zoe_error_panel(users)
   zoe_end_table
   <div ng-show="vm.users.length===0">
     <strong>No users exist</strong>
+  </div>
+  <div class="row">
+    <div class="col-xs-3" />
+	 <div class="col-xs-3" />
+	 <div class="col-xs-3" />
+	 <div class="col-xs-3"><button class="btn btn-primary" ng-click="vm.addUserClicked()">Add User</button><div>
   </div> 
-
 
   <div id="deleteUserModal" class="modal fade">
     <div class="modal-dialog">
@@ -52,6 +57,37 @@ zoe_error_panel(users)
 		  <div class="modal-footer">
 			 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 			 <button type="button" class="btn btn-primary" ng-click="vm.doDelete()" ng-disabled="loading">Delete</button>
+			 <img src="/static/img/loading.gif" alt="loading" class="button-loading" ng-show="loading" />
+        </div>
+		</div>
+    </div>
+  </div>
+
+  <div id="addUserModal" class="modal fade" ng-controller="addUserCtrl as vm">
+    <div class="modal-dialog">
+      <div class="modal-content">
+		
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Add User</h4>
+        </div>		
+        <div class="modal-body">
+		    <div class="alert alert-danger" ng-show="vm.operationSuccess==false && vm.errorText!=''">
+            <span ng-bind="vm.errorText" />
+          </div>
+          zoe_success_panel
+		    <div class="form-group">
+			   <label for="userid">User Id</label>
+				<input type="text" name="userid" ng-model="vm.userId" class="form-control" />
+			 </div>
+			 <div class="form-group">
+			   <label for="password">Password</label>
+				<input type="password" name="password" ng-model="vm.password" class="form-control" />
+			 </div>			 
+		  </div>
+		  <div class="modal-footer">
+			 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			 <button type="button" class="btn btn-primary" ng-click="vm.submitClicked()" ng-disabled="loading">Submit</button>
 			 <img src="/static/img/loading.gif" alt="loading" class="button-loading" ng-show="loading" />
         </div>
 		</div>

@@ -21,11 +21,13 @@ function addUserController(userSvc) {
   vm.password = '';
 
   vm.submitClicked = submitClicked;
+
+  document.title = vm.title;
   
   function submitClicked() {
 	 vm.errorText = '';
 	 vm.operationSuccess = null;
-	 
+
     if (vm.userId==='' || vm.password==='') {
 		vm.operationSuccess = false;
 		vm.errorText = 'Please enter a username and a password';
