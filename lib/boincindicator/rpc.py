@@ -4,6 +4,7 @@
 # rpc.py - Generic RPC Somewhat higher-level GUI_RPC API for BOINC core client
 #
 #    Copyright (C) 2013 Rodrigo Silva (MestreLion) <linux@rodrigosilva.com>
+#    Modifications by David Wilson for Zoetrope project (2016)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -21,6 +22,7 @@
 # A replacement of gui_rpc_client for basic RPC calls, with a sane API
 
 import array
+import logging
 import socket
 from xml.etree import ElementTree
 
@@ -104,9 +106,18 @@ class Rpc(object):
                     raise socket.error("No data from socket")
             except socket.error:
                 raise
+            
             n = buf.find(end.encode('ascii'))
+            
             if not n == -1: break
-            req += buf.decode('UTF-8')
+
+            try:
+                req += buf.decode('UTF-8')
+            except UnicodeDecodeError:
+                logging.error('Decoding problem: ' + buf.decode('UTF-32'))
+                logging.error('Buffer so far was: ' + req)
+                raise
+            
         req += buf[:n].decode('UTF-8')
 
         # unpack reply (remove root tag, ie: first and last lines)

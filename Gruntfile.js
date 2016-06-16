@@ -130,7 +130,7 @@ module.exports = function(grunt) {
 		m4_globalpreferences: {
         files: ['boincsite/m4/templates/assets/views/globalpreferences.m4'],
 		  tasks: ['m4:globalpreferences', 'prettify:globalpreferences']
-      },		
+      },
 		m4_manageusers: {
         files: ['boincsite/m4/templates/assets/views/manageusers.m4'],
 		  tasks: ['m4:manageusers', 'prettify:manageusers']
@@ -138,6 +138,10 @@ module.exports = function(grunt) {
 		m4_adduser: {
         files: ['boincsite/m4/templates/assets/views/adduser.m4'],
 		  tasks: ['m4:adduser', 'prettify:adduser']
+      },
+		m4_login: {
+        files: ['boincsite/m4/templates/assets/views/login.m4'],
+		  tasks: ['m4:login', 'prettify:login']
       },
 		m4_views_common: {
 		  files: ['boincsite/m4/templates/assets/views/views_common.m4'],
@@ -223,6 +227,10 @@ module.exports = function(grunt) {
 		adduser: {
 		  src: 'boincsite/m4/templates/assets/views/adduser.m4',
 		  dest: 'boincsite/templates/assets/views/adduser.html'
+		},
+		login: {
+		  src: 'boincsite/m4/templates/assets/views/login.m4',
+		  dest: 'boincsite/templates/assets/views/login.html'
 		}
 	 },
 	 prettify: {
@@ -288,6 +296,10 @@ module.exports = function(grunt) {
 		adduser: {
 		  src: 'boincsite/templates/assets/views/adduser.html',
 		  dest: 'boincsite/templates/assets/views/adduser.html'
+		},
+		login: {
+		  src: 'boincsite/templates/assets/views/login.html',
+		  dest: 'boincsite/templates/assets/views/login.html'
 		}
 	 }
   });

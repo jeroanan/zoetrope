@@ -95,10 +95,12 @@ angular.module('zoetrope', [
 		  controller: 'addUserCtrl',
 		  controllerAs: 'vm'
 		}).
+		when('/login', {
+		  templateUrl: '/static/views/login.html',
+		  controller: 'loginCtrl',
+		  controllerAs: 'vm'
+		}).
       otherwise({
         redirectTo: '/'
       });
   }]);
-
-
-
