@@ -25,7 +25,7 @@ class UserTasks(object):
 
         if user_id.find('|') > -1:
             ret_val.success = False
-            ret_val.error_message = 'User names cannot contain the pipe (|) characer'
+            ret_val.error_message = 'User names cannot contain the pipe (|) character'
             return ret_val
 
         conn, c = self.get_connection()
@@ -73,6 +73,33 @@ class UserTasks(object):
 
         ret_val.success = True
         ret_val.error_message = user_id
+
+        conn.commit()
+        cursor.close()
+
+        return ret_val
+
+    def change_password(self, user_no, password, confirm_password):
+        ret_val = se.SuccessError()
+
+        if password == '' or confirm_password == '':
+            ret_val.success = False
+            ret_val.error_message = 'Please supply a password and confirmation'
+            return ret_val
+
+        if password != confirm_password:
+            ret_val.success = False
+            ret_val.error_message = 'Password and confirmation must match.'
+            return ret_val
+
+        conn, cursor = self.get_connection()
+        sql = 'UPDATE User SET password = ? WHERE userId=?'
+
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+        cursor.execute(sql, (hashed_password, user_no))
+
+        ret_val.success = True
+        ret_val.error_message = user_no
 
         conn.commit()
         cursor.close()

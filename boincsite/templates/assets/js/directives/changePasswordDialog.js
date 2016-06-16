@@ -22,15 +22,15 @@ angular.module('zoetropeDirectives').directive('zoeChangePasswordDialog', functi
 
 		function submitClicked() {
 		  if ($scope.password==='' || $scope.confirmPassword==='') {
-			 $scope.operationSuccess = false;
-			 $scope.errorText = 'Please enter a password and confirmation password';
-			 return;
+		  	 $scope.operationSuccess = false;
+		  	 $scope.errorText = 'Please enter a password and confirmation password';
+		  	 return;
 		  }
 
 		  if ($scope.password!==$scope.confirmPassword) {
-			 $scope.operationSuccess = false;
-			 $scope.errorText = 'Password and confirmation password must match';
-			 return;
+		  	 $scope.operationSuccess = false;
+		  	 $scope.errorText = 'Password and confirmation password must match';
+		  	 return;
 		  }
 		  
 		  $scope.user.password = $scope.password;
@@ -39,9 +39,15 @@ angular.module('zoetropeDirectives').directive('zoeChangePasswordDialog', functi
 		}
 
 		function passwordChanged(data) {
+
+		  if (!data.success) {
+			 $scope.operationSuccess = false;
+			 $scope.errorText = data.error_message.split('|')[0];
+			 return;
+		  }
+		  
 		  $scope.operationSuccess = true;
 		  $scope.operationSuccessMessage = 'Password changed successfully';
-		  console.log(data);
 		}
 
 		function passwordChangeError(data) {
