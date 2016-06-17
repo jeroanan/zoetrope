@@ -252,14 +252,23 @@ class WebServer(object):
             cherrypy.session['LoggedIn'] = 1
             
         return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
+
+    @cherrypy.expose
+    def logout(self, **kwargs):
+        cherrypy.session['LoggedIn'] = None
+        raise cherrypy.HTTPRedirect('/')
         
     @cherrypy.expose
     def experimental_task(self, **kwargs):
         pass
 
     def user_logged_in(self):
-        return cherrypy.session['LoggedIn'] == 1
+        return cherrypy.session.get('LoggedIn', 0) == 1
 
+    def authenticate(self):
+        if not self.user_logged_in():
+            raise Exception(-1414)    
+    
 if __name__=='__main__':
     cwd = os.getcwd()
     from cherrypy.process.plugins import Daemonizer

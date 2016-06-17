@@ -68,6 +68,8 @@ zoe_end_dropdown_menu
 zoe_begin_dropdown_menu(User Management)
 zoe_menu_item(#/adduser, Add User)
 zoe_menu_item(#/manageusers, Manage Users)
+zoe_menu_item(#/login, Login)
+zoe_menu_item(/logout, Logout)
 zoe_end_dropdown_menu
 zoe_navbar_end
 changecom dnl
