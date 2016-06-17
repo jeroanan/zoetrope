@@ -22,6 +22,7 @@
 # A replacement of gui_rpc_client for basic RPC calls, with a sane API
 
 import array
+import base64
 import logging
 import socket
 from xml.etree import ElementTree
@@ -99,9 +100,13 @@ class Rpc(object):
             raise
 
         req = ""
+
+        error_flag = False
+        
         while True:
             try:
-                buf = self.sock.recv(8192)
+                buf = self.sock.recv(81902)
+                
                 if not buf:
                     raise socket.error("No data from socket")
             except socket.error:
@@ -111,12 +116,7 @@ class Rpc(object):
             
             if not n == -1: break
 
-            try:
-                req += buf.decode('UTF-8')
-            except UnicodeDecodeError:
-                logging.error('Decoding problem: ' + buf.decode('UTF-32'))
-                logging.error('Buffer so far was: ' + req)
-                raise
+            req += buf.decode('UTF-8')
             
         req += buf[:n].decode('UTF-8')
 

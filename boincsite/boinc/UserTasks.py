@@ -164,6 +164,46 @@ class UserTasks(object):
 
         return ret_val
 
+    def login(self, username, password):
+        ret_val = se.SuccessError()
+
+        if username=='' or password=='':
+            ret_val.success = False
+            ret_val.error_message = 'Please supply a username and password'
+            return ret_val
+
+        conn, cursor = self.get_connection()
+
+        # define this here to concisely close the db connection
+        def close_conn_cursor():
+            conn.commit()
+            cursor.close()
+
+        sql = 'SELECT userId, password FROM User WHERE userId=?'
+        results = cursor.execute(sql, (username,)).fetchall()
+
+        if not any(results):
+            ret_val.success = False
+            ret_val.error_message = 'Invalid username or password'
+            close_conn_cursor()
+            return ret_val
+
+        close_conn_cursor()
+        
+        # The user we want will always be the first one returned.
+        db_user = results[0]
+        db_username, db_password = db_user
+
+        attempted_hash = bcrypt.hashpw(password.encode('UTF-8'), db_password)
+
+        if attempted_hash==db_password:
+            ret_val.success = True
+        else:
+            ret_val.success = False
+            ret_val.error_message = 'Invalid username or password'
+
+        return ret_val
+
     def get_connection(self):
         conn = sqlite3.connect(config.database_file)
         cursor = conn.cursor()

@@ -240,11 +240,25 @@ class WebServer(object):
         # We add user_id back in here because I don't want such front-end concerns in UserTasks.
         result.error_message += '|{user_id}'.format(user_id=user_id)
         return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
+
+    @cherrypy.expose
+    def login_json(self, **kwargs):
+        username = kwargs.get('username', '')
+        password = kwargs.get('password', '')
+
+        result = self.__user_tasks.login(username, password)
+
+        if result.success==True:
+            cherrypy.session['LoggedIn'] = 1
+            
+        return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
         
     @cherrypy.expose
     def experimental_task(self, **kwargs):
         pass
-    
+
+    def user_logged_in(self):
+        return cherrypy.session['LoggedIn'] == 1
 
 if __name__=='__main__':
     cwd = os.getcwd()

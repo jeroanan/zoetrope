@@ -39,3 +39,10 @@ div.sidebar-button-row {
 button.sidebar-button {
 	 width: 170px;
 }
+
+div.login-box {
+	 margin-top: 5em;
+	 padding: 1em 2em;
+	 border: 1px solid;
+	 border-color: #317EAC;
+}

@@ -14,7 +14,8 @@ function userSvc(jsonSvc) {
 	 addUser: addUser,
 	 getUsers: getUsers,
 	 deleteUser: deleteUser,
-	 changePassword: changePassword
+	 changePassword: changePassword,
+	 login: login
   };
 
   function addUser(userId, password) {
@@ -36,6 +37,15 @@ function userSvc(jsonSvc) {
 
   function changePassword(user) {
 	 return jsonSvc.sendJson('/change_password_json', user);
+  }
+
+  function login(username, password) {
+	 var data = {
+		username: username,
+		password: password
+	 };
+	 
+	 return jsonSvc.sendJson('/login_json', data);
   }
 
   return svc;
