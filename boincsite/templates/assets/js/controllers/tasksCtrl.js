@@ -1,13 +1,13 @@
 /**
- * Controller for the index screen.
+ * Controller for the tasks screen.
  *
  * (c) David Wilson 2016, licensed under GPL V3.
  */
-angular.module('zoetropeControllers').controller('IndexCtrl', IndexController);
+angular.module('zoetropeControllers').controller('tasksCtrl', TasksController);
 
-IndexController.$inject = ['taskSvc', 'projectSvc'];
+TasksController.$inject = ['taskSvc', 'projectSvc'];
 
-function IndexController(taskSvc, projectSvc) {
+function TasksController(taskSvc, projectSvc) {
 
   var vm = this;
   vm.tasks = {};

@@ -14,7 +14,7 @@ angular.module('zoetrope', [
     $routeProvider.
       when('/', {
         templateUrl: '/static/views/tasks.html',
-        controller: 'IndexCtrl',
+        controller: 'tasksCtrl',
 		  controllerAs: 'vm'
       }).
       when('/daily_transfer_history', {
