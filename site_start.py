@@ -21,6 +21,8 @@ import os
 
 import cherrypy
 
+import lib.boincindicator.resulttypes.SuccessError as se
+
 import config as conf
 import boincsite.dbinit as dbinit
 import boincsite.boinc.ProjectTasks as pt
@@ -92,8 +94,14 @@ class WebServer(object):
 
     @cherrypy.expose
     def tasks_json(self, **kwargs):
+        authentication_result = self.authenticate()
+
+        if authentication_result is not None:
+             return json.dumps([authentication_result], self.__io, cls=jsae.JSONEncoder)
+
         result = list(self.__task_tasks.get_tasks())
         return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
+
 
     @cherrypy.expose
     def disk_usage_json(self, **kwargs):
@@ -266,8 +274,12 @@ class WebServer(object):
         return cherrypy.session.get('LoggedIn', 0) == 1
 
     def authenticate(self):
+        ret_val = se.SuccessError()
+        
         if not self.user_logged_in():
-            raise Exception(-1414)    
+            ret_val.success = False
+            ret_val.error_message = -1414
+            return ret_val
     
 if __name__=='__main__':
     cwd = os.getcwd()

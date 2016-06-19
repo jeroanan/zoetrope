@@ -47,6 +47,8 @@ function LoginController(userSvc) {
 
 	 vm.operationSuccess = true;
 	 vm.operationSuccessMessage = 'Login successful';
+
+	 setTimeout(function() { document.location = '/'; }, 2000);
   }
 
   function loginError(data) {

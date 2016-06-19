@@ -30,11 +30,21 @@ function TasksController(taskSvc, projectSvc) {
   }
 
   function gotTasks(tasks) {
+
+	 if (tasks.length>0) {
+		var t = tasks[0];
+		
+		if (t.error_message && t.error_message===-1414) {
+		  document.location = '/#/login';
+		  return;
+		}
+	 }
+	 
 	 vm.tasks = tasks;
 	 projectSvc.getAttachedProjects()().query().$promise.then(gotProjects, serviceError);
   }
 
-  function serviceError(xhr) {	 
+  function serviceError(xhr) {
 	 vm.error = true;
 	 vm.ready = true;
   }
@@ -47,12 +57,11 @@ function TasksController(taskSvc, projectSvc) {
 		var out = '';
 
 		for (var t in timeSplit) {
-		  if (timeSplit[t].length===1) {
+		  if (timeSplit[t].length===1)
 			 out += '0' + timeSplit[t];
-		  } else {
+		  else
 			 out += timeSplit[t];
-		  }
-
+		  
 		  out += ':';		  
 		}
 		return out.slice(0, out.length-1);
@@ -78,9 +87,9 @@ function TasksController(taskSvc, projectSvc) {
 		  var deadlineDate = new Date(deadlineSplit[0], deadlineSplit[1]-1, deadlineSplit[2]);
 		  var now = new Date();
 
-		  if (now>deadlineDate) {			 
+		  if (now>deadlineDate)
 			 overdue = true;
-		  } else {
+		  else {
 			 var oneDay = 86400000; // milliseconds/day
 			 var numDays = 2;
 			 var dateDiff = deadlineDate - now;
