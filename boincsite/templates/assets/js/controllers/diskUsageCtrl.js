@@ -31,6 +31,12 @@ function DiskUsageController(systemInfoSvc) {
   }
 
   function gotDiskUsages(diskUsages) {
+
+	 if (diskUsages.error_message && diskUsages.error_message===-1414) {
+		document.location = '/#/login';
+		return;
+	 }
+	 
 	 vm.disk_usages = diskUsages;
     vm.ready = true;
   }

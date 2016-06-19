@@ -31,6 +31,12 @@ function ProjectDetailController($routeParams, projectSvc, systemInfoSvc) {
   }
 
   function gotAllProjects(projects) {
+	 
+	 if (projects.length>0 && projects[0].error_message && projects[0].error_message===-1414) {
+		document.location = '/#/login';
+		return;
+	 }
+	 
 	 vm.project = projects.filter(function(x) { return x.name===$routeParams.projectname; })[0];
 
 	 if (!vm.project) {

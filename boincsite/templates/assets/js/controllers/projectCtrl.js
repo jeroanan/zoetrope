@@ -38,6 +38,12 @@ function ProjectController($routeParams, $compile, $scope, projectSvc) {
   }
 
   function gotProject(project) {
+
+	 if (project.error_message && project.error_message===-1414) {
+		document.location = '/#/login';
+		return;
+	 }
+
 	 vm.project = project;
 	 setTitle('Project Summary -- ' + project.name);
 
@@ -53,9 +59,7 @@ function ProjectController($routeParams, $compile, $scope, projectSvc) {
   }  
 
   function updateProjectClick() {
-    if (vm.ready!==true) {
-      return;
-    }
+    if (vm.ready!==true) return;
 	 projectSvc.updateProject(vm.project.master_url)().query();
   }
   

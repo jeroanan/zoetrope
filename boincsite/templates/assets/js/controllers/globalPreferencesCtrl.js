@@ -27,6 +27,12 @@ function GlobalPreferencesCtrl(systemInfoSvc) {
   }
 
   function gotGlobalPreferences(preferences) {
+
+	 if (preferences.error_message && preferences.error_message===-1414) {
+		document.location = '/#/login';
+		return;
+	 }
+
 	 vm.prefs = preferences;
     vm.ready = true;
   }

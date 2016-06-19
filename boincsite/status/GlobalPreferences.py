@@ -1,60 +1,73 @@
-# Copyright (c) David Wilson 2016
-#
-# Licensed under the GPL version 3
+# Copyright (c) David Wilson 2015, 2016
+# This file is part of Zoetrope.
+# 
+# Zoetrope is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# Zoetrope is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with Zoetrope.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
 
 import boincsite.util.DateTimeUtil as dt
 
-attrs = [
-   'source_project',
-   'mod_time',
-   'battery_charge_min_pct',
-   'battery_max_temperature',
-   'run_on_batteries',
-   'run_if_user_active',
-   'run_gpu_if_user_active',
-   'suspend_if_no_recent_input',
-   'suspend_cpu_usage',
-   'start_hour',
-   'end_hour',
-   'net_start_hour',
-   'net_end_hour',
-   'leave_apps_in_memory',
-   'confirm_before_connecting',
-   'hangup_if_dialed',
-   'dont_verify_images',
-   'work_buf_min_days',
-   'work_buf_additional_days',
-   'max_ncpus_pct',
-   'cpu_scheduling_period_minutes',
-   'disk_interval',
-   'disk_max_used_gb',
-   'disk_max_used_pct',
-   'disk_min_free_gb',
-   'vm_max_used_pct',
-   'ram_max_used_busy_pct',
-   'ram_max_used_idle_pct',
-   'idle_time_to_run',
-   'max_bytes_sec_up',
-   'max_bytes_sec_down',
-   'cpu_usage_limit',
-   'daily_xfer_limit_mb',
-   'daily_xfer_period_days',
-   'override_file_present',
-   'network_wifi_only',
-   'max_cpus'
-]
 
 class GlobalPreferences(object):
 
     def __init__(self, global_preferences):
-
+        
+        self.fields = [
+            'source_project',
+            'mod_time',
+            'battery_charge_min_pct',
+            'battery_max_temperature',
+            'run_on_batteries',
+            'run_if_user_active',
+            'run_gpu_if_user_active',
+            'suspend_if_no_recent_input',
+            'suspend_cpu_usage',
+            'start_hour',
+            'end_hour',
+            'net_start_hour',
+            'net_end_hour',
+            'leave_apps_in_memory',
+            'confirm_before_connecting',
+            'hangup_if_dialed',
+            'dont_verify_images',
+            'work_buf_min_days',
+            'work_buf_additional_days',
+            'max_ncpus_pct',
+            'cpu_scheduling_period_minutes',
+            'disk_interval',
+            'disk_max_used_gb',
+            'disk_max_used_pct',
+            'disk_min_free_gb',
+            'vm_max_used_pct',
+            'ram_max_used_busy_pct',
+            'ram_max_used_idle_pct',
+            'idle_time_to_run',
+            'max_bytes_sec_up',
+            'max_bytes_sec_down',
+            'cpu_usage_limit',
+            'daily_xfer_limit_mb',
+            'daily_xfer_period_days',
+            'override_file_present',
+            'network_wifi_only',
+            'max_cpus'
+        ]
+        
         round_number = lambda x: round(float(x))
         round_2dp = lambda x: (round(float(x), 2))
-
+        
         get_date = lambda x: dt.get_date_from_epoch_seconds(round(float(x)))
-
+        
         process_fields = {
             'ram_max_used_idle_pct': round_number,
             'start_hour': round_number,
@@ -163,13 +176,3 @@ Max CPUs: {max_cpus}
            override_file_present=self.override_file_present,
            network_wifi_only=self.network_wifi_only,
            max_cpus=self.max_cpus)
-
-
-class JSONEncoder(json.JSONEncoder):
-    def default(self, o):
-        d = {}
-
-        for a in attrs:
-            d[a] = getattr(o, a)
-
-        return d

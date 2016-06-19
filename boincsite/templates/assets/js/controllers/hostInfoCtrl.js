@@ -28,6 +28,12 @@ function HostInfoController(systemInfoSvc) {
   }
 
   function gotHostInfo(hostInfo) {
+
+	 if (hostInfo.error_message && hostInfo.error_message===-1414) {
+		document.location = '/#/login';
+		return;
+	 }
+	 
 	 hostInfo.uptime = hostInfo.uptime.split('.')[0];
 	 vm.host_info = hostInfo;
     vm.ready = true;

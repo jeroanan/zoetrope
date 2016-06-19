@@ -33,6 +33,12 @@ function DailyTransferController(systemInfoSvc) {
   }
 
   function gotDailyTransfers(dailyTransfers) {
+
+	 if (dailyTransfers.length > 0 && dailyTransfers[0].error_message && dailyTransfers[0].error_message===-1414) {
+		document.location = '/#/login';
+		return;
+	 }
+
 	 vm.daily_transfers = dailyTransfers.filter(function(transfer) {
 		return transfer.date;
 	 }).map(function(transfer) {

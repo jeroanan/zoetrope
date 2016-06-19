@@ -46,9 +46,8 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
 		taskSvc[operationFunc](vm.task.name)().query().$promise.then(function() {
 		  operationSuccess(successMessage);
 		  
-		  if (propToChange && propToChange) {
-			 vm.task[propToChange] = propValue;
-		  }
+		  if (propToChange && propToChange)
+			 vm.task[propToChange] = propValue;		  
 		});
 	 };
   }
@@ -70,11 +69,16 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
   }
 
   function gotTask(task) {
+
+	 if (task.error_message && task.error_message===-1414) {
+		document.location = '/#/login';
+		return;
+	 }
+
 	 task.truncatedName = task.name.substr(0, 20);
 
-	 if (task.name.length>20) {
-		task.truncatedName += '...';
-	 }
+	 if (task.name.length>20)
+		task.truncatedName += '...';	 
 	 
 	 task.displayName = task.truncatedName;
 	 task.active_task_state = task.active_task_state===0 ? 'Inactive' : 'Active';
@@ -89,9 +93,9 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
 	 	var deadlineDate = new Date(deadlineSplit[0], deadlineSplit[1]-1, deadlineSplit[2]);
 	 	var now = new Date();
 		
-	 	if (now>deadlineDate) {			 
+	 	if (now>deadlineDate)
 	 	  overdue = true;
-	 	} else {
+	 	else {
 	 	  var oneDay = 86400000; // milliseconds/day
 	 	  var numDays = 2;
 	 	  var dateDiff = deadlineDate - now;
