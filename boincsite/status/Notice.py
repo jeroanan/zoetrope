@@ -9,6 +9,8 @@ import json
 class Notice(object):
 
     def __init__(self, notice):
+
+        self.fields = ['title', 'description', 'create_time', 'arrival_time', 'is_private', 'project_name', 'category', 'link', 'seqno']
         self.title=notice.title
         self.description=notice.description
         self.create_time=dt.get_date_from_epoch_seconds(round(float(notice.create_time)))
@@ -38,18 +40,3 @@ Sequence No: {seqno}
            category=self.category,
            link=self.link,
            seqno=self.seqno)
-
-
-class JSONEncoder(json.JSONEncoder):
-    def default(self, o):
-        return {
-            'title': o.title,
-            'description': o.description,
-            'create_time': o.create_time,
-            'arrival_time': o.arrival_time,
-            'is_private': o.is_private,
-            'project_name': o.project_name,
-            'category': o.category,
-            'link': o.link,
-            'seqno': o.seqno
-        }

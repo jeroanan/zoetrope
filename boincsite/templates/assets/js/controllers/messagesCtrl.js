@@ -33,6 +33,12 @@ function MessagesController(systemInfoSvc) {
   }
 
   function gotMessages(messages) {
+	 
+	 if (messages.length > 0 && messages[0].error_message && messages[0].error_message===-1414) {
+		document.location = '/#/login';
+		return;
+	 }
+
 	 vm.messages = messages;
 
     var project_names = messages.map(function(x) { return x.project_name; });

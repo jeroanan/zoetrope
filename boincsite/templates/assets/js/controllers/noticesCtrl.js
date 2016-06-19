@@ -27,6 +27,12 @@ function NoticesController(systemInfoSvc) {
   }
 
   function gotNotices(notices) {
+
+	 if (notices.length > 0 && notices[0].error_message && notices[0].error_message===-1414) {
+		document.location = '/#/login';
+		return;
+	 }
+	 
 	 vm.notices = notices;
     vm.ready = true;
   }

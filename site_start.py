@@ -30,11 +30,9 @@ import boincsite.boinc.TaskTasks as tt
 import boincsite.boinc.SystemInfoTasks as sit
 import boincsite.boinc.UserTasks as ut
 
-import boincsite.status.AvailableProject as ap
 import boincsite.status.DailyTransfer as dt
 import boincsite.status.DiskUsage as duj
 import boincsite.status.GlobalPreferences as ggp
-import boincsite.status.Notice as notice
 
 import boincsite.util.JSONAttrEncoder as jsae
 
@@ -72,7 +70,7 @@ class WebServer(object):
 
     @cherrypy.expose
     def projects_json(self, **kwargs):
-        return json.dumps(self.__get_projects(), self.__io, cls=jsae.JSONEncoder)
+        return self.do_authenticated_list_request(self.__get_projects)
 
     @cherrypy.expose
     def get_statistics_json(self, **kwargs):
@@ -89,19 +87,11 @@ class WebServer(object):
 
     @cherrypy.expose
     def messages_json(self, **kwargs):
-        result = list(self.__system_info_tasks.get_messages())
-        return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
+        return self.do_authenticated_list_request(self.__system_info_tasks.get_messages)
 
     @cherrypy.expose
     def tasks_json(self, **kwargs):
-        authentication_result = self.authenticate()
-
-        if authentication_result is not None:
-             return json.dumps([authentication_result], self.__io, cls=jsae.JSONEncoder)
-
-        result = list(self.__task_tasks.get_tasks())
-        return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
-
+        return self.do_authenticated_list_request(self.__task_tasks.get_tasks)
 
     @cherrypy.expose
     def disk_usage_json(self, **kwargs):
@@ -120,9 +110,8 @@ class WebServer(object):
 
     @cherrypy.expose
     def notices_json(self, **kwargs):
-        result = list(self.__system_info_tasks.get_notices())
-        return json.dumps(result, self.__io, cls=notice.JSONEncoder)
-
+        return self.do_authenticated_list_request(self.__system_info_tasks.get_notices)
+    
     @cherrypy.expose
     def get_global_preferences_json(self, **kwargs):
         result = self.__system_info_tasks.get_global_preferences()
@@ -130,8 +119,7 @@ class WebServer(object):
 
     @cherrypy.expose
     def get_all_projects_list_json(self, **kwargs):
-        result = list(self.__project_tasks.get_all_projects_list())
-        return json.dumps(result, self.__io, cls=ap.JSONEncoder)
+        return self.do_authenticated_list_request(self.__project_tasks.get_all_projects_list)
 
     @cherrypy.expose
     def detach_project(self, **kwargs):
@@ -222,8 +210,15 @@ class WebServer(object):
 
     @cherrypy.expose
     def get_users_json(self, **kwargs):
-        result = list(self.__user_tasks.get_users())
-        return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
+        return self.do_authenticated_list_request(self.__user_tasks.get_users)
+
+    def do_authenticated_list_request(self, func):
+        authentication_result = self.authenticate()
+
+        if authentication_result is not None:
+             return json.dumps([authentication_result], self.__io, cls=jsae.JSONEncoder)
+
+        return json.dumps(list(func()), self.__io, cls=jsae.JSONEncoder)
 
     @cherrypy.expose
     def delete_user_json(self, **kwargs):

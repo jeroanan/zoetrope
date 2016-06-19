@@ -12,6 +12,7 @@ from xml.etree import ElementTree
 class AvailableProject(struct.Struct):
 
     def __init__(self):
+        self.fields = ['name', 'url', 'general_area', 'specific_area', 'description', 'home', 'platforms', 'image', 'summary']
         self.name = ''
         self.url = ''
         self.general_area = ''
@@ -43,6 +44,7 @@ class AvailableProject(struct.Struct):
 class AvailableProjectPlatform(struct.Struct):
 
     def __init__(self):
+        self.fields = ['name']
         self.name = ''
 
     def parse(self, xml):

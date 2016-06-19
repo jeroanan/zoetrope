@@ -40,6 +40,12 @@ function ManageUsersController(userSvc) {
   }
 
   function gotUsers(users) {
+
+	 if (users.length>0 && users[0].error_message && users[0].error_message===-1414) {
+		document.location = '/#/login';
+		return;
+	 }
+	 
 	 vm.users = users;
 	 vm.ready = true;
   }

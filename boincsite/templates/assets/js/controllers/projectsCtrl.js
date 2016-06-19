@@ -41,6 +41,16 @@ function ProjectsController(projectSvc) {
   }
 
   function gotProjects(projects) {
+
+	 if (projects.length>0) {
+		var p = projects[0];
+
+		if (p.error_message && p.error_message===-1414) {
+		  document.location = '/#/login';
+		  return;
+		}
+	 }
+
 	 vm.projects = projects.filter(function(x) { return x.name.length > 0; });
     vm.ready = true;
   }
@@ -65,9 +75,8 @@ function ProjectsController(projectSvc) {
 		projectSvc[operationFunc](projectUrl)().query().$promise.then(function() {
 		  operationSuccess(successMessage);
 
-		  if (propToChange && propToChange) {
+		  if (propToChange && propToChange) 
 			 setProjectProperty(projectUrl, propToChange, propValue);
-		  }
 		});
 	 };
   }

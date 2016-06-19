@@ -32,6 +32,13 @@ function AllProjectListController(projectSvc, systemInfoSvc) {
   }
 
   function gotAllProjects(projects) {
+
+	 if (projects.length>0 && projects[0].error_message && projects[0].error_message===-1414)
+	 {
+		document.location = '/#/login';
+		return;
+	 }
+
 	 vm.allProjects = projects;
 	 projectSvc.getAttachedProjects()().query().$promise.then(gotAttachedProjects, serviceError);
 	 systemInfoSvc.getPlatform()().query().$promise.then(gotPlatform, serviceError);
