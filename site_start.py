@@ -124,23 +124,28 @@ class WebServer(object):
 
     @cherrypy.expose
     def detach_project_when_done(self, **kwargs):
-        result = self.project_operation(kwargs, self.__project_tasks.detach_project_when_done)
+        f = lambda: self.project_operation(kwargs, self.__project_tasks.detach_project_when_done)
+        return self.do_authenticated_request(f, False)
 
     @cherrypy.expose
     def dont_detach_project_when_done(self, **kwargs):
-        result = self.project_operation(kwargs, self.__project_tasks.dont_detach_project_when_done)
+        f = lambda: self.project_operation(kwargs, self.__project_tasks.dont_detach_project_when_done)
+        return self.do_authenticated_request(f, False)
 
     @cherrypy.expose
     def suspend_task(self, **kwargs):
-        return self.task_name_operation(kwargs, self.__task_tasks.suspend_task)
+        f = lambda: self.task_name_operation(kwargs, self.__task_tasks.suspend_task)
+        return self.do_authenticated_request(f, False)
 
     @cherrypy.expose
     def resume_task(self, **kwargs):
-        return self.task_name_operation(kwargs, self.__task_tasks.resume_task)
+        f = lambda: self.task_name_operation(kwargs, self.__task_tasks.resume_task)
+        return self.do_authenticated_request(f, False)
 
     @cherrypy.expose
     def abort_task(self, **kwargs):
-        return self.task_name_operation(kwargs, self.__task_tasks.abort_task)
+        f = lambda: self.task_name_operation(kwargs, self.__task_tasks.abort_task)
+        return self.do_authenticated_request(f, False)
 
     def task_name_operation(self, kwargs, operation_func):
         task_name = kwargs.get('task_name', '')
@@ -162,37 +167,50 @@ class WebServer(object):
 
     @cherrypy.expose
     def create_account(self, **kwargs):
-        project_url = kwargs.get('projectUrl', '')
-        email_address = kwargs.get('email', '')
-        password_hash = kwargs.get('password', '')
-        username = kwargs.get('username', '')
-
-        self.__project_tasks.create_account_and_attach_to_project(project_url, email_address, password_hash, username)
+        def f():
+            project_url = kwargs.get('projectUrl', '')
+            email_address = kwargs.get('email', '')
+            password_hash = kwargs.get('password', '')
+            username = kwargs.get('username', '')
+            
+            return self.__project_tasks.create_account_and_attach_to_project(project_url,
+                                                                             email_address,
+                                                                             password_hash,
+                                                                             username)
+        return self.do_authenticated_request(f, False)
 
     @cherrypy.expose
     def get_platform_json(self, **kwargs):
-        platform = self.__system_info_tasks.get_platform()
-        return '{{"platform": "{platform}"}}'.format(platform=platform)
+        def f():
+            platform = self.__system_info_tasks.get_platform()
+            return '{{"platform": "{platform}"}}'.format(platform=platform)
+
+        return self.do_authenticated_request(f, False)
 
     @cherrypy.expose
     def no_more_work(self, **kwargs):
-        return self.project_operation(kwargs, self.__project_tasks.no_more_work_for_project)
+        f = lambda: self.project_operation(kwargs, self.__project_tasks.no_more_work_for_project)
+        return self.do_authenticated_request(f, False)
 
     @cherrypy.expose
     def allow_more_work(self, **kwargs):
-        return self.project_operation(kwargs, self.__project_tasks.allow_more_work_for_project)
+        f = self.project_operation(kwargs, self.__project_tasks.allow_more_work_for_project)
+        return self.do_authenticated_request(f, False)
 
     @cherrypy.expose
     def suspend_project(self, **kwargs):
-        return self.project_operation(kwargs, self.__project_tasks.suspend_project)
+        f = lambda: self.project_operation(kwargs, self.__project_tasks.suspend_project)
+        return self.do_authenticated_request(f, False)
 
     @cherrypy.expose
     def resume_project(self, **kwargs):
-        return self.project_operation(kwargs, self.__project_tasks.resume_project)
+        f = lambda: self.project_operation(kwargs, self.__project_tasks.resume_project)
+        return self.do_authenticated_request(f, False)
 
     @cherrypy.expose
     def update_project(self, **kwargs):
-        return self.project_operation(kwargs, self.__project_tasks.update_project)
+        f = lambda: self.project_operation(kwargs, self.__project_tasks.update_project)
+        return self.do_authenticated_request(f, False)
 
     def project_operation(self, kwargs, operation_function):
         project_url = kwargs.get('projectUrl', '')
@@ -200,10 +218,12 @@ class WebServer(object):
 
     @cherrypy.expose
     def add_user_json(self, **kwargs):
-        user_id = kwargs.get('userId', '')
-        password = kwargs.get('password', '')
-        result = self.__user_tasks.add_user(user_id, password)
-        return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
+        def f():
+            user_id = kwargs.get('userId', '')
+            password = kwargs.get('password', '')
+            result = self.__user_tasks.add_user(user_id, password)
+            return result
+        return self.do_authenticated_request(f, False)
 
     @cherrypy.expose
     def get_users_json(self, **kwargs):
@@ -217,30 +237,34 @@ class WebServer(object):
 
         result = list(func()) if as_list else func()
 
-        return json.dumps(result, self.__io, cls=json_encoder)
+        if result is not None:
+            return json.dumps(result, self.__io, cls=json_encoder)
 
     @cherrypy.expose
     def delete_user_json(self, **kwargs):
-        user_no = kwargs.get('userNo', '')
-        user_id = kwargs.get('userId', '')
-        row_no = kwargs.get('rowNo', '')        
-        result = self.__user_tasks.delete_user(user_no)
+        def f():
+            user_no = kwargs.get('userNo', '')
+            user_id = kwargs.get('userId', '')
+            row_no = kwargs.get('rowNo', '')        
+            result = self.__user_tasks.delete_user(user_no)
 
-        # We add user_id and row_no back in here because I don't want such front-end concerns in UserTasks.
-        result.error_message += '|{user_id}|{row_no}'.format(user_id=user_id, row_no=row_no)
-        return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
+            # We add user_id and row_no back in here because I don't want such front-end concerns in UserTasks.
+            result.error_message += '|{user_id}|{row_no}'.format(user_id=user_id, row_no=row_no)
+            return result
+        return self.do_authenticated_request(f, False)
 
     @cherrypy.expose
     def change_password_json(self, **kwargs):
-        user_no = kwargs.get('userNo', '')
-        user_id = kwargs.get('userId', '')
-        password = kwargs.get('password', '')
-        confirm_password = kwargs.get('confirmPassword', '')
-        result = self.__user_tasks.change_password(user_no, password, confirm_password)
-
-        # We add user_id back in here because I don't want such front-end concerns in UserTasks.
-        result.error_message += '|{user_id}'.format(user_id=user_id)
-        return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
+        def f():
+            user_no = kwargs.get('userNo', '')
+            user_id = kwargs.get('userId', '')
+            password = kwargs.get('password', '')
+            confirm_password = kwargs.get('confirmPassword', '')
+            result = self.__user_tasks.change_password(user_no, password, confirm_password)
+            # We add user_id back in here because I don't want such front-end concerns in UserTasks.
+            result.error_message += '|{user_id}'.format(user_id=user_id)
+            return result
+        return self.do_authenticated_request(f, False)
 
     @cherrypy.expose
     def login_json(self, **kwargs):

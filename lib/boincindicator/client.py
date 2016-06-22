@@ -602,9 +602,11 @@ class BoincClient(object):
 
     def project_detach_when_done(self, project_url):
         result = self.simple_project_operation('project_detach_when_done', project_url)
+        return successerror.SuccessError()
 
     def project_dont_detach_when_done(self, project_url):
         result = self.simple_project_operation('project_dont_detach_when_done', project_url)
+        return successerror.SuccessError()
 
     def project_update(self, project_url):
         ''' Update a project with the project server.
