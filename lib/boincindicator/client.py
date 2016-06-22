@@ -134,7 +134,6 @@ class BoincClient(object):
         '''
         xml = '<get_newer_version/>'
         result = self.rpc.call(xml)
-        print(ElementTree.tostring(result))
 
     def get_cc_status(self):
         ''' Return CcStatus instance containing basic status, such as
@@ -157,7 +156,6 @@ class BoincClient(object):
         '''
         xml = '<get_cc_config/>'
         result = self.rpc.call(xml)
-        print(ElementTree.tostring(result))
 
     def get_host_info(self):
         ''' Get information about host hardware and usage.
@@ -365,7 +363,6 @@ class BoincClient(object):
         '''
         xml = '<get_message_count />'
         result = self.rpc.call(xml)
-        print(ElementTree.tostring(result))
 
     def get_notices(self):
         '''Get BOINC notices
@@ -395,7 +392,6 @@ class BoincClient(object):
         '''
         xml = '<acct_mgr_info />'
         results = self.rpc.call(xml)        
-        print(ElementTree.tostring(results))
 
     def get_global_prefs_file(self):
         ''' The get_globals_prefs_file RPC call returns a quite large XML
@@ -423,14 +419,11 @@ class BoincClient(object):
         '''
         xml = '<get_project_init_status />'
         results = self.rpc.call(xml)        
-        print(ElementTree.tostring(results))
 
     def create_account(self, url, email_address, password_hash, username):
         xml = '<create_account><url>{url}</url><email_addr>{email_address}</email_addr><passwd_hash>{password_hash}</passwd_hash><ldap_auth>0</ldap_auth><user_name>{user_name}</user_name></create_account>'.format(
             url=url, email_address=email_address, password_hash=password_hash, user_name=username)
-        print(xml)
         results = self.rpc.call(xml)        
-        print(ElementTree.tostring(results))
 
     def create_account_poll(self):
         # Xml in:  <create_account><url>http://atlasathome.cern.ch/</url><email_addr>davidwil@posteo.de</email_addr><passwd_hash>32bd8081c1ac7e5c61e941f22af2a026</passwd_hash><ldap_auth>0</ldap_auth><user_name>jeroanan</user_name></create_account>
@@ -527,7 +520,6 @@ class BoincClient(object):
         '''
         xml = '<get_screensaver_tasks/>'
         result = self.rpc.call(xml)
-        print(ElementTree.tostring(result))
 
     def get_simple_gui_info(self):
         '''Returns info for a simple GUI
@@ -536,7 +528,6 @@ class BoincClient(object):
         '''
         xml = '<get_simple_gui_info/>'
         result = self.rpc.call(xml)
-        print(ElementTree.tostring(result))
 
     def get_state(self):
         ''' Gets a whole load of information about the overall state of the BOINC process, its tasks and projects.
@@ -571,8 +562,6 @@ class BoincClient(object):
                 project_url=project_url, authenticator=authenticator)
 
         result = self.rpc.call(xml)
-        print(ElementTree.tostring(result))
-
 
     # We have a number of operations whose xml is just:
     # <operation_name><project_url>{project_url}</project_url></operation_name>
@@ -613,11 +602,9 @@ class BoincClient(object):
 
     def project_detach_when_done(self, project_url):
         result = self.simple_project_operation('project_detach_when_done', project_url)
-        print(result)
 
     def project_dont_detach_when_done(self, project_url):
         result = self.simple_project_operation('project_dont_detach_when_done', project_url)
-        print(result)
 
     def project_update(self, project_url):
         ''' Update a project with the project server.
