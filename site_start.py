@@ -74,15 +74,13 @@ class WebServer(object):
 
     @cherrypy.expose
     def get_statistics_json(self, **kwargs):
-        statistics = self.project_operation(kwargs, self.__project_tasks.get_project_statistics)
-        return json.dumps(statistics, self.__io, cls=jsae.JSONEncoder)
+        f  = lambda: self.project_operation(kwargs, self.__project_tasks.get_project_statistics)
+        return self.do_authenticated_request(f)
 
     @cherrypy.expose
-    def project_json(self, **kwargs):
-        def f():
-            return [t for t in self.__get_projects() if t.name==kwargs.get('project', '')].pop()
+    def project_json(self, **kwargs):        
+        f = lambda: [t for t in self.__get_projects() if t.name==kwargs.get('project', '')].pop()
         return self.do_authenticated_request(f, False)
-        #return json.dumps(project, self.__io, cls=jsae.JSONEncoder)
 
     def __get_projects(self):
         return list(self.__project_tasks.get_project_status())
@@ -121,8 +119,8 @@ class WebServer(object):
 
     @cherrypy.expose
     def detach_project(self, **kwargs):
-        result = self.project_operation(kwargs, self.__project_tasks.detach_project)
-        return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
+        f  = lambda: self.project_operation(kwargs, self.__project_tasks.detach_project)
+        return self.do_authenticated_request(f, False)
 
     @cherrypy.expose
     def detach_project_when_done(self, **kwargs):
@@ -154,12 +152,13 @@ class WebServer(object):
 
     @cherrypy.expose
     def attach_project(self, **kwargs):
-        project_url = kwargs.get('projectUrl', '')
-        email_address = kwargs.get('email', '')
-        password_hash = kwargs.get('password', '')
-
-        result = self.__project_tasks.attach_project(project_url, email_address, password_hash)
-        return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
+        def f():
+            project_url = kwargs.get('projectUrl', '')
+            email_address = kwargs.get('email', '')
+            password_hash = kwargs.get('password', '')
+            
+            return self.__project_tasks.attach_project(project_url, email_address, password_hash)
+        return self.do_authenticated_request(f, False)
 
     @cherrypy.expose
     def create_account(self, **kwargs):

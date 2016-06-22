@@ -51,6 +51,12 @@ function AllProjectListController(projectSvc, systemInfoSvc) {
 
   function gotAttachedProjects(projects) {
 	 vm.ready = true;
+
+	 if (projects.length>0 && projects[0].error_message && projects[0].error_message===-1414)
+	 {
+		document.location = '/#/login';
+		return;
+	 }		
 	 
 	 vm.availableProjects = vm.allProjects.map(function(x) {
 		var thisProject = projects.filter(function(y) {

@@ -27,6 +27,8 @@ function AttachProjectController(projectSvc, md5Svc) {
   document.title = vm.title;
 
   function gotProjects(projects) {
+
+	 if (projects.length>0 && !loginCheck(projects[0])) return;
 	 vm.attachedProjects = projects.filter(function(x) { return x.name.length > 0; });
     vm.ready = true;
   }
@@ -53,9 +55,19 @@ function AttachProjectController(projectSvc, md5Svc) {
   }
 
   function projectAttached(d) {
+
+	 if (!loginCheck(d)) return;
 	 vm.loading = false;
 	 vm.success = d.success;
 	 vm.errorText = d.error_message;
+  }
+
+  function loginCheck(xhr) {
+	 if (xhr.error_message && xhr.error_message===-1414) {
+		document.location = '/#/login';
+		return false;
+	 }
+	 return true;
   }
 
   function selectedProjectChanged() {

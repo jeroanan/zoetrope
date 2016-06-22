@@ -18,13 +18,21 @@ angular.module('zoetropeDirectives').directive('detachDialog', function() {
 		  
 		  $scope.errorText = '';
 
-		  projectSvc.detachProject($scope.projecturl)().query().$promise.then(function(d) {
-			 if (d.error_message) {
-				$scope.errorText = d.error_message;
-			 } else {
+		  projectSvc.detachProject($scope.projecturl)().query().$promise.then(projectDetached);
+		}
+
+		function projectDetached(d) {
+		  if (d.error_message) {
+			 
+			 if (d.error_message===-1414) {
 				$('#detachModal').modal('hide');
+				setTimeout(function() { document.location = '/#/login'; }, 500);
+				return;
 			 }
-		  });
+			 
+			 $scope.errorText = d.error_message;
+		  } else
+			 $('#detachModal').modal('hide');			 
 		}
 	 }],
 	 link: function(scope, element, attrs, ctrl) {

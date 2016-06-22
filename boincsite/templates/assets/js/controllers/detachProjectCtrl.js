@@ -29,6 +29,13 @@ function DetachProjectController(projectSvc) {
   document.title = vm.title;
 
   function gotProjects(projects) {
+
+	 if (projects.length>0 && projects[0].error_message && projects[0].error_message===-1414)
+	 {
+		document.location = '/#/login';
+		return;
+	 }
+
 	 vm.attachedProjects = projects.filter(function(x) { return x.name.length > 0; });
     vm.ready = true;
   }
@@ -55,7 +62,13 @@ function DetachProjectController(projectSvc) {
     projectSvc.detachProject(vm.selectedProject)().query().$promise.then(projectDetached);
   }
 
-  function projectDetached(d) {	 
+  function projectDetached(d) {
+
+	 if (d.error_message===-1414) {
+		document.location = '/#/login';
+		return;
+	 }
+
     vm.detachErrorMessage = d.error_message;
 	 vm.detachSuccessful = d.success;
   }

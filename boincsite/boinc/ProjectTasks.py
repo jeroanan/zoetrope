@@ -186,7 +186,6 @@ class ProjectTasks(object):
                     time.sleep(2)
                 
                     if lookup_result.authenticator != '':
-                        print('Attaching. project_url: ' + project_url + ' Authenticator: ' + lookup_result.authenticator)
                         attach_result = c.project_attach(project_url, lookup_result.authenticator)
                     elif lookup_result.error_msg != '':
                         success_error.success = False

@@ -22,6 +22,11 @@ angular.module('zoetropeDirectives').directive('projectStatistics', function() {
 		
 		function gotStats(stats) {
 
+		  if (stats.length>0 && stats.error_message && stats.error_message===-1414) {
+			 document.location = '/#/login';
+			 return;
+		  }
+
 		  var ps = [];
 		  
 		  for (var p in stats[0]) {
