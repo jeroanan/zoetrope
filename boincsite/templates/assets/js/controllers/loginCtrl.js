@@ -20,6 +20,8 @@ function LoginController(userSvc) {
 
   vm.loginClicked = loginClicked;
 
+  $('input[name=username]').focus();
+
   document.title = vm.title;
 
   function loginClicked() {
