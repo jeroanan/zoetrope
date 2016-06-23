@@ -19,7 +19,7 @@ Additionally, Zoetrope offers functionality to interact with BOINC, including:
 * Attach and detach from projects
 
 
-The web application provided by Zoetrope makes heavy use of Bootstrap and AngularJS. Presently it allows the user to view the status of an interact with BOINC _without any kind of authentication_. This is by design -- my personal wish was to interact with BOINC running on computers on my home network. Some kind of authentication may come later but right now don't run it exposed on the public Internet unless you want some sort of crazy situation where any visitor who happens by can controll your BOINC computing.
+The web application provided by Zoetrope makes heavy use of Bootstrap and AngularJS. Thus it presently requires JavaScript to be enabled in the browser in order to run.
 
 Calls to the running BOINC process are made using XML-RPC. In order to do that I am making use of parts of the boinc-indicator project <https://github.com/MestreLion/boinc-indicator>, which I have shamelessly sliced and diced and added to for the needs of this project. It seems that Ubuntu is needed to build and run it correctly. Since I run Debian I haven't been able to run it directly, but if you do run Ubuntu or a derivative then you should definitely check it out. Many thanks to MestreLion for providing a solid foundation for the XML-RPC functionality provided here.
 
