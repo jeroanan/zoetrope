@@ -1,4 +1,4 @@
-* TODO Zoetrope TODO List [3/22]
+* TODO Zoetrope TODO List [1/19]
 ** TODO Fix the "Time So Far" information										 :Tasks:
 For the project that I am mostly crunching for while developing this, Enigma@Home, the Time So Far is always empty. 
 However, upon further investigation of what BOINC's XML-RPC functionality provides, the functions that return tonnes of data, 
@@ -55,14 +55,14 @@ Pages:
 *** TODO Host Info
 *** TODO Global Preferences
 ** TODO Put some sort of nice footer at the bottom of the page		  :General:
-** TODO Add user authentication [0/6]									  :NewFeature:
-*** TODO Add facility for adding user accounts, just containing userid and password to begin with
-*** TODO Add Login page
-*** TODO Add logout page
-*** TODO User admin page for all users
-*** TODO "My account" type page [0/2]
+** DONE Add user authentication [6/6]                            :NewFeature:
+*** DONE Add facility for adding user accounts, just containing userid and password to begin with
+*** DONE Add Login page
+*** DONE Add logout page
+*** DONE User admin page for all users
+*** DONE "My account" type page [0/2]
 **** TODO Change password
 **** TODO Delete account
-*** TODO Secure appropriate pages/web service endpoints so u
+*** DONE Secure appropriate pages/web service endpoints so u
 
 ** TODO Make timezone into a string rather than just a number		 :HostInfo:
