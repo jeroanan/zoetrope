@@ -60,9 +60,7 @@ Pages:
 *** DONE Add Login page
 *** DONE Add logout page
 *** DONE User admin page for all users
-*** DONE "My account" type page [0/2]
-**** TODO Change password
-**** TODO Delete account
+*** DONE "My account" type page
 *** DONE Secure appropriate pages/web service endpoints so u
 
 ** TODO Make timezone into a string rather than just a number		 :HostInfo:

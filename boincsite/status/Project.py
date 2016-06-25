@@ -8,6 +8,13 @@ import boincsite.util.DateTimeUtil as dt
 class Project(object):
 
     def __init__(self, project):
+        """
+        Initialise an instance of the Project class
+
+        Parameters:
+        project: An instance of JoinedProject. The attributes of this class are initialised
+                 from the attributes of this parameter.
+        """
 
         # can't do master_fetch_pending, trickle_upload_pending, ended, disk_usage
         self.fields = ['name',
@@ -69,31 +76,14 @@ class Project(object):
 class GuiUrl(object):
 
     def __init__(self, gui_url):
+        """
+        Initialise an instance of the GuiUrl class.
+
+        Parameters:
+        gui_url: An instance of lib.boincindicator.resulttypes.GuiUrl. The attributes of this class
+                 are initialised from the properties of this parameter.
+        """
         self.fields = ['name', 'description', 'url']
-        self.__name = gui_url.name
-        self.__description = gui_url.description
-        self.__url = gui_url.url
-
-    @property
-    def name(self):
-        return self.__name
-
-    @name.setter
-    def name(self, val):
-        self.__name = val
-
-    @property
-    def description(self):
-        return self.__description
-
-    @description.setter
-    def description(self, val):
-        self.__description = val
-
-    @property
-    def url(self):
-        return self.__url
-
-    @url.setter
-    def url(self, val):
-        self.__url = val
+        self.name = gui_url.name
+        self.description = gui_url.description
+        self.url = gui_url.url
