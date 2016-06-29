@@ -72,7 +72,7 @@ function ProjectDetailController($routeParams, projectSvc, systemInfoSvc) {
   }  
 
   function gotAttachedProjects(projects) {
-	 var attachedProject = projects.filter(function(x) { return x.name===vm.project.name; });
+	 var attachedProject = projects.filter(function(x) { return x.project_name===vm.project.name; });
 	 vm.project.attached = attachedProject.length > 0;
   }
 

@@ -18,6 +18,7 @@ import logging
 import time
 
 import lib.boincindicator.client as client
+import lib.boincindicator.resulttypes.JoinedProject as jp
 import lib.boincindicator.resulttypes.SuccessError as se
 
 import boincsite.boinc.AuthorizedTask as at
@@ -49,8 +50,7 @@ class ProjectTasks(object):
           A list of Project objects
         """
         try:
-            result = self.__client.get_project_status()
-            return map(lambda r: p.Project(r), result)
+            return self.__client.get_project_status()
         except ConnectionRefusedError:
             # ConnectionRefusedError will happen if the site is running on a box with no boinc installation.
             print("Connection Refused. Is boinc running?")

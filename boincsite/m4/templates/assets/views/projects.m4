@@ -20,7 +20,7 @@ divert(0)dnl
 		  <th>Actions</th>
       </thead>
       <tr ng-repeat="p in vm.projects | orderBy:vm.sortProp:vm.reverseSort">
-        <td><a href="#/project/{{ p.name }}"><span ng-bind="p.name" /></a></td>
+        <td><a href="#/project/{{ p.project_name }}"><span ng-bind="p.project_name" /></a></td>
         <td><span ng-bind="p.user_total_credit | number" /></td>
         <td><span ng-bind="p.user_expavg_credit | number" /></td>
 		  <td ng-show="true">

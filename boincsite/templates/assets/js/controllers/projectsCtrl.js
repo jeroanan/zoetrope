@@ -51,7 +51,7 @@ function ProjectsController(projectSvc) {
 		}
 	 }
 
-	 vm.projects = projects.filter(function(x) { return x.name.length > 0; });
+	 vm.projects = projects.filter(function(x) { return x.project_name.length > 0; });
     vm.ready = true;
   }
 

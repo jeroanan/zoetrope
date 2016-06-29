@@ -95,7 +95,7 @@ class GlobalPreferences(object):
             'work_buf_additional_days': round_2dp
         }
 
-        for a in attrs:
+        for a in self.fields:
             if a in process_fields:
                 setattr(self, a, process_fields[a](getattr(global_preferences, a)))
             else:

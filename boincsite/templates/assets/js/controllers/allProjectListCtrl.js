@@ -60,7 +60,7 @@ function AllProjectListController(projectSvc, systemInfoSvc) {
 	 
 	 vm.availableProjects = vm.allProjects.map(function(x) {
 		var thisProject = projects.filter(function(y) {
-		  return y.name==x.name;
+		  return y.project_name==x.name;
 		});
 		
 		x.attached = thisProject.length>0;
@@ -69,6 +69,7 @@ function AllProjectListController(projectSvc, systemInfoSvc) {
   }
 
   function gotPlatform(platform) {
+
 	 var thisPlatform = platform.platform;
 
 	 vm.allProjects = vm.allProjects.map(function(x) {

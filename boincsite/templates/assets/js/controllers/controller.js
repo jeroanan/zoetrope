@@ -26,12 +26,11 @@ var get_project_name = function(task, projects) {
   for (var p in projects) {
     var proj = projects[p];
 	 
-    if (proj.master_url == task.project_url){
+    if (proj.master_url == task.project_url) {
 		
-      if (proj.name==='') {
+      if (proj.project_name==='')
         return task.project_url;
-      }
-      return proj.name;
+      return proj.project_name;
     }
   }
   
@@ -45,10 +44,9 @@ var get_time_so_far = function(task) {
 var get_state_string = function(task) {
   if (task.suspended_via_gui) return 'Task suspended by user';
   
-  if (task.state === 2 && (task.scheduler_state === 1 || task.active_task_state === 0)) {
+  if (task.state === 2 && (task.scheduler_state === 1 || task.active_task_state === 0))
     return 'Waiting to run';
-  }
-  
+    
   switch (task.state) {
   case 2:
     return 'Running';

@@ -2,170 +2,168 @@
   <h1 ng-bind="vm.title" />
   <div ng-show="!vm.ready" class="text-center">
     <img src="/static/img/loading.gif" />
-  </div>  
+  </div>
   <div ng-show="vm.ready && vm.error">
-  An error occurred while loading the project. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>
-</div>
+    An error occurred while loading the project. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>
+  </div>
 
-  <div ng-show="vm.ready && vm.projectFound">	 
-	 <div class="container">
-		<div class="col-xs-9 col-lg-11">
-		  <a ng-href="/#/projectdetail/{{vm.project.name}}">Project Details</a> 
+  <div ng-show="vm.ready && vm.projectFound">
+    <div class="container">
+      <div class="col-xs-9 col-lg-11">
+        <a ng-href="/#/projectdetail/{{vm.project.project_name}}">Project Details</a>
 
-		  <h2 class=""><a href="javascript:" data-target="#currentStatusCollapse" data-toggle="collapse">Current Status</a></h2>
-		  <div id="currentStatusCollapse" class="collapse ">
+        <h2 class=""><a href="javascript:" data-target="#currentStatusCollapse" data-toggle="collapse">Current Status</a></h2>
+        <div id="currentStatusCollapse" class="collapse ">
 
-		    <keyvallinkrow key="URL" link="{{vm.project.master_url}}" text="{{vm.project.master_url}}" />
-		    <keyvalrow key="Username" val="{{ vm.project.user_name }}" />
-		    <keyvalrow key="Team name" val="{{ vm.project.team_name }}" />
-		    <keyvalrow key="Attached via account manager?" val="{{ vm.project.attached_via_account_manager }}" />
-		    <keyvalrow key="Ended" val="{{ vm.project.ended }}" />
-		    <keyvalrow key="Suspended via GUI?" val="{{ vm.project.suspended_via_gui }}" />
-		    <keyvalrow key="Don't request more work" val="{{ vm.project.dont_request_more_work }}" />
-		    <keyvalrow key="Detach project when all workunits done" val="{{ vm.project.detach_when_done }}" />
-		    <keyvalrow key="Disk usage" val="{{ vm.project.disk_usage }}" />
-		    <keyvalrow key="Resource share" val="{{ vm.project.resource_share }}" />
+          <keyvallinkrow key="URL" link="{{vm.project.master_url}}" text="{{vm.project.master_url}}" />
+          <keyvalrow key="Username" val="{{ vm.project.user_name }}" />
+          <keyvalrow key="Team name" val="{{ vm.project.team_name }}" />
+          <keyvalrow key="Attached via account manager?" val="{{ vm.project.attached_via_acct_mgr }}" />
+          <keyvalrow key="Suspended via GUI?" val="{{ vm.project.suspended_via_gui }}" />
+          <keyvalrow key="Don't request more work" val="{{ vm.project.dont_request_more_work }}" />
+          <keyvalrow key="Detach project when all workunits done" val="{{ vm.project.detach_when_done }}" />
+          <keyvalrow key="Resource share" val="{{ vm.project.resource_share }}" />
 
-  		    <div class="row task-row" ng-hide="vm.project.upload_backoff===null">
-			   <div class="col-lg-2" />
-			   <div class="col-xs-3 col-lg-4"><span><strong>Upload Backoff</strong></span></div>
-			   <div class="col-xs-3 col-lg-4">
-				  <span ng-bind="vm.project.upload_backoff"></span>
-			   </div>
-			   <div class="col-xs-6 col-lg-2" />
-		    </div>
-		  </div>
-
-
-		  <h2 class=""><a href="javascript:" data-target="#creditCollapse" data-toggle="collapse">Credit</a></h2>
-		  <div id="creditCollapse" class="collapse ">
-
-		    <keyvalrow key="User total credit" val="{{ vm.project.user_total_credit | number }}" />
-		    <keyvalrow key="User recent average credit" val="{{ vm.project.user_expavg_credit | number }}" />
-		    <keyvalrow key="Total credit for this host" val="{{ vm.project.host_total_credit | number }}" />
-		    <keyvalrow key="Recent average credit for this host" val="{{ vm.project.host_expavg_credit | number }}" />
-		  </div>
-
-
-		  <h2 class=""><a href="javascript:" data-target="#project-additional" data-toggle="collapse">Additional</a></h2>
-		  <div id="project-additional" class="collapse ">
-
-			 <keyvalrow key="NRPC failures" val="{{ vm.project.nrpc_failures }}" />
-			 <keyvalrow key="Master fetch failures" val="{{ vm.project.master_fetch_failures }}" />
-			 <keyvalrow key="Master fetch pending?" val="{{ vm.project.master_fetch_pending }}" />
-			 <keyvalrow key="Scheduler RPC pending?" val="{{ vm.project.scheduler_rpc_pending }}" />
-			 <keyvalrow key="Trickle upload pending?" val="{{ vm.project.trickle_upload_pending }}" />
-			 <keyvalrow key="Last RPC" val="{{ vm.project.last_rpc }}" />
-			 <keyvalrow key="Project files downloaded" val="{{ vm.project.project_files_downloaded }}" />
-			 
-			 <div class="row">
-				<div class="col-xs-3"></div>
-				<div class="col-xs-3"></div>
-				<div class="col-xs-3">&nbsp;</div>
-				<div class="col-xs-3"></div>
-			 </div>
-		  </div>
-
-
-		  <h2 class=""><a href="javascript:" data-target="#statsRow" data-toggle="collapse">Statistics</a></h2>
-		  <div id="statsRow" class="collapse ">
-		  
-		  </div>
-
-		  
-		  <h2 class="hidden-lg"><a href="javascript:" data-target="#xsProjectOperations" data-toggle="collapse">Project Operations</a></h2>
-		  <div id="xsProjectOperations" class="collapse hidden-lg">
-
-		  	 <div class="row sidebar-button-row">
-			 	<button class="btn btn-warning sidebar-button" ng-click="vm.detachClicked()">Deatch Project</button>
-			   <button class="btn btn-warning sidebar-button" ng-click="vm.detachWhenDoneClicked()" ng-show="!vm.project.detach_when_done">
-  Deatch When Done
-</button>
-			   <button class="btn  sidebar-button" ng-click="vm.dontDetachWhenDoneClicked()" ng-show="vm.project.detach_when_done">
-  Don't Detach When Done
-</button>
+          <div class="row task-row" ng-hide="vm.project.upload_backoff===null">
+            <div class="col-lg-2" />
+            <div class="col-xs-3 col-lg-4"><span><strong>Upload Backoff</strong></span></div>
+            <div class="col-xs-3 col-lg-4">
+              <span ng-bind="vm.project.upload_backoff"></span>
+            </div>
+            <div class="col-xs-6 col-lg-2" />
           </div>
-			 <div class="row sidebar-button-row">
-			   <button class="btn btn-primary sidebar-button" ng-click="vm.noMoreWorkClicked()" ng-show="!vm.project.dont_request_more_work">
-  No More Work
-</button>
-			   <button class="btn btn-primary sidebar-button" ng-click="vm.allowMoreWorkClicked()" ng-show="vm.project.dont_request_more_work">
-  Allow More Work
-</button>
-			   <button class="btn btn-primary sidebar-button" ng-click="vm.suspendClicked()" ng-show="!vm.project.suspended_via_gui">
-  Suspend Project
-</button>
-			   <button class="btn btn-primary sidebar-button" ng-click="vm.resumeClicked()" ng-show="vm.project.suspended_via_gui">
-  Resume Project
-</button>
-		   </div>
-		  </div>
+        </div>
 
 
-		  <h2 class="hidden-lg"><a href="javascript:" data-target="#xsProjectUrls" data-toggle="collapse">Project URLs</a></h2>
-		  <div id="xsProjectUrls" class="collapse hidden-lg">
+        <h2 class=""><a href="javascript:" data-target="#creditCollapse" data-toggle="collapse">Credit</a></h2>
+        <div id="creditCollapse" class="collapse ">
 
-		    <ul>
-			   <li ng-repeat="gu in vm.project.gui_urls">
-				  <a href="{{gu.url}}" title="{{gu.description}}"><span ng-bind="gu.name" /></a>
-				</li>
-			 </ul>
-		  </div>
+          <keyvalrow key="User total credit" val="{{ vm.project.user_total_credit | number }}" />
+          <keyvalrow key="User recent average credit" val="{{ vm.project.user_expavg_credit | number }}" />
+          <keyvalrow key="Total credit for this host" val="{{ vm.project.host_total_credit | number }}" />
+          <keyvalrow key="Recent average credit for this host" val="{{ vm.project.host_expavg_credit | number }}" />
+        </div>
 
-		</div> <!-- col-xs-9 -->
 
-		<div class="hidden-xs col-lg-1">
-		  <div class="row sidebar-button-row">
-  <h4>Project Operations</h4>
-</div>
+        <h2 class=""><a href="javascript:" data-target="#project-additional" data-toggle="collapse">Additional</a></h2>
+        <div id="project-additional" class="collapse ">
 
-		  <div class="row sidebar-button-row">
-  <button class="btn btn-warning sidebar-button" ng-click="vm.detachClicked()">Detach Project</button>
-</div>
-		  		  
-		  <div class="row sidebar-button-row">
-		  	 <button class="btn btn-warning sidebar-button" ng-click="vm.detachWhenDoneClicked()" ng-show="!vm.project.detach_when_done">
-  Deatch When Done
-</button>
-			 <button class="btn  sidebar-button" ng-click="vm.dontDetachWhenDoneClicked()" ng-show="vm.project.detach_when_done">
-  Don't Detach When Done
-</button>
-		  </div>
+          <keyvalrow key="NRPC failures" val="{{ vm.project.nrpc_failures }}" />
+          <keyvalrow key="Master fetch failures" val="{{ vm.project.master_fetch_failures }}" />
+          <keyvalrow key="Scheduler RPC pending?" val="{{ vm.project.sched_rpc_pending }}" />
+          <keyvalrow key="Last RPC" val="{{ vm.project.last_rpc_time }}" />
+          <keyvalrow key="Project files downloaded" val="{{ vm.project.project_files_downloaded_time }}" />
 
-		  <div class="row sidebar-button-row">
-  <button class="btn btn-primary sidebar-button" ng-click="vm.updateProject()">Update Project</button>
-</div>
-		  
-		  <div class="row sidebar-button-row">
-		    <button class="btn btn-primary sidebar-button" ng-click="vm.noMoreWorkClicked()" ng-show="!vm.project.dont_request_more_work">
-  No More Work
-</button>
-			 <button class="btn btn-primary sidebar-button" ng-click="vm.allowMoreWorkClicked()" ng-show="vm.project.dont_request_more_work">
-  Allow More Work
-</button>
-		  </div>
-		  
-		  <div class="row sidebar-button-row">
-		    <button class="btn btn-primary sidebar-button" ng-click="vm.suspendClicked()" ng-show="!vm.project.suspended_via_gui">
-  Suspend Project
-</button>
-			 <button class="btn btn-primary sidebar-button" ng-click="vm.resumeClicked()" ng-show="vm.project.suspended_via_gui">
-  Resume Project
-</button>
-		  </div>
+          <div class="row">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-3"></div>
+            <div class="col-xs-3">&nbsp;</div>
+            <div class="col-xs-3"></div>
+          </div>
+        </div>
 
-		  <div class="row sidebar-button-row">
-  <h4>Project URLs</h4>
-</div>
 
-		  <div class="row sidebar-button-row" ng-repeat="gu in vm.project.gui_urls">
-		     <a href="{{gu.url}}" title="{{gu.description}}"><span ng-bind="gu.name" /></a>
-		  </div>
-		</div>
-		
-    </div> <!-- container -->
-	 
-  </div>  
+        <h2 class=""><a href="javascript:" data-target="#statsRow" data-toggle="collapse">Statistics</a></h2>
+        <div id="statsRow" class="collapse ">
+
+        </div>
+
+
+        <h2 class="hidden-lg"><a href="javascript:" data-target="#xsProjectOperations" data-toggle="collapse">Project Operations</a></h2>
+        <div id="xsProjectOperations" class="collapse hidden-lg">
+
+          <div class="row sidebar-button-row">
+            <button class="btn btn-warning sidebar-button" ng-click="vm.detachClicked()">Deatch Project</button>
+            <button class="btn btn-warning sidebar-button" ng-click="vm.detachWhenDoneClicked()" ng-show="!vm.project.detach_when_done">
+              Deatch When Done
+            </button>
+            <button class="btn  sidebar-button" ng-click="vm.dontDetachWhenDoneClicked()" ng-show="vm.project.detach_when_done">
+              Don't Detach When Done
+            </button>
+          </div>
+          <div class="row sidebar-button-row">
+            <button class="btn btn-primary sidebar-button" ng-click="vm.noMoreWorkClicked()" ng-show="!vm.project.dont_request_more_work">
+              No More Work
+            </button>
+            <button class="btn btn-primary sidebar-button" ng-click="vm.allowMoreWorkClicked()" ng-show="vm.project.dont_request_more_work">
+              Allow More Work
+            </button>
+            <button class="btn btn-primary sidebar-button" ng-click="vm.suspendClicked()" ng-show="!vm.project.suspended_via_gui">
+              Suspend Project
+            </button>
+            <button class="btn btn-primary sidebar-button" ng-click="vm.resumeClicked()" ng-show="vm.project.suspended_via_gui">
+              Resume Project
+            </button>
+          </div>
+        </div>
+
+
+        <h2 class="hidden-lg"><a href="javascript:" data-target="#xsProjectUrls" data-toggle="collapse">Project URLs</a></h2>
+        <div id="xsProjectUrls" class="collapse hidden-lg">
+
+          <ul>
+            <li ng-repeat="gu in vm.project.gui_urls">
+              <a href="{{gu.url}}" title="{{gu.description}}"><span ng-bind="gu.name" /></a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+      <!-- col-xs-9 -->
+
+      <div class="hidden-xs col-lg-1">
+        <div class="row sidebar-button-row">
+          <h4>Project Operations</h4>
+        </div>
+
+        <div class="row sidebar-button-row">
+          <button class="btn btn-warning sidebar-button" ng-click="vm.detachClicked()">Detach Project</button>
+        </div>
+
+        <div class="row sidebar-button-row">
+          <button class="btn btn-warning sidebar-button" ng-click="vm.detachWhenDoneClicked()" ng-show="!vm.project.detach_when_done">
+            Deatch When Done
+          </button>
+          <button class="btn  sidebar-button" ng-click="vm.dontDetachWhenDoneClicked()" ng-show="vm.project.detach_when_done">
+            Don't Detach When Done
+          </button>
+        </div>
+
+        <div class="row sidebar-button-row">
+          <button class="btn btn-primary sidebar-button" ng-click="vm.updateProject()">Update Project</button>
+        </div>
+
+        <div class="row sidebar-button-row">
+          <button class="btn btn-primary sidebar-button" ng-click="vm.noMoreWorkClicked()" ng-show="!vm.project.dont_request_more_work">
+            No More Work
+          </button>
+          <button class="btn btn-primary sidebar-button" ng-click="vm.allowMoreWorkClicked()" ng-show="vm.project.dont_request_more_work">
+            Allow More Work
+          </button>
+        </div>
+
+        <div class="row sidebar-button-row">
+          <button class="btn btn-primary sidebar-button" ng-click="vm.suspendClicked()" ng-show="!vm.project.suspended_via_gui">
+            Suspend Project
+          </button>
+          <button class="btn btn-primary sidebar-button" ng-click="vm.resumeClicked()" ng-show="vm.project.suspended_via_gui">
+            Resume Project
+          </button>
+        </div>
+
+        <div class="row sidebar-button-row">
+          <h4>Project URLs</h4>
+        </div>
+
+        <div class="row sidebar-button-row" ng-repeat="gu in vm.project.gui_urls">
+          <a href="{{gu.url}}" title="{{gu.description}}"><span ng-bind="gu.name" /></a>
+        </div>
+      </div>
+
+    </div>
+    <!-- container -->
+
+  </div>
   <div class="row home-row text-center">
     <a href="/#/projects">Projects</a>
   </div>

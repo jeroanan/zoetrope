@@ -12,18 +12,16 @@ divert(0)dnl
   <div ng-show="vm.ready && vm.projectFound">	 
 	 <div class="container">
 		<div class="col-xs-9 col-lg-11">
-		  <a ng-href="/#/projectdetail/{{vm.project.name}}">Project Details</a> 
+		  <a ng-href="/#/projectdetail/{{vm.project.project_name}}">Project Details</a> 
 
 		  zoe_collapse_begin(currentStatusCollapse, Current Status)
 		    <keyvallinkrow key="URL" link="{{vm.project.master_url}}" text="{{vm.project.master_url}}" />
 		    <keyvalrow key="Username" val="{{ vm.project.user_name }}" />
 		    <keyvalrow key="Team name" val="{{ vm.project.team_name }}" />
-		    <keyvalrow key="Attached via account manager?" val="{{ vm.project.attached_via_account_manager }}" />
-		    <keyvalrow key="Ended" val="{{ vm.project.ended }}" />
+		    <keyvalrow key="Attached via account manager?" val="{{ vm.project.attached_via_acct_mgr }}" />
 		    <keyvalrow key="Suspended via GUI?" val="{{ vm.project.suspended_via_gui }}" />
 		    <keyvalrow key="Don't request more work" val="{{ vm.project.dont_request_more_work }}" />
 		    <keyvalrow key="Detach project when all workunits done" val="{{ vm.project.detach_when_done }}" />
-		    <keyvalrow key="Disk usage" val="{{ vm.project.disk_usage }}" />
 		    <keyvalrow key="Resource share" val="{{ vm.project.resource_share }}" />
 
   		    <div class="row task-row" ng-hide="vm.project.upload_backoff===null">
@@ -46,11 +44,9 @@ divert(0)dnl
 		  zoe_collapse_begin(project-additional, Additional)
 			 <keyvalrow key="NRPC failures" val="{{ vm.project.nrpc_failures }}" />
 			 <keyvalrow key="Master fetch failures" val="{{ vm.project.master_fetch_failures }}" />
-			 <keyvalrow key="Master fetch pending?" val="{{ vm.project.master_fetch_pending }}" />
-			 <keyvalrow key="Scheduler RPC pending?" val="{{ vm.project.scheduler_rpc_pending }}" />
-			 <keyvalrow key="Trickle upload pending?" val="{{ vm.project.trickle_upload_pending }}" />
-			 <keyvalrow key="Last RPC" val="{{ vm.project.last_rpc }}" />
-			 <keyvalrow key="Project files downloaded" val="{{ vm.project.project_files_downloaded }}" />
+			 <keyvalrow key="Scheduler RPC pending?" val="{{ vm.project.sched_rpc_pending }}" />
+			 <keyvalrow key="Last RPC" val="{{ vm.project.last_rpc_time }}" />
+			 <keyvalrow key="Project files downloaded" val="{{ vm.project.project_files_downloaded_time }}" />
 			 
 			 <div class="row">
 				<div class="col-xs-3"></div>

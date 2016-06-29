@@ -1,6 +1,18 @@
 # Copyright (c) David Wilson 2015, 2016
-#
-# Licensed under the GPL version 3
+# This file is part of Zoetrope.
+# 
+# Zoetrope is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# Zoetrope is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with Zoetrope.  If not, see <http://www.gnu.org/licenses/>.
 
 import boincsite.util.DateTimeUtil as dt
 
@@ -16,7 +28,6 @@ class Project(object):
                  from the attributes of this parameter.
         """
 
-        # can't do master_fetch_pending, trickle_upload_pending, ended, disk_usage
         self.fields = ['name',
                        'user_name',
                        'team_name',
@@ -27,12 +38,8 @@ class Project(object):
                        'host_expavg_credit',
                        'nrpc_failures',
                        'master_fetch_failures',
-                       'master_fetch_pending',
-                       'trickle_upload_pending',
-                       'ended',
                        'suspended_via_gui',
                        'dont_request_more_work',
-                       'disk_usage',
                        'last_rpc',
                        'project_files_downloaded',
                        'gui_urls',
@@ -54,14 +61,10 @@ class Project(object):
         self.host_expavg_credit = project.host_expavg_credit
         self.nrpc_failures = project.nrpc_failures
         self.master_fetch_failures = project.master_fetch_failures
-        self.master_fetch_pending = False
         self.scheduler_rpc_pending = project.sched_rpc_pending
-        self.trickle_upload_pending = False
         self.attached_via_account_manager = project.attached_via_acct_mgr
-        self.ended = False
         self.suspended_via_gui = project.suspended_via_gui
         self.dont_request_more_work = project.dont_request_more_work
-        self.disk_usage = ''
         self.last_rpc = str(dt.get_date_from_epoch_seconds(float(project.last_rpc_time)).split('.')[0])
         self.project_files_downloaded = project.project_files_downloaded_time
         self.gui_urls = [GuiUrl(x) for x in project.gui_urls]

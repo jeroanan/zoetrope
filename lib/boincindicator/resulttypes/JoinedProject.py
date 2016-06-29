@@ -1,8 +1,18 @@
 # Copyright (c) David Wilson 2015, 2016
-#
-# Based on code from Boinc Indicator, (C) 2013 Rodrigo Silva (MestreLion) <linux@rodrigosilva.com>
-#
-# Licensed under the GPL version 3
+# This file is part of Zoetrope.
+# 
+# Zoetrope is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# Zoetrope is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with Zoetrope.  If not, see <http://www.gnu.org/licenses/>.
 
 import logging
 
@@ -16,6 +26,29 @@ class JoinedProject(struct.Struct):
     # TODO: I would have rather called this AttachedProject
 
     def __init__(self):
+
+        self.fields = ['project_name',
+                       'user_name',
+                       'team_name',
+                       'resource_share',
+                       'user_total_credit',
+                       'user_expavg_credit',
+                       'host_total_credit',
+                       'host_expavg_credit',
+                       'nrpc_failures',
+                       'master_fetch_failures',
+                       'suspended_via_gui',
+                       'dont_request_more_work',
+                       'last_rpc_time',
+                       'project_files_downloaded_time',
+                       'gui_urls',
+                       'master_url',
+                       'sched_rpc_pending',
+                       'attached_via_acct_mgr',
+                       'detach_when_done',
+                       'upload_backoff'
+        ]
+        
         self.master_url = ''
         self.project_name = ''
         self.symstore = ''
@@ -99,6 +132,7 @@ class JoinedProject(struct.Struct):
 class GuiUrl(struct.Struct):
 
     def __init__(self):
+        self.fields = ['name', 'description', 'url']
         self.name = ''
         self.description = ''
         self.url = ''

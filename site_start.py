@@ -79,7 +79,7 @@ class WebServer(object):
 
     @cherrypy.expose
     def project_json(self, **kwargs):        
-        f = lambda: [t for t in self.__get_projects() if t.name==kwargs.get('project', '')].pop()
+        f = lambda: [t for t in self.__get_projects() if t.project_name==kwargs.get('project', '')].pop()
         return self.do_authenticated_request(f, False)
 
     def __get_projects(self):
@@ -181,11 +181,8 @@ class WebServer(object):
 
     @cherrypy.expose
     def get_platform_json(self, **kwargs):
-        def f():
-            platform = self.__system_info_tasks.get_platform()
-            return '{{"platform": "{platform}"}}'.format(platform=platform)
-
-        return self.do_authenticated_request(f, False)
+        platform = self.__system_info_tasks.get_platform()
+        return '{{"platform": "{platform}"}}'.format(platform=platform)
 
     @cherrypy.expose
     def no_more_work(self, **kwargs):
