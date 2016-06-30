@@ -16,7 +16,7 @@ function DailyTransferController(systemInfoSvc) {
   vm.totalDownloaded = '';
   vm.ready = false;
   vm.title = 'Daily Transfer History';
-  vm.sortProp = 'date';
+  vm.sortProp = 'when';
   vm.reverseSort = true;
   vm.sort = getSortFunc(vm, 'sortProp', 'reverseSort');
   vm.error = false;
@@ -40,11 +40,11 @@ function DailyTransferController(systemInfoSvc) {
 	 }
 
 	 vm.daily_transfers = dailyTransfers.filter(function(transfer) {
-		return transfer.date;
+		return transfer.when;
 	 }).map(function(transfer) {
-		var dateSplit = transfer.date.split('-');
+		var dateSplit = transfer.when.split('-');
       var theDate = new Date(dateSplit[0], dateSplit[1]-1, dateSplit[2]);
-      transfer.date = theDate;
+      transfer.when = theDate;
 		return transfer;		
 	 });
 
@@ -54,8 +54,8 @@ function DailyTransferController(systemInfoSvc) {
       return Math.round(total * 100) / 100;
     }
 
-    vm.totalUploaded = totalMegabytes('uploaded') + 'MB';
-    vm.totalDownloaded = totalMegabytes('downloaded') + 'MB';
+    vm.totalUploaded = totalMegabytes('up') + 'MB';
+    vm.totalDownloaded = totalMegabytes('down') + 'MB';
     vm.ready = true;
   }
 

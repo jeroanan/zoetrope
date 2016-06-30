@@ -13,14 +13,14 @@ divert(0)dnl
 
     zoe_begin_table
       <thead>
-		  zoe_sorting_table_header(date, Date)
-		  zoe_sorting_table_header(uploaded, Uploaded)
-		  zoe_sorting_table_header(downloaded, Downloaded)
+		  zoe_sorting_table_header(when, Date)
+		  zoe_sorting_table_header(up, Uploaded)
+		  zoe_sorting_table_header(down, Downloaded)
       </thead>
       <tr ng-repeat="dt in vm.daily_transfers | orderBy:vm.sortProp:vm.reverseSort">
-        <td><span ng-bind="dt.date.toDateString()" /></td>
-        <td><span ng-bind="dt.uploaded + 'MB'" /></td>
-        <td><span ng-bind="dt.downloaded + 'MB'" /></td>
+        <td><span ng-bind="dt.when.toDateString()" /></td>
+        <td><span ng-bind="dt.up" + 'MB'" /></td>
+        <td><span ng-bind="dt.down" + 'MB'" /></td>
       </tr>
     </table>
   </div>
