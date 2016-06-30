@@ -4,8 +4,8 @@
     <img src="/static/img/loading.gif" />
   </div>
   <div ng-show="vm.ready && vm.error">
-  An error occurred while loading the messages. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>
-</div>
+    An error occurred while loading the messages. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>
+  </div>
   <div ng-show="vm.ready && !vm.error">
     <h2>Filter</h2>
     <label for="selectProject">Project</label>
@@ -21,34 +21,33 @@
 
     <table class="table table-striped">
       <thead>
-		  <th>
-  <a ng-click="vm.sort('message_number');">#</a>
-  <span ng-show="vm.sortProp==='message_number' && !vm.reverseSort">&#x25B2;</span>
-  <span ng-show="vm.sortProp==='message_number' && vm.reverseSort">&#x25BC;</span>
-</th>
-		  <th>
-  <a ng-click="vm.sort('date_time');">Message Date</a>
-  <span ng-show="vm.sortProp==='date_time' && !vm.reverseSort">&#x25B2;</span>
-  <span ng-show="vm.sortProp==='date_time' && vm.reverseSort">&#x25BC;</span>
-</th>
-		  <th>
-  <a ng-click="vm.sort('project_name');">Project</a>
-  <span ng-show="vm.sortProp==='project_name' && !vm.reverseSort">&#x25B2;</span>
-  <span ng-show="vm.sortProp==='project_name' && vm.reverseSort">&#x25BC;</span>
-</th>
-		  <th>
-  <a ng-click="vm.sort('message_text');">Message Text</a>
-  <span ng-show="vm.sortProp==='message_text' && !vm.reverseSort">&#x25B2;</span>
-  <span ng-show="vm.sortProp==='message_text' && vm.reverseSort">&#x25BC;</span>
-</th>
+        <th>
+          <a ng-click="vm.sort('seqno');">#</a>
+          <span ng-show="vm.sortProp==='seqno' && !vm.reverseSort">&#x25B2;</span>
+          <span ng-show="vm.sortProp==='seqno' && vm.reverseSort">&#x25BC;</span>
+        </th>
+        <th>
+          <a ng-click="vm.sort('time');">Message Date</a>
+          <span ng-show="vm.sortProp==='time' && !vm.reverseSort">&#x25B2;</span>
+          <span ng-show="vm.sortProp==='time' && vm.reverseSort">&#x25BC;</span>
+        </th>
+        <th>
+          <a ng-click="vm.sort('project');">Project</a>
+          <span ng-show="vm.sortProp==='project' && !vm.reverseSort">&#x25B2;</span>
+          <span ng-show="vm.sortProp==='project' && vm.reverseSort">&#x25BC;</span>
+        </th>
+        <th>
+          <a ng-click="vm.sort('body');">Message Text</a>
+          <span ng-show="vm.sortProp==='body' && !vm.reverseSort">&#x25B2;</span>
+          <span ng-show="vm.sortProp==='body' && vm.reverseSort">&#x25BC;</span>
+        </th>
       </thead>
       <tr ng-repeat="m in vm.messages | orderBy:vm.sortProp:vm.reverseSort | filter:vm.filterProp">
-        <td><span ng-bind="m.message_number" /></td>
-        <td><span ng-bind="m.date_time" /></td>
-        <td><span ng-bind="m.project_name" /></td>
-        <td><span ng-bind="m.message_text" /></td>
+        <td><span ng-bind="m.seqno" /></td>
+        <td><span ng-bind="m.time" /></td>
+        <td><span ng-bind="m.project" /></td>
+        <td><span ng-bind="m.body" /></td>
       </tr>
     </table>
   </div>
 </div>
-

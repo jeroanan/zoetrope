@@ -11,7 +11,7 @@ MessagesController.$inject = ['systemInfoSvc'];
 function MessagesController(systemInfoSvc) {
 
   var vm = this;
-  vm.sortProp = 'message_number';
+  vm.sortProp = 'seqno';
   vm.reverseSort = true;
   vm.filterProp = '';
   vm.ready = false;

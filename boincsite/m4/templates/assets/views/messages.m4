@@ -23,16 +23,16 @@ divert(0)dnl
 
     zoe_begin_table
       <thead>
-		  zoe_sorting_table_header(message_number, #)
-		  zoe_sorting_table_header(date_time, Message Date)
-		  zoe_sorting_table_header(project_name, Project)
-		  zoe_sorting_table_header(message_text, Message Text)
+		  zoe_sorting_table_header(seqno, #)
+		  zoe_sorting_table_header(time, Message Date)
+		  zoe_sorting_table_header(project, Project)
+		  zoe_sorting_table_header(body, Message Text)
       </thead>
       <tr ng-repeat="m in vm.messages | orderBy:vm.sortProp:vm.reverseSort | filter:vm.filterProp">
-        <td><span ng-bind="m.message_number" /></td>
-        <td><span ng-bind="m.date_time" /></td>
-        <td><span ng-bind="m.project_name" /></td>
-        <td><span ng-bind="m.message_text" /></td>
+        <td><span ng-bind="m.seqno" /></td>
+        <td><span ng-bind="m.time" /></td>
+        <td><span ng-bind="m.project" /></td>
+        <td><span ng-bind="m.body" /></td>
       </tr>
     </table>
   </div>
