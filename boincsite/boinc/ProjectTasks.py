@@ -22,7 +22,6 @@ import lib.boincindicator.resulttypes.JoinedProject as jp
 import lib.boincindicator.resulttypes.SuccessError as se
 
 import boincsite.boinc.AuthorizedTask as at
-import boincsite.status.Project as p
 import boincsite.util.DateTimeUtil as dt
 
 import config as conf
