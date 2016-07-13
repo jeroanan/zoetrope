@@ -3,7 +3,6 @@
 # Licensed under the GPL version 3
 
 import boincsite.util.DateTimeUtil as dt
-import json
 
 
 class Notice(object):

@@ -14,3 +14,5 @@ log_message_format = '%(asctime)s %(message)s'
 WorkingDirectory = os.path.dirname(os.path.abspath(__file__))
 
 database_file = WorkingDirectory + '/zoetrope.db'
+
+authentication_enabled = False

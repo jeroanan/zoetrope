@@ -13,7 +13,6 @@ import lib.boincindicator.client as client
 
 import boincsite.boinc.AuthorizedTask as at
 
-#import boincsite.status.DailyTransfer as dt
 import boincsite.status.DiskUsage as du
 import boincsite.status.GlobalPreferences as gp
 import boincsite.status.Notice as n
@@ -35,8 +34,6 @@ class SystemInfoTasks(object):
         Get upload/download figures for each day as well as total upload/download.
         """
         return self.__client.get_daily_transfer_history()
-        # ts = self.__client.get_daily_transfer_history()
-        # return map(lambda x: dt.DailyTransfer(x), ts)
 
     def get_disk_usage(self):
         """

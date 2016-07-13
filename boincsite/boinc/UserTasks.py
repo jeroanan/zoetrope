@@ -17,13 +17,14 @@
 import logging
 import sqlite3
 
-import bcrypt
-
 import lib.boincindicator.resulttypes.SuccessError as se
 
 import boincsite.status.User as u
 
 import config
+
+if config.authentication_enabled:
+    import bcrypt
 
 
 class UserTasks(object):

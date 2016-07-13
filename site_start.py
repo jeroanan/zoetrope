@@ -229,7 +229,7 @@ class WebServer(object):
     def do_authenticated_request(self, func, as_list=True, json_encoder=jsae.JSONEncoder):
         authentication_result = self.authenticate(as_list)
         
-        if authentication_result is not None:
+        if authentication_result is not None and conf.authentication_enabled:
              return json.dumps(authentication_result, self.__io, cls=jsae.JSONEncoder)
 
         result = list(func()) if as_list else func()
