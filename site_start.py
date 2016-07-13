@@ -226,6 +226,18 @@ class WebServer(object):
     def get_users_json(self, **kwargs):
         return self.do_authenticated_request(self.__user_tasks.get_users)
 
+    """
+    Run a function if the user is authenticated, or if authentication is turned off
+
+    Parameters:
+    func: The function to potentially run
+    as_list: Whether the result of func should be returned in a list
+    json_encoder: The JSON encoder to run on the result of func. By default this is a generic JSON encoder.
+
+    Returns:
+    The JSON-encoded result of running func if it is run. If not then an instance of SuccessError that indicates that 
+    authentication failed. If func runs and returns None, then None is returned.
+    """
     def do_authenticated_request(self, func, as_list=True, json_encoder=jsae.JSONEncoder):
         authentication_result = self.authenticate(as_list)
         
@@ -284,13 +296,22 @@ class WebServer(object):
     def experimental_task(self, **kwargs):
         pass
 
-    def user_logged_in(self):
-        return cherrypy.session.get('LoggedIn', 0) == 1
+    """
+    Checks if the user is authenticated
 
+    The check is performed by checking the session for a 'LoggedIn' entry.
+
+    Parameters:
+    as_list: Whether or not the return value should be contained in a list
+
+    Returns:
+    If the user is not authenticated then an instance of SuccessError is returned to indicate that the user is not 
+    logged in. If the user is authenticated then None is returned.
+    """
     def authenticate(self, as_list):
         ret_val = se.SuccessError()
         
-        if not self.user_logged_in():
+        if cherrypy.session.get('LoggedIn', 0) != 1:
             ret_val.success = False
             ret_val.error_message = -1414
             ret_val = [ret_val] if as_list else ret_val
