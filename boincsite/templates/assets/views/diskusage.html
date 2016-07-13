@@ -4,31 +4,40 @@
     <img src="/static/img/loading.gif" />
   </div>
   <div ng-show="vm.ready && vm.error">
-  An error occurred while loading the disk usages. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>
-</div>
+    An error occurred while loading the disk usages. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>
+  </div>
   <div ng-show="vm.ready && !vm.error">
     <keyvalrow key="Total Disk Space" val="{{ vm.disk_usages.total_disk_space }}" />
     <keyvalrow key="Free Disk Space" val="{{ vm.disk_usages.free_disk_space }}" />
 
     <h2>By project</h2>
 
-    <table class="table table-striped">
-      <thead>
-		  <th>
-  <a ng-click="vm.sort('master_url');">Project Url</a>
-  <span ng-show="vm.sortProp==='master_url' && !vm.reverseSort">&#x25B2;</span>
-  <span ng-show="vm.sortProp==='master_url' && vm.reverseSort">&#x25BC;</span>
-</th>
-		  <th>
-  <a ng-click="vm.sort('disk_usage');">Disk Usage</a>
-  <span ng-show="vm.sortProp==='disk_usage' && !vm.reverseSort">&#x25B2;</span>
-  <span ng-show="vm.sortProp==='disk_usage' && vm.reverseSort">&#x25BC;</span>
-</th>
-      </thead>
-      <tr ng-repeat="pdu in vm.disk_usages.project_disk_usages | orderBy:vm.sortProp:vm.reverseSort">
-        <td><a ng-href="{{pdu.master_url}}"><span ng-bind="pdu.master_url" /></a></td>
-        <td><span ng-bind="pdu.disk_usage + 'MB'" /></td>
-      </tr>
-    </table>
+    <div ng-show="vm.disk_usages.project_disk_usages.length>0">
+      <table class="table table-striped">
+        <thead>
+          <th>
+            <a ng-click="vm.sort('master_url');">Project Url</a>
+            <span ng-show="vm.sortProp==='master_url' && !vm.reverseSort">&#x25B2;</span>
+            <span ng-show="vm.sortProp==='master_url' && vm.reverseSort">&#x25BC;</span>
+          </th>
+          <th>
+            <a ng-click="vm.sort('disk_usage');">Disk Usage</a>
+            <span ng-show="vm.sortProp==='disk_usage' && !vm.reverseSort">&#x25B2;</span>
+            <span ng-show="vm.sortProp==='disk_usage' && vm.reverseSort">&#x25BC;</span>
+          </th>
+        </thead>
+        <tr ng-repeat="pdu in vm.disk_usages.project_disk_usages | orderBy:vm.sortProp:vm.reverseSort">
+          <td>
+            <a ng-href="{{pdu.master_url}}"><span ng-bind="pdu.master_url" /></a>
+          </td>
+          <td><span ng-bind="pdu.disk_usage + 'MB'" /></td>
+        </tr>
+      </table>
+    </div>
+    <div ng-show="vm.disk_usages.project_disk_usages.length===0">
+      <p class="text-center">
+        No attached projects found
+      </p>
+    </div>
   </div>
 </div>

@@ -297,7 +297,7 @@ class WebServer(object):
         pass
 
     """
-    Checks if the user is authenticated
+    Check if the user is authenticated
 
     The check is performed by checking the session for a 'LoggedIn' entry.
 

@@ -14,28 +14,32 @@ zoe_error_panel(users)
     <span ng-bind="vm.errorText" />
   </div>
   zoe_success_panel
-  zoe_begin_table
-     <thead>
-	    zoe_sorting_table_header(user_id, User Id)
-		 <th>Actions</th>
-	  </thead>
-	  <tbody>
-	    <tr ng-repeat="(k, u) in vm.users | orderBy:vm.sortProp:vm.reverseSort">
-		    <td>
-			   <span ng-bind="u.user_id"/>
-				<input type="hidden" id="userRow-{{k}}" value="{{k}}" />
-			 </td>
-			 <td>
-			   zoe_begin_dropdown(Actions)
-				zoe_dropdown_action(vm.deleteClicked(u,k), Delete User)
-				zoe_dropdown_action(vm.changePasswordClicked(u), Change Password)
-				zoe_end_dropdown
-			 </td>
-		 </tr>		 
-	  </tbody>
-  zoe_end_table
+
+  <div ng-show="vm.users.length>0">
+    zoe_begin_table
+      <thead>
+        zoe_sorting_table_header(user_id, User Id)
+        <th>Actions</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="(k, u) in vm.users | orderBy:vm.sortProp:vm.reverseSort">
+  		    <td>
+  			   <span ng-bind="u.user_id"/>
+  				<input type="hidden" id="userRow-{{k}}" value="{{k}}" />
+  			 </td>
+  			 <td>
+  			   zoe_begin_dropdown(Actions)
+  				zoe_dropdown_action(vm.deleteClicked(u,k), Delete User)
+  				zoe_dropdown_action(vm.changePasswordClicked(u), Change Password)
+  				zoe_end_dropdown
+  			 </td>
+        </tr>		 
+      </tbody>
+    zoe_end_table
+  </div>
+  
   <div ng-show="vm.users.length===0">
-    <strong>No users exist</strong>
+    <p class="text-center">No users exist</p>
   </div>
   <div class="row">
     <div class="col-xs-3" />

@@ -10,9 +10,10 @@
     <span ng-bind="vm.operationSuccessMessage">
 </div>
   <div ng-show="vm.ready && !vm.error">
-    <table class="table table-striped">
-      <thead>
-		  <th>
+    <div ng-show="vm.projects.length>0">
+      <table class="table table-striped">
+        <thead>
+          <th>
   <a ng-click="vm.sort('name');">Project Name</a>
   <span ng-show="vm.sortProp==='name' && !vm.reverseSort">&#x25B2;</span>
     <span ng-show="vm.sortProp==='name' && vm.reverseSort">&#x25BC;</span>
@@ -53,7 +54,12 @@
       </td>
     </tr>
     </table>
+  </div>
+  <div ng-show="vm.projects.length===0">
+    <p class="text-center">No attached projects found.</p>
+  </div>
 
+  <div ng-show="vm.projects.length>0">
     <div class="row">
       <div class="col-xs-3"></div>
       <div class="col-xs-3"></div>
@@ -66,5 +72,7 @@
       {{ vm.projects }}
     </div>
   </div>
-  <detach-dialog id="dDialog" projecturl="{{vm.detachUrl}}" projectname="{{vm.detachName}}"></detach-dialog>
+</div>
+<detach-dialog id="dDialog" projecturl="{{vm.detachUrl}}" projectname="{{vm.detachName}}"></detach-dialog>
+</div>
 </div>

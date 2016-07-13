@@ -11,15 +11,22 @@ divert(0)dnl
 
     <h2>By project</h2>
 
-    zoe_begin_table
-      <thead>
-		  zoe_sorting_table_header(master_url, Project Url)
-		  zoe_sorting_table_header(disk_usage, Disk Usage)
-      </thead>
-      <tr ng-repeat="pdu in vm.disk_usages.project_disk_usages | orderBy:vm.sortProp:vm.reverseSort">
-        <td><a ng-href="{{pdu.master_url}}"><span ng-bind="pdu.master_url" /></a></td>
-        <td><span ng-bind="pdu.disk_usage + 'MB'" /></td>
-      </tr>
-    </table>
+    <div ng-show="vm.disk_usages.project_disk_usages.length>0">
+      zoe_begin_table
+        <thead>
+          zoe_sorting_table_header(master_url, Project Url)
+          zoe_sorting_table_header(disk_usage, Disk Usage)
+        </thead>
+        <tr ng-repeat="pdu in vm.disk_usages.project_disk_usages | orderBy:vm.sortProp:vm.reverseSort">
+          <td><a ng-href="{{pdu.master_url}}"><span ng-bind="pdu.master_url" /></a></td>
+          <td><span ng-bind="pdu.disk_usage + 'MB'" /></td>
+        </tr>
+      zoe_end_table
+    </div>
+    <div ng-show="vm.disk_usages.project_disk_usages.length===0">
+      <p class="text-center">
+        No attached projects found
+      </p>
+    </div>
   </div>
 </div>
