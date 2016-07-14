@@ -62,11 +62,11 @@ class GlobalPreferences(object):
             'network_wifi_only',
             'max_cpus'
         ]
-        
-        round_number = lambda x: round(float(x))
-        round_2dp = lambda x: (round(float(x), 2))
-        
-        get_date = lambda x: dt.get_date_from_epoch_seconds(round(float(x)))
+
+        get_number = lambda x: 0 if str(x)=='' else x            
+        round_number = lambda x: round(float(get_number(x)))
+        round_2dp = lambda x: (round(float(get_number(x)), 2))
+        get_date = lambda x: dt.get_date_from_epoch_seconds(round(float(get_number(x))))
         
         process_fields = {
             'ram_max_used_idle_pct': round_number,
