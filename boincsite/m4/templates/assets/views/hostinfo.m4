@@ -6,41 +6,33 @@ divert(0)dnl
   zoe_loading_panel
   zoe_error_panel(host info)
   <div ng-show="vm.ready && !vm.error">
-    <keyvalrow key="System uptime" val="{{ vm.host_info.uptime }}" />
+    zoe_two_column_row(System uptime, vm.host_info.uptime,
+                       CPU temperature, vm.host_info.cpu_temperature)
 
-	 <keyvalrow key="CPU temperature" val="{{ vm.host_info.cpu_temperature }}&#176;C" />
+    zoe_two_column_row(Domain name, vm.host_info.domain_name,
+                       IP address, vm.host_info.ip_address)
 
-    <keyvalrow key="Timezone" val="{{ vm.host_info.timezone  }}" />
+    zoe_two_column_row(Timezone, vm.host_info.timezone)
 
-    <keyvalrow key="Domain name" val="{{ vm.host_info.domain_name }}" />
+    zoe_two_column_row(Number of CPUs, vm.host_info.number_of_cpus,
+                       CPU vendor, vm.host_info.cpu_vendor)
 
-    <keyvalrow key="IP address" val="{{ vm.host_info.ip_address }}" />
+    zoe_two_column_row(CPU Model, vm.host_info.cpu_model,
+                       CPU floating point operations/second, vm.host_info.cpu_fps_ops)
 
-    <keyvalrow key="Number of CPUs" val="{{ vm.host_info.number_of_cpus }}" />
+    zoe_two_column_row(CPU integer operations/second, vm.host_info.cpu_int_ops,
+                       CPU memory bandwidth, vm.host_info.cpu_mem_bw)
 
-    <keyvalrow key="CPU vendor" val="{{ vm.host_info.cpu_vendor }}" />
-	 
-    <keyvalrow key="CPU Model" val="{{ vm.host_info.cpu_model }}" />
+    zoe_two_column_row(Operating system name, vm.host_info.os_name,
+                       Operating system version, vm.host_info.os_version)
 
-    <keyvalrow key="CPU floating point operations/second" val="{{ vm.host_info.cpu_fps_ops | number }}" />
+    zoe_two_column_row(Memory size, vm.host_info.memory_size,
+                       Cache size, vm.host_info.cache_size)
 
-    <keyvalrow key="CPU integer operations/second" val="{{ vm.host_info.cpu_int_ops | number }}"  />
+    zoe_two_column_row(Swap size, vm.host_info.swap_size,
+                       Disk size, vm.host_info.disk_size)
 
-    <keyvalrow key="CPU memory bandwidth" val="{{ vm.host_info.cpu_mem_bw | number }}" />
-
-    <keyvalrow key="Operating system name" val="{{ vm.host_info.os_name }}" />
-
-    <keyvalrow key="Operating system version" val="{{ vm.host_info.os_version }}" />
-
-    <keyvalrow key="Memory size" val="{{ vm.host_info.memory_size }}" />
-
-    <keyvalrow key="Cache size" val="{{ vm.host_info.cache_size }}" />
-
-    <keyvalrow key="Swap size" val="{{ vm.host_info.swap_size }}" />
-
-    <keyvalrow key="Disk size" val="{{ vm.host_info.disk_size }}"  />
-	 
-    <keyvalrow key="Disk free" val="{{ vm.host_info.disk_free }}" />
+    zoe_two_column_row(Disk free, vm.host_info.disk_free)
   </div>
   zoe_show_raw_data(vm.host_info)
 </div>

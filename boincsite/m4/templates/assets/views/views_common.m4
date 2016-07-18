@@ -89,3 +89,17 @@ define(zoe_end_dropdown, `dnl
 
 define(zoe_dropdown_action, `dnl
 <li><a href="javascript:" ng-click="$1">$2</a></li>')dnl
+
+define(zoe_two_column_row,
+  <div class="row task-row">
+    <div class="col-xs-3">
+      <strong>$1</strong>
+    </div>
+    <div class="col-xs-3" ng-bind="$2" ng-show="$2!==''"  />
+    <div class="col-xs-3" ng-show="$2===''">(no data)</div>
+    <div class="col-xs-3">
+      <strong>$3</strong> 
+    </div>    
+    `ifelse(len($3),0,, <div class="col-xs-3" ng-bind="$4" ng-show="$4.toString().length>0"></div>)'
+    `ifelse(len($3),0,, <div class="col-xs-3" ng-show="$4.toString().length===0">(no data)</div>)'
+  </div>)

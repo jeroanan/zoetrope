@@ -4,52 +4,146 @@
     <img src="/static/img/loading.gif" />
   </div>
   <div ng-show="vm.ready && vm.error">
-  An error occurred while loading the host info. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>
-</div>
+    An error occurred while loading the host info. <a title="Retry" href="javascript:" ng-click="vm.load();">Retry</a>
+  </div>
   <div ng-show="vm.ready && !vm.error">
-    <keyvalrow key="System uptime" val="{{ vm.host_info.uptime }}" />
+    <div class="row task-row">
+      <div class="col-xs-3">
+        <strong>System uptime</strong>
+      </div>
+      <div class="col-xs-3" ng-bind="vm.host_info.uptime" ng-show="vm.host_info.uptime!==''" />
+      <div class="col-xs-3" ng-show="vm.host_info.uptime===''">(no data)</div>
+      <div class="col-xs-3">
+        <strong>CPU temperature</strong>
+      </div>
+      <div class="col-xs-3" ng-bind="vm.host_info.cpu_temperature" ng-show="vm.host_info.cpu_temperature.toString().length>0"></div>
+      <div class="col-xs-3" ng-show="vm.host_info.cpu_temperature.toString().length===0">(no data)</div>
+    </div>
 
-	 <keyvalrow key="CPU temperature" val="{{ vm.host_info.cpu_temperature }}&#176;C" />
+    <div class="row task-row">
+      <div class="col-xs-3">
+        <strong>Domain name</strong>
+      </div>
+      <div class="col-xs-3" ng-bind="vm.host_info.domain_name" ng-show="vm.host_info.domain_name!==''" />
+      <div class="col-xs-3" ng-show="vm.host_info.domain_name===''">(no data)</div>
+      <div class="col-xs-3">
+        <strong>IP address</strong>
+      </div>
+      <div class="col-xs-3" ng-bind="vm.host_info.ip_address" ng-show="vm.host_info.ip_address.toString().length>0"></div>
+      <div class="col-xs-3" ng-show="vm.host_info.ip_address.toString().length===0">(no data)</div>
+    </div>
 
-    <keyvalrow key="Timezone" val="{{ vm.host_info.timezone  }}" />
+    <div class="row task-row">
+      <div class="col-xs-3">
+        <strong>Timezone</strong>
+      </div>
+      <div class="col-xs-3" ng-bind="vm.host_info.timezone" ng-show="vm.host_info.timezone!==''" />
+      <div class="col-xs-3" ng-show="vm.host_info.timezone===''">(no data)</div>
+      <div class="col-xs-3">
+        <strong></strong>
+      </div>
 
-    <keyvalrow key="Domain name" val="{{ vm.host_info.domain_name }}" />
 
-    <keyvalrow key="IP address" val="{{ vm.host_info.ip_address }}" />
+    </div>
 
-    <keyvalrow key="Number of CPUs" val="{{ vm.host_info.number_of_cpus }}" />
+    <div class="row task-row">
+      <div class="col-xs-3">
+        <strong>Number of CPUs</strong>
+      </div>
+      <div class="col-xs-3" ng-bind="vm.host_info.number_of_cpus" ng-show="vm.host_info.number_of_cpus!==''" />
+      <div class="col-xs-3" ng-show="vm.host_info.number_of_cpus===''">(no data)</div>
+      <div class="col-xs-3">
+        <strong>CPU vendor</strong>
+      </div>
+      <div class="col-xs-3" ng-bind="vm.host_info.cpu_vendor" ng-show="vm.host_info.cpu_vendor.toString().length>0"></div>
+      <div class="col-xs-3" ng-show="vm.host_info.cpu_vendor.toString().length===0">(no data)</div>
+    </div>
 
-    <keyvalrow key="CPU vendor" val="{{ vm.host_info.cpu_vendor }}" />
-	 
-    <keyvalrow key="CPU Model" val="{{ vm.host_info.cpu_model }}" />
+    <div class="row task-row">
+      <div class="col-xs-3">
+        <strong>CPU Model</strong>
+      </div>
+      <div class="col-xs-3" ng-bind="vm.host_info.cpu_model" ng-show="vm.host_info.cpu_model!==''" />
+      <div class="col-xs-3" ng-show="vm.host_info.cpu_model===''">(no data)</div>
+      <div class="col-xs-3">
+        <strong>CPU floating point operations/second</strong>
+      </div>
+      <div class="col-xs-3" ng-bind="vm.host_info.cpu_fps_ops" ng-show="vm.host_info.cpu_fps_ops.toString().length>0"></div>
+      <div class="col-xs-3" ng-show="vm.host_info.cpu_fps_ops.toString().length===0">(no data)</div>
+    </div>
 
-    <keyvalrow key="CPU floating point operations/second" val="{{ vm.host_info.cpu_fps_ops | number }}" />
+    <div class="row task-row">
+      <div class="col-xs-3">
+        <strong>CPU integer operations/second</strong>
+      </div>
+      <div class="col-xs-3" ng-bind="vm.host_info.cpu_int_ops" ng-show="vm.host_info.cpu_int_ops!==''" />
+      <div class="col-xs-3" ng-show="vm.host_info.cpu_int_ops===''">(no data)</div>
+      <div class="col-xs-3">
+        <strong>CPU memory bandwidth</strong>
+      </div>
+      <div class="col-xs-3" ng-bind="vm.host_info.cpu_mem_bw" ng-show="vm.host_info.cpu_mem_bw.toString().length>0"></div>
+      <div class="col-xs-3" ng-show="vm.host_info.cpu_mem_bw.toString().length===0">(no data)</div>
+    </div>
 
-    <keyvalrow key="CPU integer operations/second" val="{{ vm.host_info.cpu_int_ops | number }}"  />
+    <div class="row task-row">
+      <div class="col-xs-3">
+        <strong>Operating system name</strong>
+      </div>
+      <div class="col-xs-3" ng-bind="vm.host_info.os_name" ng-show="vm.host_info.os_name!==''" />
+      <div class="col-xs-3" ng-show="vm.host_info.os_name===''">(no data)</div>
+      <div class="col-xs-3">
+        <strong>Operating system version</strong>
+      </div>
+      <div class="col-xs-3" ng-bind="vm.host_info.os_version" ng-show="vm.host_info.os_version.toString().length>0"></div>
+      <div class="col-xs-3" ng-show="vm.host_info.os_version.toString().length===0">(no data)</div>
+    </div>
 
-    <keyvalrow key="CPU memory bandwidth" val="{{ vm.host_info.cpu_mem_bw | number }}" />
+    <div class="row task-row">
+      <div class="col-xs-3">
+        <strong>Memory size</strong>
+      </div>
+      <div class="col-xs-3" ng-bind="vm.host_info.memory_size" ng-show="vm.host_info.memory_size!==''" />
+      <div class="col-xs-3" ng-show="vm.host_info.memory_size===''">(no data)</div>
+      <div class="col-xs-3">
+        <strong>Cache size</strong>
+      </div>
+      <div class="col-xs-3" ng-bind="vm.host_info.cache_size" ng-show="vm.host_info.cache_size.toString().length>0"></div>
+      <div class="col-xs-3" ng-show="vm.host_info.cache_size.toString().length===0">(no data)</div>
+    </div>
 
-    <keyvalrow key="Operating system name" val="{{ vm.host_info.os_name }}" />
+    <div class="row task-row">
+      <div class="col-xs-3">
+        <strong>Swap size</strong>
+      </div>
+      <div class="col-xs-3" ng-bind="vm.host_info.swap_size" ng-show="vm.host_info.swap_size!==''" />
+      <div class="col-xs-3" ng-show="vm.host_info.swap_size===''">(no data)</div>
+      <div class="col-xs-3">
+        <strong>Disk size</strong>
+      </div>
+      <div class="col-xs-3" ng-bind="vm.host_info.disk_size" ng-show="vm.host_info.disk_size.toString().length>0"></div>
+      <div class="col-xs-3" ng-show="vm.host_info.disk_size.toString().length===0">(no data)</div>
+    </div>
 
-    <keyvalrow key="Operating system version" val="{{ vm.host_info.os_version }}" />
+    <div class="row task-row">
+      <div class="col-xs-3">
+        <strong>Disk free</strong>
+      </div>
+      <div class="col-xs-3" ng-bind="vm.host_info.disk_free" ng-show="vm.host_info.disk_free!==''" />
+      <div class="col-xs-3" ng-show="vm.host_info.disk_free===''">(no data)</div>
+      <div class="col-xs-3">
+        <strong></strong>
+      </div>
 
-    <keyvalrow key="Memory size" val="{{ vm.host_info.memory_size }}" />
 
-    <keyvalrow key="Cache size" val="{{ vm.host_info.cache_size }}" />
-
-    <keyvalrow key="Swap size" val="{{ vm.host_info.swap_size }}" />
-
-    <keyvalrow key="Disk size" val="{{ vm.host_info.disk_size }}"  />
-	 
-    <keyvalrow key="Disk free" val="{{ vm.host_info.disk_free }}" />
+    </div>
   </div>
   <div class="row">
-  <div class="col-xs-3"></div>
-  <div class="col-xs-3"></div>
-  <div class="col-xs-3"></div>
-  <div class="col-xs-3">
-    <input type="checkbox" ng-model="vm.showRawData">Show raw data</input>
-  </div>
+    <div class="col-xs-3"></div>
+    <div class="col-xs-3"></div>
+    <div class="col-xs-3"></div>
+    <div class="col-xs-3">
+      <input type="checkbox" ng-model="vm.showRawData">Show raw data</input>
+    </div>
   </div>
   <div class="row" ng-show="vm.showRawData">
     {{ vm.host_info }}
