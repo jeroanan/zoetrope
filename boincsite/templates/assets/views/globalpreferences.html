@@ -8,7 +8,7 @@
 <div ng-show="vm.ready && !vm.error">
 
   <h2>CPU/GPU</h2>
-  <div class="row">
+  <div class="row task-row">
     <div class="col-xs-3">
       <strong>Percentage of the CPUS to use</strong>
     </div>
@@ -17,13 +17,11 @@
     <div class="col-xs-3">
       <strong>Maximum CPU uage</strong>
     </div>
-
-
     <div class="col-xs-3" ng-bind="vm.prefs.suspend_cpu_usage + '%'" ng-show="vm.prefs.suspend_cpu_usage + '%'.toString().length>0"></div>
     <div class="col-xs-3" ng-show="vm.prefs.suspend_cpu_usage + '%'.toString().length===0">(no data)</div>
   </div>
 
-  <div class="row">
+  <div class="row task-row">
     <div class="col-xs-3">
       <strong>Maximum number of CPUs to use</strong>
     </div>
@@ -32,13 +30,11 @@
     <div class="col-xs-3">
       <strong>Use GPU if computer in use</strong>
     </div>
-
-
     <div class="col-xs-3" ng-bind="vm.prefs.run_gpu_if_user_active" ng-show="vm.prefs.run_gpu_if_user_active.toString().length>0"></div>
     <div class="col-xs-3" ng-show="vm.prefs.run_gpu_if_user_active.toString().length===0">(no data)</div>
   </div>
 
-  <div class="row">
+  <div class="row task-row">
     <div class="col-xs-3">
       <strong>CPU Scheduling Period</strong>
     </div>
@@ -49,12 +45,10 @@
     </div>
 
 
-
-
   </div>
 
   <h2>Memory</h2>
-  <div class="row">
+  <div class="row task-row">
     <div class="col-xs-3">
       <strong>Maximum RAM to use when idle</strong>
     </div>
@@ -63,13 +57,11 @@
     <div class="col-xs-3">
       <strong>Maximum % of RAM to use when in use</strong>
     </div>
-
-
     <div class="col-xs-3" ng-bind="vm.prefs.ram_max_used_busy_pct + '%'" ng-show="vm.prefs.ram_max_used_busy_pct + '%'.toString().length>0"></div>
     <div class="col-xs-3" ng-show="vm.prefs.ram_max_used_busy_pct + '%'.toString().length===0">(no data)</div>
   </div>
 
-  <div class="row">
+  <div class="row task-row">
     <div class="col-xs-3">
       <strong>Leave apps in memory?</strong>
     </div>
@@ -80,12 +72,10 @@
     </div>
 
 
-
-
   </div>
 
   <h2>When to run</h2>
-  <div class="row">
+  <div class="row task-row">
     <div class="col-xs-3">
       <strong>Start Hour</strong>
     </div>
@@ -94,13 +84,11 @@
     <div class="col-xs-3">
       <strong>End Hour</strong>
     </div>
-
-
     <div class="col-xs-3" ng-bind="vm.prefs.end_hour" ng-show="vm.prefs.end_hour.toString().length>0"></div>
     <div class="col-xs-3" ng-show="vm.prefs.end_hour.toString().length===0">(no data)</div>
   </div>
 
-  <div class="row">
+  <div class="row task-row">
     <div class="col-xs-3">
       <strong>Run if computer in use</strong>
     </div>
@@ -109,14 +97,12 @@
     <div class="col-xs-3">
       <strong>Run when idle for</strong>
     </div>
-
-
     <div class="col-xs-3" ng-bind="vm.prefs.idle_time_to_run" ng-show="vm.prefs.idle_time_to_run.toString().length>0"></div>
     <div class="col-xs-3" ng-show="vm.prefs.idle_time_to_run.toString().length===0">(no data)</div>
   </div>
 
   <h2>Network</h2>
-  <div class="row">
+  <div class="row task-row">
     <div class="col-xs-3">
       <strong>Hangup if dialed</strong>
     </div>
@@ -125,13 +111,11 @@
     <div class="col-xs-3">
       <strong>Confirm Before Making an Internet Connection</strong>
     </div>
-
-
     <div class="col-xs-3" ng-bind="vm.prefs.confirm_before_connecting" ng-show="vm.prefs.confirm_before_connecting.toString().length>0"></div>
     <div class="col-xs-3" ng-show="vm.prefs.confirm_before_connecting.toString().length===0">(no data)</div>
   </div>
 
-  <div class="row">
+  <div class="row task-row">
     <div class="col-xs-3">
       <strong>Maximum download speed</strong>
     </div>
@@ -140,13 +124,11 @@
     <div class="col-xs-3">
       <strong>Maximum upload speed</strong>
     </div>
-
-
     <div class="col-xs-3" ng-bind="vm.prefs.max_bytes_sec_up" ng-show="vm.prefs.max_bytes_sec_up.toString().length>0"></div>
     <div class="col-xs-3" ng-show="vm.prefs.max_bytes_sec_up.toString().length===0">(no data)</div>
   </div>
 
-  <div class="row">
+  <div class="row task-row">
     <div class="col-xs-3">
       <strong>Starting hour for network traffic</strong>
     </div>
@@ -155,13 +137,11 @@
     <div class="col-xs-3">
       <strong>Ending hour for network traffic</strong>
     </div>
-
-
     <div class="col-xs-3" ng-bind="vm.prefs.net_end_hour" ng-show="vm.prefs.net_end_hour.toString().length>0"></div>
     <div class="col-xs-3" ng-show="vm.prefs.net_end_hour.toString().length===0">(no data)</div>
   </div>
 
-  <div class="row">
+  <div class="row task-row">
     <div class="col-xs-3">
       <strong>WiFi only?</strong>
     </div>
@@ -172,12 +152,10 @@
     </div>
 
 
-
-
   </div>
 
   <h2>Battery</h2>
-  <div class="row">
+  <div class="row task-row">
     <div class="col-xs-3">
       <strong>Maximum battery temperature</strong>
     </div>
@@ -186,13 +164,11 @@
     <div class="col-xs-3">
       <strong>Minimum battery charge</strong>
     </div>
-
-
     <div class="col-xs-3" ng-bind="vm.prefs.battery_charge_min_pct + '%'" ng-show="vm.prefs.battery_charge_min_pct + '%'.toString().length>0"></div>
     <div class="col-xs-3" ng-show="vm.prefs.battery_charge_min_pct + '%'.toString().length===0">(no data)</div>
   </div>
 
-  <div class="row">
+  <div class="row task-row">
     <div class="col-xs-3">
       <strong>Run on batteries?</strong>
     </div>
@@ -203,12 +179,10 @@
     </div>
 
 
-
-
   </div>
 
   <h2>Disk</h2>
-  <div class="row">
+  <div class="row task-row">
     <div class="col-xs-3">
       <strong>Maximum disk space to use</strong>
     </div>
@@ -217,14 +191,12 @@
     <div class="col-xs-3">
       <strong>Maximum percentage disk space to use</strong>
     </div>
-
-
     <div class="col-xs-3" ng-bind="vm.prefs.disk_max_used_pct + '%'" ng-show="vm.prefs.disk_max_used_pct + '%'.toString().length>0"></div>
     <div class="col-xs-3" ng-show="vm.prefs.disk_max_used_pct + '%'.toString().length===0">(no data)</div>
   </div>
 
 
-  <div class="row">
+  <div class="row task-row">
     <div class="col-xs-3">
       <strong>Make tasks checkpoint to disk every</strong>
     </div>
@@ -233,14 +205,12 @@
     <div class="col-xs-3">
       <strong>Minimum disk space to leave free</strong>
     </div>
-
-
     <div class="col-xs-3" ng-bind="vm.prefs.disk_min_free_gb" ng-show="vm.prefs.disk_min_free_gb.toString().length>0"></div>
     <div class="col-xs-3" ng-show="vm.prefs.disk_min_free_gb.toString().length===0">(no data)</div>
   </div>
 
   <h2>Misc. Settings</h2>
-  <div class="row">
+  <div class="row task-row">
     <div class="col-xs-3">
       <strong>daily_xfer_period_days</strong>
     </div>
@@ -249,13 +219,11 @@
     <div class="col-xs-3">
       <strong>Don't verify images</strong>
     </div>
-
-
     <div class="col-xs-3" ng-bind="vm.prefs.dont_verify_images" ng-show="vm.prefs.dont_verify_images.toString().length>0"></div>
     <div class="col-xs-3" ng-show="vm.prefs.dont_verify_images.toString().length===0">(no data)</div>
   </div>
 
-  <div class="row">
+  <div class="row task-row">
     <div class="col-xs-3">
       <strong>mod_time</strong>
     </div>
@@ -264,13 +232,11 @@
     <div class="col-xs-3">
       <strong>Override file present</strong>
     </div>
-
-
     <div class="col-xs-3" ng-bind="vm.prefs.override_file_present" ng-show="vm.prefs.override_file_present.toString().length>0"></div>
     <div class="col-xs-3" ng-show="vm.prefs.override_file_present.toString().length===0">(no data)</div>
   </div>
 
-  <div class="row">
+  <div class="row task-row">
     <div class="col-xs-3">
       <strong>Source Project</strong>
     </div>
@@ -279,13 +245,11 @@
     <div class="col-xs-3">
       <strong>suspend_if_no_recent_input</strong>
     </div>
-
-
     <div class="col-xs-3" ng-bind="vm.prefs.suspend_if_no_recent_input" ng-show="vm.prefs.suspend_if_no_recent_input.toString().length>0"></div>
     <div class="col-xs-3" ng-show="vm.prefs.suspend_if_no_recent_input.toString().length===0">(no data)</div>
   </div>
 
-  <div class="row">
+  <div class="row task-row">
     <div class="col-xs-3">
       <strong>Amount of extra work to buffer</strong>
     </div>
@@ -294,13 +258,11 @@
     <div class="col-xs-3">
       <strong>Minimum work to buffer</strong>
     </div>
-
-
     <div class="col-xs-3" ng-bind="vm.prefs.work_buf_min_days" ng-show="vm.prefs.work_buf_min_days.toString().length>0"></div>
     <div class="col-xs-3" ng-show="vm.prefs.work_buf_min_days.toString().length===0">(no data)</div>
   </div>
 
-  <div class="row">
+  <div class="row task-row">
     <div class="col-xs-3">
       <strong>vm_max_used_pct</strong>
     </div>
@@ -309,8 +271,6 @@
     <div class="col-xs-3">
       <strong></strong>
     </div>
-
-
 
 
   </div>
