@@ -53,8 +53,14 @@ GUI_RPC_PASSWD_FILE = "/etc/boinc-client/gui_rpc_auth.cfg"
 
 
 class BoincClient(object):
+    '''
+    Handles XML-RPC communications with the running BOINC client.
+    '''
 
     def __init__(self, host="", passwd=None):
+        '''
+        Initialise state
+        '''
         host = host.split(':', 1)
 
         self.hostname   = host[0]
@@ -73,6 +79,9 @@ class BoincClient(object):
     def __exit__(self, *args): self.disconnect()
 
     def connect(self):
+        '''
+        Connect to the running BOINC client
+        '''
         try:
             self.rpc.connect(self.hostname, self.port)
             self.connected = True
@@ -83,9 +92,17 @@ class BoincClient(object):
         self.version = self.exchange_versions()
 
     def disconnect(self):
+        '''
+        Disconnect from the running BOINC client
+        '''
         self.rpc.disconnect()
 
     def write_xml_to_file(self, file_name, file_content):
+        '''
+        Write the given content to the given filename
+
+        This is intended to capture responses from the BOINC client for sample purposes.
+        '''
         directory = 'lib/boincindicator/doc/samplexml/'
         file_path = directory + file_name
         decoded = file_content.decode()
@@ -262,6 +279,20 @@ class BoincClient(object):
         return self.result_op('resume_result', result_name, project_url)
 
     def result_op(self, op, result_name, project_url):
+        """
+        Perform an operation for a result using the xml schema below.
+
+        Many result operations use very similar xml schemas, so this procedure constructs and executes the RPC call
+        according to the operation name given.
+        
+        Parameters:
+        
+        op: The name of the operation to perform
+
+        result_name: The name of the workunit to perform the operation on
+
+        project_url: The url of the project associated with the workunit
+        """        
         xml = '<{op}>\n<name>{rn}</name>\n<project_url>{pu}</project_url>\n</{op}>'.format(
           op=op,
           rn=result_name,
@@ -421,16 +452,31 @@ class BoincClient(object):
         results = self.rpc.call(xml)        
 
     def create_account(self, url, email_address, password_hash, username):
+        '''
+        Create a new account for the given project
+
+        This method merely begins the process of creating a new account. Once this has been called, create_account_poll
+        should be called periodically in order to check on how account creation is progressing.
+
+        Parameters:
+
+        url: The url for account sign-up at the project
+        
+        email_address: The email address to sign up to the project with
+
+        password_hash: The MD5 hash of the user's chosen password concatenated with email_address
+        
+        username: The name that the user will be known by in the project.
+        '''
         xml = '<create_account><url>{url}</url><email_addr>{email_address}</email_addr><passwd_hash>{password_hash}</passwd_hash><ldap_auth>0</ldap_auth><user_name>{user_name}</user_name></create_account>'.format(
             url=url, email_address=email_address, password_hash=password_hash, user_name=username)
         results = self.rpc.call(xml)        
 
     def create_account_poll(self):
-        # Xml in:  <create_account><url>http://atlasathome.cern.ch/</url><email_addr>davidwil@posteo.de</email_addr><passwd_hash>32bd8081c1ac7e5c61e941f22af2a026</passwd_hash><ldap_auth>0</ldap_auth><user_name>jeroanan</user_name></create_account>
-        # output from create_account: b'<success />'
-        # output from create_account_poll: Still waiting!  b'<account_out>\n    <error_num>-204</error_num>\n</account_out>'
-        # output from create_account poll: Done, here is your authenticator string b'<account_out>\n   <authenticator>b787e1945e92261c829797605cb58af2</authenticator>\n</account_out>'
-        # I could then use the authenticator string to attach to a project
+        '''
+        Once a request to create a new account on a project has been made, this procedure must be called periodically in
+        order to check the progress of new account creation.
+        '''
         xml = '<create_account_poll />'
         results = self.rpc.call(xml)
 
@@ -599,12 +645,18 @@ class BoincClient(object):
                 out.error_message = i.text.strip()
 
         return out
-
+    
     def project_detach_when_done(self, project_url):
+        '''
+        Detach from the given project once its outstanding workunits have been completed.
+        '''
         result = self.simple_project_operation('project_detach_when_done', project_url)
         return successerror.SuccessError()
-
+    
     def project_dont_detach_when_done(self, project_url):
+        '''
+        Reverse a previous request to detach from the given project when its outstanding workunits have been completed.
+        '''
         result = self.simple_project_operation('project_dont_detach_when_done', project_url)
         return successerror.SuccessError()
 
