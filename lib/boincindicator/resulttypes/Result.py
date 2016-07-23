@@ -4,6 +4,8 @@
 #
 # Licensed under the GPL version 3
 
+import logging
+
 import time
 
 import lib.boincindicator.basetypes.Struct as struct
@@ -20,6 +22,28 @@ from xml.etree import ElementTree
 class Result(struct.Struct):
     ''' Also called "task" in some contexts '''
     def __init__(self):
+
+        self.fields = ['name',
+                       'wu_name',
+                       'project_url',
+                       'report_deadline',
+                       'ready_to_report',
+                       'got_server_ack',
+                       'final_cpu_time',
+                       'state',
+                       'scheduler_state',
+                       'exit_status',
+                       'signal',
+                       'suspended_via_gui',
+                       'active_task_state',
+                       'app_version_num',
+                       'checkpoint_cpu_time',
+                       'current_cpu_time',
+                       'fraction_done',
+                       'swap_size',
+                       'working_set_size',
+                       'estimated_cpu_time_remaining']
+        
         # Names and values follow lib/gui_rpc_client.h @ RESULT
         # Order too, except when grouping contradicts client/result.cpp
         # RESULT::write_gui(), then XML order is used.
@@ -30,7 +54,7 @@ class Result(struct.Struct):
             #// identifies the app used
         self.plan_class                   = ""
         self.project_url                  = ""  # from PROJECT.master_url
-        self.report_deadline              = 0.0 # seconds since epoch
+        self.__report_deadline              = 0.0 # seconds since epoch
         self.received_time                = 0.0 # seconds since epoch
             #// when we got this from server
         self.ready_to_report              = False
@@ -39,10 +63,10 @@ class Result(struct.Struct):
             #// or there was an error
         self.got_server_ack               = False
             #// we've received the ack for this result from the server
-        self.final_cpu_time               = 0.0
+        self.__final_cpu_time               = 0.0
         self.final_elapsed_time           = 0.0
         self.state                        = resultstate.ResultState.NEW
-        self.estimated_cpu_time_remaining = 0.0
+        self.__estimated_cpu_time_remaining = 0.0
             #// actually, estimated elapsed time remaining
         self.exit_status                  = 0
             #// return value from the application
@@ -68,8 +92,8 @@ class Result(struct.Struct):
         self.pid                          = 0
         self.scheduler_state              = cpusched.CpuSched.UNINITIALIZED
         self.checkpoint_cpu_time          = 0.0
-        self.current_cpu_time             = 0.0
-        self.fraction_done                = 0.0
+        self.__current_cpu_time             = 0.0
+        self.__fraction_done                = 0.0
         self.elapsed_time                 = 0.0
         self.swap_size                    = 0
         self.working_set_size_smoothed    = 0.0
@@ -99,6 +123,46 @@ class Result(struct.Struct):
         self.bytes_sent                   = ''
         self.bytes_received               = ''
 
+    @property
+    def report_deadline(self):
+        return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(self.__report_deadline))
+
+    @report_deadline.setter
+    def report_deadline(self, val):
+        self.__report_deadline = int(float(val))
+
+    @property
+    def final_cpu_time(self):
+        return self.formatted_time_from_seconds(self.__final_cpu_time)
+
+    @final_cpu_time.setter
+    def final_cpu_time(self, val):
+        self.__final_cpu_time = val
+
+    @property
+    def current_cpu_time(self):
+        return self.formatted_time_from_seconds(self.__current_cpu_time)
+
+    @current_cpu_time.setter
+    def current_cpu_time(self, val):
+        self.__current_cpu_time = val
+
+    @property
+    def fraction_done(self):
+        return self.__get_fraction_done(self.__fraction_done)
+
+    @fraction_done.setter
+    def fraction_done(self, val):
+        self.__fraction_done = val
+
+    @property
+    def estimated_cpu_time_remaining(self):
+        return self.formatted_time_from_seconds(self.__estimated_cpu_time_remaining)
+
+    @estimated_cpu_time_remaining.setter
+    def estimated_cpu_time_remaining(self, val):
+        self.__estimated_cpu_time_remaining = val
+
     @classmethod
     def parse(cls, xml):
         if not isinstance(xml, ElementTree.Element):
@@ -126,6 +190,15 @@ class Result(struct.Struct):
             result.final_elapsed_time = result.final_cpu_time
 
         return result
+
+    def formatted_time_from_seconds(self, seconds):
+        m, s = divmod(float(seconds), 60)
+        h, m = divmod(m, 60)
+        return "%d:%02d:%02d" % (h, m, s)
+
+    def __get_fraction_done(self, fraction_done):
+        percentage = 100.00 if self.ready_to_report else round(fraction_done * 100, 2)
+        return float('{0:.2f}'.format(percentage))
 
     def __str__(self):
         buf = '%s:\n' % self.__class__.__name__

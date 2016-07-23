@@ -102,7 +102,7 @@ function TasksController(taskSvc, projectSvc) {
      * timeIn the time to perform padding on.
      */
 	 function padTime(timeIn) {
-		var timeSplit = timeIn.split(':');
+		var timeSplit = timeIn.toString().split(':');
 		var out = '';
 
 		for (var t in timeSplit) {
@@ -130,9 +130,9 @@ function TasksController(taskSvc, projectSvc) {
 		
 		var overdue = false;
 		var deadlineApproaching = false;
-		
+
 		// Assume the date is something like 2016-06-09 21:08:00
-		var deadlineSplit = x.report_deadline.split(' ')[0].split('-');
+		var deadlineSplit = x.report_deadline.toString().split(' ')[0].split('-');
 		
 		if (deadlineSplit.length===3) {
 		  var deadlineDate = new Date(deadlineSplit[0], deadlineSplit[1]-1, deadlineSplit[2]);

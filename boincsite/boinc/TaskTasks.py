@@ -3,12 +3,12 @@
 # Licensed under the GPL version 3
 
 import lib.boincindicator.client as client
+import lib.boincindicator.resulttypes.Result as r
 
 import config as c
 
 import boincsite.boinc.AuthorizedTask as at
 import boincsite.boinc.exceptions.TaskNotFoundException as tnfe
-import boincsite.status.Task as t
 
 
 class TaskTasks(object):
@@ -24,8 +24,7 @@ class TaskTasks(object):
 	and tasks that have been completed or aborted but haven't been uploaded yet.
         """
         try:
-            results = client.BoincClient().get_results(False)
-            return map(lambda r: t.Task(r), results)
+            return client.BoincClient().get_results(False)
         except ConnectionRefusedError:
             # ConnectionRefusedError will happen if the site is running on a box with no boinc installation.
             return []
