@@ -31,7 +31,6 @@ import boincsite.boinc.SystemInfoTasks as sit
 import boincsite.boinc.UserTasks as ut
 
 import boincsite.status.DiskUsage as duj
-import boincsite.status.GlobalPreferences as ggp
 
 import boincsite.util.JSONAttrEncoder as jsae
 
