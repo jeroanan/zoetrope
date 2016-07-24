@@ -10,11 +10,11 @@ import config as conf
 import xml.etree.ElementTree
 
 import lib.boincindicator.client as client
+import lib.boincindicator.resulttypes.GlobalPreferences as gp
 
 import boincsite.boinc.AuthorizedTask as at
 
 import boincsite.status.DiskUsage as du
-import boincsite.status.GlobalPreferences as gp
 import boincsite.status.Notice as n
 import boincsite.status.HostInfo as hi
 
