@@ -45,7 +45,7 @@ class SystemInfoTasks(object):
         """
         Get BOINC global preferences.
         """
-        return at.do_authorized_task(lambda c: gp.GlobalPreferences(c.get_global_prefs_file()))
+        return self.__client.get_global_prefs_file()
 
     def get_host_info(self):
         """
