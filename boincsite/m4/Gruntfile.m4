@@ -26,56 +26,64 @@ $1: {
 define(zoe_uglify_js_task, `zoe_uglify_task($1, zoe_js_dir/$1.js.map, zoe_js_dir/$1.min.js, $1)')
 
 define(zoe_watch_js_task, `dnl
+dnl $1: target name, which is passed for all parameters of zoe_watch_task
+dnl Causes the given name to be made into a jshint/uglify task
 zoe_watch_task($1, $1, [''jshint:$1'``,' ''uglify:$1'`])')
 
 define(zoe_watch_m4_task, `dnl
+dnl $1: target name, which is passed for all parameters of zoe_watch_task
+dnl Causes the given name to be passed to m4/prettify
 zoe_watch_task(m4_$1, [''zoe_m4_views_dir/$1.m4'`], [''m4:$1'``,' ''prettify:$1'`])')
 
-define(zoe_m4_html, `zoe_src_dest_task($1, zoe_m4_root/templates/assets/views/$1.m4, zoe_views_dir/$1.html)')
+define(zoe_m4_html, `dnl
+zoe_src_dest_task($1, zoe_m4_root/templates/assets/views/$1.m4, zoe_views_dir/$1.html)')
 
-define(zoe_prettify_html, `zoe_src_dest_task($1, zoe_views_dir/$1.html, zoe_views_dir/$1.html)')
+define(zoe_prettify_html, `dnl
+zoe_src_dest_task($1, zoe_views_dir/$1.html, zoe_views_dir/$1.html)')
 
 define(zoe_src_dest_task, `dnl
 $1: {
-		  src: ''$2'`,
-		  dest: ''$3'`
-		}')
+      src: ''$2'`,
+      dest: ''$3'`
+}')
 
 define(zoe_views_dir, boincsite/templates/assets/views)
 define(zoe_m4_views_dir, boincsite/m4/templates/assets/views)
-define(zoe_js_dir, boincsite/templates/assets/js)
+define(zoe_js_dir, app)
+define(zoe_js_out_dir, boincsite/templates/assets/js)
 define(zoe_m4_root, boincsite/m4)
+
 divert(0)dnl
 module.exports = function(grunt) {
 
-  var app = ['boincsite/templates/assets/js/app.js'];
+  var app = ['zoe_js_dir/app.js'];
 
   var controllers= [
-    'boincsite/templates/assets/js/controllers/*.js',
+    'zoe_js_dir/controllers/*.js',
   ];
 
   var services = [
-    'boincsite/templates/assets/js/services/*.js',    
+    'zoe_js_dir/services/*.js',    
   ];
 
   var directives = [
-	 'boincsite/templates/assets/js/directives/*.js'
+    'zoe_js_dir/directives/*.js'
   ];
   
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     uglify: {
 	 	zoe_uglify_js_task(app),	
-		zoe_uglify_task(controllers, zoe_js_dir/controller.js.map, zoe_js_dir/controller.min.js, controllers),
+		zoe_uglify_task(controllers, zoe_js_out_dir/controller.js.map, zoe_js_out_dir/controller.min.js, controllers),
 		zoe_uglify_js_task(services),
 		zoe_uglify_js_task(directives)
     },	 
     watch: {
-	   zoe_watch_task(config, ['Gruntfile.js'], []),
+	        zoe_watch_task(config, ['Gruntfile.js'], []),
 		zoe_watch_task(app, app, ['jshint:app'`,' 'uglify:app']),
 		zoe_watch_js_task(controllers),
 		zoe_watch_js_task(services),
-      zoe_watch_js_task(directives),
+                zoe_watch_js_task(directives),
 		zoe_watch_task(m4_config, ['boincsite/m4/Gruntfile.m4'], ['m4:config']),
 		zoe_watch_task(m4_index,
 							['boincsite/m4/templates/index.m4'`,' 'boincsite/m4/templates/navbar.m4'],
@@ -105,7 +113,7 @@ module.exports = function(grunt) {
 					 'm4:projectdetail',
 					 'm4:messsages']
 		}		
-    },
+         },
 	 jshint: {
 		controllers: controllers,
 		services: services,

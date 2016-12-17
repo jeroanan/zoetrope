@@ -4,3 +4,5 @@ __pycache__/
 deploy*.sh
 node_modules
 zoetrope.db
+*.swp
+*.log

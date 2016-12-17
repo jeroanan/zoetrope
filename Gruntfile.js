@@ -1,17 +1,17 @@
 module.exports = function(grunt) {
 
-  var app = ['boincsite/templates/assets/js/app.js'];
+  var app = ['app/app.js'];
 
   var controllers= [
-    'boincsite/templates/assets/js/controllers/*.js',
+    'app/controllers/*.js',
   ];
 
   var services = [
-    'boincsite/templates/assets/js/services/*.js',    
+    'app/services/*.js',    
   ];
 
   var directives = [
-	 'boincsite/templates/assets/js/directives/*.js'
+    'app/directives/*.js'
   ];
   
   grunt.initConfig({
@@ -20,10 +20,10 @@ module.exports = function(grunt) {
 	 	app: {
   options: {
     sourceMap: true,
-    sourceMapName: 'boincsite/templates/assets/js/app.js.map'
+    sourceMapName: 'app/app.js.map'
   },
  files: {
-   'boincsite/templates/assets/js/app.min.js': app
+   'app/app.min.js': app
  }
 },	
 		controllers: {
@@ -38,24 +38,24 @@ module.exports = function(grunt) {
 		services: {
   options: {
     sourceMap: true,
-    sourceMapName: 'boincsite/templates/assets/js/services.js.map'
+    sourceMapName: 'app/services.js.map'
   },
  files: {
-   'boincsite/templates/assets/js/services.min.js': services
+   'app/services.min.js': services
  }
 },
 		directives: {
   options: {
     sourceMap: true,
-    sourceMapName: 'boincsite/templates/assets/js/directives.js.map'
+    sourceMapName: 'app/directives.js.map'
   },
  files: {
-   'boincsite/templates/assets/js/directives.min.js': directives
+   'app/directives.min.js': directives
  }
 }
     },	 
     watch: {
-	   config: {
+	        config: {
         files: ['Gruntfile.js'],
 		  tasks: []
       },
@@ -71,7 +71,7 @@ module.exports = function(grunt) {
         files: services,
 		  tasks: ['jshint:services', 'uglify:services']
       },
-      directives: {
+                directives: {
         files: directives,
 		  tasks: ['jshint:directives', 'uglify:directives']
       },
@@ -153,7 +153,7 @@ module.exports = function(grunt) {
 					 'm4:projectdetail',
 					 'm4:messsages']
 		}		
-    },
+         },
 	 jshint: {
 		controllers: controllers,
 		services: services,
@@ -165,73 +165,73 @@ module.exports = function(grunt) {
 		  prefix_builtins: false
 		},		
 		config: {
-		  src: 'boincsite/m4/Gruntfile.m4',
-		  dest: 'Gruntfile.js'
-		},
+      src: 'boincsite/m4/Gruntfile.m4',
+      dest: 'Gruntfile.js'
+},
 		index: {
-		  src: 'boincsite/m4/templates/index.m4',
-		  dest: 'boincsite/templates/index.html'
-		},
+      src: 'boincsite/m4/templates/index.m4',
+      dest: 'boincsite/templates/index.html'
+},
 		tasks: {
-		  src: 'boincsite/m4/templates/assets/views/tasks.m4',
-		  dest: 'boincsite/templates/assets/views/tasks.html'
-		},
+      src: 'boincsite/m4/templates/assets/views/tasks.m4',
+      dest: 'boincsite/templates/assets/views/tasks.html'
+},
 		task: {
-		  src: 'boincsite/m4/templates/assets/views/task.m4',
-		  dest: 'boincsite/templates/assets/views/task.html'
-		},
+      src: 'boincsite/m4/templates/assets/views/task.m4',
+      dest: 'boincsite/templates/assets/views/task.html'
+},
 		projects: {
-		  src: 'boincsite/m4/templates/assets/views/projects.m4',
-		  dest: 'boincsite/templates/assets/views/projects.html'
-		},
+      src: 'boincsite/m4/templates/assets/views/projects.m4',
+      dest: 'boincsite/templates/assets/views/projects.html'
+},
 		project: {
-		  src: 'boincsite/m4/templates/assets/views/project.m4',
-		  dest: 'boincsite/templates/assets/views/project.html'
-		},
+      src: 'boincsite/m4/templates/assets/views/project.m4',
+      dest: 'boincsite/templates/assets/views/project.html'
+},
 		allprojectlist: {
-		  src: 'boincsite/m4/templates/assets/views/allprojectlist.m4',
-		  dest: 'boincsite/templates/assets/views/allprojectlist.html'
-		},
+      src: 'boincsite/m4/templates/assets/views/allprojectlist.m4',
+      dest: 'boincsite/templates/assets/views/allprojectlist.html'
+},
 		projectdetail: {
-		  src: 'boincsite/m4/templates/assets/views/projectdetail.m4',
-		  dest: 'boincsite/templates/assets/views/projectdetail.html'
-		},
+      src: 'boincsite/m4/templates/assets/views/projectdetail.m4',
+      dest: 'boincsite/templates/assets/views/projectdetail.html'
+},
 		messages: {
-		  src: 'boincsite/m4/templates/assets/views/messages.m4',
-		  dest: 'boincsite/templates/assets/views/messages.html'
-		},
+      src: 'boincsite/m4/templates/assets/views/messages.m4',
+      dest: 'boincsite/templates/assets/views/messages.html'
+},
 		notices: {
-		  src: 'boincsite/m4/templates/assets/views/notices.m4',
-		  dest: 'boincsite/templates/assets/views/notices.html'
-		},
+      src: 'boincsite/m4/templates/assets/views/notices.m4',
+      dest: 'boincsite/templates/assets/views/notices.html'
+},
 		diskusage: {
-		  src: 'boincsite/m4/templates/assets/views/diskusage.m4',
-		  dest: 'boincsite/templates/assets/views/diskusage.html'
-		},
+      src: 'boincsite/m4/templates/assets/views/diskusage.m4',
+      dest: 'boincsite/templates/assets/views/diskusage.html'
+},
 		hostinfo: {
-		  src: 'boincsite/m4/templates/assets/views/hostinfo.m4',
-		  dest: 'boincsite/templates/assets/views/hostinfo.html'
-		},
+      src: 'boincsite/m4/templates/assets/views/hostinfo.m4',
+      dest: 'boincsite/templates/assets/views/hostinfo.html'
+},
 		dailytransferhistory: {
-		  src: 'boincsite/m4/templates/assets/views/dailytransferhistory.m4',
-		  dest: 'boincsite/templates/assets/views/dailytransferhistory.html'
-		},
+      src: 'boincsite/m4/templates/assets/views/dailytransferhistory.m4',
+      dest: 'boincsite/templates/assets/views/dailytransferhistory.html'
+},
 		globalpreferences: {
-		  src: 'boincsite/m4/templates/assets/views/globalpreferences.m4',
-		  dest: 'boincsite/templates/assets/views/globalpreferences.html'
-		},
+      src: 'boincsite/m4/templates/assets/views/globalpreferences.m4',
+      dest: 'boincsite/templates/assets/views/globalpreferences.html'
+},
 		manageusers: {
-		  src: 'boincsite/m4/templates/assets/views/manageusers.m4',
-		  dest: 'boincsite/templates/assets/views/manageusers.html'
-		},
+      src: 'boincsite/m4/templates/assets/views/manageusers.m4',
+      dest: 'boincsite/templates/assets/views/manageusers.html'
+},
 		adduser: {
-		  src: 'boincsite/m4/templates/assets/views/adduser.m4',
-		  dest: 'boincsite/templates/assets/views/adduser.html'
-		},
+      src: 'boincsite/m4/templates/assets/views/adduser.m4',
+      dest: 'boincsite/templates/assets/views/adduser.html'
+},
 		login: {
-		  src: 'boincsite/m4/templates/assets/views/login.m4',
-		  dest: 'boincsite/templates/assets/views/login.html'
-		}
+      src: 'boincsite/m4/templates/assets/views/login.m4',
+      dest: 'boincsite/templates/assets/views/login.html'
+}
 	 },
 	 prettify: {
 		options: {
@@ -242,65 +242,65 @@ module.exports = function(grunt) {
 		  dest: 'boincsite/templates/index.html'
 		},
 		tasks: {
-		  src: 'boincsite/templates/assets/views/tasks.html',
-		  dest: 'boincsite/templates/assets/views/tasks.html'
-		},
+      src: 'boincsite/templates/assets/views/tasks.html',
+      dest: 'boincsite/templates/assets/views/tasks.html'
+},
 		task: {
-		  src: 'boincsite/templates/assets/views/task.html',
-		  dest: 'boincsite/templates/assets/views/task.html'
-		},
+      src: 'boincsite/templates/assets/views/task.html',
+      dest: 'boincsite/templates/assets/views/task.html'
+},
 		projects: {
-		  src: 'boincsite/templates/assets/views/projects.html',
-		  dest: 'boincsite/templates/assets/views/projects.html'
-		},
+      src: 'boincsite/templates/assets/views/projects.html',
+      dest: 'boincsite/templates/assets/views/projects.html'
+},
 		project: {
-		  src: 'boincsite/templates/assets/views/project.html',
-		  dest: 'boincsite/templates/assets/views/project.html'
-		},
+      src: 'boincsite/templates/assets/views/project.html',
+      dest: 'boincsite/templates/assets/views/project.html'
+},
 		allprojectlist: {
-		  src: 'boincsite/templates/assets/views/allprojectlist.html',
-		  dest: 'boincsite/templates/assets/views/allprojectlist.html'
-		},
+      src: 'boincsite/templates/assets/views/allprojectlist.html',
+      dest: 'boincsite/templates/assets/views/allprojectlist.html'
+},
 		projectdetail: {
-		  src: 'boincsite/templates/assets/views/projectdetail.html',
-		  dest: 'boincsite/templates/assets/views/projectdetail.html'
-		},
+      src: 'boincsite/templates/assets/views/projectdetail.html',
+      dest: 'boincsite/templates/assets/views/projectdetail.html'
+},
 		messages: {
-		  src: 'boincsite/templates/assets/views/messages.html',
-		  dest: 'boincsite/templates/assets/views/messages.html'
-		},
+      src: 'boincsite/templates/assets/views/messages.html',
+      dest: 'boincsite/templates/assets/views/messages.html'
+},
 		notices: {
-		  src: 'boincsite/templates/assets/views/notices.html',
-		  dest: 'boincsite/templates/assets/views/notices.html'
-		},
+      src: 'boincsite/templates/assets/views/notices.html',
+      dest: 'boincsite/templates/assets/views/notices.html'
+},
 		diskusage: {
-		  src: 'boincsite/templates/assets/views/diskusage.html',
-		  dest: 'boincsite/templates/assets/views/diskusage.html'
-		},
+      src: 'boincsite/templates/assets/views/diskusage.html',
+      dest: 'boincsite/templates/assets/views/diskusage.html'
+},
 		hostinfo: {
-		  src: 'boincsite/templates/assets/views/hostinfo.html',
-		  dest: 'boincsite/templates/assets/views/hostinfo.html'
-		},
+      src: 'boincsite/templates/assets/views/hostinfo.html',
+      dest: 'boincsite/templates/assets/views/hostinfo.html'
+},
 		dailytransferhistory: {
-		  src: 'boincsite/templates/assets/views/dailytransferhistory.html',
-		  dest: 'boincsite/templates/assets/views/dailytransferhistory.html'
-		},
+      src: 'boincsite/templates/assets/views/dailytransferhistory.html',
+      dest: 'boincsite/templates/assets/views/dailytransferhistory.html'
+},
 		globalpreferences: {
-		  src: 'boincsite/templates/assets/views/globalpreferences.html',
-		  dest: 'boincsite/templates/assets/views/globalpreferences.html'
-		},
+      src: 'boincsite/templates/assets/views/globalpreferences.html',
+      dest: 'boincsite/templates/assets/views/globalpreferences.html'
+},
 		manageusers: {
-		  src: 'boincsite/templates/assets/views/manageusers.html',
-		  dest: 'boincsite/templates/assets/views/manageusers.html'
-		},
+      src: 'boincsite/templates/assets/views/manageusers.html',
+      dest: 'boincsite/templates/assets/views/manageusers.html'
+},
 		adduser: {
-		  src: 'boincsite/templates/assets/views/adduser.html',
-		  dest: 'boincsite/templates/assets/views/adduser.html'
-		},
+      src: 'boincsite/templates/assets/views/adduser.html',
+      dest: 'boincsite/templates/assets/views/adduser.html'
+},
 		login: {
-		  src: 'boincsite/templates/assets/views/login.html',
-		  dest: 'boincsite/templates/assets/views/login.html'
-		}
+      src: 'boincsite/templates/assets/views/login.html',
+      dest: 'boincsite/templates/assets/views/login.html'
+}
 	 }
   });
 
