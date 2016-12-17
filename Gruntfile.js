@@ -1,17 +1,17 @@
 module.exports = function(grunt) {
 
-  var app = ['app/app.js'];
+  var app = ['boincsite/app/app.js'];
 
   var controllers= [
-    'app/controllers/*.js',
+    'boincsite/app/controllers/*.js',
   ];
 
   var services = [
-    'app/services/*.js',    
+    'boincsite/app/services/*.js',    
   ];
 
   var directives = [
-    'app/directives/*.js'
+    'boincsite/app/directives/*.js'
   ];
   
   grunt.initConfig({
@@ -20,10 +20,10 @@ module.exports = function(grunt) {
 	 	app: {
   options: {
     sourceMap: true,
-    sourceMapName: 'app/app.js.map'
+    sourceMapName: 'boincsite/templates/assets/js/app.js.map'
   },
  files: {
-   'app/app.min.js': app
+   'boincsite/templates/assets/js/app.min.js': app
  }
 },	
 		controllers: {
@@ -38,19 +38,19 @@ module.exports = function(grunt) {
 		services: {
   options: {
     sourceMap: true,
-    sourceMapName: 'app/services.js.map'
+    sourceMapName: 'boincsite/templates/assets/js/services.js.map'
   },
  files: {
-   'app/services.min.js': services
+   'boincsite/templates/assets/js/services.min.js': services
  }
 },
 		directives: {
   options: {
     sourceMap: true,
-    sourceMapName: 'app/directives.js.map'
+    sourceMapName: 'boincsite/templates/assets/js/directives.js.map'
   },
  files: {
-   'app/directives.min.js': directives
+   'boincsite/templates/assets/js/directives.min.js': controllers
  }
 }
     },	 

@@ -49,7 +49,7 @@ $1: {
 
 define(zoe_views_dir, boincsite/templates/assets/views)
 define(zoe_m4_views_dir, boincsite/m4/templates/assets/views)
-define(zoe_js_dir, app)
+define(zoe_js_dir, boincsite/app)
 define(zoe_js_out_dir, boincsite/templates/assets/js)
 define(zoe_m4_root, boincsite/m4)
 
@@ -73,10 +73,10 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     uglify: {
-	 	zoe_uglify_js_task(app),	
+	 	zoe_uglify_task(app, zoe_js_out_dir/app.js.map, zoe_js_out_dir/app.min.js, app),	
 		zoe_uglify_task(controllers, zoe_js_out_dir/controller.js.map, zoe_js_out_dir/controller.min.js, controllers),
-		zoe_uglify_js_task(services),
-		zoe_uglify_js_task(directives)
+		zoe_uglify_task(services, zoe_js_out_dir/services.js.map, zoe_js_out_dir/services.min.js, services),
+		zoe_uglify_task(directives, zoe_js_out_dir/directives.js.map, zoe_js_out_dir/directives.min.js, controllers)
     },	 
     watch: {
 	        zoe_watch_task(config, ['Gruntfile.js'], []),
