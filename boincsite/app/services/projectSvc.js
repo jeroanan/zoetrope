@@ -35,6 +35,7 @@ function ProjectSvc($resource, jsonSvc) {
 	 detachProject: detachProject,
 	 getAvailableProjects: getAvailableProjects,
 	 getAttachedProjects: getAttachedProjects,
+	 getAttachedProjects2: getAttachedProjects2,
 	 getProjectStatistics: getProjectStatistics,
 	 detachWhenDone: detachWhenDone,
 	 dontDetachWhenDone: dontDetachWhenDone
@@ -163,10 +164,24 @@ function ProjectSvc($resource, jsonSvc) {
   }
 
   /**
-	* Get a list of currently-attached projects
-	*/
+   * Get a list of currently-attached projects
+   *
+   * TODO: Obsolete. This will be replaced by getAttachedProjects2 when 
+   *       migration to it has been completed.
+   */
   function getAttachedProjects() {
-	 return jsonSvc.getJson('/projects_json', true);
+    return jsonSvc.getJson('/projects_json', true);
+  }
+
+  /**
+   * Get a list of currently-attached projects
+   * 
+   * Params:
+   * @success: callback to run on success
+   * @error: callback to run on error
+   */
+  function getAttachedProjects2(success, error) {
+    return jsonSvc.getJson2('/projects_json', true).then(success, error);
   }
 
   /**

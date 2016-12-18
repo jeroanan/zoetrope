@@ -29,13 +29,17 @@ function TaskService($resource, jsonSvc) {
   }
 
   /**
-	* Get all tasks:
-	*
-	* This includes running tasks, tasks waiting to run or that are suspended,
-	* and tasks that have been completed or aborted but haven't been uploaded yet.
-	*/
-  function getAllTasks() {
-	 return jsonSvc.getJson('/tasks_json', true);
+   * Get all tasks:
+   *
+   * This includes running tasks, tasks waiting to run or that are suspended,
+   * and tasks that have been completed or aborted but haven't been uploaded yet.
+   * 
+   * Params:
+   * @success: callback to run on success
+   * @error: callback to run on error
+   */
+  function getAllTasks(success, error) {
+    jsonSvc.getJson2('/tasks_json', true).then(success,error);
   }
 
   /**
