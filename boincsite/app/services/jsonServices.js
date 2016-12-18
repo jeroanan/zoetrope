@@ -13,7 +13,8 @@ function JsonService($resource) {
   var svc = {
     getJson: getJson,
     getJson2: getJson2,
-    sendJson: sendJson
+    sendJson: sendJson,
+    sendJson2: sendJson2
   };
 
   /**
@@ -37,7 +38,8 @@ function JsonService($resource) {
       var res = $resource(endpoint, data, {
         query: {method: 'GET', isArray: isArray}
       });
-
+      
+      return res;
     };	 
   }
 
@@ -72,6 +74,9 @@ function JsonService($resource) {
    *
    * Returns: 
    * A $resource that will promise the server's response
+   *
+   * TODO: Obsolete. Will be replaced by sendJson2 when all calls to this function
+   *       have been migrated to it.
    */
   function sendJson(endpoint, data) {
 	 return function() {
@@ -81,6 +86,24 @@ function JsonService($resource) {
 		
       return res;
     };
+  }
+
+  /**
+   * Post the given data to the given endpoint
+   *
+   * Params:
+   * @endpoint: The endpoint on the webserver to send the data to
+   * @data: The data to send to the endpoint
+   *
+   * Returns: 
+   * A promise of the server's response
+   */
+  function sendJson2(endpoint, data) {
+    var res = $resource(endpoint, data, {
+      query: {method: 'POST'}
+    });
+		
+    return res.query().$promise;
   }
 
   return svc;
