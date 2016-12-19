@@ -33,74 +33,76 @@ function ProjectController($routeParams, $compile, $scope, projectSvc) {
   load();
   
   function load() {
-	 vm.ready = false;
-	 projectSvc.getProject($routeParams.project)().query().$promise.then(gotProject, serviceError);
+    vm.ready = false;
+    projectSvc.getProject2($routeParams.project, gotProject, serviceError);
   }
 
   function gotProject(project) {
 
-	 if (project.error_message && project.error_message===-1414) {
-		document.location = '/#/login';
-		return;
-	 }
+    if (project.error_message && project.error_message===-1414) {
+      document.location = '/#/login';
+      return;
+    }
 
-	 vm.project = project;
-	 setTitle('Project Summary -- ' + project.project_name);
+    vm.project = project;
+    setTitle('Project Summary -- ' + project.project_name);
 
-	 $('#statsRow').append($compile('<project-statistics project-url="' + project.master_url + '" />')($scope));
+    $('#statsRow').append($compile('<project-statistics project-url="' + project.master_url + '" />')($scope));
 
-	 vm.projectFound = true;
-	 vm.ready = true;
+    vm.projectFound = true;
+    vm.ready = true;
   }
 
   function serviceError() {
-	 vm.ready = true;
-	 vm.projectFound = false;
+    vm.ready = true;
+    vm.projectFound = false;
   }  
 
   function updateProjectClick() {
     if (vm.ready!==true) return;
-	 projectSvc.updateProject(vm.project.master_url)().query();
+    projectSvc.updateProject(vm.project.master_url)().query();
   }
   
   function detachClicked() {
-	 $('#detachModal').modal('show');
+    $('#detachModal').modal('show');
   }
 
   function noMoreWorkClicked() {
-	 projectSvc.noMoreWork(vm.project.master_url)().query().$promise.then(function() {
-		vm.project.dont_request_more_work = true;
-	 });
+    projectSvc.noMoreWork2(vm.project.master_url, function() {
+      vm.project.dont_request_more_work = true;
+    });
   }
 
   function allowMoreWorkClicked() {
-	 projectSvc.allowMoreWork(vm.project.master_url)().query().$promise.then(function() {
-		vm.project.dont_request_more_work = false;
-	 });
+    projectSvc.allowMoreWork2(vm.project.master_url, function() {
+      vm.project.dont_request_more_work = false;
+    });
   }
 
   function suspendClicked() {
-	 projectSvc.suspendProject(vm.project.master_url)().query().$promise.then(function() {
-		vm.project.suspended_via_gui = true;
-	 });
+    projectSvc.suspendProject2(vm.project.master_url, function() {
+      vm.project.suspended_via_gui = true;
+    });
   }
 
   function resumeClicked() {
-	 projectSvc.resumeProject(vm.project.master_url)().query().$promise.then(function() {
-		vm.project.suspended_via_gui = false;
-	 });
+    projectSvc.resumeProject2(vm.project.master_url, function() {
+      vm.project.suspended_via_gui = false;
+    });
   }
 
   function detachWhenDoneClicked() {
-	 projectSvc.detachWhenDone(vm.project.master_url)().query();
+    //TODO: Change screen state when this returns successfully
+    projectSvc.detachWhenDone2(vm.project.master_url);
   }
 
   function dontDetachWhenDoneClicked() {
-	 projectSvc.dontDetachWhenDone(vm.project.master_url)().query();
+    //TODO: Change screen state when this returns successfully
+    projectSvc.dontDetachWhenDone2(vm.project.master_url);
   }
 
   function setTitle(title) {
-	 vm.title = title;
-	 document.title = vm.title;
+    vm.title = title;
+    document.title = vm.title;
   }
 }
