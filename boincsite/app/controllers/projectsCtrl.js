@@ -25,87 +25,76 @@ function ProjectsController(projectSvc) {
   vm.operationSuccessMessage = '';
   
   vm.detachClicked = detachClicked;
-  vm.updateClicked = getProjectOperation('updateProject', 'Project updated successfully');
-  vm.noMoreWorkClicked = getProjectOperation('noMoreWork', 'New tasks disallowed', 'dont_request_more_work', true);
-  vm.allowMoreWorkClicked = getProjectOperation('allowMoreWork', 'New tasks re-allowed', 'dont_request_more_work', false);
-  vm.suspendProjectClicked = getProjectOperation('suspendProject', 'Project suspended', 'suspended_via_gui', true);
-  vm.resumeProjectClicked = getProjectOperation('resumeProject', 'Project resumed', 'suspended_via_gui', false);
+  vm.updateClicked = getProjectOperation('updateProject2', 'Project updated successfully');
+  vm.noMoreWorkClicked = getProjectOperation('noMoreWork2', 'New tasks disallowed', 'dont_request_more_work', true);
+  vm.allowMoreWorkClicked = getProjectOperation('allowMoreWork2', 'New tasks re-allowed', 'dont_request_more_work', false);
+  vm.suspendProjectClicked = getProjectOperation('suspendProject2', 'Project suspended', 'suspended_via_gui', true);
+  vm.resumeProjectClicked = getProjectOperation('resumeProject2', 'Project resumed', 'suspended_via_gui', false);
   
   document.title = vm.title;
   load();
   
   function load() {
-	 vm.ready = false;
-	 vm.error = false;
-	 projectSvc.getAttachedProjects()().query().$promise.then(gotProjects, serviceError);
+    vm.ready = false;
+    vm.error = false;
+    projectSvc.getAttachedProjects2(gotProjects, serviceError);
   }
 
   function gotProjects(projects) {
 
-	 if (projects.length>0) {
-		var p = projects[0];
+    if (projects.length>0) {
+      var p = projects[0];
 
-		if (p.error_message && p.error_message===-1414) {
-		  document.location = '/#/login';
-		  return;
-		}
-	 }
+      if (p.error_message && p.error_message===-1414) {
+        document.location = '/#/login';
+        return;
+      }
+    }
 
-	 vm.projects = projects.filter(function(x) { return x.project_name.length > 0; });
+    vm.projects = projects.filter(function(x) { return x.project_name.length > 0; });
     vm.ready = true;
   }
 
   function serviceError(xhr) {
-	 vm.error = true;
-	 vm.ready = true;
+    vm.error = true;
+    vm.ready = true;
   }
 
   function detachClicked(projectName, projectUrl) {
-	 var dialog = $('#detachModal');
+    var dialog = $('#detachModal');
 	 
-	 vm.detachUrl = projectUrl;
-	 vm.detachName = projectName;
+    vm.detachUrl = projectUrl;
+    vm.detachName = projectName;
 
-	 dialog.modal('show');
+    dialog.modal('show');
   }
   
   function getProjectOperation(operationFunc, successMessage, propToChange, propValue) {
-	 return function(projectUrl) {
-		resetProjectOperationSuccess();
-		projectSvc[operationFunc](projectUrl)().query().$promise.then(function() {
-		  operationSuccess(successMessage);
+    return function(projectUrl) {
+      resetProjectOperationSuccess();
+      projectSvc[operationFunc](projectUrl, function() {
+        operationSuccess(successMessage);
 
-		  if (propToChange && propToChange) 
-			 setProjectProperty(projectUrl, propToChange, propValue);
-		});
-	 };
-  }
-
-  function suspendProjectClicked(projectUrl) {
-	 projectSvc.suspendProject(projectUrl)().query().$promise.then(
-		setProjectProperty(projectUrl, 'suspended_via_gui', true));	 
-  }
-
-  function resumeProjectClicked(projectUrl) {
-	 projectSvc.resumeProject(projectUrl)().query().$promise.then(
-		setProjectProperty(projectUrl, 'suspended_via_gui', false));
+        if (propToChange && propToChange) setProjectProperty(projectUrl, propToChange, propValue);
+      });
+    };
   }
 
   function resetProjectOperationSuccess() {
-	 vm.operationSuccess = false;
-	 vm.operationSuccessMessage = '';
+    vm.operationSuccess = false;
+    vm.operationSuccessMessage = '';
   }
 
   function operationSuccess(message) {
-	 vm.operationSuccess = true;
-	 vm.operationSuccessMessage = message;
+    vm.operationSuccess = true;
+    vm.operationSuccessMessage = message;
   }
 
   function setProjectProperty(projectUrl, propertyName, propertyValue) {
-	 vm.projects = vm.projects.map(function(x) {
-		if (x.master_url!==projectUrl) return x;
-		x[propertyName] = propertyValue;		
-		return x;
-	 });
+    vm.projects = vm.projects.map(function(x) {
+      if (x.master_url!==projectUrl) return x;
+      x[propertyName] = propertyValue;		
+      return x;
+    });
   }
 }
