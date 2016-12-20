@@ -39,6 +39,7 @@ function ProjectSvc($resource, jsonSvc) {
     attachProject: attachProject,
     detachProject: detachProject,
     getAvailableProjects: getAvailableProjects,
+    getAvailableProjects2: getAvailableProjects2,
     getAttachedProjects: getAttachedProjects,
     getAttachedProjects2: getAttachedProjects2,
     getProjectStatistics: getProjectStatistics,
@@ -249,9 +250,23 @@ function ProjectSvc($resource, jsonSvc) {
 
   /**
    * Get a list of all public projects
+   *
+   * TODO: Obsolete. This will be replaced by getAvailableProjects2 when 
+   *       migration to it has been completed.
    */
   function getAvailableProjects() {
     return jsonSvc.getJson('/get_all_projects_list_json', true);
+  }
+
+  /**
+   * Get a list of all public projects
+   * 
+   * Params:
+   * @success: callback to run on success
+   * @error: callback to run on error
+   */
+  function getAvailableProjects2(success, error) {
+    return jsonSvc.getJson2('/get_all_projects_list_json', true).then(success, error);
   }
 
   /**

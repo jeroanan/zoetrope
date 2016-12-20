@@ -26,60 +26,60 @@ function AllProjectListController(projectSvc, systemInfoSvc) {
   load();
 
   function load() {
-	 vm.ready = false;
-	 vm.error = false;
-	 projectSvc.getAvailableProjects()().query().$promise.then(gotAllProjects, serviceError);
+    vm.ready = false;
+    vm.error = false;
+    projectSvc.getAvailableProjects2(gotAllProjects, serviceError);
   }
 
   function gotAllProjects(projects) {
 
-	 if (projects.length>0 && projects[0].error_message && projects[0].error_message===-1414)
-	 {
-		document.location = '/#/login';
-		return;
-	 }
+    if (projects.length>0 && projects[0].error_message && projects[0].error_message===-1414)
+    {
+      document.location = '/#/login';
+      return;
+    }
 
-	 vm.allProjects = projects;
-	 projectSvc.getAttachedProjects()().query().$promise.then(gotAttachedProjects, serviceError);
-	 systemInfoSvc.getPlatform()().query().$promise.then(gotPlatform, serviceError);
+    vm.allProjects = projects;
+    projectSvc.getAttachedProjects2(gotAttachedProjects, serviceError);
+    systemInfoSvc.getPlatform2(gotPlatform, serviceError);
   }
 
   function serviceError() {
-	 vm.ready = true;
-	 vm.error = true;
+    vm.ready = true;
+    vm.error = true;
   }  
 
   function gotAttachedProjects(projects) {
-	 vm.ready = true;
+    vm.ready = true;
 
-	 if (projects.length>0 && projects[0].error_message && projects[0].error_message===-1414)
-	 {
-		document.location = '/#/login';
-		return;
-	 }		
+    if (projects.length>0 && projects[0].error_message && projects[0].error_message===-1414)
+    {
+      document.location = '/#/login';
+      return;
+    }		
 	 
-	 vm.availableProjects = vm.allProjects.map(function(x) {
-		var thisProject = projects.filter(function(y) {
-		  return y.project_name==x.name;
-		});
+    vm.availableProjects = vm.allProjects.map(function(x) {
+      var thisProject = projects.filter(function(y) {
+        return y.project_name==x.name;
+      });
 		
-		x.attached = thisProject.length>0;
-		return x;
-	 });
+      x.attached = thisProject.length>0;
+      return x;
+    });
   }
 
   function gotPlatform(platform) {
 
-	 var thisPlatform = platform.platform;
+    var thisPlatform = platform.platform;
 
-	 vm.allProjects = vm.allProjects.map(function(x) {
-		var supportedPlatform = x.platforms.filter(function(y) {
-		  return y.name===thisPlatform;		
-		});
+    vm.allProjects = vm.allProjects.map(function(x) {
+      var supportedPlatform = x.platforms.filter(function(y) {
+        return y.name===thisPlatform;		
+      });
 
-		x.supported = supportedPlatform.length > 0;
+      x.supported = supportedPlatform.length > 0;
 
-		return x;
-	 });
+      return x;
+    });
   }  
 }
