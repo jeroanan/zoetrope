@@ -16,6 +16,7 @@ function SystemInfoService(jsonSvc) {
     getDiskUsage: getDiskUsage,
     getDiskUsage2: getDiskUsage2,
     getDailyTransferHistory: getDailyTransferHistory,
+    getDailyTransferHistory2: getDailyTransferHistory2,
     getGlobalPreferences: getGlobalPreferences,
     getHostInfo: getHostInfo,
     getHostInfo2: getHostInfo2,
@@ -50,9 +51,23 @@ function SystemInfoService(jsonSvc) {
 
   /**
    * Get upload/download figures for each day as well as total upload/download.
+   *
+   * TODO: Obsolete. This will be replaced by getDailyTransferHistory2 when 
+   *       migration to it has been completed.
    */
   function getDailyTransferHistory() {
     return jsonSvc.getJson('/daily_transfer_history_json', true);
+  }
+
+  /**
+   * Get upload/download figures for each day as well as total upload/download.
+   *
+   * Params:
+   * @success: callback to run on success
+   * @error: callback to run on error
+   */
+  function getDailyTransferHistory2(success, error) {
+    jsonSvc.getJson2('/daily_transfer_history_json', true).then(success, error);
   }
 
   /**

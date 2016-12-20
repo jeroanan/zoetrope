@@ -27,26 +27,26 @@ function DailyTransferController(systemInfoSvc) {
   load();
 
   function load() {
-	 vm.ready = false;
-	 vm.error = false;
-	 systemInfoSvc.getDailyTransferHistory()().query().$promise.then(gotDailyTransfers, serviceError);
+    vm.ready = false;
+    vm.error = false;
+    systemInfoSvc.getDailyTransferHistory2(gotDailyTransfers, serviceError);
   }
 
   function gotDailyTransfers(dailyTransfers) {
 
-	 if (dailyTransfers.length > 0 && dailyTransfers[0].error_message && dailyTransfers[0].error_message===-1414) {
-		document.location = '/#/login';
-		return;
-	 }
+    if (dailyTransfers.length > 0 && dailyTransfers[0].error_message && dailyTransfers[0].error_message===-1414) {
+      document.location = '/#/login';
+      return;
+    }
 
-	 vm.daily_transfers = dailyTransfers.filter(function(transfer) {
-		return transfer.when;
-	 }).map(function(transfer) {
-		var dateSplit = transfer.when.split('-');
+    vm.daily_transfers = dailyTransfers.filter(function(transfer) {
+      return transfer.when;
+    }).map(function(transfer) {
+      var dateSplit = transfer.when.split('-');
       var theDate = new Date(dateSplit[0], dateSplit[1]-1, dateSplit[2]);
       transfer.when = theDate;
-		return transfer;		
-	 });
+      return transfer;		
+    });
 
     function totalMegabytes(fieldName) {
       var megs = dailyTransfers.map(function(x) { return x[fieldName]; });
@@ -60,7 +60,7 @@ function DailyTransferController(systemInfoSvc) {
   }
 
   function serviceError() {
-	 vm.ready = true;
-	 vm.error = true;
+    vm.ready = true;
+    vm.error = true;
   }
 }
