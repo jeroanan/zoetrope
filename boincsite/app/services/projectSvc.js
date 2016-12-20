@@ -37,6 +37,7 @@ function ProjectSvc($resource, jsonSvc) {
     resumeProject2: resumeProject2,
     updateProject: updateProject,
     attachProject: attachProject,
+    attachProject2: attachProject2,
     detachProject: detachProject,
     getAvailableProjects: getAvailableProjects,
     getAvailableProjects2: getAvailableProjects2,
@@ -230,6 +231,36 @@ function ProjectSvc($resource, jsonSvc) {
     }
 
     return jsonSvc.sendJson(endpoint, data);
+  }
+
+  /**
+   * Request to attach to a project
+   *
+   * Params:
+   * @projectUrl: The url of the proejct to attach to
+   * @email: The email address to use to sign into the project account
+   * @password: The MD5-hash of password + email address
+   * @username: If signing up for a new account, the username of the acount
+   * @newAccount: If true, sign up for a new account before attaching. 
+   *              Otherwise sign into an existing account to attach.
+   * @success: callback to run on success
+   * @error: callback to run on error
+   */
+  function attachProject2(projectUrl, email, password, username, newAcccount, success, error) {
+    var endpoint = '/attach_project';
+	 
+    data = {
+      'projectUrl': projectUrl,
+      'email': email,
+      'password': password
+    };
+	 
+    if (newAcccount) {
+      endpoint = '/create_account';
+      data.username = username;
+    }
+
+    return jsonSvc.sendJson2(endpoint, data).then(success, error);
   }
 
   /**
