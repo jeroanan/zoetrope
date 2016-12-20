@@ -25,24 +25,24 @@ function DiskUsageController(systemInfoSvc) {
   load();
 
   function load() {
-	 vm.ready = false;
-	 vm.error = false;
-	 systemInfoSvc.getDiskUsage()().query().$promise.then(gotDiskUsages, serviceError);
+    vm.ready = false;
+    vm.error = false;
+    systemInfoSvc.getDiskUsage2(gotDiskUsages, serviceError);
   }
 
   function gotDiskUsages(diskUsages) {
 
-	 if (diskUsages.error_message && diskUsages.error_message===-1414) {
-		document.location = '/#/login';
-		return;
-	 }
+    if (diskUsages.error_message && diskUsages.error_message===-1414) {
+      document.location = '/#/login';
+      return;
+    }
 	 
-	 vm.disk_usages = diskUsages;
+    vm.disk_usages = diskUsages;
     vm.ready = true;
   }
 
   function serviceError() {
-	 vm.ready = true;
-	 vm.error = true;
+    vm.ready = true;
+    vm.error = true;
   }
 }

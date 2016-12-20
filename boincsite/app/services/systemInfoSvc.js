@@ -14,6 +14,7 @@ function SystemInfoService(jsonSvc) {
 
   var svc = {
     getDiskUsage: getDiskUsage,
+    getDiskUsage2: getDiskUsage2,
     getDailyTransferHistory: getDailyTransferHistory,
     getGlobalPreferences: getGlobalPreferences,
     getHostInfo: getHostInfo,
@@ -30,6 +31,17 @@ function SystemInfoService(jsonSvc) {
    */
   function getDiskUsage() {
     return jsonSvc.getJson('/disk_usage_json', false);
+  }
+
+  /**
+   * Get project-by-project disk usage and disk size/disk free details.
+   *
+   * Params:
+   * @success: callback to run on success
+   * @error: callback to run on error
+   */
+  function getDiskUsage2(success, error) {
+    return jsonSvc.getJson2('/disk_usage_json', false).then(success, error);
   }
 
   /**
