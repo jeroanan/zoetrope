@@ -26,39 +26,39 @@ function addUserController(userSvc) {
   document.title = vm.title;
   
   function submitClicked() {
-	 vm.errorText = '';
-	 vm.operationSuccess = null;
+    vm.errorText = '';
+    vm.operationSuccess = null;
 
     if (vm.userId==='' || vm.password==='') {
-		vm.operationSuccess = false;
-		vm.errorText = 'Please enter a username and a password';
-		return;
-	 }
+      vm.operationSuccess = false;
+      vm.errorText = 'Please enter a username and a password';
+      return;
+    }
 
-	 if (vm.userId.contains('|')) {
-		vm.operationSuccess = false;
-		vm.errorText = 'User names cannot contain the pipe (|) characer';
-		return;
-	 }
+    if (vm.userId.contains('|')) {
+      vm.operationSuccess = false;
+      vm.errorText = 'User names cannot contain the pipe (|) characer';
+      return;
+    }
 
-	 if (vm.password!==vm.confirmPassword) {
-		vm.operationSuccess = false;
-		vm.errorText = 'Password and Confirm Password must match.';
-		return;
-	 }
+    if (vm.password!==vm.confirmPassword) {
+      vm.operationSuccess = false;
+      vm.errorText = 'Password and Confirm Password must match.';
+      return;
+    }
 
-	 userSvc.addUser(vm.userId, vm.password)().query().$promise.then(
-		function(d) {
-		  if (!d.success && d.error_message) {
-			 vm.operationSuccess = false;
-			 vm.errorText = d.error_message;
-			 return;
-		  }
-		  vm.operationSuccess = true;
-		},
-		function(d) {
-		  vm.operationSuccess = false;
-		  vm.errorText = d.statusText;
-		});	 
+    userSvc.addUser2(vm.userId, vm.password,
+      function(d) {
+        if (!d.success && d.error_message) {
+          vm.operationSuccess = false;
+          vm.errorText = d.error_message;
+          return;
+        }
+        vm.operationSuccess = true;
+      },
+      function(d) {
+        vm.operationSuccess = false;
+        vm.errorText = d.statusText;
+      });	 
   }
 }
