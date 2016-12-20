@@ -27,19 +27,19 @@ function MessagesController(systemInfoSvc) {
   load();
 
   function load() {
-	 vm.ready = false;
-	 vm.error = false;
-	 systemInfoSvc.getMessages()().query().$promise.then(gotMessages, serviceError);
+    vm.ready = false;
+    vm.error = false;
+    systemInfoSvc.getMessages2(gotMessages, serviceError);
   }
 
   function gotMessages(messages) {
 	 
-	 if (messages.length > 0 && messages[0].error_message && messages[0].error_message===-1414) {
-		document.location = '/#/login';
-		return;
-	 }
+    if (messages.length > 0 && messages[0].error_message && messages[0].error_message===-1414) {
+      document.location = '/#/login';
+      return;
+    }
 
-	 vm.messages = messages;
+    vm.messages = messages;
 
     var project_names = messages.map(function(x) { return x.project_name; });
 
@@ -63,8 +63,8 @@ function MessagesController(systemInfoSvc) {
   }
 
   function serviceError() {
-	 vm.ready = true;
-	 vm.error = true;
+    vm.ready = true;
+    vm.error = true;
   }  
 
   function getProjectName(pn) {

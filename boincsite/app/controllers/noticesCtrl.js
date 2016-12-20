@@ -21,24 +21,24 @@ function NoticesController(systemInfoSvc) {
   load();
 
   function load() {
-	 vm.ready = false;
-	 vm.error = false;
-	 systemInfoSvc.getNotices()().query().$promise.then(gotNotices, serviceError);
+    vm.ready = false;
+    vm.error = false;
+    systemInfoSvc.getNotices2(gotNotices, serviceError);
   }
 
   function gotNotices(notices) {
 
-	 if (notices.length > 0 && notices[0].error_message && notices[0].error_message===-1414) {
-		document.location = '/#/login';
-		return;
-	 }
+    if (notices.length > 0 && notices[0].error_message && notices[0].error_message===-1414) {
+      document.location = '/#/login';
+      return;
+    }
 	 
-	 vm.notices = notices;
+    vm.notices = notices;
     vm.ready = true;
   }
 
   function serviceError() {
-	 vm.ready = true;
-	 vm.error = true;
+    vm.ready = true;
+    vm.error = true;
   }
 }
