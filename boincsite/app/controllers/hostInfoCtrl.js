@@ -22,25 +22,25 @@ function HostInfoController(systemInfoSvc) {
   load();
 
   function load() {
-	 vm.ready = false;
-	 vm.error = false;
-	 systemInfoSvc.getHostInfo()().query().$promise.then(gotHostInfo, serviceError);
+    vm.ready = false;
+    vm.error = false;
+    systemInfoSvc.getHostInfo2(gotHostInfo, serviceError);
   }
 
   function gotHostInfo(hostInfo) {
 
-	 if (hostInfo.error_message && hostInfo.error_message===-1414) {
-		document.location = '/#/login';
-		return;
-	 }
+    if (hostInfo.error_message && hostInfo.error_message===-1414) {
+      document.location = '/#/login';
+      return;
+    }
 	 
-	 hostInfo.uptime = hostInfo.uptime.split('.')[0];
-	 vm.host_info = hostInfo;
+    hostInfo.uptime = hostInfo.uptime.split('.')[0];
+    vm.host_info = hostInfo;
     vm.ready = true;
   }
 
   function serviceError() {
-	 vm.ready = true;
-	 vm.error = true;
+    vm.ready = true;
+    vm.error = true;
   }
 }
