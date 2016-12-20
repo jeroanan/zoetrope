@@ -24,19 +24,19 @@ function DetachProjectController(projectSvc) {
   vm.detachErrorMessage = '';
   vm.selectedProjectChanged = selectedProjectChanged;
 
-  projectSvc.getAttachedProjects()().query().$promise.then(gotProjects);
+  projectSvc.getAttachedProjects2(gotProjects);
   
   document.title = vm.title;
 
   function gotProjects(projects) {
 
-	 if (projects.length>0 && projects[0].error_message && projects[0].error_message===-1414)
-	 {
-		document.location = '/#/login';
-		return;
-	 }
+    if (projects.length>0 && projects[0].error_message && projects[0].error_message===-1414)
+    {
+      document.location = '/#/login';
+      return;
+    }
 
-	 vm.attachedProjects = projects.filter(function(x) { return x.name.length > 0; });
+    vm.attachedProjects = projects.filter(function(x) { return x.project_name.length > 0; });
     vm.ready = true;
   }
 
@@ -59,23 +59,23 @@ function DetachProjectController(projectSvc) {
   // from the project.
   function detachLinkClicked() {
     vm.detachClicked = true;
-    projectSvc.detachProject(vm.selectedProject)().query().$promise.then(projectDetached);
+    projectSvc.detachProject2(vm.selectedProject, projectDetached);
   }
 
   function projectDetached(d) {
 
-	 if (d.error_message===-1414) {
-		document.location = '/#/login';
-		return;
-	 }
+    if (d.error_message===-1414) {
+      document.location = '/#/login';
+      return;
+    }
 
     vm.detachErrorMessage = d.error_message;
-	 vm.detachSuccessful = d.success;
+    vm.detachSuccessful = d.success;
   }
 
   function selectedProjectChanged() {
-	 vm.detachErrorMessage = '';
-	 vm.detachClicked = false;
-	 vm.showConfirmDetach=false;
+    vm.detachErrorMessage = '';
+    vm.detachClicked = false;
+    vm.showConfirmDetach=false;
   }
 }

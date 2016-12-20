@@ -39,6 +39,7 @@ function ProjectSvc($resource, jsonSvc) {
     attachProject: attachProject,
     attachProject2: attachProject2,
     detachProject: detachProject,
+    detachProject2: detachProject2,
     getAvailableProjects: getAvailableProjects,
     getAvailableProjects2: getAvailableProjects2,
     getAttachedProjects: getAttachedProjects,
@@ -270,6 +271,9 @@ function ProjectSvc($resource, jsonSvc) {
    *
    * Params:
    * @projectUrl: The url of the project to detach from
+   *
+   * TODO: Obsolete. This will be replaced by detachProject2 when 
+   *       migration to it has been completed.
    */
   function detachProject(projectUrl) {
     var data = {
@@ -277,6 +281,24 @@ function ProjectSvc($resource, jsonSvc) {
     };
 
     return jsonSvc.sendJson('/detach_project', data);
+  }
+
+  /**
+   * Request to detach from a project
+   *
+   * Detaching causes any queued or in-progress workunits for that project to be aborted.
+   *
+   * Params:
+   * @projectUrl: The url of the project to detach from
+   * @success: callback to run on success
+   * @error: callback to run on error
+   */
+  function detachProject2(projectUrl, success, error) {
+    var data = {
+      'projectUrl': projectUrl
+    };
+
+    return jsonSvc.sendJson2('/detach_project', data).then(success, error);
   }
 
   /**
