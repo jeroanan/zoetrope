@@ -21,24 +21,24 @@ function GlobalPreferencesCtrl(systemInfoSvc) {
   load();
 
   function load() {
-	 vm.ready = false;
-	 vm.error = false;
-	 systemInfoSvc.getGlobalPreferences()().query().$promise.then(gotGlobalPreferences, serviceError);
+    vm.ready = false;
+    vm.error = false;
+    systemInfoSvc.getGlobalPreferences2(gotGlobalPreferences, serviceError);
   }
 
   function gotGlobalPreferences(preferences) {
 
-	 if (preferences.error_message && preferences.error_message===-1414) {
-		document.location = '/#/login';
-		return;
-	 }
+    if (preferences.error_message && preferences.error_message===-1414) {
+      document.location = '/#/login';
+      return;
+    }
 
-	 vm.prefs = preferences;
+    vm.prefs = preferences;
     vm.ready = true;
   }
 
   function serviceError() {
-	 vm.ready = true;
-	 vm.error = true;
+    vm.ready = true;
+    vm.error = true;
   }
 }

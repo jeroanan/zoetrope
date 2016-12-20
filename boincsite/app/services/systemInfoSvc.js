@@ -18,6 +18,7 @@ function SystemInfoService(jsonSvc) {
     getDailyTransferHistory: getDailyTransferHistory,
     getDailyTransferHistory2: getDailyTransferHistory2,
     getGlobalPreferences: getGlobalPreferences,
+    getGlobalPreferences2: getGlobalPreferences2,
     getHostInfo: getHostInfo,
     getHostInfo2: getHostInfo2,
     getMessages: getMessages,
@@ -72,9 +73,23 @@ function SystemInfoService(jsonSvc) {
 
   /**
    * Get BOINC global preferences.
+   *
+   * TODO: Obsolete. This will be replaced by getGlobalPreferences2 when 
+   *       migration to it has been completed.
    */
   function getGlobalPreferences() {
     return jsonSvc.getJson('/get_global_preferences_json', false);
+  }
+
+  /**
+   * Get BOINC global preferences.
+   *
+   * Params:
+   * @success: callback to run on success
+   * @error: callback to run on error
+   */
+  function getGlobalPreferences2(success, error) {
+    return jsonSvc.getJson2('/get_global_preferences_json', false).then(success, error);
   }
 
   /**
