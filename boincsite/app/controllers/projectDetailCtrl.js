@@ -42,9 +42,9 @@ function ProjectDetailController($routeParams, projectSvc, systemInfoSvc) {
    * Initialise the display
    */
   function load() {
-	 vm.ready = false;
-	 vm.error = false;
-	 projectSvc.getAvailableProjects()().query().$promise.then(gotAllProjects, serviceError);
+    vm.ready = false;
+    vm.error = false;
+    projectSvc.getAvailableProjects2(gotAllProjects, serviceError);
   }
 
   /**
@@ -55,24 +55,24 @@ function ProjectDetailController($routeParams, projectSvc, systemInfoSvc) {
    */
   function gotAllProjects(projects) {
 	 
-	 if (projects.length>0 && projects[0].error_message && projects[0].error_message===-1414) {
-		document.location = '/#/login';
-		return;
-	 }
+    if (projects.length>0 && projects[0].error_message && projects[0].error_message===-1414) {
+      document.location = '/#/login';
+      return;
+    }
 	 
-	 vm.project = projects.filter(function(x) { return x.name===$routeParams.projectname; })[0];
+    vm.project = projects.filter(function(x) { return x.name===$routeParams.projectname; })[0];
 
-	 if (!vm.project) {
-		vm.projectFound = false;
-		vm.ready = true;
-		return;
-	 }
+    if (!vm.project) {
+      vm.projectFound = false;
+      vm.ready = true;
+      return;
+    }
 
-	 projectSvc.getAttachedProjects()().query().$promise.then(gotAttachedProjects, serviceError);
-	 systemInfoSvc.getPlatform()().query().$promise.then(gotPlatform, serviceError);
+    projectSvc.getAttachedProjects2(gotAttachedProjects, serviceError);
+    systemInfoSvc.getPlatform2(gotPlatform, serviceError);
 
     setTitle('Project Details -- ' + vm.project.name);
-	 vm.projectFound = true;
+    vm.projectFound = true;
     vm.ready = true;
   }
 
@@ -82,22 +82,22 @@ function ProjectDetailController($routeParams, projectSvc, systemInfoSvc) {
    * Updtaes the display to an error state.
    */
   function serviceError() {
-	 vm.ready = true;
-	 vm.error = true;
+    vm.ready = true;
+    vm.error = true;
   }
 
   /**
    * Called when the attach button is clicked
    */
   function attachClicked() {
-	 $('#attachModal').modal('show');
+    $('#attachModal').modal('show');
   }
 
   /**
    * Called when the detach button is clicked
    */
   function detachClicked() {
-	 $('#detachModal').modal('show');
+    $('#detachModal').modal('show');
   }
 
   /**
@@ -119,9 +119,9 @@ function ProjectDetailController($routeParams, projectSvc, systemInfoSvc) {
    * projects: The xhr response from the service call
    */
   function gotAttachedProjects(projects) {
-	 var attachedProject = projects.filter(function(x) { return x.project_name===vm.project.name; });
+    var attachedProject = projects.filter(function(x) { return x.project_name===vm.project.name; });
 
-	 vm.project.attached = attachedProject.length > 0;
+    vm.project.attached = attachedProject.length > 0;
   }
 
   /**
@@ -131,19 +131,19 @@ function ProjectDetailController($routeParams, projectSvc, systemInfoSvc) {
    * projects: The xhr response from the service call
    */
   function gotPlatform(platform) {
-	 var supportedPlatform = vm.project.platforms.filter(function(x) {
-		return x.name===platform.platform;
-	 });
+    var supportedPlatform = vm.project.platforms.filter(function(x) {
+      return x.name===platform.platform;
+    });
 
-	 vm.project.platformSupported = supportedPlatform.length>0;
-	 vm.gotPlatform = true;
+    vm.project.platformSupported = supportedPlatform.length>0;
+    vm.gotPlatform = true;
 
-	 var supportedPlatformListItems = $('#supportedPlatforms').children('li:contains(' + platform.platform + ')');
+    var supportedPlatformListItems = $('#supportedPlatforms').children('li:contains(' + platform.platform + ')');
 
-	 for (var i=0;i<supportedPlatformListItems.length;i++) {
-		var platformItem = $(supportedPlatformListItems[i]);
-		platformItem.addClass('text-success');
-		platformItem.text(platformItem.text() + ' ✔');
-	 }
+    for (var i=0;i<supportedPlatformListItems.length;i++) {
+      var platformItem = $(supportedPlatformListItems[i]);
+      platformItem.addClass('text-success');
+      platformItem.text(platformItem.text() + ' ✔');
+    }
   }
 }
