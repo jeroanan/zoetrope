@@ -33,69 +33,70 @@ function ManageUsersController(userSvc) {
   vm.load = load;
   
   document.title = vm.title;
+
   load();
   
   function load() {
-	 userSvc.getUsers()().query().$promise.then(gotUsers);
+    userSvc.getUsers2(gotUsers);
   }
 
   function gotUsers(users) {
 
-	 if (users.length>0 && users[0].error_message && users[0].error_message===-1414) {
-		document.location = '/#/login';
-		return;
-	 }
+    if (users.length>0 && users[0].error_message && users[0].error_message===-1414) {
+      document.location = '/#/login';
+      return;
+    }
 	 
-	 vm.users = users;
-	 vm.ready = true;
+    vm.users = users;
+    vm.ready = true;
   }
 
   function deleteClicked(user, rownumber) {
-	 vm.userOperationUser = {
-		userId: user.user_id,
-		userNo: user.user_no,
-		rowNo: rownumber
-	 };
+    vm.userOperationUser = {
+      userId: user.user_id,
+      userNo: user.user_no,
+      rowNo: rownumber
+    };
 	 
-	 $('#deleteUserModal').modal('show');	 
+    $('#deleteUserModal').modal('show');	 
   }
 
   function doDelete() {
-	 vm.operationSuccess = false;
-	 vm.operationSuccessMessage = '';
-	 
-	 $('#deleteUserModal').modal('hide');
-	 userSvc.deleteUser(vm.userOperationUser)().query().$promise.then(userDeleted);
+    vm.operationSuccess = false;
+    vm.operationSuccessMessage = '';
+
+    $('#deleteUserModal').modal('hide');
+    userSvc.deleteUser(vm.userOperationUser, userDeleted);
   }
 
   function userDeleted(d) {
 
-	 if (!d.success && d.error_message) {
-		vm.operationSuccess = false;
-		vm.errorText = d.error_message;
-		return;
-	 }
+    if (!d.success && d.error_message) {
+      vm.operationSuccess = false;
+      vm.errorText = d.error_message;
+      return;
+    }
 
-	 var messageSplit = d.error_message.split('|');
-	 var userId = messageSplit[1];
-	 var rowNum = messageSplit[2];
+    var messageSplit = d.error_message.split('|');
+    var userId = messageSplit[1];
+    var rowNum = messageSplit[2];
 	 
-	 vm.operationSuccess = true;
-	 vm.operationSuccessMessage = 'User ' + userId + ' deleted successfully';
-	 $('#userRow-' + rowNum).parents('tr').hide();
+    vm.operationSuccess = true;
+    vm.operationSuccessMessage = 'User ' + userId + ' deleted successfully';
+    $('#userRow-' + rowNum).parents('tr').hide();
   }
 
   function addUserClicked() {
-	 $('#addUserModal').modal('show');
+    $('#addUserModal').modal('show');
   }
 
   function changePasswordClicked(user, rowNumber) {
-	 vm.userOperationUser = {
-		userId: user.user_id,
-		userNo: user.user_no,
-		rowNo: rowNumber
-	 };
+    vm.userOperationUser = {
+      userId: user.user_id,
+      userNo: user.user_no,
+      rowNo: rowNumber
+    };
 
-	 $('#changePasswordModal').modal('show');	 
+    $('#changePasswordModal').modal('show');	 
   }
 }
