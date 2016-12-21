@@ -14,33 +14,33 @@ angular.module('zoetropeDirectives').directive('attachDialog', function() {
     templateUrl: '/static/directives/attachDialog.html',
     controller: ['$scope', 'projectSvc', 'md5Svc', function($scope, projectSvc, md5Svc) {
 
-    $scope.emailaddress = '';
-    $scope.password = '';
-    $scope.username = '';
-				
-    $scope.errorText = '';
-    $scope.success = false;
-    $scope.loading = false;
-    $scope.newAccountActive = false;
-    $scope.popupMode = null;
-		
-    $scope.submitClicked = submitClicked;
-    $scope.existingAccountPillClicked = existingAccountPillClicked;
-    $scope.newAccountPillClicked = newAccountPillClicked;
-
-    function submitClicked() {
+      $scope.emailaddress = '';
+      $scope.password = '';
+      $scope.username = '';
+  				
       $scope.errorText = '';
       $scope.success = false;
-
-      if (!validate()) return;
-		  
-      var hash_in = $scope.password + $scope.emailaddress;
-      var password_hash = md5Svc.query(hash_in)();
-
-      $scope.loading = true;
-
-      projectSvc
-        .attachProject2($scope.projecturl, $scope.emailaddress, password_hash, $scope.username, $scope.newAccountActive, projectAttached);
+      $scope.loading = false;
+      $scope.newAccountActive = false;
+      $scope.popupMode = null;
+  		
+      $scope.submitClicked = submitClicked;
+      $scope.existingAccountPillClicked = existingAccountPillClicked;
+      $scope.newAccountPillClicked = newAccountPillClicked;
+  
+      function submitClicked() {
+        $scope.errorText = '';
+        $scope.success = false;
+  
+        if (!validate()) return;
+  		  
+        var hash_in = $scope.password + $scope.emailaddress;
+        var password_hash = md5Svc.query(hash_in)();
+  
+        $scope.loading = true;
+  
+        projectSvc
+          .attachProject2($scope.projecturl, $scope.emailaddress, password_hash, $scope.username, $scope.newAccountActive, projectAttached);
       }
 
       function validate() {
