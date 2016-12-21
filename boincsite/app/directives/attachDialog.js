@@ -8,107 +8,97 @@ angular.module('zoetropeDirectives').directive('attachDialog', function() {
   return {
     restrict: 'E',
     scope: {
-		projecturl: '@',
-		projectname: '@'
+      projecturl: '@',
+      projectname: '@'
     },
     templateUrl: '/static/directives/attachDialog.html',
-	 controller: ['$scope', 'projectSvc', 'md5Svc', function($scope, projectSvc, md5Svc) {
+    controller: ['$scope', 'projectSvc', 'md5Svc', function($scope, projectSvc, md5Svc) {
 
-		$scope.emailaddress = '';
-		$scope.password = '';
-		$scope.username = '';
+    $scope.emailaddress = '';
+    $scope.password = '';
+    $scope.username = '';
 				
-		$scope.errorText = '';
-		$scope.success = false;
-		$scope.loading = false;
-		$scope.newAccountActive = false;
-		$scope.popupMode = null;
+    $scope.errorText = '';
+    $scope.success = false;
+    $scope.loading = false;
+    $scope.newAccountActive = false;
+    $scope.popupMode = null;
 		
-		$scope.submitClicked = submitClicked;
-		$scope.existingAccountPillClicked = existingAccountPillClicked;
-		$scope.newAccountPillClicked = newAccountPillClicked;
+    $scope.submitClicked = submitClicked;
+    $scope.existingAccountPillClicked = existingAccountPillClicked;
+    $scope.newAccountPillClicked = newAccountPillClicked;
 
-		function submitClicked() {
-		  $scope.errorText = '';
-		  $scope.success = false;
+    function submitClicked() {
+      $scope.errorText = '';
+      $scope.success = false;
 
-		  if (!validate()) {
-			 return;
-		  }
+      if (!validate()) return;
 		  
-		  var hash_in = $scope.password + $scope.emailaddress;
-		  var password_hash = md5Svc.query(hash_in)();
+      var hash_in = $scope.password + $scope.emailaddress;
+      var password_hash = md5Svc.query(hash_in)();
 
-		  $scope.loading = true;
+      $scope.loading = true;
 
-		  projectSvc
-			 .attachProject($scope.projecturl, $scope.emailaddress, password_hash, $scope.username, $scope.newAccountActive)()
-			 .query()
-			 .$promise
-			 .then(projectAttached);
-		}
+      projectSvc
+        .attachProject2($scope.projecturl, $scope.emailaddress, password_hash, $scope.username, $scope.newAccountActive, projectAttached);
+      }
 
-		function validate() {
-		  if ($scope.newAccountActive) {
-			 if ($scope.password === '' || $scope.emailaddress === '' || $scope.username === '') {
-				$scope.errorText = 'Please enter an email address, password and username to attach to this project.';
-				return false;
-			 }
-		  } else {
-			 if ($scope.password === '' || $scope.emailaddress === '') {
-				$scope.errorText = 'Please enter an email address and password to attach to this project.';
-				return false;
-			 }
-		  }
+      function validate() {
+        if ($scope.newAccountActive) {
+          if ($scope.password === '' || $scope.emailaddress === '' || $scope.username === '') {
+            $scope.errorText = 'Please enter an email address, password and username to attach to this project.';
+            return false;
+          }
+        } else {
+          if ($scope.password === '' || $scope.emailaddress === '') {
+            $scope.errorText = 'Please enter an email address and password to attach to this project.';
+            return false;
+          }
+        }
 
-		  return true;
-		}
+        return true;
+      }
 
-		function projectAttached(d) {
-		  $scope.loading = false;
+      function projectAttached(d) {
+        $scope.loading = false;
 		  
-		  if (d.error_message && d.error_message!=='') {
-			 $scope.errorText = d.error_message;
-		  } else {
-			 $scope.success = true;
-		  }
-		}
+        if (d.error_message && d.error_message!=='') $scope.errorText = d.error_message;
+        else $scope.success = true;
+      }
 
-		function existingAccountPillClicked() {
-		  togglePills('existingAccountPill', 'newAccountPill');
-		  $scope.newAccountActive = false;
-		}
+      function existingAccountPillClicked() {
+        togglePills('existingAccountPill', 'newAccountPill');
+        $scope.newAccountActive = false;
+      }
 
-		function newAccountPillClicked() {
-		  togglePills('newAccountPill', 'existingAccountPill');
-		  $scope.newAccountActive = true;
-		}
+      function newAccountPillClicked() {
+        togglePills('newAccountPill', 'existingAccountPill');
+        $scope.newAccountActive = true;
+      }
 
-		function togglePills(activePillId, inactivePillId) {
-		  var activePill = $('#' + activePillId);
-		  var inactivePill = $('#' + inactivePillId);
-		  var activeClass = 'active';
+      function togglePills(activePillId, inactivePillId) {
+        var activePill = $('#' + activePillId);
+        var inactivePill = $('#' + inactivePillId);
+        var activeClass = 'active';
 		  
-		  activePill.addClass(activeClass);
-		  inactivePill.removeClass(activeClass);
-		}
-	 }],
-	 link: function(scope, element, attrs, ctrl) {
+        activePill.addClass(activeClass);
+        inactivePill.removeClass(activeClass);
+      }
+    }],
+    link: function(scope, element, attrs, ctrl) {
 
-		attrs.$observe('projecturl', function(val) {
-		  disableFields();
-		});
+      attrs.$observe('projecturl', function(val) {
+        disableFields();
+      });
 
-		attrs.$observe('projectname', function(val) {
-		  disableFields();
-		});
+      attrs.$observe('projectname', function(val) {
+        disableFields();
+      });
 
-		function disableFields() {
-		  if (scope.projecturl==='' && scope.projectname==='') {
-			 scope.popupMode = false;
-		  }
-		  scope.popupMode = true;
-		}
-	 }
+      function disableFields() {
+        if (scope.projecturl==='' && scope.projectname==='') scope.popupMode = false;
+        scope.popupMode = true;
+      }
+    }
   };
 });
