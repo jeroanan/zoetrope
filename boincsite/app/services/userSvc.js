@@ -18,6 +18,7 @@ function userSvc(jsonSvc) {
     deleteUser: deleteUser,
     deleteUser2: deleteUser2,
     changePassword: changePassword,
+    changePassword2: changePassword2,
     login: login,
     login2: login2
   };
@@ -111,8 +112,29 @@ function userSvc(jsonSvc) {
     return jsonSvc.sendJson2('/delete_user_json', user).then(success, error);
   }
 
+  /**
+   * Change the user's password
+   *
+   * Params:
+   * @user: The user's details
+   *
+   * TODO: Obsolete. This will be replaced by changePassword2 when 
+   *       migration to it has been completed.
+   */
   function changePassword(user) {
     return jsonSvc.sendJson('/change_password_json', user);
+  }
+
+  /**
+   * Change the user's password
+   *
+   * Params:
+   * @user: The user's details
+   * @success: callback to run on success
+   * @error: callback to run on error
+   */
+  function changePassword2(user, success, error) {
+    return jsonSvc.sendJson2('/change_password_json', user).then(success, error);
   }
 
   /**

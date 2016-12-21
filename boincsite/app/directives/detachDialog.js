@@ -7,44 +7,43 @@ angular.module('zoetropeDirectives').directive('detachDialog', function() {
   return {
     restrict: 'E',
     templateUrl: '/static/directives/detachDialog.html',
-	 controller: ['$scope', 'projectSvc', function($scope, projectSvc) {
+    controller: ['$scope', 'projectSvc', function($scope, projectSvc) {
 		
-		$scope.submitClicked = submitClicked;
-		$scope.errorText = '';
-		$scope.projecturl = '';
-		$scope.projectname = '';
+      $scope.submitClicked = submitClicked;
+      $scope.errorText = '';
+      $scope.projecturl = '';
+      $scope.projectname = '';
 		
-		function submitClicked() {
+      function submitClicked() {
 		  
-		  $scope.errorText = '';
+        $scope.errorText = '';
 
-		  projectSvc.detachProject($scope.projecturl)().query().$promise.then(projectDetached);
-		}
+        projectSvc.detachProject2($scope.projecturl, projectDetached);
+      }
 
-		function projectDetached(d) {
-		  if (d.error_message) {
+      function projectDetached(d) {
+        if (d.error_message) {
 			 
-			 if (d.error_message===-1414) {
-				$('#detachModal').modal('hide');
-				setTimeout(function() { document.location = '/#/login'; }, 500);
-				return;
-			 }
+          if (d.error_message===-1414) {
+            $('#detachModal').modal('hide');
+            setTimeout(function() { document.location = '/#/login'; }, 500);
+            return;
+          }
 			 
-			 $scope.errorText = d.error_message;
-		  } else
-			 $('#detachModal').modal('hide');			 
-		}
-	 }],
-	 link: function(scope, element, attrs, ctrl) {
+          $scope.errorText = d.error_message;
+        } else
+          $('#detachModal').modal('hide');			 
+      }
+    }],
+    link: function(scope, element, attrs, ctrl) {
 		
-		attrs.$observe('projecturl', function(val) {
-		  scope.projecturl = val;
-		  
-		});
+      attrs.$observe('projecturl', function(val) {
+        scope.projecturl = val;
+      });
 		
-		attrs.$observe('projectname', function(val) {
-		  scope.projectname = val;
-		});
-	 }
+      attrs.$observe('projectname', function(val) {
+        scope.projectname = val;
+      });
+    }
   };
 });
