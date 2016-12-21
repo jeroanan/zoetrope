@@ -18,7 +18,8 @@ function userSvc(jsonSvc) {
     deleteUser: deleteUser,
     deleteUser2: deleteUser2,
     changePassword: changePassword,
-    login: login
+    login: login,
+    login2: login2
   };
 
   /**
@@ -114,6 +115,16 @@ function userSvc(jsonSvc) {
     return jsonSvc.sendJson('/change_password_json', user);
   }
 
+  /**
+   * Login as the given username and password
+   *
+   * Params:
+   * @username: The username to login as
+   * @password: The user's plaintext password
+   *
+   * TODO: Obsolete. This will be replaced by login2 when 
+   *       migration to it has been completed.
+   */
   function login(username, password) {
     var data = {
       username: username,
@@ -121,6 +132,24 @@ function userSvc(jsonSvc) {
     };
 	 
     return jsonSvc.sendJson('/login_json', data);
+  }
+
+  /**
+   * Login as the given username and password
+   *
+   * Params:
+   * @username: The username to login as
+   * @password: The user's plaintext password
+   * @success: callback to run on success
+   * @error: callback to run on error
+   */
+  function login2(username, password, success, error) {
+    var data = {
+      username: username,
+      password: password
+    };
+	 
+    jsonSvc.sendJson2('/login_json', data).then(success, error);
   }
 
   return svc;

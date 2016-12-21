@@ -26,35 +26,35 @@ function LoginController(userSvc) {
 
   function loginClicked() {
 
-	 vm.operationSuccess = false;
-	 vm.operationSuccessMessage = '';
-	 vm.errorText = '';
+    vm.operationSuccess = false;
+    vm.operationSuccessMessage = '';
+    vm.errorText = '';
 
-	 if (vm.username==='' || vm.password==='') {
-	 	vm.operationSuccess = false;
-	 	vm.errorText = 'Please enter a username and password';
-	 	return;
-	 }
+    if (vm.username==='' || vm.password==='') {
+      vm.operationSuccess = false;
+      vm.errorText = 'Please enter a username and password';
+      return;
+    }
 
-	 userSvc.login(vm.username, vm.password)().query().$promise.then(loginSuccess, loginError);
+    userSvc.login(vm.username, vm.password, loginSuccess, loginError);
   }
 
   function loginSuccess(data) {
 
-	 if (!data.success) {
-		vm.operationSuccess = false;
-		vm.errorText = data.error_message;
-		return;
-	 }
+    if (!data.success) {
+      vm.operationSuccess = false;
+      vm.errorText = data.error_message;
+      return;
+    }
 
-	 vm.operationSuccess = true;
-	 vm.operationSuccessMessage = 'Login successful';
+    vm.operationSuccess = true;
+    vm.operationSuccessMessage = 'Login successful';
 
-	 setTimeout(function() { document.location = '/'; }, 2000);
+    setTimeout(function() { document.location = '/'; }, 2000);
   }
 
   function loginError(data) {
-	 vm.operationSuccess = false;
-	 vm.errorText = data.statusText;
+    vm.operationSuccess = false;
+    vm.errorText = data.statusText;
   }
 }
