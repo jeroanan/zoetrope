@@ -76,7 +76,7 @@ module.exports = function(grunt) {
 	 	zoe_uglify_task(app, zoe_js_out_dir/app.js.map, zoe_js_out_dir/app.min.js, app),	
 		zoe_uglify_task(controllers, zoe_js_out_dir/controller.js.map, zoe_js_out_dir/controller.min.js, controllers),
 		zoe_uglify_task(services, zoe_js_out_dir/services.js.map, zoe_js_out_dir/services.min.js, services),
-		zoe_uglify_task(directives, zoe_js_out_dir/directives.js.map, zoe_js_out_dir/directives.min.js, controllers)
+		zoe_uglify_task(directives, zoe_js_out_dir/directives.js.map, zoe_js_out_dir/directives.min.js, directives)
     },	 
     watch: {
 	        zoe_watch_task(config, ['Gruntfile.js'], []),

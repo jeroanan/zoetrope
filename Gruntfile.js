@@ -50,7 +50,7 @@ module.exports = function(grunt) {
     sourceMapName: 'boincsite/templates/assets/js/directives.js.map'
   },
  files: {
-   'boincsite/templates/assets/js/directives.min.js': controllers
+   'boincsite/templates/assets/js/directives.min.js': directives
  }
 }
     },	 
