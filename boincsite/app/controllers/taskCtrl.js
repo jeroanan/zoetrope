@@ -23,9 +23,9 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
   vm.getDeadlineClass = getDeadlineClass;
   vm.taskNameClicked = taskNameClicked;
 
-  vm.suspendClicked = getTaskOperation('suspendTask2', 'Task suspended', 'suspended_via_gui', true);
-  vm.resumeClicked = getTaskOperation('resumeTask2', 'Task resumed', 'suspended_via_gui', false);
-  vm.abortTaskLinkClicked = getTaskOperation('abortTask2', 'Task Aborted');
+  vm.suspendClicked = getTaskOperation('suspendTask', 'Task suspended', 'suspended_via_gui', true);
+  vm.resumeClicked = getTaskOperation('resumeTask', 'Task resumed', 'suspended_via_gui', false);
+  vm.abortTaskLinkClicked = getTaskOperation('abortTask', 'Task Aborted');
   vm.abortButtonClicked = abortButtonClicked;
 
   document.title = vm.title;
@@ -33,7 +33,7 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
   load();
   
   function load() {
-    taskSvc.getTask2($routeParams.task_name, gotTask, onError);
+    taskSvc.getTask($routeParams.task_name, gotTask, onError);
   }
 
   function abortButtonClicked() {
