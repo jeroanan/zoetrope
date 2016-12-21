@@ -34,7 +34,7 @@ function ProjectController($routeParams, $compile, $scope, projectSvc) {
   
   function load() {
     vm.ready = false;
-    projectSvc.getProject2($routeParams.project, gotProject, serviceError);
+    projectSvc.getProject($routeParams.project, gotProject, serviceError);
   }
 
   function gotProject(project) {
@@ -68,37 +68,37 @@ function ProjectController($routeParams, $compile, $scope, projectSvc) {
   }
 
   function noMoreWorkClicked() {
-    projectSvc.noMoreWork2(vm.project.master_url, function() {
+    projectSvc.noMoreWork(vm.project.master_url, function() {
       vm.project.dont_request_more_work = true;
     });
   }
 
   function allowMoreWorkClicked() {
-    projectSvc.allowMoreWork2(vm.project.master_url, function() {
+    projectSvc.allowMoreWork(vm.project.master_url, function() {
       vm.project.dont_request_more_work = false;
     });
   }
 
   function suspendClicked() {
-    projectSvc.suspendProject2(vm.project.master_url, function() {
+    projectSvc.suspendProject(vm.project.master_url, function() {
       vm.project.suspended_via_gui = true;
     });
   }
 
   function resumeClicked() {
-    projectSvc.resumeProject2(vm.project.master_url, function() {
+    projectSvc.resumeProject(vm.project.master_url, function() {
       vm.project.suspended_via_gui = false;
     });
   }
 
   function detachWhenDoneClicked() {
     //TODO: Change screen state when this returns successfully
-    projectSvc.detachWhenDone2(vm.project.master_url);
+    projectSvc.detachWhenDone(vm.project.master_url);
   }
 
   function dontDetachWhenDoneClicked() {
     //TODO: Change screen state when this returns successfully
-    projectSvc.dontDetachWhenDone2(vm.project.master_url);
+    projectSvc.dontDetachWhenDone(vm.project.master_url);
   }
 
   function setTitle(title) {

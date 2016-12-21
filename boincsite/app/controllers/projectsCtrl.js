@@ -37,7 +37,7 @@ function ProjectsController(projectSvc) {
   function load() {
     vm.ready = false;
     vm.error = false;
-    projectSvc.getAttachedProjects2(gotProjects, serviceError);
+    projectSvc.getAttachedProjects(gotProjects, serviceError);
   }
 
   function gotProjects(projects) {

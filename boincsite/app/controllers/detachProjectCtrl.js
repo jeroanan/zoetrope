@@ -24,7 +24,7 @@ function DetachProjectController(projectSvc) {
   vm.detachErrorMessage = '';
   vm.selectedProjectChanged = selectedProjectChanged;
 
-  projectSvc.getAttachedProjects2(gotProjects);
+  projectSvc.getAttachedProjects(gotProjects);
   
   document.title = vm.title;
 
@@ -59,7 +59,7 @@ function DetachProjectController(projectSvc) {
   // from the project.
   function detachLinkClicked() {
     vm.detachClicked = true;
-    projectSvc.detachProject2(vm.selectedProject, projectDetached);
+    projectSvc.detachProject(vm.selectedProject, projectDetached);
   }
 
   function projectDetached(d) {

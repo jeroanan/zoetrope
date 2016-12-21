@@ -18,7 +18,7 @@ angular.module('zoetropeDirectives').directive('detachDialog', function() {
 		  
         $scope.errorText = '';
 
-        projectSvc.detachProject2($scope.projecturl, projectDetached);
+        projectSvc.detachProject($scope.projecturl, projectDetached);
       }
 
       function projectDetached(d) {

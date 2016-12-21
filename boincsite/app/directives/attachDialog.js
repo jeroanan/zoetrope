@@ -40,7 +40,7 @@ angular.module('zoetropeDirectives').directive('attachDialog', function() {
         $scope.loading = true;
   
         projectSvc
-          .attachProject2($scope.projecturl, $scope.emailaddress, password_hash, $scope.username, $scope.newAccountActive, projectAttached);
+          .attachProject($scope.projecturl, $scope.emailaddress, password_hash, $scope.username, $scope.newAccountActive, projectAttached);
       }
 
       function validate() {

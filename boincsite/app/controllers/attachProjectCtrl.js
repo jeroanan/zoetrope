@@ -22,7 +22,7 @@ function AttachProjectController(projectSvc, md5Svc) {
   vm.loading = false;
   vm.selectedProjectChanged = selectedProjectChanged;
   
-  projectSvc.getAvailableProjects2(gotProjects);  
+  projectSvc.getAvailableProjects(gotProjects);  
 
   document.title = vm.title;
 
@@ -48,7 +48,7 @@ function AttachProjectController(projectSvc, md5Svc) {
     var password_hash = md5Svc.query(hash_in)();
     vm.loading = true;
 	 
-    projectSvc.attachProject2(vm.selectedProject, vm.emailaddress, password_hash, '', false, projectAttached);
+    projectSvc.attachProject(vm.selectedProject, vm.emailaddress, password_hash, '', false, projectAttached);
   }
 
   function projectAttached(d) {

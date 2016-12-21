@@ -28,7 +28,7 @@ function AllProjectListController(projectSvc, systemInfoSvc) {
   function load() {
     vm.ready = false;
     vm.error = false;
-    projectSvc.getAvailableProjects2(gotAllProjects, serviceError);
+    projectSvc.getAvailableProjects(gotAllProjects, serviceError);
   }
 
   function gotAllProjects(projects) {
@@ -40,7 +40,7 @@ function AllProjectListController(projectSvc, systemInfoSvc) {
     }
 
     vm.allProjects = projects;
-    projectSvc.getAttachedProjects2(gotAttachedProjects, serviceError);
+    projectSvc.getAttachedProjects(gotAttachedProjects, serviceError);
     systemInfoSvc.getPlatform2(gotPlatform, serviceError);
   }
 

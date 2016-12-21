@@ -70,7 +70,7 @@ function TasksController(taskSvc, projectSvc) {
         return;
       }
 
-      projectSvc.getAttachedProjects2(gotProjects, serviceError);
+      projectSvc.getAttachedProjects(gotProjects, serviceError);
     }
     else vm.ready = true;
   }

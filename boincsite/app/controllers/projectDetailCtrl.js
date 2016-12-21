@@ -44,7 +44,7 @@ function ProjectDetailController($routeParams, projectSvc, systemInfoSvc) {
   function load() {
     vm.ready = false;
     vm.error = false;
-    projectSvc.getAvailableProjects2(gotAllProjects, serviceError);
+    projectSvc.getAvailableProjects(gotAllProjects, serviceError);
   }
 
   /**
@@ -68,7 +68,7 @@ function ProjectDetailController($routeParams, projectSvc, systemInfoSvc) {
       return;
     }
 
-    projectSvc.getAttachedProjects2(gotAttachedProjects, serviceError);
+    projectSvc.getAttachedProjects(gotAttachedProjects, serviceError);
     systemInfoSvc.getPlatform2(gotPlatform, serviceError);
 
     setTitle('Project Details -- ' + vm.project.name);

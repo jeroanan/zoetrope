@@ -26,44 +26,19 @@ function ProjectSvc($resource, jsonSvc) {
 
   var svc = {
     getProject: getProject,
-    getProject2: getProject2,
     noMoreWork: noMoreWork,
-    noMoreWork2: noMoreWork2,
     allowMoreWork: allowMoreWork,
-    allowMoreWork2: allowMoreWork2,
     suspendProject: suspendProject,
-    suspendProject2: suspendProject2,
     resumeProject: resumeProject,
-    resumeProject2: resumeProject2,
     updateProject: updateProject,
     attachProject: attachProject,
-    attachProject2: attachProject2,
     detachProject: detachProject,
-    detachProject2: detachProject2,
     getAvailableProjects: getAvailableProjects,
-    getAvailableProjects2: getAvailableProjects2,
     getAttachedProjects: getAttachedProjects,
-    getAttachedProjects2: getAttachedProjects2,
     getProjectStatistics: getProjectStatistics,
-    getProjectStatistics2: getProjectStatistics2,
     detachWhenDone: detachWhenDone,
-    detachWhenDone2: detachWhenDone2,
-    dontDetachWhenDone: dontDetachWhenDone,
-    dontDetachWhenDone2: dontDetachWhenDone2
+    dontDetachWhenDone: dontDetachWhenDone
   };
-
-   /**
-   * Get details of an individual project
-   *
-   * Params:
-   * @projectName: The name of the project, e.g. asteroids@home
-   *
-   * TODO: Obsolete. This will be replaced by getProject2 when 
-   *       migration to it has been completed.
-   */
-  function getProject(projectName) {
-    return jsonSvc.getJson('/project_json?project=' + projectName, false);
-  }
 
   /**
    * Get details of an individual project
@@ -73,7 +48,7 @@ function ProjectSvc($resource, jsonSvc) {
    * @success: callback to run on success
    * @error: callback to run on error
    */
-  function getProject2(projectName, success, error) {
+  function getProject(projectName, success, error) {
     jsonSvc.getJson2('/project_json?project=' + projectName, false).then(success, error);
   }
 
@@ -85,26 +60,10 @@ function ProjectSvc($resource, jsonSvc) {
    *
    * Params:
    * @projectUrl: The url of the project to perform the request on
-   *
-   * TODO: Obsolete. This will be replaced by noMoreWork2 when 
-   *       migration to it has been completed.
-   */
-  function noMoreWork(projectUrl) {
-    return projectOperation('/no_more_work', projectUrl);
-  }
-
-  /**
-   * Request that no more work is requested for the given project
-   *
-   * Workunits for the project that are in progress or waiting to be processed
-   * will be completed even when the project is set to request no more work.
-   *
-   * Params:
-   * @projectUrl: The url of the project to perform the request on
    * @success: callback to run on success
    * @error: callback to run on error
    */
-  function noMoreWork2(projectUrl, success, error) {
+  function noMoreWork(projectUrl, success, error) {
     projectOperation2('/no_more_work', projectUrl).then(success, error);
   }
 
@@ -115,25 +74,10 @@ function ProjectSvc($resource, jsonSvc) {
    *
    * Params:
    * @projectUrl: The url of the project to perform the request on
-   *
-   * TODO: Obsolete. This will be replaced by allowMoreWork2 when 
-   *       migration to it has been completed.
-   */
-  function allowMoreWork(projectUrl) {
-    return projectOperation('/allow_more_work', projectUrl);
-  }
-
-  /**
-   * Request that work is requested for the given project
-   *
-   * To be called for projects that are currently set not to request more work.
-   *
-   * Params:
-   * @projectUrl: The url of the project to perform the request on
    * @success: callback to run on success
    * @error: callback to run on error
    */
-  function allowMoreWork2(projectUrl, success, error) {
+  function allowMoreWork(projectUrl, success, error) {
     return projectOperation2('/allow_more_work', projectUrl).then(success, error);
   }
 
@@ -144,25 +88,10 @@ function ProjectSvc($resource, jsonSvc) {
    *
    * Params:
    * @projectUrl: The url of the project to perform the request on
-   *
-   * TODO: Obsolete. This will be replaced by suspendProject2 when 
-   *       migration to it has been completed.
-   */
-  function suspendProject(projectUrl) {
-    return projectOperation('/suspend_project', projectUrl);
-  }
-
-  /**
-   * Request that work is suspended for the given project
-   *
-   * Workunits for the project that are currently in progress or waiting to processed will be paused.
-   *
-   * Params:
-   * @projectUrl: The url of the project to perform the request on
    * @success: callback to run on success
    * @error: callback to run on error
    */
-  function suspendProject2(projectUrl, success, error) {
+  function suspendProject(projectUrl, success, error) {
     projectOperation2('/suspend_project', projectUrl).then(success, error);
   }
 
@@ -173,25 +102,10 @@ function ProjectSvc($resource, jsonSvc) {
    *
    * Params:
    * @projectUrl: The url of the project to perform the request on
-   *
-   * TODO: Obsolete. This will be replaced by resumeProject2 when 
-   *       migration to it has been completed.
-   */
-  function resumeProject(projectUrl) {
-    return projectOperation('/resume_project', projectUrl);
-  }
-
-  /**
-   * Request that work is resumed for the given project
-   *
-   * Existing workunits for the project will be resumed.
-   *
-   * Params:
-   * @projectUrl: The url of the project to perform the request on
    * @success: callback to run on success
    * @error: callback to run on error
    */
-  function resumeProject2(projectUrl, success, error) {
+  function resumeProject(projectUrl, success, error) {
     projectOperation2('/resume_project', projectUrl).then(success, error);
   }
 
@@ -217,38 +131,10 @@ function ProjectSvc($resource, jsonSvc) {
    * @username: If signing up for a new account, the username of the acount
    * @newAccount: If true, sign up for a new account before attaching. 
    *              Otherwise sign into an existing account to attach.
-   */
-  function attachProject(projectUrl, email, password, username, newAcccount) {
-    var endpoint = '/attach_project';
-	 
-    data = {
-      'projectUrl': projectUrl,
-      'email': email,
-      'password': password
-    };
-	 
-    if (newAcccount) {
-      endpoint = '/create_account';
-      data.username = username;
-    }
-
-    return jsonSvc.sendJson(endpoint, data);
-  }
-
-  /**
-   * Request to attach to a project
-   *
-   * Params:
-   * @projectUrl: The url of the proejct to attach to
-   * @email: The email address to use to sign into the project account
-   * @password: The MD5-hash of password + email address
-   * @username: If signing up for a new account, the username of the acount
-   * @newAccount: If true, sign up for a new account before attaching. 
-   *              Otherwise sign into an existing account to attach.
    * @success: callback to run on success
    * @error: callback to run on error
    */
-  function attachProject2(projectUrl, email, password, username, newAcccount, success, error) {
+  function attachProject(projectUrl, email, password, username, newAcccount, success, error) {
     var endpoint = '/attach_project';
 	 
     data = {
@@ -272,29 +158,10 @@ function ProjectSvc($resource, jsonSvc) {
    *
    * Params:
    * @projectUrl: The url of the project to detach from
-   *
-   * TODO: Obsolete. This will be replaced by detachProject2 when 
-   *       migration to it has been completed.
-   */
-  function detachProject(projectUrl) {
-    var data = {
-      'projectUrl': projectUrl
-    };
-
-    return jsonSvc.sendJson('/detach_project', data);
-  }
-
-  /**
-   * Request to detach from a project
-   *
-   * Detaching causes any queued or in-progress workunits for that project to be aborted.
-   *
-   * Params:
-   * @projectUrl: The url of the project to detach from
    * @success: callback to run on success
    * @error: callback to run on error
    */
-  function detachProject2(projectUrl, success, error) {
+  function detachProject(projectUrl, success, error) {
     var data = {
       'projectUrl': projectUrl
     };
@@ -304,43 +171,23 @@ function ProjectSvc($resource, jsonSvc) {
 
   /**
    * Get a list of all public projects
-   *
-   * TODO: Obsolete. This will be replaced by getAvailableProjects2 when 
-   *       migration to it has been completed.
-   */
-  function getAvailableProjects() {
-    return jsonSvc.getJson('/get_all_projects_list_json', true);
-  }
-
-  /**
-   * Get a list of all public projects
    * 
    * Params:
    * @success: callback to run on success
    * @error: callback to run on error
    */
-  function getAvailableProjects2(success, error) {
+  function getAvailableProjects(success, error) {
     return jsonSvc.getJson2('/get_all_projects_list_json', true).then(success, error);
   }
 
   /**
    * Get a list of currently-attached projects
-   *
-   * TODO: Obsolete. This will be replaced by getAttachedProjects2 when 
-   *       migration to it has been completed.
-   */
-  function getAttachedProjects() {
-    return jsonSvc.getJson('/projects_json', true);
-  }
-
-  /**
-   * Get a list of currently-attached projects
    * 
    * Params:
    * @success: callback to run on success
    * @error: callback to run on error
    */
-  function getAttachedProjects2(success, error) {
+  function getAttachedProjects(success, error) {
     return jsonSvc.getJson2('/projects_json', true).then(success, error);
   }
 
@@ -349,28 +196,10 @@ function ProjectSvc($resource, jsonSvc) {
    *
    * Params:
    * @projectUrl: The url of the project to get statistics for.
-   *
-   * TODO: Obsolete. This will be replaced by getProjectStatistics2 when 
-   *       migration to it has been completed.
-   */ 
-  function getProjectStatistics(projectUrl) {
-	 
-    var data = {
-      'projectUrl': projectUrl
-    };
-	 
-    return jsonSvc.getJson('/get_statistics_json', true, data);
-  }
-
-  /**
-   * Get daily statistics for the given project.
-   *
-   * Params:
-   * @projectUrl: The url of the project to get statistics for.
    * @success: callback to run on success
    * @error: callback to run on error
    */ 
-  function getProjectStatistics2(projectUrl, success, error) {
+  function getProjectStatistics(projectUrl, success, error) {
 	 
     var data = {
       'projectUrl': projectUrl
@@ -385,24 +214,10 @@ function ProjectSvc($resource, jsonSvc) {
    *
    * Params:
    * @projectUrl: The url of the project to detach from
-   *
-   * TODO: Obsolete. This will be replaced by detachWhenDone2 when 
-   *       migration to it has been completed.
-   */
-  function detachWhenDone(projectUrl) {
-    return projectOperation('/detach_project_when_done', projectUrl);
-  }
-
-  /**
-   * Request that when all outstanding workunits have been completed for the
-   * given project, it is detached.
-   *
-   * Params:
-   * @projectUrl: The url of the project to detach from
    * @success: callback to run on success
    * @error: callback to run on error
    */
-  function detachWhenDone2(projectUrl, success, error) {
+  function detachWhenDone(projectUrl, success, error) {
     projectOperation2('/detach_project_when_done', projectUrl).then(success,error);
   }
 
@@ -412,24 +227,10 @@ function ProjectSvc($resource, jsonSvc) {
    *
    * Params:
    * @projectUrl: The url of the project to detach from
-   *
-   * TODO: Obsolete. This will be replaced by dontDetachWhenDone2 when 
-   *       migration to it has been completed.
-   */
-  function dontDetachWhenDone(projectUrl) {
-    return projectOperation('/dont_detach_project_when_done', projectUrl);
-  }
-
-  /**
-   * Cancel a previous request that a project be detached when all of its outstanding workunits 
-   * have been completed.
-   *
-   * Params:
-   * @projectUrl: The url of the project to detach from
    * @success: callback to run on success
    * @error: callback to run on error
    */
-  function dontDetachWhenDone2(projectUrl, success, error) {
+  function dontDetachWhenDone(projectUrl, success, error) {
     projectOperation2('/dont_detach_project_when_done', projectUrl).then(success, error);
   }
 

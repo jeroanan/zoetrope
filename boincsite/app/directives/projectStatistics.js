@@ -18,7 +18,7 @@ angular.module('zoetropeDirectives').directive('projectStatistics', function() {
       $scope.upArrow = upArrow;
       $scope.downArrow = downArrow;
 
-      projectSvc.getProjectStatistics2($scope.projectUrl, gotStats);
+      projectSvc.getProjectStatistics($scope.projectUrl, gotStats);
 	
       function gotStats(stats) {
 

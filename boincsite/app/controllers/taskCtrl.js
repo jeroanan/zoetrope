@@ -103,7 +103,7 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
     task.overdue = overdue;
     task.deadlineApproaching = deadlineApproaching;
     vm.task = task;	 
-    projectSvc.getAttachedProjects2(gotProjects, onError);
+    projectSvc.getAttachedProjects(gotProjects, onError);
   }
 
   function gotProjects(projects) {
