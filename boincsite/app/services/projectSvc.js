@@ -45,6 +45,7 @@ function ProjectSvc($resource, jsonSvc) {
     getAttachedProjects: getAttachedProjects,
     getAttachedProjects2: getAttachedProjects2,
     getProjectStatistics: getProjectStatistics,
+    getProjectStatistics2: getProjectStatistics2,
     detachWhenDone: detachWhenDone,
     detachWhenDone2: detachWhenDone2,
     dontDetachWhenDone: dontDetachWhenDone,
@@ -348,6 +349,9 @@ function ProjectSvc($resource, jsonSvc) {
    *
    * Params:
    * @projectUrl: The url of the project to get statistics for.
+   *
+   * TODO: Obsolete. This will be replaced by getProjectStatistics2 when 
+   *       migration to it has been completed.
    */ 
   function getProjectStatistics(projectUrl) {
 	 
@@ -356,6 +360,23 @@ function ProjectSvc($resource, jsonSvc) {
     };
 	 
     return jsonSvc.getJson('/get_statistics_json', true, data);
+  }
+
+  /**
+   * Get daily statistics for the given project.
+   *
+   * Params:
+   * @projectUrl: The url of the project to get statistics for.
+   * @success: callback to run on success
+   * @error: callback to run on error
+   */ 
+  function getProjectStatistics2(projectUrl, success, error) {
+	 
+    var data = {
+      'projectUrl': projectUrl
+    };
+	 
+    return jsonSvc.getJson2('/get_statistics_json', true, data).then(success, error);
   }
 
   /**
