@@ -20,9 +20,9 @@
     
 angular.module('zoetropeControllers').controller('tasksCtrl', TasksController);
 
-TasksController.$inject = ['$document', 'taskSvc', 'projectSvc'];
+TasksController.$inject = ['$document', '$location', '$log', 'taskSvc', 'projectSvc'];
 
-function TasksController($document, taskSvc, projectSvc) {
+function TasksController($document, $location, $log, taskSvc, projectSvc) {
 
   var vm = this;
   vm.tasks = {};
@@ -69,7 +69,7 @@ function TasksController($document, taskSvc, projectSvc) {
       var t = tasks[0];
 		
       if (t.error_message && t.error_message===-1414) {
-        document.location = '/#/login';
+        $location.path('/#/login');
         return;
       }
 
@@ -82,7 +82,7 @@ function TasksController($document, taskSvc, projectSvc) {
    * Called when there is an error getting the list of tasks
    */
   function gotTasksError() {
-    console.log('tasksCtrl: Error while getting tasks.');
+    $log.error('tasksCtrl: Error while getting tasks.');
     serviceError();
   }
 
