@@ -44,7 +44,7 @@ function SystemInfoService(jsonSvc) {
    * @error: callback to run on error
    */
   function getDiskUsage(success, error) {
-    return jsonSvc.getJson2('/disk_usage_json', false).then(success, error);
+    return jsonSvc.getJson('/disk_usage_json', false).then(success, error);
   }
 
   /**
@@ -55,7 +55,7 @@ function SystemInfoService(jsonSvc) {
    * @error: callback to run on error
    */
   function getDailyTransferHistory(success, error) {
-    jsonSvc.getJson2('/daily_transfer_history_json', true).then(success, error);
+    jsonSvc.getJson('/daily_transfer_history_json', true).then(success, error);
   }
 
   /**
@@ -66,7 +66,7 @@ function SystemInfoService(jsonSvc) {
    * @error: callback to run on error
    */
   function getGlobalPreferences(success, error) {
-    return jsonSvc.getJson2('/get_global_preferences_json', false).then(success, error);
+    return jsonSvc.getJson('/get_global_preferences_json', false).then(success, error);
   }
 
   /**
@@ -77,7 +77,7 @@ function SystemInfoService(jsonSvc) {
    * @error: callback to run on error
    */
   function getHostInfo(success, error) {
-    return jsonSvc.getJson2('/host_info_json').then(success, error);
+    return jsonSvc.getJson('/host_info_json').then(success, error);
   }
 
   /**
@@ -88,7 +88,7 @@ function SystemInfoService(jsonSvc) {
    * @error: callback to run on error
    */
   function getMessages(success, error) {
-    return jsonSvc.getJson2('/messages_json', true).then(success, error);
+    return jsonSvc.getJson('/messages_json', true).then(success, error);
   }
 
   /**
@@ -99,7 +99,7 @@ function SystemInfoService(jsonSvc) {
    * @error: callback to run on error
    */
   function getNotices(success, error) {
-    return jsonSvc.getJson2('/notices_json', true).then(success, error);
+    return jsonSvc.getJson('/notices_json', true).then(success, error);
   }
 
   /**
@@ -110,7 +110,7 @@ function SystemInfoService(jsonSvc) {
    * @error: callback to run on error
    */
   function getPlatform(success, error) {
-    return jsonSvc.getJson2('/get_platform_json', false).then(success, error);
+    return jsonSvc.getJson('/get_platform_json', false).then(success, error);
   }
 
   return svc;

@@ -60,7 +60,7 @@ function ProjectController($routeParams, $compile, $scope, projectSvc) {
 
   function updateProjectClick() {
     if (vm.ready!==true) return;
-    projectSvc.updateProject(vm.project.master_url)().query();
+    projectSvc.updateProject(vm.project.master_url);
   }
   
   function detachClicked() {

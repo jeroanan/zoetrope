@@ -41,7 +41,7 @@ function TaskService($resource, jsonSvc) {
    * @error: callback to run on error
    */
   function getTask(taskName, success, error) {
-    return jsonSvc.getJson2('/task_json?task_name=' + taskName, false).then(success, error);
+    return jsonSvc.getJson('/task_json?task_name=' + taskName, false).then(success, error);
   }
 
   /**
@@ -55,7 +55,7 @@ function TaskService($resource, jsonSvc) {
    * @error: callback to run on error
    */
   function getAllTasks(success, error) {
-    jsonSvc.getJson2('/tasks_json', true).then(success,error);
+    jsonSvc.getJson('/tasks_json', true).then(success,error);
   }
 
   /**
@@ -110,7 +110,7 @@ function TaskService($resource, jsonSvc) {
     task_name: taskName
     };
 
-    return jsonSvc.sendJson2(endpoint, data).then(success, error);
+    return jsonSvc.sendJson(endpoint, data).then(success, error);
   }
 
   return svc;

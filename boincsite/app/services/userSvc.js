@@ -14,7 +14,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  * 
- * You should have received a copy of the GNU General Public License
+ * You should have received a copy of the GNU General Public Licensemenu-bar (new menu-bar%
  * along with Zoetrope.  If not, see <http://www.gnu.org/licenses/>.
  */
 angular.module('zoetropeServices')
@@ -50,7 +50,7 @@ function userSvc(jsonSvc) {
       'password': password
     };
 	 
-    return jsonSvc.sendJson2('/add_user_json', data).then(success, error);
+    return jsonSvc.sendJson('/add_user_json', data).then(success, error);
   }
 
   /**
@@ -61,7 +61,7 @@ function userSvc(jsonSvc) {
    * @error: callback to run on error
    */
   function getUsers(success, error) {
-    jsonSvc.getJson2('/get_users_json', true).then(success, error);
+    jsonSvc.getJson('/get_users_json', true).then(success, error);
   }
 
   /**
@@ -73,7 +73,7 @@ function userSvc(jsonSvc) {
    * @error: callback to run on error
   */
   function deleteUser(user, success, error) {
-    return jsonSvc.sendJson2('/delete_user_json', user).then(success, error);
+    return jsonSvc.sendJson('/delete_user_json', user).then(success, error);
   }
 
   /**
@@ -85,7 +85,7 @@ function userSvc(jsonSvc) {
    * @error: callback to run on error
    */
   function changePassword(user, success, error) {
-    return jsonSvc.sendJson2('/change_password_json', user).then(success, error);
+    return jsonSvc.sendJson('/change_password_json', user).then(success, error);
   }
 
   /**
@@ -103,7 +103,7 @@ function userSvc(jsonSvc) {
       password: password
     };
 	 
-    jsonSvc.sendJson2('/login_json', data).then(success, error);
+    jsonSvc.sendJson('/login_json', data).then(success, error);
   }
 
   return svc;

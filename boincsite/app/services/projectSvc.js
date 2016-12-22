@@ -49,7 +49,7 @@ function ProjectSvc($resource, jsonSvc) {
    * @error: callback to run on error
    */
   function getProject(projectName, success, error) {
-    jsonSvc.getJson2('/project_json?project=' + projectName, false).then(success, error);
+    jsonSvc.getJson('/project_json?project=' + projectName, false).then(success, error);
   }
 
   /**
@@ -64,7 +64,7 @@ function ProjectSvc($resource, jsonSvc) {
    * @error: callback to run on error
    */
   function noMoreWork(projectUrl, success, error) {
-    projectOperation2('/no_more_work', projectUrl).then(success, error);
+    projectOperation('/no_more_work', projectUrl).then(success, error);
   }
 
   /**
@@ -78,7 +78,7 @@ function ProjectSvc($resource, jsonSvc) {
    * @error: callback to run on error
    */
   function allowMoreWork(projectUrl, success, error) {
-    return projectOperation2('/allow_more_work', projectUrl).then(success, error);
+    return projectOperation('/allow_more_work', projectUrl).then(success, error);
   }
 
   /**
@@ -92,7 +92,7 @@ function ProjectSvc($resource, jsonSvc) {
    * @error: callback to run on error
    */
   function suspendProject(projectUrl, success, error) {
-    projectOperation2('/suspend_project', projectUrl).then(success, error);
+    projectOperation('/suspend_project', projectUrl).then(success, error);
   }
 
   /**
@@ -106,7 +106,7 @@ function ProjectSvc($resource, jsonSvc) {
    * @error: callback to run on error
    */
   function resumeProject(projectUrl, success, error) {
-    projectOperation2('/resume_project', projectUrl).then(success, error);
+    projectOperation('/resume_project', projectUrl).then(success, error);
   }
 
   /**
@@ -116,9 +116,11 @@ function ProjectSvc($resource, jsonSvc) {
    *
    * Params:
    * @projectUrl: The url of the project to perform the request on
+   * @success: callback to run on success
+   * @error: callback to run on error
    */
-  function updateProject(projectUrl) {
-    return projectOperation('/update_project', projectUrl);
+  function updateProject(projectUrl, success, error) {
+    projectOperation('/update_project', projectUrl).then(success, error);
   }
 
   /**
@@ -148,7 +150,7 @@ function ProjectSvc($resource, jsonSvc) {
       data.username = username;
     }
 
-    return jsonSvc.sendJson2(endpoint, data).then(success, error);
+    return jsonSvc.sendJson(endpoint, data).then(success, error);
   }
 
   /**
@@ -166,7 +168,7 @@ function ProjectSvc($resource, jsonSvc) {
       'projectUrl': projectUrl
     };
 
-    return jsonSvc.sendJson2('/detach_project', data).then(success, error);
+    return jsonSvc.sendJson('/detach_project', data).then(success, error);
   }
 
   /**
@@ -177,7 +179,7 @@ function ProjectSvc($resource, jsonSvc) {
    * @error: callback to run on error
    */
   function getAvailableProjects(success, error) {
-    return jsonSvc.getJson2('/get_all_projects_list_json', true).then(success, error);
+    return jsonSvc.getJson('/get_all_projects_list_json', true).then(success, error);
   }
 
   /**
@@ -188,7 +190,7 @@ function ProjectSvc($resource, jsonSvc) {
    * @error: callback to run on error
    */
   function getAttachedProjects(success, error) {
-    return jsonSvc.getJson2('/projects_json', true).then(success, error);
+    return jsonSvc.getJson('/projects_json', true).then(success, error);
   }
 
   /**
@@ -205,7 +207,7 @@ function ProjectSvc($resource, jsonSvc) {
       'projectUrl': projectUrl
     };
 	 
-    return jsonSvc.getJson2('/get_statistics_json', true, data).then(success, error);
+    return jsonSvc.getJson('/get_statistics_json', true, data).then(success, error);
   }
 
   /**
@@ -218,7 +220,7 @@ function ProjectSvc($resource, jsonSvc) {
    * @error: callback to run on error
    */
   function detachWhenDone(projectUrl, success, error) {
-    projectOperation2('/detach_project_when_done', projectUrl).then(success,error);
+    projectOperation('/detach_project_when_done', projectUrl).then(success,error);
   }
 
   /**
@@ -231,7 +233,7 @@ function ProjectSvc($resource, jsonSvc) {
    * @error: callback to run on error
    */
   function dontDetachWhenDone(projectUrl, success, error) {
-    projectOperation2('/dont_detach_project_when_done', projectUrl).then(success, error);
+    projectOperation('/dont_detach_project_when_done', projectUrl).then(success, error);
   }
 
   /**
@@ -242,9 +244,6 @@ function ProjectSvc($resource, jsonSvc) {
    * Params:
    * @endpoint: The endpoint on the webserver to call in order to complete the operation, e.g. '/update_project'
    * @projectUrl: The url of the project to perform the request on
-   *
-   * TODO: Obsolete. This will be replaced by projectOperation2 when 
-   *       migration to it has been completed.
    */
   function projectOperation(endpoint, projectUrl) {
     var data = {
@@ -252,23 +251,6 @@ function ProjectSvc($resource, jsonSvc) {
     };
 
     return jsonSvc.sendJson(endpoint, data);
-  }
-
-  /**
-   * Do a generic operation on a project where that operation only requires the project's url
-   *
-   * This method is internal to this service and isn't exposed by default.
-   *
-   * Params:
-   * @endpoint: The endpoint on the webserver to call in order to complete the operation, e.g. '/update_project'
-   * @projectUrl: The url of the project to perform the request on
-   */
-  function projectOperation2(endpoint, projectUrl) {
-    var data = {
-      'projectUrl': projectUrl
-    };
-
-    return jsonSvc.sendJson2(endpoint, data);
   }
 
   return svc;
