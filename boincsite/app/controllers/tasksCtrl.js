@@ -20,9 +20,9 @@
     
 angular.module('zoetropeControllers').controller('tasksCtrl', TasksController);
 
-TasksController.$inject = ['taskSvc', 'projectSvc'];
+TasksController.$inject = ['$document', 'taskSvc', 'projectSvc'];
 
-function TasksController(taskSvc, projectSvc) {
+function TasksController($document, taskSvc, projectSvc) {
 
   var vm = this;
   vm.tasks = {};
@@ -31,10 +31,14 @@ function TasksController(taskSvc, projectSvc) {
   vm.reverseSort = false;
   vm.ready = false;  
   vm.error = false;
+  vm.showRawData = false;
+  vm.title = 'BOINC Tasks';
 
-  vm.sort = getSortFunc(vm, 'sortProp', 'reverseSort');
+  $document.title = vm.title;
+
   vm.load = load;
   vm.getDeadlineClass = getDeadlineClass;
+  vm.sort = getSortFunc(vm, 'sortProp', 'reverseSort');
 
   load();
 
@@ -46,7 +50,7 @@ function TasksController(taskSvc, projectSvc) {
   function load() {
     vm.ready = false;
     vm.error = false;
-    taskSvc.getAllTasks(gotTasks, serviceError);
+    taskSvc.getAllTasks(gotTasks, gotTasksError);
   }
 
   /**
@@ -56,7 +60,6 @@ function TasksController(taskSvc, projectSvc) {
    * tasks: The list of tasks that was retrieved
    */
   function gotTasks(tasks) {
-
     vm.tasks = tasks;
 
     // If there were any tasks then go on processing. Otherwise,
@@ -73,6 +76,14 @@ function TasksController(taskSvc, projectSvc) {
       projectSvc.getAttachedProjects(gotProjects, serviceError);
     }
     else vm.ready = true;
+  }
+
+  /**
+   * Called when there is an error getting the list of tasks
+   */
+  function gotTasksError() {
+    console.log('tasksCtrl: Error while getting tasks.');
+    serviceError();
   }
 
   /**
@@ -162,12 +173,10 @@ function TasksController(taskSvc, projectSvc) {
       x.deadlineApproaching = deadlineApproaching;
       return x;
     });
+
+    vm.ready = true;
   }
 	 
-  vm.ready = true;
-  vm.showRawData = false;
-  vm.title = 'BOINC Tasks';
-  document.title = vm.title;
 
   /**
    * Gives a css class for a task that is overdue has its deadline approaching
