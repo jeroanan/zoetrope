@@ -41,7 +41,7 @@ function AllProjectListController(projectSvc, systemInfoSvc) {
 
     vm.allProjects = projects;
     projectSvc.getAttachedProjects(gotAttachedProjects, serviceError);
-    systemInfoSvc.getPlatform2(gotPlatform, serviceError);
+    systemInfoSvc.getPlatform(gotPlatform, serviceError);
   }
 
   function serviceError() {

@@ -29,7 +29,7 @@ function MessagesController(systemInfoSvc) {
   function load() {
     vm.ready = false;
     vm.error = false;
-    systemInfoSvc.getMessages2(gotMessages, serviceError);
+    systemInfoSvc.getMessages(gotMessages, serviceError);
   }
 
   function gotMessages(messages) {

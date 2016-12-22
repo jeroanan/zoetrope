@@ -69,7 +69,7 @@ function ProjectDetailController($routeParams, projectSvc, systemInfoSvc) {
     }
 
     projectSvc.getAttachedProjects(gotAttachedProjects, serviceError);
-    systemInfoSvc.getPlatform2(gotPlatform, serviceError);
+    systemInfoSvc.getPlatform(gotPlatform, serviceError);
 
     setTitle('Project Details -- ' + vm.project.name);
     vm.projectFound = true;

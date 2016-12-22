@@ -23,7 +23,7 @@ function GlobalPreferencesCtrl(systemInfoSvc) {
   function load() {
     vm.ready = false;
     vm.error = false;
-    systemInfoSvc.getGlobalPreferences2(gotGlobalPreferences, serviceError);
+    systemInfoSvc.getGlobalPreferences(gotGlobalPreferences, serviceError);
   }
 
   function gotGlobalPreferences(preferences) {

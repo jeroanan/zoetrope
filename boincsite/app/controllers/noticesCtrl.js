@@ -23,7 +23,7 @@ function NoticesController(systemInfoSvc) {
   function load() {
     vm.ready = false;
     vm.error = false;
-    systemInfoSvc.getNotices2(gotNotices, serviceError);
+    systemInfoSvc.getNotices(gotNotices, serviceError);
   }
 
   function gotNotices(notices) {

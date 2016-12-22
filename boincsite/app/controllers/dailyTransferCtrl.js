@@ -29,7 +29,7 @@ function DailyTransferController(systemInfoSvc) {
   function load() {
     vm.ready = false;
     vm.error = false;
-    systemInfoSvc.getDailyTransferHistory2(gotDailyTransfers, serviceError);
+    systemInfoSvc.getDailyTransferHistory(gotDailyTransfers, serviceError);
   }
 
   function gotDailyTransfers(dailyTransfers) {

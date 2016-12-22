@@ -24,7 +24,7 @@ function HostInfoController(systemInfoSvc) {
   function load() {
     vm.ready = false;
     vm.error = false;
-    systemInfoSvc.getHostInfo2(gotHostInfo, serviceError);
+    systemInfoSvc.getHostInfo(gotHostInfo, serviceError);
   }
 
   function gotHostInfo(hostInfo) {

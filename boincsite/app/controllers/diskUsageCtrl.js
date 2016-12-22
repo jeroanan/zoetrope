@@ -27,7 +27,7 @@ function DiskUsageController(systemInfoSvc) {
   function load() {
     vm.ready = false;
     vm.error = false;
-    systemInfoSvc.getDiskUsage2(gotDiskUsages, serviceError);
+    systemInfoSvc.getDiskUsage(gotDiskUsages, serviceError);
   }
 
   function gotDiskUsages(diskUsages) {
