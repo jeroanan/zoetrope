@@ -35,7 +35,7 @@ angular.module('zoetropeDirectives').directive('zoeChangePasswordDialog', functi
 		  
       $scope.user.password = $scope.password;
       $scope.user.confirmPassword = $scope.confirmPassword;
-      userSvc.changePassword2($scope.user, passwordChanged, passwordChangeError);
+      userSvc.changePassword($scope.user, passwordChanged, passwordChangeError);
     }
 
     function passwordChanged(data) {

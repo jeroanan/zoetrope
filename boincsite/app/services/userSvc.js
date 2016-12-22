@@ -1,7 +1,21 @@
 /**
  * Services to handle user account operations.
  *
- * (c) David Wilson 2016, licensed under GPL V3.
+ * Copyright (c) David Wilson 2016
+ * This file is part of Zoetrope.
+ * 
+ * Zoetrope is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Zoetrope is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Zoetrope.  If not, see <http://www.gnu.org/licenses/>.
  */
 angular.module('zoetropeServices')
   .factory('userSvc', userSvc);
@@ -12,38 +26,11 @@ function userSvc(jsonSvc) {
 
   var svc = {
     addUser: addUser,
-    addUser2: addUser2,
     getUsers: getUsers,
-    getUsers2: getUsers2,
     deleteUser: deleteUser,
-    deleteUser2: deleteUser2,
     changePassword: changePassword,
-    changePassword2: changePassword2,
-    login: login,
-    login2: login2
+    login: login
   };
-
-  /**
-   * Request that a new user be added
-   *
-   * Params:
-   * @userId: The user id of the new user
-   * @password: The (plaintext) password of the new user
-   *
-   * Returns:
-   * Any response that the server makes to the request
-   *
-   * TODO: Obsolete. This will be replaced by addUser2 when 
-   *       migration to it has been completed.
-   */
-  function addUser(userId, password) {
-    var data = {
-      'userId': userId,
-      'password': password
-    };
-	 
-    return jsonSvc.sendJson('/add_user_json', data);
-  }
 
   /**
    * Request that a new user be added
@@ -57,7 +44,7 @@ function userSvc(jsonSvc) {
    * Returns:
    * Any response that the server makes to the request
    */
-  function addUser2(userId, password, success, error) {
+  function addUser(userId, password, success, error) {
     var data = {
       'userId': userId,
       'password': password
@@ -69,21 +56,11 @@ function userSvc(jsonSvc) {
   /**
    * Request a list of all users
    *
-   * TODO: Obsolete. This will be replaced by getUsers2 when 
-   *       migration to it has been completed.
-   */
-  function getUsers() {
-    return jsonSvc.getJson('/get_users_json', true);
-  }
-
-  /**
-   * Request a list of all users
-   *
    * Params:
    * @success: callback to run on success
    * @error: callback to run on error
    */
-  function getUsers2(success, error) {
+  function getUsers(success, error) {
     jsonSvc.getJson2('/get_users_json', true).then(success, error);
   }
 
@@ -92,23 +69,10 @@ function userSvc(jsonSvc) {
    *
    * Params:
    * @user the number of the user to delete
-   *
-   * TODO: Obsolete. This will be replaced by deleteUser2 when 
-   *       migration to it has been completed.
-  */
-  function deleteUser(user) {
-    return jsonSvc.sendJson('/delete_user_json', user);
-  }
-
-  /**
-   * Delete the given user
-   *
-   * Params:
-   * @user the number of the user to delete
    * @success: callback to run on success
    * @error: callback to run on error
   */
-  function deleteUser2(user, success, error) {
+  function deleteUser(user, success, error) {
     return jsonSvc.sendJson2('/delete_user_json', user).then(success, error);
   }
 
@@ -117,23 +81,10 @@ function userSvc(jsonSvc) {
    *
    * Params:
    * @user: The user's details
-   *
-   * TODO: Obsolete. This will be replaced by changePassword2 when 
-   *       migration to it has been completed.
-   */
-  function changePassword(user) {
-    return jsonSvc.sendJson('/change_password_json', user);
-  }
-
-  /**
-   * Change the user's password
-   *
-   * Params:
-   * @user: The user's details
    * @success: callback to run on success
    * @error: callback to run on error
    */
-  function changePassword2(user, success, error) {
+  function changePassword(user, success, error) {
     return jsonSvc.sendJson2('/change_password_json', user).then(success, error);
   }
 
@@ -143,29 +94,10 @@ function userSvc(jsonSvc) {
    * Params:
    * @username: The username to login as
    * @password: The user's plaintext password
-   *
-   * TODO: Obsolete. This will be replaced by login2 when 
-   *       migration to it has been completed.
-   */
-  function login(username, password) {
-    var data = {
-      username: username,
-      password: password
-    };
-	 
-    return jsonSvc.sendJson('/login_json', data);
-  }
-
-  /**
-   * Login as the given username and password
-   *
-   * Params:
-   * @username: The username to login as
-   * @password: The user's plaintext password
    * @success: callback to run on success
    * @error: callback to run on error
    */
-  function login2(username, password, success, error) {
+  function login(username, password, success, error) {
     var data = {
       username: username,
       password: password

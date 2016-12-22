@@ -47,7 +47,7 @@ function addUserController(userSvc) {
       return;
     }
 
-    userSvc.addUser2(vm.userId, vm.password,
+    userSvc.addUser(vm.userId, vm.password,
       function(d) {
         if (!d.success && d.error_message) {
           vm.operationSuccess = false;

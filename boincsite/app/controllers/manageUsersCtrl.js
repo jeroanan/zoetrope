@@ -37,7 +37,7 @@ function ManageUsersController(userSvc) {
   load();
   
   function load() {
-    userSvc.getUsers2(gotUsers);
+    userSvc.getUsers(gotUsers);
   }
 
   function gotUsers(users) {
