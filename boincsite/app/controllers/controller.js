@@ -37,6 +37,9 @@ var get_project_name = function(task, projects) {
   return task.project_url;
 };
 
+/**
+ * TODO: move into timeSvc
+ */
 var get_time_so_far = function(task) {
   return task.ready_to_report ? task.final_cpu_time : task.current_cpu_time;
 };

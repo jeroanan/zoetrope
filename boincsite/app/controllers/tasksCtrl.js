@@ -42,8 +42,6 @@ function TasksController($document, $location, $log, taskSvc, projectSvc) {
 
   load();
 
-  var idx = 0;
-
   /**
    * Initialise screen state
    */
@@ -118,6 +116,8 @@ function TasksController($document, $location, $log, taskSvc, projectSvc) {
    *
    * Returns:
    * The correctly-padded time
+   *
+   * TODO: Move into a new timeSvc
    */
   function padTime(timeIn) {
     var timeSplit = timeIn.toString().split(':');
@@ -139,6 +139,8 @@ function TasksController($document, $location, $log, taskSvc, projectSvc) {
    */
   function postProcessProjects() {
     // Now we make the tasks into the format we want to see on-screen.
+    var idx = 0;
+
     vm.tasks = vm.tasks.map(function(x) {
       idx++;
   
@@ -152,6 +154,7 @@ function TasksController($document, $location, $log, taskSvc, projectSvc) {
       var deadlineApproaching = false;
   
       // Assume the date is something like 2016-06-09 21:08:00
+      // TODO: move this overdue/deadlineapproaching stuff into a service that can be tested.
       var deadlineSplit = x.report_deadline.toString().split(' ')[0].split('-');
   		
       if (deadlineSplit.length===3) {

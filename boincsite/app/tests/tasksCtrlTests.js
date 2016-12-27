@@ -36,18 +36,12 @@ describe('tasksCtrl', function() {
   describe('getTasks', function() {
     
     var json;
-    var getAttachedProjectsCalled;
 
     beforeEach(function() {
       json = readJSON('tests/json/tasks.json');
-      getAttachedProjectsCalled = false;
 
       taskSvc.getAllTasks = function(success, error) {
         success(json, '200', '', '');
-      };
-
-      projectSvc.getAttachedProjects = function(success, error) {
-	getAttachedProjectsCalled = true;
       };
     });
 
@@ -57,9 +51,10 @@ describe('tasksCtrl', function() {
     });
 
     it('gets attached projects after loading tasks', function() {
+      spyOn(projectSvc, 'getAttachedProjects');
 
       var vm = $controller('tasksCtrl', {});
-      expect(getAttachedProjectsCalled).toBeTruthy();
+      expect(projectSvc.getAttachedProjects).toHaveBeenCalled();
     });
 
     it('is not ready yet when there are tasks because it still has work to do', function() {
@@ -87,21 +82,109 @@ describe('tasksCtrl', function() {
 
     it('handles errors', function() {
 
-      var errorLogCalled = false;
-
       taskSvc.getAllTasks = function(success, error) {
         error({}, '500', '', '');
       };
 
-      $log.error = function(msg) {
-        errorLogCalled = true;
-      };
+      spyOn($log, 'error');
 
       var vm = $controller('tasksCtrl', {});
 
-      expect(errorLogCalled).toBeTruthy();
+      expect($log.error).toHaveBeenCalled();
       expect(vm.ready).toBeTruthy();
       expect(vm.error).toBeTruthy();
+    });
+  });
+
+  describe('getAttachedProjects', function() {
+
+    var tasksJson;
+    var projectsJson;
+
+    beforeEach(function() {
+      tasksJson = readJSON('tests/json/tasks.json');
+      projectsJson = readJSON('tests/json/attachedProjects.json');
+    });
+
+    it('Gets the right amount of projects', function() {
+      
+      spyOn(taskSvc, 'getAllTasks').and.callFake(function(s,e) { s(tasksJson, '200', '', ''); });
+      spyOn(projectSvc, 'getAttachedProjects').and.callFake(function(s,e) { s(projectsJson, '200', '', ''); });
+
+      var vm = $controller('tasksCtrl', {});
+      expect(vm.projects.length).toEqual(projectsJson.length);
+    });
+    
+    it('Properly post-processes tasks based on the projects', function() {
+
+      var projectsJson = [{
+                            "user_total_credit": "3840.000000", 
+			    "host_expavg_credit": "0.000000", 
+			    "suspended_via_gui": false, 
+			    "master_url": "http://asteroidsathome.net/boinc/", 
+			    "project_files_downloaded_time": "0.000000", 
+			    "user_name": "pi", 
+			    "dont_request_more_work": false, 
+			    "user_expavg_credit": "0.099184", 
+			    "gui_urls": [{
+			                   "description": "View your account information and credit totals", 
+					   "name": "Your account", 
+					   "url": "http://asteroidsathome.net/boinc/home.php"
+					 }], 
+                            "last_rpc_time": "1482090820.985531", 
+			    "host_total_credit": "0.000000", 
+			    "project_name": "Asteroids@home", 
+			    "team_name": "", 
+			    "attached_via_acct_mgr": false, 
+			    "detach_when_done": true, 
+			    "master_fetch_failures": "0", 
+			    "nrpc_failures": "0", 
+			    "resource_share": "100.000000", 
+			    "upload_backoff": null, 
+			    "sched_rpc_pending": "0"
+			  }];
+      
+      var tasksJson = [{
+                         "report_deadline": "2016-12-18 07:56:36", 
+			 "app_version_num": 10210, 
+			 "final_cpu_time": "0:09:40", 
+			 "name": "ps_161130_input_58973_13_0", 
+			 "scheduler_state": 2, 
+			 "ready_to_report": false, 
+			 "swap_size": 22532096, 
+			 "project_url": "http://asteroidsathome.net/boinc/", 
+			 "got_server_ack": false, 
+			 "signal": 0, 
+			 "working_set_size": 7720960, 
+			 "state": 2, 
+			 "exit_status": 0, 
+			 "checkpoint_cpu_time": 564.012, 
+			 "wu_name": "ps_161130_input_58973_13", 
+			 "suspended_via_gui": false, 
+			 "active_task_state": 0,
+			 "estimated_cpu_time_remaining": "2:59:24",
+			 "fraction_done": 2.63,
+			 "current_cpu_time": "0:09:40"
+                       }];
+
+      spyOn(taskSvc, 'getAllTasks').and.callFake(function(s,e) { s(tasksJson, '200', '', ''); });
+      spyOn(projectSvc, 'getAttachedProjects').and.callFake(function(s,e) { s(projectsJson, '200', '', ''); });
+
+      var vm = $controller('tasksCtrl', {}); 
+
+      expect(vm.tasks.length).toBe(1);
+      expect(vm.projects.length).toBe(1);
+
+      var task = vm.tasks[0];
+      var project = vm.projects[0];
+      
+      expect(task.idx).toBe(1);
+      expect(task.project_name).toBe(project.project_name);
+      expect(task.state).toBe('Waiting to run');
+      expect(task.time_so_far).toBe('00:09:40');
+      expect(task.overdue).toBeTruthy();
+      expect(task.deadlineApproaching).toBeFalsy();
+      expect(vm.ready).toBeTruthy();
     });
   });
 });
