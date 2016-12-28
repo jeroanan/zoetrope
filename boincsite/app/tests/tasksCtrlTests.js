@@ -1,3 +1,22 @@
+/**
+ * Unit tests for tasksCtrl
+ *
+ * Copyright (c) David Wilson 2016
+ * This file is part of Zoetrope.
+ * 
+ * Zoetrope is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Zoetrope is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Zoetrope.  If not, see <http://www.gnu.org/licenses/>.
+ */
 describe('tasksCtrl', function() {
   beforeEach(module('zoetropeControllers'));
 
@@ -16,21 +35,23 @@ describe('tasksCtrl', function() {
     projectSvc = _projectSvc_;
   }));
 
-  it('initialises correctly', function() {
-    
-    var vm = $controller('tasksCtrl', {});
-
-    var expectedWindowTitle = 'BOINC Tasks';
-
-    expect(vm.tasks).toEqual({});
-    expect(vm.projects).toEqual({});
-    expect(vm.sortProp).toBe('idx');
-    expect(vm.reverseSort).toBe(false);
-    expect(vm.ready).toBe(false);
-    expect(vm.error).toBe(false);
-    expect(vm.showRawData).toBe(false);
-    expect(vm.title).toBe(expectedWindowTitle);
-    expect($document.title).toBe(expectedWindowTitle);
+  describe('initialisation', function() {
+    it('is done correctly', function() {
+      
+      var vm = $controller('tasksCtrl', {});
+  
+      var expectedWindowTitle = 'BOINC Tasks';
+  
+      expect(vm.tasks).toEqual({});
+      expect(vm.projects).toEqual({});
+      expect(vm.sortProp).toBe('idx');
+      expect(vm.reverseSort).toBe(false);
+      expect(vm.ready).toBe(false);
+      expect(vm.error).toBe(false);
+      expect(vm.showRawData).toBe(false);
+      expect(vm.title).toBe(expectedWindowTitle);
+      expect($document.title).toBe(expectedWindowTitle);
+    });
   });
 
   describe('getTasks', function() {
@@ -185,6 +206,39 @@ describe('tasksCtrl', function() {
       expect(task.overdue).toBeTruthy();
       expect(task.deadlineApproaching).toBeFalsy();
       expect(vm.ready).toBeTruthy();
+    });
+  });
+
+  describe('getDeadlineCLass', function() {
+
+    it('returns text-danger class if task is overdue', function() {
+
+      var task = { overdue: true };
+
+      var vm = $controller('tasksCtrl', {});
+      var result = vm.getDeadlineClass(task);
+
+      expect(result).toBe('text-danger');
+    });
+
+    it('returns text-warning if task is approaching deadline', function() {
+
+      var task = { deadlineApproaching: true };
+
+      var vm = $controller('tasksCtrl', {});
+      var result = vm.getDeadlineClass(task);
+
+      expect(result).toBe('text-warning');
+    });
+
+    it('returns undefined if task is neither overdue nor approaching deadline', function() {
+
+      var task = { deadlineApproaching: false, overdue: false };
+
+      var vm = $controller('tasksCtrl', {});
+      var result = vm.getDeadlineClass(task);
+
+      expect(result).toBeUndefined();
     });
   });
 });
