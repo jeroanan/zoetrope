@@ -268,4 +268,53 @@ describe('taskCtrl', function() {
       expect(vm.task.displayName).toEqual(truncatedTaskName);
     });
   });
+
+ describe('task operations', function() {
+
+   var vm;
+
+   beforeEach(function() {
+
+     var taskJson = readJSON('tests/json/task.json');
+     var projectsJson = readJSON('tests/json/attachedProjects.json');
+     vm = $controller('TaskCtrl', {});
+   });
+
+   it('taskSvc is called to suspend the task when suspendClicked is invoked', function() {
+
+     spyOn(taskSvc, 'suspendTask');
+     vm.suspendClicked();
+     expect(taskSvc.suspendTask).toHaveBeenCalled();
+   });
+
+   it('taskSvc is called to resume the task when resumeClicked is invoked', function() {
+
+     spyOn(taskSvc, 'resumeTask');
+     vm.resumeClicked();
+     expect(taskSvc.resumeTask).toHaveBeenCalled();
+   });
+
+   it('taskSvc is called to abort the task when abortTaskLinkClicked is invoked', function() {
+
+     spyOn(taskSvc, 'abortTask');
+     vm.abortTaskLinkClicked();
+     expect(taskSvc.abortTask).toHaveBeenCalled();
+   });
+
+   describe('abort button clicked', function() {
+
+     it('shows the abort confirmation link if it\'s not currenlty visible', function() {
+
+       vm.abortButtonClicked();
+       expect(vm.showConfirmAbort).toBeTruthy();
+     });
+
+     it('hides the abort confirmation link if it\'s currenlty visible', function() {
+
+       vm.showConfirmAbort = true;
+       vm.abortButtonClicked();
+       expect(vm.showConfirmAbort).toBeFalsy();
+     });
+   });
+ });
 });
