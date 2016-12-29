@@ -36,7 +36,7 @@ divert(0)dnl
     	    <span><strong>Report Deadline</strong></span>
 		  </div>
         <div class="col-xs-5 col-lg-4 keyvalrowcol">
-          <span ng-bind="vm.task.report_deadline" ng-class="vm.getDeadlineClass()"></span>
+          <span ng-bind="vm.task.report_deadline" ng-class="vm.getDeadlineClass(vm.task)"></span>
         </div>
         <div class="col-xs-6 col-lg-2" />
       </div>

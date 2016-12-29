@@ -50,7 +50,7 @@ describe('tasksCtrl', function() {
       expect(vm.error).toBe(false);
       expect(vm.showRawData).toBe(false);
       expect(vm.title).toBe(expectedWindowTitle);
-      expect($document.title).toBe(expectedWindowTitle);
+      expect($document[0].title).toBe(expectedWindowTitle);
     });
   });
 

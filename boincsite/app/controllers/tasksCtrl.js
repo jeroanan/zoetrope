@@ -34,7 +34,7 @@ function TasksController($document, $location, $log, taskSvc, projectSvc) {
   vm.showRawData = false;
   vm.title = 'BOINC Tasks';
 
-  $document.title = vm.title;
+  $document[0].title = vm.title;
 
   vm.load = load;
   vm.getDeadlineClass = getDeadlineClass;
@@ -190,6 +190,8 @@ function TasksController($document, $location, $log, taskSvc, projectSvc) {
    * Returns:
    * If the task is overdue or its deadline is approaching then the name of a
    * css class is returned. Otherwise, undefined.
+   *
+   * TODO: Move to taskSvc
    */
   function getDeadlineClass(task) {
 	 if (task.overdue) return 'text-danger';

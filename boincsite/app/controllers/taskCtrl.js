@@ -1,14 +1,28 @@
 /**
  * Controller for the task detail screen.
  *
- * (c) David Wilson 2016, licensed under GPL V3.
+ * Copyright (c) David Wilson 2016
+ * This file is part of Zoetrope.
+ * 
+ * Zoetrope is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Zoetrope is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Zoetrope.  If not, see <http://www.gnu.org/licenses/>.
  */
 angular.module('zoetropeControllers')
   .controller('TaskCtrl', TaskController);
 
-TaskController.$inject = ['$http', '$routeParams', 'taskSvc', 'projectSvc'];
+TaskController.$inject = ['$routeParams', '$document', '$location', 'taskSvc', 'projectSvc'];
 
-function TaskController($http, $routeParams, taskSvc, projectSvc) {
+function TaskController($routeParams, $document, $location, taskSvc, projectSvc) {
 
   var vm = this;
   vm.ready = false;
@@ -28,7 +42,7 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
   vm.abortTaskLinkClicked = getTaskOperation('abortTask', 'Task Aborted');
   vm.abortButtonClicked = abortButtonClicked;
 
-  document.title = vm.title;
+  $document[0].title = vm.title;
 
   load();
   
@@ -62,7 +76,6 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
   }
 
   function onError() {
-    var errorText = 'Task not found';
     vm.ready = true;
     vm.error = true;
   }
@@ -70,7 +83,7 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
   function gotTask(task) {
 
     if (task.error_message && task.error_message===-1414) {
-      document.location = '/#/login';
+      $location.path('/#/login');
       return;
     }
 
@@ -85,6 +98,7 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
     var deadlineApproaching = false;
 
     // Assume the date is something like 2016-06-09 21:08:00
+    // TODO: move this overdue/deadlineapproaching stuff into a service that can be tested.
     var deadlineSplit = task.report_deadline.split(' ')[0].split('-');
 	 
     if (deadlineSplit.length===3) {
@@ -103,20 +117,24 @@ function TaskController($http, $routeParams, taskSvc, projectSvc) {
     task.overdue = overdue;
     task.deadlineApproaching = deadlineApproaching;
     vm.task = task;	 
+    // TODO: Since we're only ever interested in one project here,
+    //       just ask the server for that one up-front.
     projectSvc.getAttachedProjects(gotProjects, onError);
   }
 
   function gotProjects(projects) {
     vm.task.project_name = get_project_name(vm.task, projects);
-    vm.task.state = get_state_string(vm.task);
+    vm.task.state = get_state_string(vm.task); // TODO: Why is this here and not in gotTask()?
+                                               // TODO: Also move the get_state_string into a svc
     vm.task.time_so_far = get_time_so_far(vm.task);
 	 	 
     vm.ready = true;
   }
 
-  function getDeadlineClass() {
-    if (vm.task.overdue) return 'text-danger';
-    if (vm.task.deadlineApproaching) return 'text-warning';	 
+  // TODO: Move to taskSvc
+  function getDeadlineClass(task) {
+    if (task.overdue) return 'text-danger';
+    if (task.deadlineApproaching) return 'text-warning';	 
   }
 
   function taskNameClicked() {
