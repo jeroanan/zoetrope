@@ -25,11 +25,11 @@ function ProjectsController(projectSvc) {
   vm.operationSuccessMessage = '';
   
   vm.detachClicked = detachClicked;
-  vm.updateClicked = getProjectOperation('updateProject2', 'Project updated successfully');
-  vm.noMoreWorkClicked = getProjectOperation('noMoreWork2', 'New tasks disallowed', 'dont_request_more_work', true);
-  vm.allowMoreWorkClicked = getProjectOperation('allowMoreWork2', 'New tasks re-allowed', 'dont_request_more_work', false);
-  vm.suspendProjectClicked = getProjectOperation('suspendProject2', 'Project suspended', 'suspended_via_gui', true);
-  vm.resumeProjectClicked = getProjectOperation('resumeProject2', 'Project resumed', 'suspended_via_gui', false);
+  vm.updateClicked = getProjectOperation('updateProject', 'Project updated successfully');
+  vm.noMoreWorkClicked = getProjectOperation('noMoreWork', 'New tasks disallowed', 'dont_request_more_work', true);
+  vm.allowMoreWorkClicked = getProjectOperation('allowMoreWork', 'New tasks re-allowed', 'dont_request_more_work', false);
+  vm.suspendProjectClicked = getProjectOperation('suspendProject', 'Project suspended', 'suspended_via_gui', true);
+  vm.resumeProjectClicked = getProjectOperation('resumeProject', 'Project resumed', 'suspended_via_gui', false);
   
   document.title = vm.title;
   load();
