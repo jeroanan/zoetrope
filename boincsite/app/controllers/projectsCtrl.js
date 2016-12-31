@@ -1,14 +1,28 @@
 /**
  * Controller for the attached projects screen.
  *
- * (c) David Wilson 2016, licensed under GPL V3.
+ * Copyright (c) David Wilson 2016
+ * This file is part of Zoetrope.
+ * 
+ * Zoetrope is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Zoetrope is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Zoetrope.  If not, see <http://www.gnu.org/licenses/>.
  */
 angular.module('zoetropeControllers')
   .controller('ProjectsCtrl', ProjectsController);
 
-ProjectsController.$inject = ['projectSvc'];
+ProjectsController.$inject = ['projectSvc', '$document', '$location'];
 
-function ProjectsController(projectSvc) {
+function ProjectsController(projectSvc, $document, $location) {
 
   var vm = this;
   vm.sortProp = 'name';
@@ -18,12 +32,13 @@ function ProjectsController(projectSvc) {
   vm.title = "BOINC Projects";  
   vm.detachUrl = '';
   vm.detachName = '';
-  vm.sort = getSortFunc(vm, 'sortProp', 'reverseSort');
   vm.error = false;
-  vm.load = load;
   vm.operationSuccess = false;
   vm.operationSuccessMessage = '';
   
+  vm.load = load;
+  vm.sort = getSortFunc(vm, 'sortProp', 'reverseSort');
+
   vm.detachClicked = detachClicked;
   vm.updateClicked = getProjectOperation('updateProject', 'Project updated successfully');
   vm.noMoreWorkClicked = getProjectOperation('noMoreWork', 'New tasks disallowed', 'dont_request_more_work', true);
@@ -31,7 +46,8 @@ function ProjectsController(projectSvc) {
   vm.suspendProjectClicked = getProjectOperation('suspendProject', 'Project suspended', 'suspended_via_gui', true);
   vm.resumeProjectClicked = getProjectOperation('resumeProject', 'Project resumed', 'suspended_via_gui', false);
   
-  document.title = vm.title;
+  $document[0].title = vm.title;
+
   load();
   
   function load() {
@@ -46,7 +62,7 @@ function ProjectsController(projectSvc) {
       var p = projects[0];
 
       if (p.error_message && p.error_message===-1414) {
-        document.location = '/#/login';
+        $location.path('/#/login');
         return;
       }
     }
@@ -61,6 +77,7 @@ function ProjectsController(projectSvc) {
   }
 
   function detachClicked(projectName, projectUrl) {
+    //TODO: How to unit test the showing of the modal dialog?
     var dialog = $('#detachModal');
 	 
     vm.detachUrl = projectUrl;
@@ -72,7 +89,7 @@ function ProjectsController(projectSvc) {
   function getProjectOperation(operationFunc, successMessage, propToChange, propValue) {
     return function(projectUrl) {
       resetProjectOperationSuccess();
-      projectSvc[operationFunc](projectUrl, function() {
+      projectSvc[operationFunc](projectUrl, function() { //TODO: Add operationError too.
         operationSuccess(successMessage);
 
         if (propToChange && propToChange) setProjectProperty(projectUrl, propToChange, propValue);

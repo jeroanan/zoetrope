@@ -2,6 +2,7 @@ module.exports = function(config) {
   config.set({
     basePath: 'boincsite/app',
     files: ['../templates/assets/js/jquery.min.js', 
+	    '../templates/assets/js/bootstrap.min.js',
             '../templates/assets/js/angular.min.js',
             '../templates/assets/js/angular-route.min.js',
 	    '../templates/assets/js/angular-resource.min.js',
