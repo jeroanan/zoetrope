@@ -1,33 +1,51 @@
 /**
  * Controller for the All Projects list screen.
  *
- * (c) David Wilson 2016, licensed under GPL V3.
+ * Copyright (c) David Wilson 2016-2017
+ * This file is part of Zoetrope.
+ * 
+ * Zoetrope is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Zoetrope is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Zoetrope.  If not, see <http://www.gnu.org/licenses/>.
  */
 angular.module('zoetropeControllers')
   .controller('allProjectListCtrl', AllProjectListController);
 
-AllProjectListController.$inject = ['projectSvc', 'systemInfoSvc'];
+AllProjectListController.$inject = ['$document', '$location', 'projectSvc', 'systemInfoSvc'];
 
-function AllProjectListController(projectSvc, systemInfoSvc) {
+function AllProjectListController($document, $location, projectSvc, systemInfoSvc) {
 
   var vm = this;
 
   vm.ready  = false;
+  vm.error = false;
   vm.title = 'All Projects';
   vm.sortProp = 'name';
   vm.reverseSort = false;
   vm.availableProjects = null;
-  vm.sort = getSortFunc(vm, 'sortProp', 'reverseSort');
   vm.allProjects = [];
+
+  vm.sort = getSortFunc(vm, 'sortProp', 'reverseSort'); //TODO: This (and similar functions in other controller)
+                                                        //      should be moved to a svc.
   vm.load = load;
   
-  document.title = vm.title;
+  $document[0].title = vm.title;
 
   load();
 
   function load() {
     vm.ready = false;
     vm.error = false;
+    //TODO: The names in this controller around getting available/attahced projects seem to be a mess.
     projectSvc.getAvailableProjects(gotAllProjects, serviceError);
   }
 
@@ -35,7 +53,7 @@ function AllProjectListController(projectSvc, systemInfoSvc) {
 
     if (projects.length>0 && projects[0].error_message && projects[0].error_message===-1414)
     {
-      document.location = '/#/login';
+      $location.path('/#/login');
       return;
     }
 
@@ -54,7 +72,7 @@ function AllProjectListController(projectSvc, systemInfoSvc) {
 
     if (projects.length>0 && projects[0].error_message && projects[0].error_message===-1414)
     {
-      document.location = '/#/login';
+      $location.path('/#/login');
       return;
     }		
 	 
@@ -76,7 +94,6 @@ function AllProjectListController(projectSvc, systemInfoSvc) {
       var supportedPlatform = x.platforms.filter(function(y) {
         return y.name===thisPlatform;		
       });
-
       x.supported = supportedPlatform.length > 0;
 
       return x;
