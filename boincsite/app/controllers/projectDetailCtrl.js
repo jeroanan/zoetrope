@@ -1,7 +1,7 @@
 /**
 * Controller for the Project detail screen.
 *
-* Copyright (c) David Wilson 2016
+* Copyright (c) David Wilson 2016-2017
 * This file is part of Zoetrope.
 * 
 * Zoetrope is free software: you can redistribute it and/or modify
@@ -18,21 +18,22 @@
 * along with Zoetrope.  If not, see <http://www.gnu.org/licenses/>.
 */
 angular.module('zoetropeControllers')
-  .controller('projectDetailCrl', ProjectDetailController);
+  .controller('projectDetailCtrl', ProjectDetailController);
 
-ProjectDetailController.$inject = ['$routeParams', 'projectSvc', 'systemInfoSvc'];
+ProjectDetailController.$inject = ['$routeParams', '$document', '$location', 'projectSvc', 'systemInfoSvc'];
 
-function ProjectDetailController($routeParams, projectSvc, systemInfoSvc) {
+function ProjectDetailController($routeParams, $document, $location, projectSvc, systemInfoSvc) {
   var vm = this;
 
   vm.ready = false;
   vm.project = {};
-  vm.attachClicked = attachClicked;
-  vm.detachClicked = detachClicked;
   vm.projectFound = false;
   vm.error = false;
-  vm.load = load;
   vm.gotPlatform = false;
+
+  vm.load = load;
+  vm.attachClicked = attachClicked;
+  vm.detachClicked = detachClicked;
   
   setTitle('Project Details');
 
@@ -56,7 +57,7 @@ function ProjectDetailController($routeParams, projectSvc, systemInfoSvc) {
   function gotAllProjects(projects) {
 	 
     if (projects.length>0 && projects[0].error_message && projects[0].error_message===-1414) {
-      document.location = '/#/login';
+      $location.path('/#/login');
       return;
     }
 	 
@@ -108,9 +109,8 @@ function ProjectDetailController($routeParams, projectSvc, systemInfoSvc) {
    */
   function setTitle(title) {
     vm.title = title;
-    document.title = vm.title;
+    $document[0].title = vm.title;
   }  
-
 
   /**
    * Callback made when list list of currently-attched projects has been retrieved
@@ -138,6 +138,7 @@ function ProjectDetailController($routeParams, projectSvc, systemInfoSvc) {
     vm.project.platformSupported = supportedPlatform.length>0;
     vm.gotPlatform = true;
 
+    //TODO: How to unit test the rest of this function?
     var supportedPlatformListItems = $('#supportedPlatforms').children('li:contains(' + platform.platform + ')');
 
     for (var i=0;i<supportedPlatformListItems.length;i++) {
