@@ -1,28 +1,43 @@
 /**
  * Controller for the Attach project screen.
  *
- * (c) David Wilson 2016, licensed under GPL V3.
+ * Copyright (c) David Wilson 2016-2017
+ * This file is part of Zoetrope.
+ * 
+ * Zoetrope is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Zoetrope is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Zoetrope.  If not, see <http://www.gnu.org/licenses/>.
  */
 angular.module('zoetropeControllers')
   .controller('attachProjectCtrl', AttachProjectController);
 
-AttachProjectController.$inject = ['projectSvc', 'md5Svc'];
+AttachProjectController.$inject = ['$location', 'projectSvc', 'md5Svc'];
 
-function AttachProjectController(projectSvc, md5Svc) {
+function AttachProjectController($location, projectSvc, md5Svc) {
 
   var vm = this;
   vm.selectedProject = '';
   vm.emailaddress = '';
   vm.password = '';
-  vm.submitClicked = submitClicked;
   vm.ready = false;
   vm.title = 'Attach Project';
   vm.errorText = '';
   vm.success = false;
   vm.loading = false;
+
+  vm.submitClicked = submitClicked;
   vm.selectedProjectChanged = selectedProjectChanged;
   
-  projectSvc.getAvailableProjects(gotProjects);  
+  projectSvc.getAvailableProjects(gotProjects); //TODO: no error handling
 
   document.title = vm.title;
 
@@ -45,10 +60,10 @@ function AttachProjectController(projectSvc, md5Svc) {
     }
 
     var hash_in = vm.password + vm.emailaddress;
-    var password_hash = md5Svc.query(hash_in)();
+    var password_hash = md5Svc.query(hash_in);
     vm.loading = true;
 	 
-    projectSvc.attachProject(vm.selectedProject, vm.emailaddress, password_hash, '', false, projectAttached);
+    projectSvc.attachProject(vm.selectedProject, vm.emailaddress, password_hash, '', false, projectAttached); //TODO: no error handling
   }
 
   function projectAttached(d) {
@@ -61,7 +76,7 @@ function AttachProjectController(projectSvc, md5Svc) {
 
   function loginCheck(xhr) {
     if (xhr.error_message && xhr.error_message===-1414) {
-      document.location = '/#/login';
+      $location.path('/#/login');
       return false;
     }
     return true;

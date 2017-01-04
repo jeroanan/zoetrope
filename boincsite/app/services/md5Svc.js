@@ -238,10 +238,7 @@ function md5Service($resource) {
   
   var svc = {
     query: function(text) {
-		
-      return function() {
         return hex_md5(text);
-      };
     }
   };
   
