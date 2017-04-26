@@ -1,4 +1,4 @@
-# Copyright (c) David Wilson 2016
+# Copyright (c) David Wilson 2016, 2017
 # This file is part of Zoetrope.
 # 
 # Zoetrope is free software: you can redistribute it and/or modify
@@ -41,7 +41,7 @@ class UserTasks(object):
 
         Params:
         user_id: An login name for the user. 
-        password: A password for the new user.
+        password: A plaintext password for the new user. 
 
         Returns:
         An instance of SuccessError. If the user was saved successfully then its success flag will be set to True.
@@ -55,24 +55,37 @@ class UserTasks(object):
             ret_val.error_message = 'User names cannot contain the pipe (|) character'
             return ret_val
 
-        conn, c = self.get_connection()
-
-        sql = 'SELECT UserId FROM User WHERE userId=?'
-        results = c.execute(sql, (user_id,))
-
-        if not any(results.fetchall()):
+        if not self.user_exists(user_id):
             hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
+            conn, c = self.get_connection()
 
             sql = 'INSERT INTO User VALUES (?, ?)'
             c.execute(sql, (user_id, hashed_password))
+
+            conn.commit()
+            c.close()
         else:
             ret_val.success = False
             ret_val.error_message = 'User {user_id} already exists'.format(user_id=user_id)
 
-        conn.commit()
+        return ret_val
+
+    def user_exists(self, user_id):
+        """
+        Does a user with the given id exist?
+
+        Returns: True if it does, otherwise False
+        """
+        conn, c = self.get_connection()
+        sql = 'SELECT UserId FROM User WHERE userId=?'
+        results = c.execute(sql, (user_id,))
+
+        exists = any(results.fetchall())
+
         c.close()
 
-        return ret_val
+        return exists
 
     def get_users(self):
         """

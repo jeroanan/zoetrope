@@ -1,3 +1,7 @@
+# Copyright (c) David Wilson 2016, 2017
+#
+# Licensed under the GPL version 3
+
 import os
 
 import logging
@@ -16,3 +20,7 @@ WorkingDirectory = os.path.dirname(os.path.abspath(__file__))
 database_file = WorkingDirectory + '/zoetrope.db'
 
 authentication_enabled = False
+
+# The following two should be changed. 
+default_username = 'user'
+default_password = 'password'
