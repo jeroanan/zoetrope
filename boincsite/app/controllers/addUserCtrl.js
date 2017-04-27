@@ -1,14 +1,14 @@
 /**
  * Controller for the Add User screen.
  *
- * (c) David Wilson 2016, licensed under GPL V3.
+ * (c) David Wilson 2016, 2017, licensed under GPL V3.
  */
 angular.module('zoetropeControllers')
   .controller('addUserCtrl', addUserController);
 
-addUserController.$inject = ['userSvc'];
+addUserController.$inject = ['userSvc', 'zoetropeSvc'];
 
-function addUserController(userSvc) {
+function addUserController(userSvc, zoetropeSvc) {
   var vm = this;
   
   vm.title = 'Add User';
@@ -24,7 +24,22 @@ function addUserController(userSvc) {
   vm.submitClicked = submitClicked;
 
   document.title = vm.title;
+
+  load();
   
+  function load() {
+    function gotStatus(xhr) {
+      if(!xhr.logged_in)
+        document.location = '/#/login';
+    }
+
+    function gotStatusError(xhr) {
+      document.location = '/#/login';
+    }
+
+    zoetropeSvc.getStatus(gotStatus, gotStatusError);
+  }
+
   function submitClicked() {
     vm.errorText = '';
     vm.operationSuccess = null;
