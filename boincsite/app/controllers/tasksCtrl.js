@@ -1,7 +1,7 @@
 /**
 * Controller for the tasks screen.
 *
-* Copyright (c) David Wilson 2016
+* Copyright (c) David Wilson 2016, 2017
 * This file is part of Zoetrope.
 * 
 * Zoetrope is free software: you can redistribute it and/or modify
@@ -20,9 +20,9 @@
     
 angular.module('zoetropeControllers').controller('tasksCtrl', TasksController);
 
-TasksController.$inject = ['$document', '$location', '$log', 'taskSvc', 'projectSvc'];
+TasksController.$inject = ['$document', '$location', '$log', '$rootScope', 'taskSvc', 'projectSvc'];
 
-function TasksController($document, $location, $log, taskSvc, projectSvc) {
+function TasksController($document, $location, $log, $rootScope, taskSvc, projectSvc) {
 
   var vm = this;
   vm.tasks = {};
@@ -58,7 +58,6 @@ function TasksController($document, $location, $log, taskSvc, projectSvc) {
    * tasks: The list of tasks that was retrieved
    */
   function gotTasks(tasks) {
-    vm.tasks = tasks;
 
     // If there were any tasks then go on processing. Otherwise,
     // just indicate that the screen is ready to stop any further
@@ -66,14 +65,17 @@ function TasksController($document, $location, $log, taskSvc, projectSvc) {
     if (tasks.length>0) {
       var t = tasks[0];
 		
-      if (t.error_message && t.error_message===-1414) {
-        $location.path('/#/login');
+      if (!t.success && t.error_message==-1414) {
+        document.location = '/#/login';
         return;
       }
 
       projectSvc.getAttachedProjects(gotProjects, serviceError);
     }
-    else vm.ready = true;
+    else {
+      vm.ready = true;
+      vm.tasks = tasks;
+    }
   }
 
   /**

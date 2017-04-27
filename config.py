@@ -19,7 +19,7 @@ WorkingDirectory = os.path.dirname(os.path.abspath(__file__))
 
 database_file = WorkingDirectory + '/zoetrope.db'
 
-authentication_enabled = False
+authentication_enabled = True
 
 # The following two should be changed. 
 default_username = 'user'
