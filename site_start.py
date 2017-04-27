@@ -1,4 +1,4 @@
-# Copyright (c) David Wilson 2015, 2016
+# Copyright (c) David Wilson 2015, 2016, 2017
 # This file is part of Zoetrope.
 # 
 # Zoetrope is free software: you can redistribute it and/or modify
@@ -31,6 +31,7 @@ import boincsite.boinc.SystemInfoTasks as sit
 import boincsite.boinc.UserTasks as ut
 
 import boincsite.status.DiskUsage as duj
+import boincsite.status.Status as status
 
 import boincsite.util.JSONAttrEncoder as jsae
 
@@ -290,6 +291,12 @@ class WebServer(object):
     def logout(self, **kwargs):
         cherrypy.session['LoggedIn'] = None
         raise cherrypy.HTTPRedirect('/')
+
+    @cherrypy.expose
+    def zoetrope_status(self, **kwargs):
+        s = status.Status()
+        s.logged_in = cherrypy.session.get('LoggedIn', 0) == 1
+        return json.dumps(s, self.__io, cls=jsae.JSONEncoder)
         
     @cherrypy.expose
     def experimental_task(self, **kwargs):

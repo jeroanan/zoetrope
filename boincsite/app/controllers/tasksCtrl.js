@@ -71,8 +71,6 @@ function TasksController($document, $location, $log, $rootScope, taskSvc, projec
       }
 
       projectSvc.getAttachedProjects(gotProjects, serviceError);
-    }
-    else {
       vm.ready = true;
       vm.tasks = tasks;
     }

@@ -7,7 +7,7 @@ define(zoe_external_script, `dnl
 
 divert(0)dnl
 <!DOCTYPE html>
- <html lang="en" ng-app="zoetrope">
+ <html lang="en" ng-app="zoetrope" ng-controller="indexCtrl">
    <head>
      <meta charset="utf-8">
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
