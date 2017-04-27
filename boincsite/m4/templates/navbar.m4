@@ -17,7 +17,7 @@ define(zoe_navbar_start, `dnl
       <ul class="nav navbar-nav">')
 
 define(zoe_begin_dropdown_menu, `dnl
-        <li class="dropdown collapse">
+        <li class="dropdown collapse" ng-show="logged_in">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
             $1 <span class="caret"></span>
           </a>
@@ -28,7 +28,7 @@ define(zoe_end_dropdown_menu, `dnl
         </li>')
 		  
 define(zoe_menu_item, `dnl
-        <li><a href="$1">$2</a></li>')
+        <li ng-show="logged_in"><a href="$1">$2</a></li>')
 
 define(zoe_dropdown_menu_item, `dnl
     zoe_menu_item(`$1', `$2')')
@@ -68,7 +68,6 @@ zoe_end_dropdown_menu
 zoe_begin_dropdown_menu(User Management)
 zoe_menu_item(#/adduser, Add User)
 zoe_menu_item(#/manageusers, Manage Users)
-zoe_menu_item(#/login, Login)
 zoe_menu_item(/logout, Logout)
 zoe_end_dropdown_menu
 zoe_navbar_end

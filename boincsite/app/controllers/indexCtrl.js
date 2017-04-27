@@ -27,6 +27,7 @@ function IndexController($scope, zoetropeSvc) {
 
   function load() {
     function gotStatus(xhr) {
+      $scope.logged_in = xhr.logged_in;
     }
 
     function gotStatusError() {
