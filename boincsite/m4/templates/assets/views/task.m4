@@ -5,6 +5,7 @@ include(boincsite/m4/templates/assets/views/views_common.m4)
   
 divert(0)dnl
 <div>
+  zoe_level_one_breadcrumb(Task Summary)
   zoe_page_title(vm.title)
   zoe_loading_panel
   zoe_error_panel(task)
