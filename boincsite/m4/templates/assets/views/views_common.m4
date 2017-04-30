@@ -125,4 +125,12 @@ define(zoe_level_one_breadcrumb, `dnl
   zoe_active_breadcrumb_item($1)
   zoe_end_breadcrumb
 ')dnl
+
+define(zoe_level_two_breadcrumb, `dnl
+  zoe_begin_breadcrumb
+  zoe_breadcrumb_item(/`#'/, Home)
+  zoe_breadcrumb_item($1, $2)
+  zoe_active_breadcrumb_item($3)
+  zoe_end_breadcrumb
+')dnl
 dnl END BREADCRUMBS

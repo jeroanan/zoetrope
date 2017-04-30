@@ -4,6 +4,7 @@ changecom(@@)
 include(boincsite/m4/templates/assets/views/views_common.m4)
   
 divert(0)dnl
+zoe_level_two_breadcrumb(/`#'/getallprojectlist, All Projects, Project Details)
 zoe_page_title(vm.title)
 zoe_loading_panel
 <div ng-show="vm.ready && !vm.projectFound">
