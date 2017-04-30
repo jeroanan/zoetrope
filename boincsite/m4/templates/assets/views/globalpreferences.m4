@@ -1,6 +1,7 @@
 divert(-1)
 include(boincsite/m4/templates/assets/views/views_common.m4)
 divert(0)dnl
+zoe_level_one_breadcrumb(Global Preferences)
 zoe_page_title(vm.title)
 zoe_loading_panel
 zoe_error_panel(global preferences)

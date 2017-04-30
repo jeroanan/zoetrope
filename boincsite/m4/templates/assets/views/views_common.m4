@@ -102,4 +102,27 @@ define(zoe_two_column_row,
     </div>    
     `ifelse(len($3),0,, <div class="col-xs-3" ng-bind="$4" ng-show="$4.toString().length>0"></div>)'
     `ifelse(len($3),0,, <div class="col-xs-3" ng-show="$4.toString().length===0">(no data)</div>)'
-  </div>)
+  </div>)dnl
+
+
+dnl BREADCRUMB FUNCTIONS 
+
+define(zoe_begin_breadcrumb, `dnl
+<ol class="breadcrumb">')dnl
+
+define(zoe_breadcrumb_item, `dnl
+<li><a href="$1">$2</a></li>')dnl
+
+define(zoe_active_breadcrumb_item, `dnl
+<li><a class="active">$1</a></li>')dnl
+
+define(zoe_end_breadcrumb, `dnl
+</ol>')dnl
+
+define(zoe_level_one_breadcrumb, `dnl
+  zoe_begin_breadcrumb
+  zoe_breadcrumb_item(/`#'/, Home)
+  zoe_active_breadcrumb_item($1)
+  zoe_end_breadcrumb
+')dnl
+dnl END BREADCRUMBS

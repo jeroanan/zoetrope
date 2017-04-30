@@ -151,7 +151,7 @@ module.exports = function(grunt) {
 					 'm4:project',
 					 'm4:allprojectlist',
 					 'm4:projectdetail',
-					 'm4:messsages']
+					 'm4:messages']
 		}		
          },
 	 jshint: {

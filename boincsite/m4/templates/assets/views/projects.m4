@@ -7,7 +7,9 @@ define(zoe_dropdown_action_show, `dnl
 
 divert(0)dnl
 <div>
+  zoe_level_one_breadcrumb(Projects)
   zoe_page_title(vm.title)
+
   zoe_loading_panel
   zoe_error_panel(project)
   zoe_success_panel
