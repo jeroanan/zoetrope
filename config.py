@@ -1,4 +1,4 @@
-# Copyright (c) David Wilson 2016, 2017
+# Copyright (c) David Wilson 2016, 2017, 2021
 #
 # Licensed under the GPL version 3
 

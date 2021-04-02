@@ -1,4 +1,4 @@
-# Copyright (c) David Wilson 2015, 2016, 2017
+# Copyright (c) David Wilson 2015, 2016, 2017, 2021
 # This file is part of Zoetrope.
 # 
 # Zoetrope is free software: you can redistribute it and/or modify
