@@ -51,7 +51,7 @@ class WebServer(object):
         if conf.rpc_password is not None:
             self.__client.authorize(conf.rpc_password)
 
-        self.__project_tasks = pt.ProjectTasks()
+        self.__project_tasks = pt.ProjectTasks(self.__client)
         self.__task_tasks = tt.TaskTasks(self.__client)
         self.__system_info_tasks = sit.SystemInfoTasks()
         self.__user_tasks = ut.UserTasks()

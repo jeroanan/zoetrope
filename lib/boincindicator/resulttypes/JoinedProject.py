@@ -1,4 +1,4 @@
-# Copyright (c) David Wilson 2015, 2016
+# Copyright (c) David Wilson 2015, 2016, 2021
 # This file is part of Zoetrope.
 # 
 # Zoetrope is free software: you can redistribute it and/or modify
@@ -46,7 +46,9 @@ class JoinedProject(struct.Struct):
                        'sched_rpc_pending',
                        'attached_via_acct_mgr',
                        'detach_when_done',
-                       'upload_backoff'
+                       'upload_backoff',
+                       'disk_usage',
+                       'disk_share'
         ]
         
         self.master_url = ''
@@ -107,6 +109,8 @@ class JoinedProject(struct.Struct):
                                    # trying again. Its text value represents a timestamp since epoch. The
                                    # difference between epoch and that timestamp is how long remains until
                                    # the upload is retried. e.g. 15933.489031
+        self.disk_usage = ''
+        self.disk_share = ''
 
     @classmethod
     def parse(cls, xml):

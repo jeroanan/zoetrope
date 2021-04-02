@@ -1,4 +1,4 @@
-# Copyright (c) David Wilson 2015, 2016
+# Copyright (c) David Wilson 2015, 2016, 2021
 # This file is part of Zoetrope.
 # 
 # Zoetrope is free software: you can redistribute it and/or modify
@@ -32,8 +32,15 @@ class ProjectTasks(object):
     Handles tasks that perform project operations
     """
 
-    def __init__(self):
-        self.__client = client.BoincClient()
+    def __init__(self, client):
+        """
+        Constructor
+
+        Params:
+
+        client - an instance of lib.boincindicator.client
+        """
+        self.__client = client
 
     def get_all_projects_list(self):
         """
