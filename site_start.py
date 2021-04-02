@@ -326,8 +326,9 @@ class WebServer(object):
 if __name__=='__main__':
     cwd = os.getcwd()
     from cherrypy.process.plugins import Daemonizer
-    d = Daemonizer(cherrypy.engine)
-    d.subscribe()
+    if conf.daemonize:
+        d = Daemonizer(cherrypy.engine)
+        d.subscribe()
 
     ws = WebServer()
     ws.start(cwd)

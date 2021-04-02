@@ -21,6 +21,11 @@ database_file = WorkingDirectory + '/zoetrope.db'
 
 authentication_enabled = True
 
+# Should we daemonize cherrpy on start?
+# When running in Docker we shouldn't; if you're just running
+# in the console then maybe you'd want to.
+daemonize = False
+
 # The following two should be changed. 
 default_username = 'user'
 default_password = 'password'
