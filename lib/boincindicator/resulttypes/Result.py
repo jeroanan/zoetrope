@@ -1,4 +1,4 @@
-# Copyright (c) David Wilson 2015, 2016
+# Copyright (c) David Wilson 2015, 2016, 2021
 #
 # Based on code from Boinc Indicator, (C) 2013 Rodrigo Silva (MestreLion) <linux@rodrigosilva.com>
 #
@@ -53,7 +53,9 @@ class Result(struct.Struct):
                        'fraction_done',
                        'swap_size',
                        'working_set_size',
-                       'estimated_cpu_time_remaining']
+                       'estimated_cpu_time_remaining',
+                       'platform',
+                       'progress_rate']
         
         # Names and values follow lib/gui_rpc_client.h @ RESULT
         # Order too, except when grouping contradicts client/result.cpp
@@ -133,6 +135,8 @@ class Result(struct.Struct):
         self.avp                          = None  # APP_VERSION*
         self.bytes_sent                   = ''
         self.bytes_received               = ''
+        self.platform                     = ''
+        self.progress_rate                = ''
 
     @property
     def report_deadline(self):
