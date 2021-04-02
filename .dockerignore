@@ -1,0 +1,11 @@
+env/
+db.sqlite3
+__pycache__/
+deploy*.sh
+node_modules
+zoetrope.db
+*.swp
+*.swo
+*.log
+.gitignore
+.git/
