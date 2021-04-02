@@ -4,7 +4,7 @@
 # client.py - Somewhat higher-level GUI_RPC API for BOINC core client
 #
 #    Copyright (C) 2013 Rodrigo Silva (MestreLion) <linux@rodrigosilva.com>
-#    Further modifications for Zoetrope project (C) 2016 David Wilson <davidwil@posteo.de>
+#    Further modifications for Zoetrope project (C) 2016, 2021 David Wilson <davidwil@posteo.de>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -66,7 +66,7 @@ class BoincClient(object):
         self.hostname   = host[0]
         self.port       = int(host[1]) if len(host)==2 else 0
         self.passwd     = passwd
-        self.rpc        = rpc.Rpc(text_output=False)
+        self.rpc        = rpc.Rpc(text_output=False, hostname=self.hostname, port=self.port)
         self.version    = None
         self.authorized = False
 

@@ -21,6 +21,7 @@ import os
 
 import cherrypy
 
+import lib.boincindicator.client as client
 import lib.boincindicator.resulttypes.SuccessError as se
 
 import config as conf
@@ -45,8 +46,13 @@ class WebServer(object):
 
         dbinit.init_db()
 
+        self.__client = client.BoincClient(host=conf.rpc_hostname)
+
+        if conf.rpc_password is not None:
+            self.__client.authorize(conf.rpc_password)
+
         self.__project_tasks = pt.ProjectTasks()
-        self.__task_tasks = tt.TaskTasks()
+        self.__task_tasks = tt.TaskTasks(self.__client)
         self.__system_info_tasks = sit.SystemInfoTasks()
         self.__user_tasks = ut.UserTasks()
         self.__io = StringIO()
@@ -242,12 +248,12 @@ class WebServer(object):
         authentication_result = self.authenticate(as_list)
         
         if authentication_result is not None and conf.authentication_enabled:
-             return json.dumps(authentication_result, self.__io, cls=jsae.JSONEncoder)
+             return json.dumps(authentication_result, cls=jsae.JSONEncoder)
 
         result = list(func()) if as_list else func()
 
         if result is not None:
-            return json.dumps(result, self.__io, cls=json_encoder)
+            return json.dumps(result, cls=json_encoder)
 
     @cherrypy.expose
     def delete_user_json(self, **kwargs):
@@ -285,7 +291,7 @@ class WebServer(object):
         if result.success==True:
             cherrypy.session['LoggedIn'] = 1
             
-        return json.dumps(result, self.__io, cls=jsae.JSONEncoder)
+        return json.dumps(result, cls=jsae.JSONEncoder)
 
     @cherrypy.expose
     def logout(self, **kwargs):
@@ -296,7 +302,7 @@ class WebServer(object):
     def zoetrope_status(self, **kwargs):
         s = status.Status()
         s.logged_in = cherrypy.session.get('LoggedIn', 0) == 1
-        return json.dumps(s, self.__io, cls=jsae.JSONEncoder)
+        return json.dumps(s, cls=jsae.JSONEncoder)
         
     @cherrypy.expose
     def experimental_task(self, **kwargs):

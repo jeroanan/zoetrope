@@ -1,8 +1,7 @@
-# Copyright (c) David Wilson 2016
+# Copyright (c) David Wilson 2016, 2021
 #
 # Licensed under the GPL version 3
 
-import lib.boincindicator.client as client
 import lib.boincindicator.resulttypes.Result as r
 
 import config as c
@@ -16,6 +15,17 @@ class TaskTasks(object):
     Handles tasks that perform Task operations
     """
 
+
+    def __init__(self, client):
+        """
+        Constructor
+
+        Params:
+
+        client - an instance of lib.boincindicator.client
+        """
+        self.__client = client
+
     def get_tasks(self):
         """
         Get all tasks
@@ -24,7 +34,7 @@ class TaskTasks(object):
 	and tasks that have been completed or aborted but haven't been uploaded yet.
         """
         try:
-            return client.BoincClient().get_results(False)
+            return self.__client.get_results(False)
         except ConnectionRefusedError:
             # ConnectionRefusedError will happen if the site is running on a box with no boinc installation.
             return []
