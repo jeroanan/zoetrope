@@ -19,7 +19,7 @@ WorkingDirectory = os.path.dirname(os.path.abspath(__file__))
 
 database_file = WorkingDirectory + '/zoetrope.db'
 
-authentication_enabled = True
+authentication_enabled = False
 
 # Should we daemonize cherrpy on start?
 # When running in Docker we shouldn't; if you're just running
