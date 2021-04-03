@@ -1,4 +1,4 @@
-# Copyright (c) David Wilson 2016
+# Copyright (c) David Wilson 2016, 2021
 #
 # Licensed under the GPL version 3
 
@@ -9,7 +9,6 @@ import config as conf
 
 import xml.etree.ElementTree
 
-import lib.boincindicator.client as client
 import lib.boincindicator.resulttypes.GlobalPreferences as gp
 
 import boincsite.boinc.AuthorizedTask as at
@@ -26,8 +25,15 @@ class SystemInfoTasks(object):
     Handles tasks that relate to information about the running BOINC client and the computer it is hosted on.
     """
 
-    def __init__(self):
-        self.__client = client.BoincClient()
+    def __init__(self, client):
+        """
+        Constructor
+
+        Params:
+
+        client - an instance of lib.boincindicator.client
+        """
+        self.__client = client
 
     def get_daily_transfer_history(self):
         """

@@ -53,7 +53,7 @@ class WebServer(object):
 
         self.__project_tasks = pt.ProjectTasks(self.__client)
         self.__task_tasks = tt.TaskTasks(self.__client)
-        self.__system_info_tasks = sit.SystemInfoTasks()
+        self.__system_info_tasks = sit.SystemInfoTasks(self.__client)
         self.__user_tasks = ut.UserTasks()
         self.__io = StringIO()
         self.__cwd = ''
