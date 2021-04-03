@@ -1,3 +1,4 @@
 bcrypt
 cherrypy
+cherrypy-cors
 uptime

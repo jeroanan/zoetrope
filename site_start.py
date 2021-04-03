@@ -20,6 +20,7 @@ import logging
 import os
 
 import cherrypy
+import cherrypy_cors
 
 import lib.boincindicator.client as client
 import lib.boincindicator.resulttypes.SuccessError as se
@@ -59,6 +60,7 @@ class WebServer(object):
         self.__cwd = ''
         
     def start(self, cwd):
+        cherrypy_cors.install()
         self.__cwd = cwd
         cherrypy.quickstart(self, '/', 'server.conf')
 
