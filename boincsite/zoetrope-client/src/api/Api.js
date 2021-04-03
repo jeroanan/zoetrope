@@ -8,8 +8,10 @@ const getData = (cb,ep) => {
 
 const getTasks = cb => getData(cb, 'tasks_json');
 const getProjects = cb => getData(cb, 'projects_json');
+const getMessages = cb => getData(cb, 'messages_json');
 
 export { 
   getTasks,
   getProjects,
+  getMessages,
 };
