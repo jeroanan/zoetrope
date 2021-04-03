@@ -1,4 +1,4 @@
-# Copyright (c) David Wilson 2015, 2016
+# Copyright (c) David Wilson 2015, 2016, 2021
 #
 # Based on code from Boinc Indicator, (C) 2013 Rodrigo Silva (MestreLion) <linux@rodrigosilva.com>
 #
@@ -46,6 +46,10 @@ class HostInfo(struct.Struct):
 
         # The following are currently unused (not in RPC XML)
         self.serialnum    = ""   #// textual description of coprocessors
+
+        self.n_usable_coprocs = ""
+        self.wsl_available = ""
+
 
     @classmethod
     def parse(cls, xml):

@@ -1,4 +1,4 @@
-# Copyright (c) David Wilson 2015, 2016
+# Copyright (c) David Wilson 2015, 2016, 2021
 #
 # Licensed under the GPL version 3
 
@@ -12,7 +12,20 @@ from xml.etree import ElementTree
 class AvailableProject(struct.Struct):
 
     def __init__(self):
-        self.fields = ['name', 'url', 'general_area', 'specific_area', 'description', 'home', 'platforms', 'image', 'summary']
+        self.fields = [
+                'name', 
+                'url', 
+                'general_area', 
+                'specific_area', 
+                'description', 
+                'home', 
+                'platforms', 
+                'image', 
+                'summary',
+                'id',
+                'web_url',
+                'keywords']
+
         self.name = ''
         self.url = ''
         self.general_area = ''
@@ -22,6 +35,9 @@ class AvailableProject(struct.Struct):
         self.platforms = []
         self.image = ''
         self.summary = ''
+        self.id = ''
+        self.web_url = ''
+        self.keywords = ''
 
     @classmethod
     def parse(cls, xml):
