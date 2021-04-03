@@ -70,7 +70,18 @@ class WebServer(object):
             return f.read()
 
     @cherrypy.expose
+    def tasks_json(self, **kwargs):
+        """GET the list of tasks"""
+        return self.do_authenticated_request(self.__task_tasks.get_tasks)
+
+    @cherrypy.expose
     def task_json(self, **kwargs):
+        """
+        GET a single task.
+
+        Querystring Params:
+            task_name -- the name of the task to get details of
+        """
         def f():
             task_name = kwargs.get('task_name', '')
             return self.__task_tasks.get_task(task_name)
@@ -96,10 +107,6 @@ class WebServer(object):
     @cherrypy.expose
     def messages_json(self, **kwargs):
         return self.do_authenticated_request(self.__system_info_tasks.get_messages)
-
-    @cherrypy.expose
-    def tasks_json(self, **kwargs):
-        return self.do_authenticated_request(self.__task_tasks.get_tasks)
 
     @cherrypy.expose
     def disk_usage_json(self, **kwargs):
