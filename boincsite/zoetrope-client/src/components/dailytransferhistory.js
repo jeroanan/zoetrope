@@ -40,7 +40,7 @@ const DailyTransferHistory = () => {
         </tr>
       </thead>
       <tbody>
-        {transferHistory.map(x => (
+        {transferHistory.length && transferHistory.map(x => (
           <tr key={x.when}>
             <td>{x.when}</td>
             <td>{x.up}MB</td>
