@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { getDiskUsage } from '../api/Api';
+import { LabelValueRow } from './primitives/row';
 
 const DiskUsage = () => {
 
@@ -39,17 +40,5 @@ const DiskUsage = () => {
   );
 };
 
-
-const LabelValueRow = ({label, value}) => {
-  return (
-    <div className="row">
-      <div className="col-xs-1 col-lg-2"></div>
-      <div className="col-xs-5 col-lg-4">{label}</div>
-      <div className="col-xs-5 col-lg-4">{value}</div>
-      <div className="col-xs-1 col-lg-2"></div>
-    </div>
-  );
-  
-};
 export default DiskUsage;
 

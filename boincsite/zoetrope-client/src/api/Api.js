@@ -11,6 +11,7 @@ const getProjects = cb => getData(cb, 'projects_json');
 const getMessages = cb => getData(cb, 'messages_json');
 const getDiskUsage = cb => getData(cb, 'disk_usage_json');
 const getHostInfo = cb => getData(cb, 'host_info_json');
+const getDailyTransferHistory = cb => getData(cb, 'daily_transfer_history_json');
 
 export { 
   getTasks,
@@ -18,4 +19,5 @@ export {
   getMessages,
   getDiskUsage,
   getHostInfo,
+  getDailyTransferHistory,
 };
