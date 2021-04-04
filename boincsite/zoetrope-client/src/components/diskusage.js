@@ -25,7 +25,7 @@ const DiskUsage = () => {
         </tr>
       </thead>
       <tbody>
-        {diskUsage.project_disk_usages.map(x => {
+        {diskUsage.project_disk_usages && diskUsage.project_disk_usages.map(x => {
           return (
             <tr key={x.master_url}>
               <td><a href={x.master_url}>{x.master_url}</a></td>
