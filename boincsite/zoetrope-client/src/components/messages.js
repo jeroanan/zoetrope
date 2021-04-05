@@ -13,7 +13,7 @@ const Messages = () => {
   return (
     <>
     <h2>Messages</h2>
-    <table>
+    <table className="table table-striped">
       <thead>
         <tr>
           <th>#</th>
@@ -28,6 +28,7 @@ const Messages = () => {
             <tr key={x.seqno}>
               <td>{x.seqno}</td>
               <td>{x.time}</td>
+              <td>{x.project}</td>
               <td>{x.body}</td>
             </tr>
           );
