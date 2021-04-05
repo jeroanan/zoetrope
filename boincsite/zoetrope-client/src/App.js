@@ -1,4 +1,5 @@
-import logo from './logo.svg';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
 import './App.css';
 
 import TaskList from './components/tasklist';
@@ -12,7 +13,31 @@ import GlobalPreferences from './components/globalpreferences';
 function App() {
   return (
     <div className="App">
-      <GlobalPreferences />
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            <TaskList />
+          </Route>
+          <Route path="/projects">
+            <ProjectList />
+          </Route>
+          <Route path="/messages">
+            <Messages />
+          </Route>
+          <Route path="/diskusage">
+            <DiskUsage />
+          </Route>
+          <Route path="/hostinfo">
+            <HostInfo />
+          </Route>
+          <Route path="/dailytransferhistory">
+            <DailyTransferHistory />
+          </Route>
+          <Route path="/globalpreferences">
+            <GlobalPreferences />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
