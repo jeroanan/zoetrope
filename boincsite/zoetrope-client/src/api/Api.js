@@ -12,6 +12,7 @@ const getMessages = cb => getData(cb, 'messages_json');
 const getDiskUsage = cb => getData(cb, 'disk_usage_json');
 const getHostInfo = cb => getData(cb, 'host_info_json');
 const getDailyTransferHistory = cb => getData(cb, 'daily_transfer_history_json');
+const getGlobalPreferences = cb => getData(cb, 'get_global_preferences_json');
 
 export { 
   getTasks,
@@ -20,4 +21,5 @@ export {
   getDiskUsage,
   getHostInfo,
   getDailyTransferHistory,
+  getGlobalPreferences,
 };

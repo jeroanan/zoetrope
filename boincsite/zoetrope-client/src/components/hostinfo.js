@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { getHostInfo } from '../api/Api';
+import { FourColumnRow } from './primitives/row';
 
 const HostInfo = () => {
   
@@ -16,7 +17,6 @@ const HostInfo = () => {
 
     return FourColumnRow({col1, col2});
   };
-
 
   return (
     <>
@@ -35,21 +35,6 @@ const HostInfo = () => {
   );
 };
 
-
-const FourColumnRow = ({col1, col2}) => {
-
-  const { col1Label, col1Value } = col1;
-  const { col2Label, col2Value } = col2;
-
-  return (
-    <div className="row">
-      <div className="col-3">{col1Label}</div>
-      <div className="col-3">{col1Value}</div>
-      <div className="col-3">{col2Label}</div>
-      <div className="col-3">{col2Value}</div>
-    </div>
-  );
-};
 
 export default HostInfo;
 

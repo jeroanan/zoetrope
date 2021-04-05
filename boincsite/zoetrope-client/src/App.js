@@ -1,17 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
 
-import TaskList from './components/tasklist.js';
-import ProjectList from './components/projectlist.js';
-import Messages from './components/messages.js';
-import DiskUsage from './components/diskusage.js';
-import HostInfo from './components/hostinfo.js';
-import DailyTransferHistory from './components/dailytransferhistory.js';
+import TaskList from './components/tasklist';
+import ProjectList from './components/projectlist';
+import Messages from './components/messages';
+import DiskUsage from './components/diskusage';
+import HostInfo from './components/hostinfo';
+import DailyTransferHistory from './components/dailytransferhistory';
+import GlobalPreferences from './components/globalpreferences';
 
 function App() {
   return (
     <div className="App">
-      <DailyTransferHistory />
+      <GlobalPreferences />
     </div>
   );
 }
