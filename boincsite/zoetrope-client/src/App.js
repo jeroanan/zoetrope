@@ -9,35 +9,39 @@ import DiskUsage from './components/diskusage';
 import HostInfo from './components/hostinfo';
 import DailyTransferHistory from './components/dailytransferhistory';
 import GlobalPreferences from './components/globalpreferences';
+import NavBar from './components/primitives/navbar';
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            <TaskList />
-          </Route>
-          <Route path="/projects">
-            <ProjectList />
-          </Route>
-          <Route path="/messages">
-            <Messages />
-          </Route>
-          <Route path="/diskusage">
-            <DiskUsage />
-          </Route>
-          <Route path="/hostinfo">
-            <HostInfo />
-          </Route>
-          <Route path="/dailytransferhistory">
-            <DailyTransferHistory />
-          </Route>
-          <Route path="/globalpreferences">
-            <GlobalPreferences />
-          </Route>
-        </Switch>
-      </BrowserRouter>
+      <NavBar />
+      <div className="App-Inner">
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/">
+              <TaskList />
+            </Route>
+            <Route path="/projects">
+              <ProjectList />
+            </Route>
+            <Route path="/messages">
+              <Messages />
+            </Route>
+            <Route path="/diskusage">
+              <DiskUsage />
+            </Route>
+            <Route path="/hostinfo">
+              <HostInfo />
+            </Route>
+            <Route path="/dailytransferhistory">
+              <DailyTransferHistory />
+            </Route>
+            <Route path="/globalpreferences">
+              <GlobalPreferences />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </div>
     </div>
   );
 }
