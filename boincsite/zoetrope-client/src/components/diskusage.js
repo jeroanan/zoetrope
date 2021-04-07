@@ -18,7 +18,7 @@ const DiskUsage = () => {
     <LabelValueRow label="Free Disk Space" value={diskUsage.free_disk_space} />
 
     <h3>By Project</h3>
-    <table>
+    <table className="table table-striped">
       <thead>
         <tr>
           <th>Project Url</th>

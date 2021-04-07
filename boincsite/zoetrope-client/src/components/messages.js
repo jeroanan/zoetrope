@@ -7,7 +7,7 @@ const Messages = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    getMessages((messages) => setMessages(messages));
+    getMessages((messages) => setMessages(messages.reverse()));
   }, []);
 
   return (

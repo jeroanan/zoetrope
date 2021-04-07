@@ -20,5 +20,7 @@ h2,h3 {
   color: #317eac;
 }
 
-
+div.row {
+  padding-bottom: 1em;
+}
 
