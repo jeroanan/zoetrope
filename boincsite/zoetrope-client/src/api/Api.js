@@ -14,6 +14,8 @@ const getHostInfo = cb => getData(cb, 'host_info_json');
 const getDailyTransferHistory = cb => getData(cb, 'daily_transfer_history_json');
 const getGlobalPreferences = cb => getData(cb, 'get_global_preferences_json');
 
+const getTask = (taskName, cb) => getData(cb, `task_json?task_name=${taskName}`);
+
 export { 
   getTasks,
   getProjects,
@@ -22,4 +24,5 @@ export {
   getHostInfo,
   getDailyTransferHistory,
   getGlobalPreferences,
+  getTask,
 };

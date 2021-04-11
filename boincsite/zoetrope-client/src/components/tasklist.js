@@ -42,7 +42,7 @@ const TaskList = () => {
         <tbody>
           {tasks.map(x => (
             <tr key={x.name}>
-              <td>{x.name}</td>
+              <td><a href={`/task/${x.name}`}>{x.name}</a></td>
               <td>{getProjectByUrl(x.project_url)?.project_name}</td>
               <td>{x.fraction_done}</td>
               <td>{x.state}</td>
